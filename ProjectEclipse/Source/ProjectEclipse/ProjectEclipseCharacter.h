@@ -20,6 +20,12 @@ class AProjectEclipseCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+	/** Direction of character movement*/
+	FVector2D MovementVector;
+
+	/** Tracks whether character is sprinting or not*/
+	bool Sprinting = false;
+
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	USpringArmComponent* CameraBoom;
@@ -39,6 +45,10 @@ class AProjectEclipseCharacter : public ACharacter
 	/** Sprint Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* SprintAction;
+
+	/** Dodge Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* DodgeAction;
 
 	/** Move Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -62,6 +72,9 @@ protected:
 			
 	/** Called for sprint input */
 	void Sprint(const FInputActionValue& Value);
+
+	/** Called for dodge input */
+	void Dodge(const FInputActionValue& Value);
 
 protected:
 	// APawn interface

@@ -87,6 +87,9 @@ void AProjectEclipseCharacter::SetupPlayerInputComponent(UInputComponent* Player
 		// Sprinting
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Sprint);
 
+		// Dodging
+		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Dodge);
+
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Look);
 	}
@@ -99,7 +102,8 @@ void AProjectEclipseCharacter::SetupPlayerInputComponent(UInputComponent* Player
 void AProjectEclipseCharacter::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
-	FVector2D MovementVector = Value.Get<FVector2D>();
+	MovementVector = Value.Get<FVector2D>();
+	UE_LOG(LogTemp, Warning, TEXT("Move vector value is: %s"), *MovementVector.ToString())
 
 	if (Controller != nullptr)
 	{
@@ -135,10 +139,34 @@ void AProjectEclipseCharacter::Look(const FInputActionValue& Value)
 void AProjectEclipseCharacter::Sprint(const FInputActionValue& Value)
 {
 	// input is a bool
-	bool sprinting = Value.Get<bool>();
+	Sprinting = Value.Get<bool>();
 
 	if (Controller != nullptr)
 	{
-		GetCharacterMovement()->MaxWalkSpeed *= sprinting ? 2.0f : 0.5f;
+		GetCharacterMovement()->MaxWalkSpeed *= Sprinting ? 2.0f : 0.5f;
+	}
+}
+
+void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
+{
+	// inpus is a bool
+	bool dodging = Value.Get<bool>();
+
+	if (Controller != nullptr && dodging)
+	{
+		// find out which way is forward
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator YawRotation(0, Rotation.Yaw, 0);
+
+		// get forward vector
+		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+
+		// get right vector 
+		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+
+		const FVector2D TargetDirection = MovementVector != FVector2D(0.0, 0.0) ? MovementVector : FVector2D(0.0f, -1.0);
+		const FVector DodgeDirection = ((ForwardDirection * TargetDirection.Y) + (RightDirection * TargetDirection.X)) * (Sprinting ? 1000.0 : 500.0);
+		FHitResult hitResult;
+		SetActorLocation(GetActorLocation() + DodgeDirection, true, &hitResult, ETeleportType::None);
 	}
 }

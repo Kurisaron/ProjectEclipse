@@ -8,7 +8,9 @@
 				"D:/Github/ProjectEclipse/ProjectEclipse/Content/StarterContent/Maps/Advanced_Lighting_BuiltData.uasset",
 				"D:/Github/ProjectEclipse/ProjectEclipse/Content/ThirdPerson/Input/Actions/IA_Sprint.uasset",
 				"D:/Github/ProjectEclipse/ProjectEclipse/Content/ThirdPerson/Input/IMC_Default.uasset",
-				"D:/Github/ProjectEclipse/ProjectEclipse/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset"
+				"D:/Github/ProjectEclipse/ProjectEclipse/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipse/Content/ThirdPerson/Input/Actions/IA_Dodge.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipse/Content/ThirdPerson/Input/Actions/IA_Move.uasset"
 			]
 		}
 	]
