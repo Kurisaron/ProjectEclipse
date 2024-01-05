@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "ProjectEclipse",
+			"Path": "..\\Source\\ProjectEclipse.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "ProjectEclipseEditor",
+			"Path": "..\\Source\\ProjectEclipseEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
