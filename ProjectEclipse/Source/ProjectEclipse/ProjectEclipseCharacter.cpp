@@ -45,10 +45,11 @@ AProjectEclipseCharacter::AProjectEclipseCharacter()
 	CameraBoom->TargetArmLength = 400.0f; // The camera follows at this distance behind the character	
 	CameraBoom->bUsePawnControlRotation = true; // Rotate the arm based on the controller
 
-	// Create a follow camera
-	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
-	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
-	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+	// Create a third person camera
+	ThirdPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ThirdPersonCamera"));
+	ThirdPersonCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
+	ThirdPersonCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -103,7 +104,10 @@ void AProjectEclipseCharacter::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
 	MovementVector = Value.Get<FVector2D>();
-	UE_LOG(LogTemp, Warning, TEXT("Move vector value is: %s"), *MovementVector.ToString())
+	UE_LOG(LogTemp, Warning, TEXT("Move vector value is: %s"), *MovementVector.ToString());
+
+	//FVector Origin, Extent;
+	//TestTrace(Origin, Extent);
 
 	if (Controller != nullptr)
 	{
@@ -120,6 +124,7 @@ void AProjectEclipseCharacter::Move(const FInputActionValue& Value)
 		// add movement 
 		AddMovementInput(ForwardDirection, MovementVector.Y);
 		AddMovementInput(RightDirection, MovementVector.X);
+
 	}
 }
 
@@ -169,4 +174,11 @@ void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
 		FHitResult hitResult;
 		SetActorLocation(GetActorLocation() + DodgeDirection, true, &hitResult, ETeleportType::None);
 	}
+}
+
+void AProjectEclipseCharacter::TestTrace(FVector& Origin, FVector& Extent)
+{
+	GetActorBounds(true, Origin, Extent, true);
+
+	DrawDebugBox(GetWorld(), Origin, Extent, FColor::Red);
 }
