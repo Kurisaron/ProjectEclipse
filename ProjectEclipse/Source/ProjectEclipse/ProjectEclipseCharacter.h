@@ -20,8 +20,17 @@ class AProjectEclipseCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+	/** Origin of character's bounds */
+	FVector BoundOrigin;
+
+	/** Extend of character's bounds */
+	FVector BoundExtent;
+	
 	/** Direction of character movement*/
 	FVector2D MovementVector;
+
+	/** Tracks if the character is jumping */
+	bool Jumping = false;
 
 	/** Tracks whether character is sprinting or not*/
 	bool Sprinting = false;
@@ -69,15 +78,21 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
-			
+
+	/** Called for jumping input */
+	void Jump(const FInputActionValue& Value);
+	
 	/** Called for sprint input */
 	void Sprint(const FInputActionValue& Value);
+
+	/** Called for freerun tick */
+	void FreerunTick(float DeltaSeconds);
 
 	/** Called for dodge input */
 	void Dodge(const FInputActionValue& Value);
 
-	/** Called to test traces (raycasts) */
-	void TestTrace(FVector& Origin, FVector& Extent);
+	/** Called to update bound information */
+	void UpdateBounds();
 
 protected:
 	// APawn interface
@@ -85,6 +100,9 @@ protected:
 	
 	// To add mapping context
 	virtual void BeginPlay();
+
+	// To handle 
+	virtual void Tick(float DeltaSeconds);
 
 public:
 	/** Returns CameraBoom subobject **/

@@ -70,6 +70,17 @@ void AProjectEclipseCharacter::BeginPlay()
 	}
 }
 
+void AProjectEclipseCharacter::Tick(float DeltaSeconds)
+{
+	UpdateBounds();
+	
+	if (Sprinting)
+	{
+		// While sprinting, the character can freerun
+		FreerunTick(DeltaSeconds);
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 // Input
 
@@ -79,8 +90,7 @@ void AProjectEclipseCharacter::SetupPlayerInputComponent(UInputComponent* Player
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
 		
 		// Jumping
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Jump);
 
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Move);
@@ -104,10 +114,7 @@ void AProjectEclipseCharacter::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
 	MovementVector = Value.Get<FVector2D>();
-	UE_LOG(LogTemp, Warning, TEXT("Move vector value is: %s"), *MovementVector.ToString());
-
-	//FVector Origin, Extent;
-	//TestTrace(Origin, Extent);
+	//UE_LOG(LogTemp, Warning, TEXT("Move vector value is: %s"), *MovementVector.ToString());
 
 	if (Controller != nullptr)
 	{
@@ -141,6 +148,15 @@ void AProjectEclipseCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
+void AProjectEclipseCharacter::Jump(const FInputActionValue& Value)
+{
+	// input is a bool
+	Jumping = Value.Get<bool>();
+	
+	if (Jumping) ACharacter::Jump();
+	else ACharacter::StopJumping();
+}
+
 void AProjectEclipseCharacter::Sprint(const FInputActionValue& Value)
 {
 	// input is a bool
@@ -151,6 +167,12 @@ void AProjectEclipseCharacter::Sprint(const FInputActionValue& Value)
 		GetCharacterMovement()->MaxWalkSpeed *= Sprinting ? 2.0f : 0.5f;
 	}
 }
+
+void AProjectEclipseCharacter::FreerunTick(float DeltaSeconds)
+{
+	
+}
+
 
 void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
 {
@@ -176,9 +198,21 @@ void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
 	}
 }
 
-void AProjectEclipseCharacter::TestTrace(FVector& Origin, FVector& Extent)
+void AProjectEclipseCharacter::UpdateBounds()
 {
-	GetActorBounds(true, Origin, Extent, true);
+	GetActorBounds(true, BoundOrigin, BoundExtent, true);
 
-	DrawDebugBox(GetWorld(), Origin, Extent, FColor::Red);
+	if (true)
+	{
+		const FVector Location = GetActorLocation();
+
+		DrawDebugBox(GetWorld(), BoundOrigin, BoundExtent, FColor::Red);
+		DrawDebugSphere(GetWorld(), BoundOrigin, 10.0f, 64, FColor::Red);
+		FVector High(Location.X, Location.Y, BoundOrigin.Z + BoundExtent.Z);
+		FVector Low(Location.X, Location.Y, BoundOrigin.Z - BoundExtent.Z);
+		DrawDebugSphere(GetWorld(), High, 10.0f, 64, FColor::Green);
+		DrawDebugSphere(GetWorld(), Low, 10.0f, 64, FColor::Green);
+
+		DrawDebugSphere(GetWorld(), GetActorLocation(), 10.0f, 64, FColor::Blue);
+	}
 }
