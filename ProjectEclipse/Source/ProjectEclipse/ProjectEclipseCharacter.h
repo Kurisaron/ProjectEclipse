@@ -35,6 +35,9 @@ class AProjectEclipseCharacter : public ACharacter
 	/** Tracks whether character is sprinting or not*/
 	bool Sprinting = false;
 
+	/** Tracks whether character can dodge */
+	bool canDodge = true;
+
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	USpringArmComponent* CameraBoom;
@@ -90,6 +93,9 @@ protected:
 
 	/** Called for dodge input */
 	void Dodge(const FInputActionValue& Value);
+
+	/** Called to reset dodge */
+	void ResetDodge();
 
 	/** Called to update bound information */
 	void UpdateBounds();

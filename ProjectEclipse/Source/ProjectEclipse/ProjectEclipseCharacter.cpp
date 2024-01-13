@@ -26,6 +26,8 @@ AProjectEclipseCharacter::AProjectEclipseCharacter()
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 
+	JumpMaxCount = 2;
+
 	// Configure character movement
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f); // ...at this rotation rate
@@ -154,7 +156,10 @@ void AProjectEclipseCharacter::Jump(const FInputActionValue& Value)
 	Jumping = Value.Get<bool>();
 	
 	if (Jumping) ACharacter::Jump();
-	else ACharacter::StopJumping();
+	else
+	{
+		ACharacter::StopJumping();
+	}
 }
 
 void AProjectEclipseCharacter::Sprint(const FInputActionValue& Value)
@@ -176,10 +181,10 @@ void AProjectEclipseCharacter::FreerunTick(float DeltaSeconds)
 
 void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
 {
-	// inpus is a bool
+	// input is a bool
 	bool dodging = Value.Get<bool>();
 
-	if (Controller != nullptr && dodging)
+	if (Controller != nullptr && dodging && canDodge)
 	{
 		// find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();
@@ -193,9 +198,26 @@ void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
 
 		const FVector2D TargetDirection = MovementVector != FVector2D(0.0, 0.0) ? MovementVector : FVector2D(0.0f, -1.0);
 		const FVector DodgeDirection = ((ForwardDirection * TargetDirection.Y) + (RightDirection * TargetDirection.X)) * (Sprinting ? 1000.0 : 500.0);
+
 		FHitResult hitResult;
-		SetActorLocation(GetActorLocation() + DodgeDirection, true, &hitResult, ETeleportType::None);
+		const FVector ActorLocation = GetActorLocation();
+
+		FCollisionQueryParams QueryParams;
+		QueryParams.AddIgnoredActor(this);
+
+		//SetActorLocation(GetActorLocation() + DodgeDirection, true, &hitResult, ETeleportType::None);
+		//bool targetObstructed = GetWorld()->LineTraceSingleByChannel(hitResult, ActorLocation, ActorLocation + DodgeDirection, ECollisionChannel::ECC_MAX, QueryParams);
+		GetCharacterMovement()->AddForce(DodgeDirection * 17500.0);
+		canDodge = false;
+
+		FTimerHandle TimerHandle;
+		GetWorldTimerManager().SetTimer(TimerHandle, this, &AProjectEclipseCharacter::ResetDodge, 1.0f, false);
 	}
+}
+
+void AProjectEclipseCharacter::ResetDodge()
+{
+	canDodge = true;
 }
 
 void AProjectEclipseCharacter::UpdateBounds()
