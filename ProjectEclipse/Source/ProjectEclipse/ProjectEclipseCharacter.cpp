@@ -26,8 +26,6 @@ AProjectEclipseCharacter::AProjectEclipseCharacter()
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 
-	JumpMaxCount = 2;
-
 	// Configure character movement
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f); // ...at this rotation rate
@@ -102,6 +100,9 @@ void AProjectEclipseCharacter::SetupPlayerInputComponent(UInputComponent* Player
 
 		// Dodging
 		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Dodge);
+
+		// Crouching
+		EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Crouch);
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Look);
@@ -220,6 +221,24 @@ void AProjectEclipseCharacter::ResetDodge()
 	canDodge = true;
 }
 
+
+void AProjectEclipseCharacter::Crouch(const FInputActionValue& Value)
+{
+	// input is a bool
+	Crouching = Value.Get<bool>();
+
+	UE_LOG(LogTemp, Warning, TEXT("The character is %s crouching"), (Crouching ? TEXT("now") : TEXT("NOT")));
+
+	if (Crouching)
+	{
+		ACharacter::Crouch();
+	}
+	else
+	{
+		ACharacter::UnCrouch();
+	}
+}
+
 void AProjectEclipseCharacter::UpdateBounds()
 {
 	GetActorBounds(true, BoundOrigin, BoundExtent, true);
@@ -236,5 +255,8 @@ void AProjectEclipseCharacter::UpdateBounds()
 		DrawDebugSphere(GetWorld(), Low, 10.0f, 64, FColor::Green);
 
 		DrawDebugSphere(GetWorld(), GetActorLocation(), 10.0f, 64, FColor::Blue);
+
+		UCapsuleComponent* capsule = GetCapsuleComponent();
+		DrawDebugCapsule(GetWorld(), capsule->GetComponentLocation(), capsule->GetScaledCapsuleHalfHeight(), capsule->GetScaledCapsuleRadius(), FQuat::Identity, FColor::Magenta);
 	}
 }

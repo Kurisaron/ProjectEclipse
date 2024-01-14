@@ -32,11 +32,14 @@ class AProjectEclipseCharacter : public ACharacter
 	/** Tracks if the character is jumping */
 	bool Jumping = false;
 
-	/** Tracks whether character is sprinting or not*/
+	/** Tracks whether character is sprinting*/
 	bool Sprinting = false;
 
 	/** Tracks whether character can dodge */
 	bool canDodge = true;
+
+	/** Tracks whether character is crouching */
+	bool Crouching = false;
 
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
@@ -61,6 +64,10 @@ class AProjectEclipseCharacter : public ACharacter
 	/** Dodge Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* DodgeAction;
+
+	/** Dodge Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* CrouchAction;
 
 	/** Move Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -96,6 +103,9 @@ protected:
 
 	/** Called to reset dodge */
 	void ResetDodge();
+
+	/** Called for crouch input */
+	void Crouch(const FInputActionValue& Value);
 
 	/** Called to update bound information */
 	void UpdateBounds();
