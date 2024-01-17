@@ -50,6 +50,8 @@ AProjectEclipseCharacter::AProjectEclipseCharacter()
 	ThirdPersonCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	ThirdPersonCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+	// Bind events for default double jump
+	DoubleJumpEvent.AddUObject<AProjectEclipseCharacter>(this, &AProjectEclipseCharacter::Default_DoubleJump);
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -73,6 +75,9 @@ void AProjectEclipseCharacter::BeginPlay()
 void AProjectEclipseCharacter::Tick(float DeltaSeconds)
 {
 	UpdateBounds();
+
+	if (!CanDoubleJump && GetCharacterMovement()->IsMovingOnGround())
+		CanDoubleJump = true;
 	
 	if (Sprinting)
 	{
@@ -156,11 +161,39 @@ void AProjectEclipseCharacter::Jump(const FInputActionValue& Value)
 	// input is a bool
 	Jumping = Value.Get<bool>();
 	
-	if (Jumping) ACharacter::Jump();
+	bool grounded = GetCharacterMovement()->IsMovingOnGround();
+	//UE_LOG(LogTemp, Warning, TEXT("The character is %s grounded"), (grounded ? TEXT("currently") : TEXT("not")));
+
+	if (Jumping)
+	{
+		if (grounded) ACharacter::Jump();
+		else AirJump();
+	}
 	else
 	{
 		ACharacter::StopJumping();
 	}
+}
+
+void AProjectEclipseCharacter::AirJump()
+{
+	// Broadcasts AirJumpEvent
+	DoubleJumpEvent.Broadcast(this);
+}
+
+void AProjectEclipseCharacter::Default_DoubleJump(const AProjectEclipseCharacter* Char)
+{
+	if (!CanDoubleJump) return;
+	
+	FVector forceDirection(0.0, 0.0, 1.0);
+	LaunchCharacter(forceDirection * 1000.0, false, true);
+	//UE_LOG(LogTemp, Warning, TEXT("Character performed double jump"));
+	CanDoubleJump = false;
+}
+
+void AProjectEclipseCharacter::ResetDoubleJump(const FHitResult& Hit)
+{
+	CanDoubleJump = true;
 }
 
 void AProjectEclipseCharacter::Sprint(const FInputActionValue& Value)
@@ -198,17 +231,19 @@ void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
 		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 
 		const FVector2D TargetDirection = MovementVector != FVector2D(0.0, 0.0) ? MovementVector : FVector2D(0.0f, -1.0);
-		const FVector DodgeDirection = ((ForwardDirection * TargetDirection.Y) + (RightDirection * TargetDirection.X)) * (Sprinting ? 1000.0 : 500.0);
+		const FVector DodgeDirection = ((ForwardDirection * TargetDirection.Y) + (RightDirection * TargetDirection.X));
+		const double DodgeStrength = 1500.0 * (Sprinting ? 2.0 : 1.0);
 
-		FHitResult hitResult;
-		const FVector ActorLocation = GetActorLocation();
+		//FHitResult hitResult;
+		//const FVector ActorLocation = GetActorLocation();
 
-		FCollisionQueryParams QueryParams;
-		QueryParams.AddIgnoredActor(this);
+		//FCollisionQueryParams QueryParams;
+		//QueryParams.AddIgnoredActor(this);
 
 		//SetActorLocation(GetActorLocation() + DodgeDirection, true, &hitResult, ETeleportType::None);
 		//bool targetObstructed = GetWorld()->LineTraceSingleByChannel(hitResult, ActorLocation, ActorLocation + DodgeDirection, ECollisionChannel::ECC_MAX, QueryParams);
-		GetCharacterMovement()->AddForce(DodgeDirection * 17500.0);
+		LaunchCharacter(DodgeDirection * DodgeStrength, true, false);
+		//GetCharacterMovement()->AddImpulse(DodgeDirection * 10000.0, true);
 		canDodge = false;
 
 		FTimerHandle TimerHandle;

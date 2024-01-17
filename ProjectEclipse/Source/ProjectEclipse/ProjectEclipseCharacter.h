@@ -32,6 +32,13 @@ class AProjectEclipseCharacter : public ACharacter
 	/** Tracks if the character is jumping */
 	bool Jumping = false;
 
+	/** Tracks if the character has double jumped */
+	bool CanDoubleJump = true;
+
+	DECLARE_EVENT_OneParam(AProjectEclipseCharacter, FDoubleJumpEvent, const AProjectEclipseCharacter*);
+	/** Broadcasts whenever the player presses the jump button in the air */
+	FDoubleJumpEvent DoubleJumpEvent;
+
 	/** Tracks whether character is sprinting*/
 	bool Sprinting = false;
 
@@ -80,6 +87,8 @@ class AProjectEclipseCharacter : public ACharacter
 public:
 	AProjectEclipseCharacter();
 	
+	/** Broadcasts whenever the player presses the jump button in the air */
+	FDoubleJumpEvent& DoubleJump() { return DoubleJumpEvent; }
 
 protected:
 
@@ -91,6 +100,15 @@ protected:
 
 	/** Called for jumping input */
 	void Jump(const FInputActionValue& Value);
+
+	/** Called for double jump action (fires event) */
+	void AirJump();
+
+	/** Default AirJumpEvent subscriber */
+	void Default_DoubleJump(const AProjectEclipseCharacter* Char);
+
+	UFUNCTION(BlueprintCallable)
+	void ResetDoubleJump(const FHitResult& Hit);
 	
 	/** Called for sprint input */
 	void Sprint(const FInputActionValue& Value);

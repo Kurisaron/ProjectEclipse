@@ -9,6 +9,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+struct FHitResult;
 #ifdef PROJECTECLIPSE_ProjectEclipseCharacter_generated_h
 #error "ProjectEclipseCharacter.generated.h already included, missing '#pragma once' in ProjectEclipseCharacter.h"
 #endif
@@ -17,7 +18,11 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_21_SPARSE_DATA
 #define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_21_SPARSE_DATA_PROPERTY_ACCESSORS
 #define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_21_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_21_RPC_WRAPPERS_NO_PURE_DECLS
+#define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_21_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execResetDoubleJump);
+
+
 #define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_21_ACCESSORS
 #define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_21_INCLASS_NO_PURE_DECLS \
 private: \
