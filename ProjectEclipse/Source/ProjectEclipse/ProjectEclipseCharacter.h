@@ -29,9 +29,6 @@ class AProjectEclipseCharacter : public ACharacter
 	/** Direction of character movement*/
 	FVector2D MovementVector;
 
-	/** Tracks if the character is jumping */
-	bool Jumping = false;
-
 	/** Tracks if the character has double jumped */
 	bool CanDoubleJump = true;
 
@@ -107,14 +104,14 @@ protected:
 	/** Default AirJumpEvent subscriber */
 	void Default_DoubleJump(const AProjectEclipseCharacter* Char);
 
-	UFUNCTION(BlueprintCallable)
+	/** Called to reset character's ability to double jump */
 	void ResetDoubleJump(const FHitResult& Hit);
 	
 	/** Called for sprint input */
 	void Sprint(const FInputActionValue& Value);
 
-	/** Called for freerun tick */
-	void FreerunTick(float DeltaSeconds);
+	/** Called for sprint ongoing input */
+	void SprintTick();
 
 	/** Called for dodge input */
 	void Dodge(const FInputActionValue& Value);

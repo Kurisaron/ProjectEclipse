@@ -79,11 +79,6 @@ void AProjectEclipseCharacter::Tick(float DeltaSeconds)
 	if (!CanDoubleJump && GetCharacterMovement()->IsMovingOnGround())
 		CanDoubleJump = true;
 	
-	if (Sprinting)
-	{
-		// While sprinting, the character can freerun
-		FreerunTick(DeltaSeconds);
-	}
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -102,6 +97,7 @@ void AProjectEclipseCharacter::SetupPlayerInputComponent(UInputComponent* Player
 
 		// Sprinting
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Sprint);
+		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Ongoing, this, &AProjectEclipseCharacter::SprintTick);
 
 		// Dodging
 		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Dodge);
@@ -159,13 +155,14 @@ void AProjectEclipseCharacter::Look(const FInputActionValue& Value)
 void AProjectEclipseCharacter::Jump(const FInputActionValue& Value)
 {
 	// input is a bool
-	Jumping = Value.Get<bool>();
+	bool pressed = Value.Get<bool>();
 	
 	bool grounded = GetCharacterMovement()->IsMovingOnGround();
 	//UE_LOG(LogTemp, Warning, TEXT("The character is %s grounded"), (grounded ? TEXT("currently") : TEXT("not")));
 
-	if (Jumping)
+	if (pressed)
 	{
+		
 		if (grounded) ACharacter::Jump();
 		else AirJump();
 	}
@@ -173,6 +170,7 @@ void AProjectEclipseCharacter::Jump(const FInputActionValue& Value)
 	{
 		ACharacter::StopJumping();
 	}
+
 }
 
 void AProjectEclipseCharacter::AirJump()
@@ -186,7 +184,7 @@ void AProjectEclipseCharacter::Default_DoubleJump(const AProjectEclipseCharacter
 	if (!CanDoubleJump) return;
 	
 	FVector forceDirection(0.0, 0.0, 1.0);
-	LaunchCharacter(forceDirection * 1000.0, false, true);
+	LaunchCharacter(forceDirection * 800.0, false, true);
 	//UE_LOG(LogTemp, Warning, TEXT("Character performed double jump"));
 	CanDoubleJump = false;
 }
@@ -207,11 +205,63 @@ void AProjectEclipseCharacter::Sprint(const FInputActionValue& Value)
 	}
 }
 
-void AProjectEclipseCharacter::FreerunTick(float DeltaSeconds)
+void AProjectEclipseCharacter::SprintTick()
 {
+	bool onGround = GetCharacterMovement()->IsMovingOnGround();
+	if (onGround) return;
 	
-}
+	FHitResult LeftFoot, RightFoot;
 
+	FCollisionQueryParams QueryParams;
+	QueryParams.AddIgnoredActor(this);
+
+	const FVector Location = GetActorLocation();
+	const FVector Right = GetActorRightVector() * 75.0;
+	FVector High(Location.X, Location.Y, BoundOrigin.Z + BoundExtent.Z);
+	FVector Low(Location.X, Location.Y, BoundOrigin.Z - BoundExtent.Z);
+	FVector LowLeftTarget = Low - Right;
+	FVector LowRightTarget = Low + Right;
+
+	bool leftFooting = GetWorld()->LineTraceSingleByChannel(LeftFoot, Low, LowLeftTarget, ECollisionChannel::ECC_MAX, QueryParams);
+	bool rightFooting = GetWorld()->LineTraceSingleByChannel(RightFoot, Low, LowRightTarget, ECollisionChannel::ECC_MAX, QueryParams);
+
+	DrawDebugLine(GetWorld(), Low, LowLeftTarget, leftFooting ? FColor::Green : FColor::Red);
+	DrawDebugLine(GetWorld(), Low, LowRightTarget, rightFooting ? FColor::Green : FColor::Red);
+
+	bool leftRun(false), rightRun(false);
+	if (leftFooting)
+	{
+		FVector LeftDir = -Right;
+		FVector LeftNormal = LeftFoot.ImpactNormal;
+
+		LeftDir.Normalize();
+		LeftNormal.Normalize();
+
+		float DotProduct = FVector::DotProduct(LeftDir, LeftNormal);
+		float AngleInRadians = FMath::Acos(DotProduct);
+		float AngleInDegrees = FMath::RadiansToDegrees(AngleInRadians);
+		leftRun = AngleInDegrees > 140.0;
+
+		DrawDebugLine(GetWorld(), LeftFoot.ImpactPoint, LeftFoot.ImpactPoint + (LeftNormal * 100.0), (leftRun ? FColor::Green : FColor::Magenta));
+	}
+
+	if (rightFooting)
+	{
+		FVector RightDir = Right;
+		FVector RightNormal = RightFoot.ImpactNormal;
+
+		RightDir.Normalize();
+		RightNormal.Normalize();
+
+		float DotProduct = FVector::DotProduct(RightDir, RightNormal);
+		float AngleInRadians = FMath::Acos(DotProduct);
+		float AngleInDegrees = FMath::RadiansToDegrees(AngleInRadians);
+		rightRun = AngleInDegrees > 140.0;
+
+		DrawDebugLine(GetWorld(), RightFoot.ImpactPoint, RightFoot.ImpactPoint + (RightNormal * 100.0), (leftRun ? FColor::Green : FColor::Magenta));
+	}
+
+}
 
 void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
 {
@@ -232,7 +282,7 @@ void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
 
 		const FVector2D TargetDirection = MovementVector != FVector2D(0.0, 0.0) ? MovementVector : FVector2D(0.0f, -1.0);
 		const FVector DodgeDirection = ((ForwardDirection * TargetDirection.Y) + (RightDirection * TargetDirection.X));
-		const double DodgeStrength = 1500.0 * (Sprinting ? 2.0 : 1.0);
+		const double DodgeStrength = 1500.0 * (Sprinting ? 1.5 : 1.0);
 
 		//FHitResult hitResult;
 		//const FVector ActorLocation = GetActorLocation();
@@ -247,7 +297,7 @@ void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
 		canDodge = false;
 
 		FTimerHandle TimerHandle;
-		GetWorldTimerManager().SetTimer(TimerHandle, this, &AProjectEclipseCharacter::ResetDodge, 1.0f, false);
+		GetWorldTimerManager().SetTimer(TimerHandle, this, &AProjectEclipseCharacter::ResetDodge, 0.75f, false);
 	}
 }
 
@@ -292,6 +342,6 @@ void AProjectEclipseCharacter::UpdateBounds()
 		DrawDebugSphere(GetWorld(), GetActorLocation(), 10.0f, 64, FColor::Blue);
 
 		UCapsuleComponent* capsule = GetCapsuleComponent();
-		DrawDebugCapsule(GetWorld(), capsule->GetComponentLocation(), capsule->GetScaledCapsuleHalfHeight(), capsule->GetScaledCapsuleRadius(), FQuat::Identity, FColor::Magenta);
+		DrawDebugCapsule(GetWorld(), capsule->GetComponentLocation(), capsule->GetScaledCapsuleHalfHeight(), capsule->GetScaledCapsuleRadius(), FQuat::Identity, FColor::Cyan);
 	}
 }

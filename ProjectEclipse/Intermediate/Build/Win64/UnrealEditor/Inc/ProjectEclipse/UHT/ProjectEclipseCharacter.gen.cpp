@@ -6,77 +6,20 @@
 
 #include "UObject/GeneratedCppIncludes.h"
 #include "ProjectEclipse/ProjectEclipseCharacter.h"
-#include "../../Source/Runtime/Engine/Classes/Engine/HitResult.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeProjectEclipseCharacter() {}
 // Cross Module References
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 	ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
-	ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FHitResult();
 	ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputAction_NoRegister();
 	ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputMappingContext_NoRegister();
 	PROJECTECLIPSE_API UClass* Z_Construct_UClass_AProjectEclipseCharacter();
 	PROJECTECLIPSE_API UClass* Z_Construct_UClass_AProjectEclipseCharacter_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_ProjectEclipse();
 // End Cross Module References
-	DEFINE_FUNCTION(AProjectEclipseCharacter::execResetDoubleJump)
-	{
-		P_GET_STRUCT_REF(FHitResult,Z_Param_Out_Hit);
-		P_FINISH;
-		P_NATIVE_BEGIN;
-		P_THIS->ResetDoubleJump(Z_Param_Out_Hit);
-		P_NATIVE_END;
-	}
 	void AProjectEclipseCharacter::StaticRegisterNativesAProjectEclipseCharacter()
 	{
-		UClass* Class = AProjectEclipseCharacter::StaticClass();
-		static const FNameNativePtrPair Funcs[] = {
-			{ "ResetDoubleJump", &AProjectEclipseCharacter::execResetDoubleJump },
-		};
-		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
-	}
-	struct Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics
-	{
-		struct ProjectEclipseCharacter_eventResetDoubleJump_Parms
-		{
-			FHitResult Hit;
-		};
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_Hit_MetaData[];
-#endif
-		static const UECodeGen_Private::FStructPropertyParams NewProp_Hit;
-		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
-#endif
-		static const UECodeGen_Private::FFunctionParams FuncParams;
-	};
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics::NewProp_Hit_MetaData[] = {
-		{ "NativeConst", "" },
-	};
-#endif
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics::NewProp_Hit = { "Hit", nullptr, (EPropertyFlags)0x0010008008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProjectEclipseCharacter_eventResetDoubleJump_Parms, Hit), Z_Construct_UScriptStruct_FHitResult, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics::NewProp_Hit_MetaData), Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics::NewProp_Hit_MetaData) }; // 1891709922
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics::NewProp_Hit,
-	};
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics::Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "ProjectEclipseCharacter.h" },
-	};
-#endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AProjectEclipseCharacter, nullptr, "ResetDoubleJump", nullptr, nullptr, Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics::PropPointers), sizeof(Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics::ProjectEclipseCharacter_eventResetDoubleJump_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04480401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics::Function_MetaDataParams), Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics::ProjectEclipseCharacter_eventResetDoubleJump_Parms) < MAX_uint16);
-	UFunction* Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump()
-	{
-		static UFunction* ReturnFunction = nullptr;
-		if (!ReturnFunction)
-		{
-			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump_Statics::FuncParams);
-		}
-		return ReturnFunction;
 	}
 	IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(AProjectEclipseCharacter);
 	UClass* Z_Construct_UClass_AProjectEclipseCharacter_NoRegister()
@@ -86,7 +29,6 @@ void EmptyLinkFunctionForGeneratedCodeProjectEclipseCharacter() {}
 	struct Z_Construct_UClass_AProjectEclipseCharacter_Statics
 	{
 		static UObject* (*const DependentSingletons[])();
-		static const FClassFunctionLinkInfo FuncInfo[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
@@ -135,10 +77,6 @@ void EmptyLinkFunctionForGeneratedCodeProjectEclipseCharacter() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_ProjectEclipse,
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectEclipseCharacter_Statics::DependentSingletons) < 16);
-	const FClassFunctionLinkInfo Z_Construct_UClass_AProjectEclipseCharacter_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_AProjectEclipseCharacter_ResetDoubleJump, "ResetDoubleJump" }, // 771624461
-	};
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectEclipseCharacter_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectEclipseCharacter_Statics::Class_MetaDataParams[] = {
 		{ "HideCategories", "Navigation" },
@@ -293,11 +231,11 @@ void EmptyLinkFunctionForGeneratedCodeProjectEclipseCharacter() {}
 		"Game",
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
-		FuncInfo,
+		nullptr,
 		Z_Construct_UClass_AProjectEclipseCharacter_Statics::PropPointers,
 		nullptr,
 		UE_ARRAY_COUNT(DependentSingletons),
-		UE_ARRAY_COUNT(FuncInfo),
+		0,
 		UE_ARRAY_COUNT(Z_Construct_UClass_AProjectEclipseCharacter_Statics::PropPointers),
 		0,
 		0x008000A4u,
@@ -323,9 +261,9 @@ void EmptyLinkFunctionForGeneratedCodeProjectEclipseCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AProjectEclipseCharacter, AProjectEclipseCharacter::StaticClass, TEXT("AProjectEclipseCharacter"), &Z_Registration_Info_UClass_AProjectEclipseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectEclipseCharacter), 4122877054U) },
+		{ Z_Construct_UClass_AProjectEclipseCharacter, AProjectEclipseCharacter::StaticClass, TEXT("AProjectEclipseCharacter"), &Z_Registration_Info_UClass_AProjectEclipseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectEclipseCharacter), 1372847913U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_1769140944(TEXT("/Script/ProjectEclipse"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_1777267897(TEXT("/Script/ProjectEclipse"),
 		Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
