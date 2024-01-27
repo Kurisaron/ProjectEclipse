@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/PointLightComponent.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "ProjectEclipseCharacter.generated.h"
@@ -29,21 +30,33 @@ class AProjectEclipseCharacter : public ACharacter
 	/** Direction of character movement*/
 	FVector2D MovementVector;
 
+	/** Tracks amount of time in seconds the jump button has been pressed */
+	float JumpPressedTime = 0.0f;
+
+	/** Threshold value for time jump button has been pressed for the character to be considered freerunning */
+	float JumpFreerunThreshold = 0.25f;
+
 	/** Tracks if the character has double jumped */
-	bool CanDoubleJump = true;
+	bool bCanDoubleJump = true;
 
 	DECLARE_EVENT_OneParam(AProjectEclipseCharacter, FDoubleJumpEvent, const AProjectEclipseCharacter*);
 	/** Broadcasts whenever the player presses the jump button in the air */
 	FDoubleJumpEvent DoubleJumpEvent;
 
 	/** Tracks whether character is sprinting*/
-	bool Sprinting = false;
+	bool bSprinting = false;
+
+	/** Tracks whether character is wallrunning */
+	bool bWallRunning = false;
+
+	/** Setting for how far the line trace should be to check for wall running */
+	float WallCheckDistance = 70.0f;
 
 	/** Tracks whether character can dodge */
-	bool canDodge = true;
+	bool bCanDodge = true;
 
 	/** Tracks whether character is crouching */
-	bool Crouching = false;
+	bool bCrouching = false;
 
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
@@ -110,8 +123,17 @@ protected:
 	/** Called for sprint input */
 	void Sprint(const FInputActionValue& Value);
 
-	/** Called for sprint ongoing input */
-	void SprintTick();
+	/** Called for freerunning ongoing input */
+	void FreerunTick();
+
+	/** Checks if the character is freerunning */
+	bool IsFreerunning();
+
+	/** Checks for forward obstacle */
+	bool ForwardObstacle(TArray<FVector> StartLocations);
+
+	/** Called to check for a wall */
+	bool CheckForObstacle(const FVector& Start, const FVector& Direction);
 
 	/** Called for dodge input */
 	void Dodge(const FInputActionValue& Value);

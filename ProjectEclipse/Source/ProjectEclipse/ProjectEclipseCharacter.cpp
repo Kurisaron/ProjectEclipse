@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "ProjectEclipseCharacter.h"
+#include "Components/PointLightComponent.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -76,8 +77,12 @@ void AProjectEclipseCharacter::Tick(float DeltaSeconds)
 {
 	UpdateBounds();
 
-	if (!CanDoubleJump && GetCharacterMovement()->IsMovingOnGround())
-		CanDoubleJump = true;
+	if (GetCharacterMovement()->IsMovingOnGround())
+	{
+		if (!bCanDoubleJump)
+			bCanDoubleJump = true;
+	}
+
 	
 }
 
@@ -91,13 +96,13 @@ void AProjectEclipseCharacter::SetupPlayerInputComponent(UInputComponent* Player
 		
 		// Jumping
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Jump);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Ongoing, this, &AProjectEclipseCharacter::FreerunTick);
 
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Move);
 
 		// Sprinting
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Sprint);
-		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Ongoing, this, &AProjectEclipseCharacter::SprintTick);
 
 		// Dodging
 		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Dodge);
@@ -160,11 +165,19 @@ void AProjectEclipseCharacter::Jump(const FInputActionValue& Value)
 	bool grounded = GetCharacterMovement()->IsMovingOnGround();
 	//UE_LOG(LogTemp, Warning, TEXT("The character is %s grounded"), (grounded ? TEXT("currently") : TEXT("not")));
 
+	JumpPressedTime = 0.0f;
+
 	if (pressed)
 	{
-		
-		if (grounded) ACharacter::Jump();
-		else AirJump();
+		JumpFreerunThreshold = grounded ? 0.25f : 0.0f;
+		if (grounded)
+		{
+			ACharacter::Jump();
+		}
+		else
+		{
+			AirJump();
+		}
 	}
 	else
 	{
@@ -181,86 +194,73 @@ void AProjectEclipseCharacter::AirJump()
 
 void AProjectEclipseCharacter::Default_DoubleJump(const AProjectEclipseCharacter* Char)
 {
-	if (!CanDoubleJump) return;
+	if (!bCanDoubleJump) return;
 	
 	FVector forceDirection(0.0, 0.0, 1.0);
 	LaunchCharacter(forceDirection * 800.0, false, true);
 	//UE_LOG(LogTemp, Warning, TEXT("Character performed double jump"));
-	CanDoubleJump = false;
+	bCanDoubleJump = false;
 }
 
 void AProjectEclipseCharacter::ResetDoubleJump(const FHitResult& Hit)
 {
-	CanDoubleJump = true;
+	bCanDoubleJump = true;
 }
 
 void AProjectEclipseCharacter::Sprint(const FInputActionValue& Value)
 {
 	// input is a bool
-	Sprinting = Value.Get<bool>();
+	bSprinting = Value.Get<bool>();
 
 	if (Controller != nullptr)
 	{
-		GetCharacterMovement()->MaxWalkSpeed *= Sprinting ? 2.0f : 0.5f;
+		GetCharacterMovement()->MaxWalkSpeed *= bSprinting ? 2.0f : 0.5f;
 	}
 }
 
-void AProjectEclipseCharacter::SprintTick()
+void AProjectEclipseCharacter::FreerunTick()
 {
-	bool onGround = GetCharacterMovement()->IsMovingOnGround();
-	if (onGround) return;
+	float DeltaTime = GetWorld()->DeltaTimeSeconds;
+	JumpPressedTime += DeltaTime;
+	UE_LOG(LogTemp, Warning, TEXT("Jump pressed for %f seconds"), JumpPressedTime);
+
+	if (!IsFreerunning()) return;
 	
-	FHitResult LeftFoot, RightFoot;
+	UE_LOG(LogTemp, Warning, TEXT("Freerunning"));
+	
+}
+
+bool AProjectEclipseCharacter::IsFreerunning()
+{
+	return !GetCharacterMovement()->IsMovingOnGround() && JumpPressedTime > JumpFreerunThreshold;
+}
+
+bool AProjectEclipseCharacter::ForwardObstacle(TArray<FVector> StartLocations)
+{
+	bool obstaclePresent(false), flag(false);
+
+	for (FVector location : StartLocations)
+	{
+		flag = CheckForObstacle(location, GetActorForwardVector());
+		if (flag) obstaclePresent = true;
+	}
+
+	return obstaclePresent;
+}
+
+bool AProjectEclipseCharacter::CheckForObstacle(const FVector& Start, const FVector& Direction)
+{
+	FHitResult HitResult;
 
 	FCollisionQueryParams QueryParams;
 	QueryParams.AddIgnoredActor(this);
 
-	const FVector Location = GetActorLocation();
-	const FVector Right = GetActorRightVector() * 75.0;
-	FVector High(Location.X, Location.Y, BoundOrigin.Z + BoundExtent.Z);
-	FVector Low(Location.X, Location.Y, BoundOrigin.Z - BoundExtent.Z);
-	FVector LowLeftTarget = Low - Right;
-	FVector LowRightTarget = Low + Right;
+	// Perform a line trace to check for walls
+	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, Start, Start + (Direction * WallCheckDistance), ECollisionChannel::ECC_Visibility, QueryParams);
 
-	bool leftFooting = GetWorld()->LineTraceSingleByChannel(LeftFoot, Low, LowLeftTarget, ECollisionChannel::ECC_MAX, QueryParams);
-	bool rightFooting = GetWorld()->LineTraceSingleByChannel(RightFoot, Low, LowRightTarget, ECollisionChannel::ECC_MAX, QueryParams);
+	DrawDebugLine(GetWorld(), Start, Start + (Direction * WallCheckDistance), bHit ? FColor::Green : FColor::Red);
 
-	DrawDebugLine(GetWorld(), Low, LowLeftTarget, leftFooting ? FColor::Green : FColor::Red);
-	DrawDebugLine(GetWorld(), Low, LowRightTarget, rightFooting ? FColor::Green : FColor::Red);
-
-	bool leftRun(false), rightRun(false);
-	if (leftFooting)
-	{
-		FVector LeftDir = -Right;
-		FVector LeftNormal = LeftFoot.ImpactNormal;
-
-		LeftDir.Normalize();
-		LeftNormal.Normalize();
-
-		float DotProduct = FVector::DotProduct(LeftDir, LeftNormal);
-		float AngleInRadians = FMath::Acos(DotProduct);
-		float AngleInDegrees = FMath::RadiansToDegrees(AngleInRadians);
-		leftRun = AngleInDegrees > 140.0;
-
-		DrawDebugLine(GetWorld(), LeftFoot.ImpactPoint, LeftFoot.ImpactPoint + (LeftNormal * 100.0), (leftRun ? FColor::Green : FColor::Magenta));
-	}
-
-	if (rightFooting)
-	{
-		FVector RightDir = Right;
-		FVector RightNormal = RightFoot.ImpactNormal;
-
-		RightDir.Normalize();
-		RightNormal.Normalize();
-
-		float DotProduct = FVector::DotProduct(RightDir, RightNormal);
-		float AngleInRadians = FMath::Acos(DotProduct);
-		float AngleInDegrees = FMath::RadiansToDegrees(AngleInRadians);
-		rightRun = AngleInDegrees > 140.0;
-
-		DrawDebugLine(GetWorld(), RightFoot.ImpactPoint, RightFoot.ImpactPoint + (RightNormal * 100.0), (leftRun ? FColor::Green : FColor::Magenta));
-	}
-
+	return bHit;
 }
 
 void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
@@ -268,7 +268,7 @@ void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
 	// input is a bool
 	bool dodging = Value.Get<bool>();
 
-	if (Controller != nullptr && dodging && canDodge)
+	if (Controller != nullptr && dodging && bCanDodge)
 	{
 		// find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();
@@ -282,7 +282,7 @@ void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
 
 		const FVector2D TargetDirection = MovementVector != FVector2D(0.0, 0.0) ? MovementVector : FVector2D(0.0f, -1.0);
 		const FVector DodgeDirection = ((ForwardDirection * TargetDirection.Y) + (RightDirection * TargetDirection.X));
-		const double DodgeStrength = 1500.0 * (Sprinting ? 1.5 : 1.0);
+		const double DodgeStrength = 1500.0 * (bSprinting ? 1.5 : 1.0);
 
 		//FHitResult hitResult;
 		//const FVector ActorLocation = GetActorLocation();
@@ -294,7 +294,7 @@ void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
 		//bool targetObstructed = GetWorld()->LineTraceSingleByChannel(hitResult, ActorLocation, ActorLocation + DodgeDirection, ECollisionChannel::ECC_MAX, QueryParams);
 		LaunchCharacter(DodgeDirection * DodgeStrength, true, false);
 		//GetCharacterMovement()->AddImpulse(DodgeDirection * 10000.0, true);
-		canDodge = false;
+		bCanDodge = false;
 
 		FTimerHandle TimerHandle;
 		GetWorldTimerManager().SetTimer(TimerHandle, this, &AProjectEclipseCharacter::ResetDodge, 0.75f, false);
@@ -303,18 +303,18 @@ void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
 
 void AProjectEclipseCharacter::ResetDodge()
 {
-	canDodge = true;
+	bCanDodge = true;
 }
 
 
 void AProjectEclipseCharacter::Crouch(const FInputActionValue& Value)
 {
 	// input is a bool
-	Crouching = Value.Get<bool>();
+	bCrouching = Value.Get<bool>();
 
-	UE_LOG(LogTemp, Warning, TEXT("The character is %s crouching"), (Crouching ? TEXT("now") : TEXT("NOT")));
+	UE_LOG(LogTemp, Warning, TEXT("The character is %s crouching"), (bCrouching ? TEXT("now") : TEXT("NOT")));
 
-	if (Crouching)
+	if (bCrouching)
 	{
 		ACharacter::Crouch();
 	}
@@ -328,7 +328,7 @@ void AProjectEclipseCharacter::UpdateBounds()
 {
 	GetActorBounds(true, BoundOrigin, BoundExtent, true);
 
-	if (true)
+	if (false)
 	{
 		const FVector Location = GetActorLocation();
 
