@@ -20,6 +20,7 @@ void AWeatherManager::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	dayTime += DayDuration / 4.0f;
 }
 
 // Called every frame
@@ -27,10 +28,13 @@ void AWeatherManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (!bCycleDay) return;
+
 	dayTime += DeltaTime;
-	dayTime = fmod(dayTime, dayDuration);
-	float t = dayTime / dayDuration;
-	t = (sin(t * 2.0 * PI) + 0.9) / 2.0;
+	dayTime = fmod(dayTime, DayDuration);
+	float t = dayTime / DayDuration;
+	t = sin(t * 2.0 * PI) + 0.2f;
+	t = FMath::Clamp(t, 0.0f, 1.0f);
 
 	float sunIntensity = FMath::Lerp<float, float>(0.0f, 3.0f, t);
 	MainSun->SetIntensity(sunIntensity);

@@ -238,10 +238,11 @@ bool AProjectEclipseCharacter::IsFreerunning()
 bool AProjectEclipseCharacter::ForwardObstacle(TArray<FVector> StartLocations)
 {
 	bool obstaclePresent(false), flag(false);
+	const FVector ForwardVector = GetActorForwardVector();
 
 	for (FVector location : StartLocations)
 	{
-		flag = CheckForObstacle(location, GetActorForwardVector());
+		flag = CheckForObstacle(location, ForwardVector);
 		if (flag) obstaclePresent = true;
 	}
 

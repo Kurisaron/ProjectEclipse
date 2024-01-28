@@ -30,6 +30,15 @@ void EmptyLinkFunctionForGeneratedCodeWeatherManager() {}
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bCycleDay_MetaData[];
+#endif
+		static void NewProp_bCycleDay_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bCycleDay;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_DayDuration_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_DayDuration;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_MainSun_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_MainSun;
@@ -49,6 +58,38 @@ void EmptyLinkFunctionForGeneratedCodeWeatherManager() {}
 	};
 #endif
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWeatherManager_Statics::NewProp_bCycleDay_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Day Cycle" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** Toggle to set whether the manager should change the game's time of day */" },
+#endif
+		{ "ModuleRelativePath", "Public/WeatherManager.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Toggle to set whether the manager should change the game's time of day" },
+#endif
+	};
+#endif
+	void Z_Construct_UClass_AWeatherManager_Statics::NewProp_bCycleDay_SetBit(void* Obj)
+	{
+		((AWeatherManager*)Obj)->bCycleDay = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AWeatherManager_Statics::NewProp_bCycleDay = { "bCycleDay", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AWeatherManager), &Z_Construct_UClass_AWeatherManager_Statics::NewProp_bCycleDay_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AWeatherManager_Statics::NewProp_bCycleDay_MetaData), Z_Construct_UClass_AWeatherManager_Statics::NewProp_bCycleDay_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWeatherManager_Statics::NewProp_DayDuration_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Day Cycle" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** Duration of the day in seconds */" },
+#endif
+		{ "ModuleRelativePath", "Public/WeatherManager.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Duration of the day in seconds" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AWeatherManager_Statics::NewProp_DayDuration = { "DayDuration", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AWeatherManager, DayDuration), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AWeatherManager_Statics::NewProp_DayDuration_MetaData), Z_Construct_UClass_AWeatherManager_Statics::NewProp_DayDuration_MetaData) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWeatherManager_Statics::NewProp_MainSun_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Lights" },
@@ -58,6 +99,8 @@ void EmptyLinkFunctionForGeneratedCodeWeatherManager() {}
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AWeatherManager_Statics::NewProp_MainSun = { "MainSun", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AWeatherManager, MainSun), Z_Construct_UClass_UDirectionalLightComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AWeatherManager_Statics::NewProp_MainSun_MetaData), Z_Construct_UClass_AWeatherManager_Statics::NewProp_MainSun_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AWeatherManager_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeatherManager_Statics::NewProp_bCycleDay,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeatherManager_Statics::NewProp_DayDuration,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeatherManager_Statics::NewProp_MainSun,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AWeatherManager_Statics::StaticCppClassTypeInfo = {
@@ -98,9 +141,9 @@ void EmptyLinkFunctionForGeneratedCodeWeatherManager() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_WeatherManager_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AWeatherManager, AWeatherManager::StaticClass, TEXT("AWeatherManager"), &Z_Registration_Info_UClass_AWeatherManager, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWeatherManager), 3225024866U) },
+		{ Z_Construct_UClass_AWeatherManager, AWeatherManager::StaticClass, TEXT("AWeatherManager"), &Z_Registration_Info_UClass_AWeatherManager, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWeatherManager), 2057539057U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_WeatherManager_h_1759021328(TEXT("/Script/ProjectEclipse"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_WeatherManager_h_2266463863(TEXT("/Script/ProjectEclipse"),
 		Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_WeatherManager_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_WeatherManager_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

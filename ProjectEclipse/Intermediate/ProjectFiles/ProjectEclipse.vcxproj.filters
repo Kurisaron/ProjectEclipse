@@ -57,12 +57,30 @@
     <Filter Include="Source\ProjectEclipse\Private">
       <UniqueIdentifier>{E3169F58-E4C8-3C21-A697-3F402C250CB5}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\DamageType_Base.cpp">
+      <Filter>Source\ProjectEclipse\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\DamageType_Fire.cpp">
+      <Filter>Source\ProjectEclipse\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\DamageType_Slash.cpp">
+      <Filter>Source\ProjectEclipse\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\WeatherManager.cpp">
       <Filter>Source\ProjectEclipse\Private</Filter>
     </ClCompile>
     <Filter Include="Source\ProjectEclipse\Public">
       <UniqueIdentifier>{88552100-DCF1-3F63-A7C0-C447C7B201BC}</UniqueIdentifier>
     </Filter>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\DamageType_Base.h">
+      <Filter>Source\ProjectEclipse\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\DamageType_Fire.h">
+      <Filter>Source\ProjectEclipse\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\DamageType_Slash.h">
+      <Filter>Source\ProjectEclipse\Public</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\WeatherManager.h">
       <Filter>Source\ProjectEclipse\Public</Filter>
     </ClInclude>

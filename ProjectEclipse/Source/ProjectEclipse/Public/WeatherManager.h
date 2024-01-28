@@ -13,9 +13,15 @@ class PROJECTECLIPSE_API AWeatherManager : public AActor
 {
 	GENERATED_BODY()
 
+	/** Toggle to set whether the manager should change the game's time of day */
+	UPROPERTY(EditAnywhere, Category = "Day Cycle", meta = (AllowPrivateAccess = "true"))
+	bool bCycleDay = true;
+
 	float dayTime = 0.0f;
 
-	float dayDuration = 1500.0f;
+	/** Duration of the day in seconds */
+	UPROPERTY(EditAnywhere, Category = "Day Cycle", meta = (AllowPrivateAccess = "true"))
+	float DayDuration = 1500.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Lights", meta = (AllowPrivateAccess = "true"))
 	UDirectionalLightComponent* MainSun;
