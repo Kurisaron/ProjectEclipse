@@ -77,13 +77,14 @@ void AProjectEclipseCharacter::Tick(float DeltaSeconds)
 {
 	UpdateBounds();
 
+	UpdateCounters(activeTimeCounters, DeltaSeconds);
+
 	if (GetCharacterMovement()->IsMovingOnGround())
 	{
 		if (!bCanDoubleJump)
 			bCanDoubleJump = true;
 	}
 
-	
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -96,13 +97,16 @@ void AProjectEclipseCharacter::SetupPlayerInputComponent(UInputComponent* Player
 		
 		// Jumping
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Jump);
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Ongoing, this, &AProjectEclipseCharacter::FreerunTick);
+		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Ongoing, this, &AProjectEclipseCharacter::FreerunTick);
 
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Move);
 
 		// Sprinting
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Sprint);
+
+		// Attacking
+		EnhancedInputComponent->BindAction(PrimaryAttackAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::PrimaryAttack);
 
 		// Dodging
 		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Dodge);
@@ -165,10 +169,9 @@ void AProjectEclipseCharacter::Jump(const FInputActionValue& Value)
 	bool grounded = GetCharacterMovement()->IsMovingOnGround();
 	//UE_LOG(LogTemp, Warning, TEXT("The character is %s grounded"), (grounded ? TEXT("currently") : TEXT("not")));
 
-	JumpPressedTime = 0.0f;
-
 	if (pressed)
 	{
+		StartCounter(activeTimeCounters, JumpCounterKey);
 		JumpFreerunThreshold = grounded ? 0.25f : 0.0f;
 		if (grounded)
 		{
@@ -176,17 +179,18 @@ void AProjectEclipseCharacter::Jump(const FInputActionValue& Value)
 		}
 		else
 		{
-			AirJump();
+			DoubleJump();
 		}
 	}
 	else
 	{
+		StopCounter(activeTimeCounters, JumpCounterKey);
 		ACharacter::StopJumping();
 	}
 
 }
 
-void AProjectEclipseCharacter::AirJump()
+void AProjectEclipseCharacter::DoubleJump()
 {
 	// Broadcasts AirJumpEvent
 	DoubleJumpEvent.Broadcast(this);
@@ -221,18 +225,25 @@ void AProjectEclipseCharacter::Sprint(const FInputActionValue& Value)
 void AProjectEclipseCharacter::FreerunTick()
 {
 	float DeltaTime = GetWorld()->DeltaTimeSeconds;
-	JumpPressedTime += DeltaTime;
-	UE_LOG(LogTemp, Warning, TEXT("Jump pressed for %f seconds"), JumpPressedTime);
+	//UE_LOG(LogTemp, Warning, TEXT("Jump pressed for %f seconds"), JumpPressedTime);
 
 	if (!IsFreerunning()) return;
 	
-	UE_LOG(LogTemp, Warning, TEXT("Freerunning"));
+	//UE_LOG(LogTemp, Warning, TEXT("Freerunning"));
+
+	const FVector Location = GetActorLocation();
+	FVector High(Location.X, Location.Y, BoundOrigin.Z + BoundExtent.Z);
 	
+	TArray<FVector> FrontStarts = { Location, High };
+	if (ForwardObstacle(FrontStarts))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Forward Obstacle Present"));
+	}
 }
 
 bool AProjectEclipseCharacter::IsFreerunning()
 {
-	return !GetCharacterMovement()->IsMovingOnGround() && JumpPressedTime > JumpFreerunThreshold;
+	return !GetCharacterMovement()->IsMovingOnGround() && GetCounter(activeTimeCounters, JumpCounterKey) > JumpFreerunThreshold;
 }
 
 bool AProjectEclipseCharacter::ForwardObstacle(TArray<FVector> StartLocations)
@@ -262,6 +273,29 @@ bool AProjectEclipseCharacter::CheckForObstacle(const FVector& Start, const FVec
 	DrawDebugLine(GetWorld(), Start, Start + (Direction * WallCheckDistance), bHit ? FColor::Green : FColor::Red);
 
 	return bHit;
+}
+
+void AProjectEclipseCharacter::PrimaryAttack(const FInputActionValue& Value)
+{
+	// input is a bool
+	bool attacking = Value.Get<bool>();
+
+	if (Controller != nullptr)
+	{
+		if (attacking)
+		{
+			StartCounter(activeTimeCounters, PrimaryAttackCounterKey);
+		}
+		else
+		{
+			float timePressed = GetCounter(activeTimeCounters, PrimaryAttackCounterKey);
+
+			UE_LOG(LogTemp, Warning, TEXT("The attack button was pressed for %f seconds"), timePressed);
+			// Insert attack logic here
+
+			StopCounter(activeTimeCounters, PrimaryAttackCounterKey);
+		}
+	}
 }
 
 void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
@@ -344,5 +378,53 @@ void AProjectEclipseCharacter::UpdateBounds()
 
 		UCapsuleComponent* capsule = GetCapsuleComponent();
 		DrawDebugCapsule(GetWorld(), capsule->GetComponentLocation(), capsule->GetScaledCapsuleHalfHeight(), capsule->GetScaledCapsuleRadius(), FQuat::Identity, FColor::Cyan);
+	}
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+// Free Functions
+
+void StartCounter(TMap<FString, float>& Tracker, FString Key)
+{
+	Tracker.Add(Key, 0.0f);
+	UE_LOG(LogTemp, Warning, TEXT("%s counter added tracker"), *Key);
+}
+
+void StopCounter(TMap<FString, float>& Tracker, FString Key)
+{
+	if (Tracker.Contains(Key))
+	{
+		Tracker.Remove(Key);
+		UE_LOG(LogTemp, Warning, TEXT("%s counter removed from tracker"), *Key);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s counter not present in tracker"), *Key);
+	}
+}
+
+float GetCounter(TMap<FString, float>& Tracker, FString Key)
+{
+	if (Tracker.Contains(Key))
+	{
+		float Value = Tracker[Key];
+		UE_LOG(LogTemp, Warning, TEXT("%s counter found, value is: %f"), *Key, Value);
+		return Value;
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s counter not present in tracker"), *Key);
+		return 0.0f;
+	}
+		
+}
+
+void UpdateCounters(TMap<FString, float>& Tracker, float DeltaSeconds)
+{
+	for (auto& Element : Tracker)
+	{
+		Element.Value += DeltaSeconds;
+		UE_LOG(LogTemp, Warning, TEXT("%s counter is now at %f seconds"), *Element.Key, Element.Value);
 	}
 }

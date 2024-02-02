@@ -21,6 +21,9 @@ class AProjectEclipseCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+	/** List of time counters for tracking how long something has been active */
+	TMap<FString, float> activeTimeCounters;
+
 	/** Origin of character's bounds */
 	FVector BoundOrigin;
 
@@ -30,8 +33,8 @@ class AProjectEclipseCharacter : public ACharacter
 	/** Direction of character movement*/
 	FVector2D MovementVector;
 
-	/** Tracks amount of time in seconds the jump button has been pressed */
-	float JumpPressedTime = 0.0f;
+	/** Key used in time counter map for tracking how long the jump button has been pressed */
+	FString JumpCounterKey = "JumpPressed";
 
 	/** Threshold value for time jump button has been pressed for the character to be considered freerunning */
 	float JumpFreerunThreshold = 0.25f;
@@ -42,6 +45,9 @@ class AProjectEclipseCharacter : public ACharacter
 	DECLARE_EVENT_OneParam(AProjectEclipseCharacter, FDoubleJumpEvent, const AProjectEclipseCharacter*);
 	/** Broadcasts whenever the player presses the jump button in the air */
 	FDoubleJumpEvent DoubleJumpEvent;
+
+	/** Key used in time counter map for tracking how long the primary attack button has been pressed */
+	FString PrimaryAttackCounterKey = "PrimaryAttackPressed";
 
 	/** Tracks whether character is sprinting*/
 	bool bSprinting = false;
@@ -78,11 +84,15 @@ class AProjectEclipseCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* SprintAction;
 
+	/** Main Attack Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* PrimaryAttackAction;
+
 	/** Dodge Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* DodgeAction;
 
-	/** Dodge Input Action */
+	/** Crouch Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* CrouchAction;
 
@@ -98,7 +108,7 @@ public:
 	AProjectEclipseCharacter();
 	
 	/** Broadcasts whenever the player presses the jump button in the air */
-	FDoubleJumpEvent& DoubleJump() { return DoubleJumpEvent; }
+	FDoubleJumpEvent& GetDoubleJumpEvent() { return DoubleJumpEvent; }
 
 protected:
 
@@ -112,7 +122,7 @@ protected:
 	void Jump(const FInputActionValue& Value);
 
 	/** Called for double jump action (fires event) */
-	void AirJump();
+	void DoubleJump();
 
 	/** Default AirJumpEvent subscriber */
 	void Default_DoubleJump(const AProjectEclipseCharacter* Char);
@@ -134,6 +144,9 @@ protected:
 
 	/** Called to check for a wall */
 	bool CheckForObstacle(const FVector& Start, const FVector& Direction);
+
+	/** Called to perform the main attack */
+	void PrimaryAttack(const FInputActionValue& Value);
 
 	/** Called for dodge input */
 	void Dodge(const FInputActionValue& Value);
@@ -164,3 +177,7 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return ThirdPersonCamera; }
 };
 
+void StartCounter(TMap<FString, float>& Tracker, FString Key);
+void StopCounter(TMap<FString, float>& Tracker, FString Key);
+float GetCounter(TMap<FString, float>& Tracker, FString Key);
+void UpdateCounters(TMap<FString, float>& Tracker, float DeltaSeconds);
