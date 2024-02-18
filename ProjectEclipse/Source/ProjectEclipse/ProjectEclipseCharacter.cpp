@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "ProjectEclipseCharacter.h"
+#include "Kismet/GameplayStatics.h"
 #include "Components/PointLightComponent.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
@@ -51,8 +52,9 @@ AProjectEclipseCharacter::AProjectEclipseCharacter()
 	ThirdPersonCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	ThirdPersonCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
-	// Bind events for default double jump
+	// Bind delegates/events
 	DoubleJumpEvent.AddUObject<AProjectEclipseCharacter>(this, &AProjectEclipseCharacter::Default_DoubleJump);
+	PrimaryAttackEvent.AddUObject<AProjectEclipseCharacter>(this, &AProjectEclipseCharacter::Default_PrimaryAttack);
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -193,10 +195,11 @@ void AProjectEclipseCharacter::Jump(const FInputActionValue& Value)
 void AProjectEclipseCharacter::DoubleJump()
 {
 	// Broadcasts AirJumpEvent
-	DoubleJumpEvent.Broadcast(this);
+	if (DoubleJumpEvent.IsBound()) 
+		DoubleJumpEvent.Broadcast(this);
 }
 
-void AProjectEclipseCharacter::Default_DoubleJump(const AProjectEclipseCharacter* Char)
+void AProjectEclipseCharacter::Default_DoubleJump(const AProjectEclipseCharacter* Character)
 {
 	if (!bCanDoubleJump) return;
 	
@@ -233,11 +236,17 @@ void AProjectEclipseCharacter::FreerunTick()
 
 	const FVector Location = GetActorLocation();
 	FVector High(Location.X, Location.Y, BoundOrigin.Z + BoundExtent.Z);
+	FVector Low(Location.X, Location.Y, BoundOrigin.Z - BoundExtent.Z);
 	
-	TArray<FVector> FrontStarts = { Location, High };
-	if (ForwardObstacle(FrontStarts))
+	TMap<FString, TTuple<FVector, bool>> FrontStarts;
+	FrontStarts.Add("Location", TTuple<FVector, bool>(Location, false));
+	FrontStarts.Add("High", TTuple<FVector, bool>(High, false));
+	FrontStarts.Add("Low", TTuple<FVector, bool>(Low, false));
+
+	if (CheckForwardObstacle(FrontStarts))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Forward Obstacle Present"));
+		//UE_LOG(LogTemp, Warning, TEXT("Forward Obstacle Present"));
+
 	}
 }
 
@@ -246,13 +255,17 @@ bool AProjectEclipseCharacter::IsFreerunning()
 	return !GetCharacterMovement()->IsMovingOnGround() && GetCounter(activeTimeCounters, JumpCounterKey) > JumpFreerunThreshold;
 }
 
-bool AProjectEclipseCharacter::ForwardObstacle(TArray<FVector> StartLocations)
+bool AProjectEclipseCharacter::CheckForwardObstacle(TMap<FString, TTuple<FVector, bool>>& StartLocations)
 {
-	bool obstaclePresent(false), flag(false);
+	bool obstaclePresent(false);
 	const FVector ForwardVector = GetActorForwardVector();
 
-	for (FVector location : StartLocations)
+	for (auto& Element : StartLocations)
 	{
+		TTuple<FVector, bool>& Value = Element.Value;
+		FVector location = Value.Get<0>();
+		bool& flag = Value.Get<1>();
+		
 		flag = CheckForObstacle(location, ForwardVector);
 		if (flag) obstaclePresent = true;
 	}
@@ -275,6 +288,7 @@ bool AProjectEclipseCharacter::CheckForObstacle(const FVector& Start, const FVec
 	return bHit;
 }
 
+
 void AProjectEclipseCharacter::PrimaryAttack(const FInputActionValue& Value)
 {
 	// input is a bool
@@ -282,20 +296,36 @@ void AProjectEclipseCharacter::PrimaryAttack(const FInputActionValue& Value)
 
 	if (Controller != nullptr)
 	{
+		float timePressed(0.0f);
 		if (attacking)
 		{
 			StartCounter(activeTimeCounters, PrimaryAttackCounterKey);
 		}
 		else
 		{
-			float timePressed = GetCounter(activeTimeCounters, PrimaryAttackCounterKey);
-
-			UE_LOG(LogTemp, Warning, TEXT("The attack button was pressed for %f seconds"), timePressed);
-			// Insert attack logic here
+			timePressed = GetCounter(activeTimeCounters, PrimaryAttackCounterKey);
 
 			StopCounter(activeTimeCounters, PrimaryAttackCounterKey);
 		}
+
+		PrimaryAttackEvent.Broadcast(this, attacking, timePressed);
+		//UE_LOG(LogTemp, Warning, TEXT("The attack button was pressed for %f seconds"), timePressed);
 	}
+}
+
+void AProjectEclipseCharacter::Default_PrimaryAttack(const AProjectEclipseCharacter* Character, const bool Pressed, const float PressedTime)
+{
+	//UE_LOG(LogTemp, Warning, TEXT("The attack button %s being pressed, pressed time is: %f"), (Pressed ? TEXT("is") : TEXT("is not")), PressedTime);
+
+	if (Pressed) return;
+
+	FVector Location = GetActorLocation();
+	FVector Forward = GetActorForwardVector();
+	FVector SpawnLocation = Location + (Forward * 100.0);
+	FRotator Rotation = FRotator::ZeroRotator;
+	
+	AProjectileActor* SpawnedProjectile = GetWorld()->SpawnActor<AProjectileActor>(DefaultProjectile->GetAuthoritativeClass(), SpawnLocation, Rotation);
+	SpawnedProjectile->GetMesh()->AddImpulse(Forward * 5000.0);
 }
 
 void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
@@ -388,7 +418,7 @@ void AProjectEclipseCharacter::UpdateBounds()
 void StartCounter(TMap<FString, float>& Tracker, FString Key)
 {
 	Tracker.Add(Key, 0.0f);
-	UE_LOG(LogTemp, Warning, TEXT("%s counter added tracker"), *Key);
+	//UE_LOG(LogTemp, Warning, TEXT("%s counter added tracker"), *Key);
 }
 
 void StopCounter(TMap<FString, float>& Tracker, FString Key)
@@ -396,11 +426,11 @@ void StopCounter(TMap<FString, float>& Tracker, FString Key)
 	if (Tracker.Contains(Key))
 	{
 		Tracker.Remove(Key);
-		UE_LOG(LogTemp, Warning, TEXT("%s counter removed from tracker"), *Key);
+		//UE_LOG(LogTemp, Warning, TEXT("%s counter removed from tracker"), *Key);
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("%s counter not present in tracker"), *Key);
+		//UE_LOG(LogTemp, Warning, TEXT("%s counter not present in tracker"), *Key);
 	}
 }
 
@@ -409,12 +439,12 @@ float GetCounter(TMap<FString, float>& Tracker, FString Key)
 	if (Tracker.Contains(Key))
 	{
 		float Value = Tracker[Key];
-		UE_LOG(LogTemp, Warning, TEXT("%s counter found, value is: %f"), *Key, Value);
+		//UE_LOG(LogTemp, Warning, TEXT("%s counter found, value is: %f"), *Key, Value);
 		return Value;
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("%s counter not present in tracker"), *Key);
+		//UE_LOG(LogTemp, Warning, TEXT("%s counter not present in tracker"), *Key);
 		return 0.0f;
 	}
 		
@@ -425,6 +455,6 @@ void UpdateCounters(TMap<FString, float>& Tracker, float DeltaSeconds)
 	for (auto& Element : Tracker)
 	{
 		Element.Value += DeltaSeconds;
-		UE_LOG(LogTemp, Warning, TEXT("%s counter is now at %f seconds"), *Element.Key, Element.Value);
+		//UE_LOG(LogTemp, Warning, TEXT("%s counter is now at %f seconds"), *Element.Key, Element.Value);
 	}
 }

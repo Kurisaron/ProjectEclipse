@@ -4,6 +4,7 @@
 #include "WeatherManager.h"
 #include "Components/DirectionalLightComponent.h"
 #include "Components/PointLightComponent.h"
+#include "Components/ExponentialHeightFogComponent.h"
 
 // Sets default values
 AWeatherManager::AWeatherManager()
@@ -13,6 +14,7 @@ AWeatherManager::AWeatherManager()
 
 	MainSun = CreateDefaultSubobject<UDirectionalLightComponent>(TEXT("Main Sun"));
 
+	MainFog = CreateDefaultSubobject<UExponentialHeightFogComponent>(TEXT("Main Fog"));
 }
 
 // Called when the game starts or when spawned
@@ -21,6 +23,7 @@ void AWeatherManager::BeginPlay()
 	Super::BeginPlay();
 	
 	dayTime += DayDuration / 4.0f;
+
 }
 
 // Called every frame
@@ -36,7 +39,7 @@ void AWeatherManager::Tick(float DeltaTime)
 	t = sin(t * 2.0 * PI) + 0.2f;
 	t = FMath::Clamp(t, 0.0f, 1.0f);
 
-	float sunIntensity = FMath::Lerp<float, float>(0.0f, 3.0f, t);
+	float sunIntensity = FMath::Lerp<float, float>(0.0f, 10.0f, t);
 	MainSun->SetIntensity(sunIntensity);
 }
 

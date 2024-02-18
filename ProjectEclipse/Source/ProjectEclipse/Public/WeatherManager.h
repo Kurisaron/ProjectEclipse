@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/DirectionalLightComponent.h"
 #include "Components/PointLightComponent.h"
+#include "Components/ExponentialHeightFogComponent.h"
 #include "WeatherManager.generated.h"
 
 UCLASS(config=Game)
@@ -23,8 +24,13 @@ class PROJECTECLIPSE_API AWeatherManager : public AActor
 	UPROPERTY(EditAnywhere, Category = "Day Cycle", meta = (AllowPrivateAccess = "true"))
 	float DayDuration = 1500.0f;
 
+	/** Light used to represent the sun */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Lights", meta = (AllowPrivateAccess = "true"))
 	UDirectionalLightComponent* MainSun;
+
+	/** Main fog component */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Lights", meta = (AllowPrivateAccess = "true"))
+	UExponentialHeightFogComponent* MainFog;
 
 
 public:	

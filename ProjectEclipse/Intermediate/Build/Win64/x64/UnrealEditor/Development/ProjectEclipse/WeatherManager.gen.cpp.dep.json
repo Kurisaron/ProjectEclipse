@@ -17,6 +17,8 @@
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\components\\locallightcomponent.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\locallightcomponent.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\pointlightcomponent.generated.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\components\\exponentialheightfogcomponent.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\exponentialheightfogcomponent.generated.h",
             "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\weathermanager.generated.h"
         ],
         "ImportedModules": [],

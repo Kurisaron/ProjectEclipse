@@ -11,6 +11,7 @@ void EmptyLinkFunctionForGeneratedCodeWeatherManager() {}
 // Cross Module References
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
 	ENGINE_API UClass* Z_Construct_UClass_UDirectionalLightComponent_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_UExponentialHeightFogComponent_NoRegister();
 	PROJECTECLIPSE_API UClass* Z_Construct_UClass_AWeatherManager();
 	PROJECTECLIPSE_API UClass* Z_Construct_UClass_AWeatherManager_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_ProjectEclipse();
@@ -42,6 +43,10 @@ void EmptyLinkFunctionForGeneratedCodeWeatherManager() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_MainSun_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_MainSun;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_MainFog_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_MainFog;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -93,15 +98,37 @@ void EmptyLinkFunctionForGeneratedCodeWeatherManager() {}
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWeatherManager_Statics::NewProp_MainSun_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Lights" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** Light used to represent the sun */" },
+#endif
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/WeatherManager.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Light used to represent the sun" },
+#endif
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AWeatherManager_Statics::NewProp_MainSun = { "MainSun", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AWeatherManager, MainSun), Z_Construct_UClass_UDirectionalLightComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AWeatherManager_Statics::NewProp_MainSun_MetaData), Z_Construct_UClass_AWeatherManager_Statics::NewProp_MainSun_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWeatherManager_Statics::NewProp_MainFog_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Lights" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** Main fog component */" },
+#endif
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/WeatherManager.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Main fog component" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AWeatherManager_Statics::NewProp_MainFog = { "MainFog", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AWeatherManager, MainFog), Z_Construct_UClass_UExponentialHeightFogComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AWeatherManager_Statics::NewProp_MainFog_MetaData), Z_Construct_UClass_AWeatherManager_Statics::NewProp_MainFog_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AWeatherManager_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeatherManager_Statics::NewProp_bCycleDay,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeatherManager_Statics::NewProp_DayDuration,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeatherManager_Statics::NewProp_MainSun,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeatherManager_Statics::NewProp_MainFog,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AWeatherManager_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AWeatherManager>::IsAbstract,
@@ -141,9 +168,9 @@ void EmptyLinkFunctionForGeneratedCodeWeatherManager() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_WeatherManager_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AWeatherManager, AWeatherManager::StaticClass, TEXT("AWeatherManager"), &Z_Registration_Info_UClass_AWeatherManager, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWeatherManager), 2057539057U) },
+		{ Z_Construct_UClass_AWeatherManager, AWeatherManager::StaticClass, TEXT("AWeatherManager"), &Z_Registration_Info_UClass_AWeatherManager, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWeatherManager), 3542067954U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_WeatherManager_h_2266463863(TEXT("/Script/ProjectEclipse"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_WeatherManager_h_1831878987(TEXT("/Script/ProjectEclipse"),
 		Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_WeatherManager_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_WeatherManager_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

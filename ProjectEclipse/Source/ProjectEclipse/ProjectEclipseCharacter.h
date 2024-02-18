@@ -6,6 +6,7 @@
 #include "Components/PointLightComponent.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "ProjectileActor.h"
 #include "ProjectEclipseCharacter.generated.h"
 
 class USpringArmComponent;
@@ -42,12 +43,18 @@ class AProjectEclipseCharacter : public ACharacter
 	/** Tracks if the character has double jumped */
 	bool bCanDoubleJump = true;
 
-	DECLARE_EVENT_OneParam(AProjectEclipseCharacter, FDoubleJumpEvent, const AProjectEclipseCharacter*);
+	DECLARE_MULTICAST_DELEGATE_OneParam(FDoubleJumpEvent, const AProjectEclipseCharacter*);
 	/** Broadcasts whenever the player presses the jump button in the air */
 	FDoubleJumpEvent DoubleJumpEvent;
 
 	/** Key used in time counter map for tracking how long the primary attack button has been pressed */
 	FString PrimaryAttackCounterKey = "PrimaryAttackPressed";
+
+	DECLARE_EVENT_ThreeParams(AProjectEclipseCharacter, FPrimaryAttackEvent, const AProjectEclipseCharacter*, const bool, const float);
+	FPrimaryAttackEvent PrimaryAttackEvent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Primary Attack", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AProjectileActor> DefaultProjectile;
 
 	/** Tracks whether character is sprinting*/
 	bool bSprinting = false;
@@ -110,6 +117,9 @@ public:
 	/** Broadcasts whenever the player presses the jump button in the air */
 	FDoubleJumpEvent& GetDoubleJumpEvent() { return DoubleJumpEvent; }
 
+	/** Broadcasts whenever the player performs their primary attack */
+	FPrimaryAttackEvent& GetPrimaryAttackEvent() { return PrimaryAttackEvent; }
+
 protected:
 
 	/** Called for movement input */
@@ -124,8 +134,8 @@ protected:
 	/** Called for double jump action (fires event) */
 	void DoubleJump();
 
-	/** Default AirJumpEvent subscriber */
-	void Default_DoubleJump(const AProjectEclipseCharacter* Char);
+	/** Default DoubleJumpEvent subscriber */
+	void Default_DoubleJump(const AProjectEclipseCharacter* Character);
 
 	/** Called to reset character's ability to double jump */
 	void ResetDoubleJump(const FHitResult& Hit);
@@ -140,13 +150,16 @@ protected:
 	bool IsFreerunning();
 
 	/** Checks for forward obstacle */
-	bool ForwardObstacle(TArray<FVector> StartLocations);
+	bool CheckForwardObstacle(TMap<FString, TTuple<FVector, bool>>& StartLocations);
 
 	/** Called to check for a wall */
 	bool CheckForObstacle(const FVector& Start, const FVector& Direction);
 
 	/** Called to perform the main attack */
 	void PrimaryAttack(const FInputActionValue& Value);
+
+	/** Default PrimaryAttackEvent subscriber */
+	void Default_PrimaryAttack(const AProjectEclipseCharacter* Character, const bool Pressed, const float PressedTime);
 
 	/** Called for dodge input */
 	void Dodge(const FInputActionValue& Value);
