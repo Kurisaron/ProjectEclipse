@@ -68,8 +68,20 @@ class AProjectEclipseCharacter : public ACharacter
 	/** Tracks whether character can dodge */
 	bool bCanDodge = true;
 
-	/** Tracks whether character is crouching */
-	bool bCrouching = false;
+	/** Key used in time counter map for tracking how long the dodge button has been pressed */
+	FString DodgeCounterKey = "DodgePressed";
+
+	DECLARE_EVENT_ThreeParams(AProjectEclipseCharacter, FDodgeEvent, AProjectEclipseCharacter*, const bool, const float);
+	FDodgeEvent DodgeEvent;
+
+	/** Tracks whether character is pressing crouch */
+	bool bCrouchPressed = false;
+
+	/** Key used in time counter map for tracking how long the crouch button has been pressed */
+	FString CrouchCounterKey = "CrouchPressed";
+
+	DECLARE_EVENT_ThreeParams(AProjectEclipseCharacter, FCrouchEvent, AProjectEclipseCharacter*, const bool, const float);
+	FCrouchEvent CrouchEvent;
 
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
@@ -164,11 +176,12 @@ protected:
 	/** Called for dodge input */
 	void Dodge(const FInputActionValue& Value);
 
-	/** Called to reset dodge */
-	void ResetDodge();
+	void Default_Dodge(AProjectEclipseCharacter* Character, const bool Pressed, const float PressedTime);
 
 	/** Called for crouch input */
 	void Crouch(const FInputActionValue& Value);
+
+	void Default_Crouch(AProjectEclipseCharacter* Character, const bool Pressed, const float PressedTime);
 
 	/** Called to update bound information */
 	void UpdateBounds();
@@ -188,9 +201,25 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return ThirdPersonCamera; }
+
+	bool Sprinting() { return bSprinting; }
+
+	/** Returns whether character can dodge */
+	bool CanDodge() { return bCanDodge; }
+
+	/** Sets whether character can dodge */
+	void CanDodge(bool Value) { bCanDodge = Value; }
+
+	/** Called to reset dodge */
+	void ResetDodge() { CanDodge(true); }
+
+	void Crouch(const bool State);
+
+	FVector2D GetMovementVector() { return MovementVector; }
 };
 
 void StartCounter(TMap<FString, float>& Tracker, FString Key);
 void StopCounter(TMap<FString, float>& Tracker, FString Key);
+bool HasCounter(TMap<FString, float>& Tracker, FString Key);
 float GetCounter(TMap<FString, float>& Tracker, FString Key);
 void UpdateCounters(TMap<FString, float>& Tracker, float DeltaSeconds);

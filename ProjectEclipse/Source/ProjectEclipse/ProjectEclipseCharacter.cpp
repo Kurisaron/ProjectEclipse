@@ -55,6 +55,8 @@ AProjectEclipseCharacter::AProjectEclipseCharacter()
 	// Bind delegates/events
 	DoubleJumpEvent.AddUObject<AProjectEclipseCharacter>(this, &AProjectEclipseCharacter::Default_DoubleJump);
 	PrimaryAttackEvent.AddUObject<AProjectEclipseCharacter>(this, &AProjectEclipseCharacter::Default_PrimaryAttack);
+	CrouchEvent.AddUObject<AProjectEclipseCharacter>(this, &AProjectEclipseCharacter::Default_Crouch);
+	DodgeEvent.AddUObject<AProjectEclipseCharacter>(this, &AProjectEclipseCharacter::Default_Dodge);
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -332,11 +334,20 @@ void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
 {
 	// input is a bool
 	bool dodging = Value.Get<bool>();
+	if (dodging) StartCounter(activeTimeCounters, DodgeCounterKey);
 
-	if (Controller != nullptr && dodging && bCanDodge)
+	if (DodgeEvent.IsBound())
+		DodgeEvent.Broadcast(this, dodging, GetCounter(activeTimeCounters, DodgeCounterKey));
+
+	if (dodging) StopCounter(activeTimeCounters, DodgeCounterKey);
+}
+
+void AProjectEclipseCharacter::Default_Dodge(AProjectEclipseCharacter* Character, const bool Pressed, const float PressedTime)
+{
+	if (Pressed && Character->Controller != nullptr && Character->CanDodge())
 	{
 		// find out which way is forward
-		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator Rotation = Character->Controller->GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
 
 		// get forward vector
@@ -345,41 +356,37 @@ void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
 		// get right vector 
 		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 
-		const FVector2D TargetDirection = MovementVector != FVector2D(0.0, 0.0) ? MovementVector : FVector2D(0.0f, -1.0);
+		FVector2D MoveVector = Character->GetMovementVector();
+		const FVector2D TargetDirection = MoveVector != FVector2D(0.0, 0.0) ? MoveVector : FVector2D(0.0f, -1.0);
 		const FVector DodgeDirection = ((ForwardDirection * TargetDirection.Y) + (RightDirection * TargetDirection.X));
-		const double DodgeStrength = 1500.0 * (bSprinting ? 1.5 : 1.0);
+		const double DodgeStrength = 1500.0 * (Character->Sprinting() ? 1.5 : 1.0);
 
-		//FHitResult hitResult;
-		//const FVector ActorLocation = GetActorLocation();
-
-		//FCollisionQueryParams QueryParams;
-		//QueryParams.AddIgnoredActor(this);
-
-		//SetActorLocation(GetActorLocation() + DodgeDirection, true, &hitResult, ETeleportType::None);
-		//bool targetObstructed = GetWorld()->LineTraceSingleByChannel(hitResult, ActorLocation, ActorLocation + DodgeDirection, ECollisionChannel::ECC_MAX, QueryParams);
-		LaunchCharacter(DodgeDirection * DodgeStrength, true, false);
-		//GetCharacterMovement()->AddImpulse(DodgeDirection * 10000.0, true);
-		bCanDodge = false;
+		Character->LaunchCharacter(DodgeDirection * DodgeStrength, true, false);
+		Character->CanDodge(false);
 
 		FTimerHandle TimerHandle;
-		GetWorldTimerManager().SetTimer(TimerHandle, this, &AProjectEclipseCharacter::ResetDodge, 0.75f, false);
+		Character->GetWorldTimerManager().SetTimer(TimerHandle, Character, &AProjectEclipseCharacter::ResetDodge, 0.75f, false);
 	}
-}
-
-void AProjectEclipseCharacter::ResetDodge()
-{
-	bCanDodge = true;
 }
 
 
 void AProjectEclipseCharacter::Crouch(const FInputActionValue& Value)
 {
 	// input is a bool
-	bCrouching = Value.Get<bool>();
+	bCrouchPressed = Value.Get<bool>();
+	if (bCrouchPressed) StartCounter(activeTimeCounters, CrouchCounterKey);
 
-	UE_LOG(LogTemp, Warning, TEXT("The character is %s crouching"), (bCrouching ? TEXT("now") : TEXT("NOT")));
+	if (CrouchEvent.IsBound())
+	{
+		CrouchEvent.Broadcast(this, bCrouchPressed, GetCounter(activeTimeCounters, CrouchCounterKey));
+	}
 
-	if (bCrouching)
+	if (!bCrouchPressed) StopCounter(activeTimeCounters, CrouchCounterKey);
+}
+
+void AProjectEclipseCharacter::Crouch(const bool State)
+{
+	if (State)
 	{
 		ACharacter::Crouch();
 	}
@@ -387,6 +394,12 @@ void AProjectEclipseCharacter::Crouch(const FInputActionValue& Value)
 	{
 		ACharacter::UnCrouch();
 	}
+}
+
+void AProjectEclipseCharacter::Default_Crouch(AProjectEclipseCharacter* Character, const bool Pressed, const float PressedTime)
+{
+	UE_LOG(LogTemp, Warning, TEXT("The character is %s crouching"), (Pressed ? TEXT("now") : TEXT("NOT")));
+	Character->Crouch(Pressed);
 }
 
 void AProjectEclipseCharacter::UpdateBounds()
@@ -432,6 +445,11 @@ void StopCounter(TMap<FString, float>& Tracker, FString Key)
 	{
 		//UE_LOG(LogTemp, Warning, TEXT("%s counter not present in tracker"), *Key);
 	}
+}
+
+bool HasCounter(TMap<FString, float>& Tracker, FString Key)
+{
+	return Tracker.Contains(Key);
 }
 
 float GetCounter(TMap<FString, float>& Tracker, FString Key)
