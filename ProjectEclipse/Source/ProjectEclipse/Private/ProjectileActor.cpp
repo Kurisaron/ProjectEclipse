@@ -12,13 +12,19 @@ AProjectileActor::AProjectileActor()
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 
 	RootComponent = Mesh;
+
+	Light = CreateDefaultSubobject<UPointLightComponent>(TEXT("Light"));
+	Light->AttachToComponent(Mesh, FAttachmentTransformRules::KeepRelativeTransform);
+
+	VFX = CreateDefaultSubobject<UNiagaraComponent>(TEXT("VFX"));
+	VFX->AttachToComponent(Mesh, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 // Called when the game starts or when spawned
 void AProjectileActor::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 // Called every frame
@@ -39,7 +45,17 @@ void AProjectileActor::NotifyHit(
 	const FHitResult& Hit
 )
 {
-	Destroy();
+	Mesh->SetVisibility(false);
+	Mesh->SetPhysicsLinearVelocity(FVector::Zero());
+	Mesh->SetEnableGravity(false);
+
+	FTimerHandle TimerHandle;
+	GetWorldTimerManager().SetTimer(TimerHandle, this, &AProjectileActor::DestroySelf, 1.0f, false);
+}
+
+void AProjectileActor::DestroySelf()
+{
+	//Destroy();
 }
 
 UStaticMeshComponent* AProjectileActor::GetMesh() { return Mesh; }

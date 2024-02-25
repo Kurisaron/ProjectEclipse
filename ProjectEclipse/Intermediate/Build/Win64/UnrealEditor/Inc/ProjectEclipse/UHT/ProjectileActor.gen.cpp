@@ -13,9 +13,11 @@ void EmptyLinkFunctionForGeneratedCodeProjectileActor() {}
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
 	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_UPointLightComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UPrimitiveComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 	ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FHitResult();
+	NIAGARA_API UClass* Z_Construct_UClass_UNiagaraComponent_NoRegister();
 	PROJECTECLIPSE_API UClass* Z_Construct_UClass_AProjectileActor();
 	PROJECTECLIPSE_API UClass* Z_Construct_UClass_AProjectileActor_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_ProjectEclipse();
@@ -150,6 +152,14 @@ void EmptyLinkFunctionForGeneratedCodeProjectileActor() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Mesh_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_Mesh;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Light_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Light;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_VFX_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_VFX;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -178,8 +188,28 @@ void EmptyLinkFunctionForGeneratedCodeProjectileActor() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProjectileActor_Statics::NewProp_Mesh = { "Mesh", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectileActor, Mesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectileActor_Statics::NewProp_Mesh_MetaData), Z_Construct_UClass_AProjectileActor_Statics::NewProp_Mesh_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectileActor_Statics::NewProp_Light_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "VFX" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/ProjectileActor.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProjectileActor_Statics::NewProp_Light = { "Light", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectileActor, Light), Z_Construct_UClass_UPointLightComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectileActor_Statics::NewProp_Light_MetaData), Z_Construct_UClass_AProjectileActor_Statics::NewProp_Light_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectileActor_Statics::NewProp_VFX_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "VFX" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/ProjectileActor.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProjectileActor_Statics::NewProp_VFX = { "VFX", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectileActor, VFX), Z_Construct_UClass_UNiagaraComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectileActor_Statics::NewProp_VFX_MetaData), Z_Construct_UClass_AProjectileActor_Statics::NewProp_VFX_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AProjectileActor_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectileActor_Statics::NewProp_Mesh,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectileActor_Statics::NewProp_Light,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectileActor_Statics::NewProp_VFX,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AProjectileActor_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AProjectileActor>::IsAbstract,
@@ -219,9 +249,9 @@ void EmptyLinkFunctionForGeneratedCodeProjectileActor() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AProjectileActor, AProjectileActor::StaticClass, TEXT("AProjectileActor"), &Z_Registration_Info_UClass_AProjectileActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectileActor), 1533757042U) },
+		{ Z_Construct_UClass_AProjectileActor, AProjectileActor::StaticClass, TEXT("AProjectileActor"), &Z_Registration_Info_UClass_AProjectileActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectileActor), 738463836U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_2810696793(TEXT("/Script/ProjectEclipse"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_986413582(TEXT("/Script/ProjectEclipse"),
 		Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
