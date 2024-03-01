@@ -8,6 +8,8 @@
 #include "Components/PointLightComponent.h"
 #include "ProjectileActor.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_NineParams(FProjectileHit, AProjectileActor*, Projectile, UPrimitiveComponent*, MyComp, AActor*, Other, UPrimitiveComponent*, OtherComp, bool, bSelfMoved, FVector, HitLocation, FVector, HitNormal, FVector, NormalImpulse, const FHitResult&, Hit);
+
 UCLASS()
 class PROJECTECLIPSE_API AProjectileActor : public AActor
 {
@@ -23,6 +25,10 @@ class PROJECTECLIPSE_API AProjectileActor : public AActor
 	UNiagaraComponent* VFX;
 
 public:	
+
+	UPROPERTY(BlueprintAssignable)
+	FProjectileHit OnHit;
+
 	// Sets default values for this actor's properties
 	AProjectileActor();
 
@@ -33,6 +39,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UFUNCTION(BlueprintCallable)
+	virtual void Fire(FVector Direction, float Force = 1000.0f);
 
 	UFUNCTION()
 	virtual void NotifyHit(
@@ -45,8 +54,6 @@ public:
 		FVector NormalImpulse,
 		const FHitResult& Hit
 	) override;
-
-	void DestroySelf();
 
 	virtual UStaticMeshComponent* GetMesh();
 

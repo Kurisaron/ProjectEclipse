@@ -54,7 +54,6 @@ AProjectEclipseCharacter::AProjectEclipseCharacter()
 
 	// Bind delegates/events
 	DoubleJumpEvent.AddUObject<AProjectEclipseCharacter>(this, &AProjectEclipseCharacter::Default_DoubleJump);
-	PrimaryAttackEvent.AddUObject<AProjectEclipseCharacter>(this, &AProjectEclipseCharacter::Default_PrimaryAttack);
 	CrouchEvent.AddUObject<AProjectEclipseCharacter>(this, &AProjectEclipseCharacter::Default_Crouch);
 	DodgeEvent.AddUObject<AProjectEclipseCharacter>(this, &AProjectEclipseCharacter::Default_Dodge);
 
@@ -310,24 +309,9 @@ void AProjectEclipseCharacter::PrimaryAttack(const FInputActionValue& Value)
 			StopCounter(activeTimeCounters, PrimaryAttackCounterKey);
 		}
 
-		PrimaryAttackEvent.Broadcast(this, attacking, timePressed);
+		PrimaryAttackEvent.Broadcast(attacking, timePressed);
 		//UE_LOG(LogTemp, Warning, TEXT("The attack button was pressed for %f seconds"), timePressed);
 	}
-}
-
-void AProjectEclipseCharacter::Default_PrimaryAttack(const AProjectEclipseCharacter* Character, const bool Pressed, const float PressedTime)
-{
-	//UE_LOG(LogTemp, Warning, TEXT("The attack button %s being pressed, pressed time is: %f"), (Pressed ? TEXT("is") : TEXT("is not")), PressedTime);
-
-	if (Pressed) return;
-
-	FVector Location = GetActorLocation();
-	FVector Forward = GetActorForwardVector();
-	FVector SpawnLocation = Location + (Forward * 100.0);
-	FRotator Rotation = FRotator::ZeroRotator;
-	
-	AProjectileActor* SpawnedProjectile = GetWorld()->SpawnActor<AProjectileActor>(DefaultProjectile->GetAuthoritativeClass(), SpawnLocation, Rotation);
-	SpawnedProjectile->GetMesh()->AddImpulse(Forward * 5000.0);
 }
 
 void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)

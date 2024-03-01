@@ -17,6 +17,8 @@ struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPrimaryAttackEvent, const bool, Pressed, const float, PressedTime);
+
 UCLASS(config=Game)
 class AProjectEclipseCharacter : public ACharacter
 {
@@ -50,11 +52,12 @@ class AProjectEclipseCharacter : public ACharacter
 	/** Key used in time counter map for tracking how long the primary attack button has been pressed */
 	FString PrimaryAttackCounterKey = "PrimaryAttackPressed";
 
-	DECLARE_EVENT_ThreeParams(AProjectEclipseCharacter, FPrimaryAttackEvent, const AProjectEclipseCharacter*, const bool, const float);
+public:
+
+	UPROPERTY(BlueprintAssignable)
 	FPrimaryAttackEvent PrimaryAttackEvent;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Primary Attack", meta = (AllowPrivateAccess = "true"))
-	TSubclassOf<AProjectileActor> DefaultProjectile;
+private:
 
 	/** Tracks whether character is sprinting*/
 	bool bSprinting = false;
@@ -106,6 +109,10 @@ class AProjectEclipseCharacter : public ACharacter
 	/** Main Attack Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* PrimaryAttackAction;
+
+	/** Cycle Attack Input Action*/
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* CycleAttackAction;
 
 	/** Dodge Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -169,9 +176,6 @@ protected:
 
 	/** Called to perform the main attack */
 	void PrimaryAttack(const FInputActionValue& Value);
-
-	/** Default PrimaryAttackEvent subscriber */
-	void Default_PrimaryAttack(const AProjectEclipseCharacter* Character, const bool Pressed, const float PressedTime);
 
 	/** Called for dodge input */
 	void Dodge(const FInputActionValue& Value);

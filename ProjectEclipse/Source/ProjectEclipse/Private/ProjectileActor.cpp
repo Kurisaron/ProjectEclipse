@@ -10,6 +10,7 @@ AProjectileActor::AProjectileActor()
 	PrimaryActorTick.bCanEverTick = true;
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	Mesh->SetSimulatePhysics(true);
 
 	RootComponent = Mesh;
 
@@ -34,6 +35,11 @@ void AProjectileActor::Tick(float DeltaTime)
 
 }
 
+void AProjectileActor::Fire(FVector Direction, float Force)
+{
+	Mesh->AddImpulse(Direction * Force);
+}
+
 void AProjectileActor::NotifyHit(
 	class UPrimitiveComponent* MyComp,
 	AActor* Other,
@@ -45,17 +51,8 @@ void AProjectileActor::NotifyHit(
 	const FHitResult& Hit
 )
 {
-	Mesh->SetVisibility(false);
-	Mesh->SetPhysicsLinearVelocity(FVector::Zero());
-	Mesh->SetEnableGravity(false);
-
-	FTimerHandle TimerHandle;
-	GetWorldTimerManager().SetTimer(TimerHandle, this, &AProjectileActor::DestroySelf, 1.0f, false);
-}
-
-void AProjectileActor::DestroySelf()
-{
-	//Destroy();
+	
+	OnHit.Broadcast(this, MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
 }
 
 UStaticMeshComponent* AProjectileActor::GetMesh() { return Mesh; }

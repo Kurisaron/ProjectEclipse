@@ -9,7 +9,6 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeProjectEclipseCharacter() {}
 // Cross Module References
-	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 	ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
@@ -17,9 +16,80 @@ void EmptyLinkFunctionForGeneratedCodeProjectEclipseCharacter() {}
 	ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputMappingContext_NoRegister();
 	PROJECTECLIPSE_API UClass* Z_Construct_UClass_AProjectEclipseCharacter();
 	PROJECTECLIPSE_API UClass* Z_Construct_UClass_AProjectEclipseCharacter_NoRegister();
-	PROJECTECLIPSE_API UClass* Z_Construct_UClass_AProjectileActor_NoRegister();
+	PROJECTECLIPSE_API UFunction* Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature();
 	UPackage* Z_Construct_UPackage__Script_ProjectEclipse();
 // End Cross Module References
+	struct Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics
+	{
+		struct _Script_ProjectEclipse_eventPrimaryAttackEvent_Parms
+		{
+			bool Pressed;
+			float PressedTime;
+		};
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Pressed_MetaData[];
+#endif
+		static void NewProp_Pressed_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_Pressed;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_PressedTime_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_PressedTime;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::NewProp_Pressed_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	void Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::NewProp_Pressed_SetBit(void* Obj)
+	{
+		((_Script_ProjectEclipse_eventPrimaryAttackEvent_Parms*)Obj)->Pressed = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::NewProp_Pressed = { "Pressed", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(_Script_ProjectEclipse_eventPrimaryAttackEvent_Parms), &Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::NewProp_Pressed_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::NewProp_Pressed_MetaData), Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::NewProp_Pressed_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::NewProp_PressedTime_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::NewProp_PressedTime = { "PressedTime", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(_Script_ProjectEclipse_eventPrimaryAttackEvent_Parms, PressedTime), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::NewProp_PressedTime_MetaData), Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::NewProp_PressedTime_MetaData) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::NewProp_Pressed,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::NewProp_PressedTime,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "ProjectEclipseCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_ProjectEclipse, nullptr, "PrimaryAttackEvent__DelegateSignature", nullptr, nullptr, Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::PropPointers), sizeof(Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::_Script_ProjectEclipse_eventPrimaryAttackEvent_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::Function_MetaDataParams), Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::_Script_ProjectEclipse_eventPrimaryAttackEvent_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+void FPrimaryAttackEvent_DelegateWrapper(const FMulticastScriptDelegate& PrimaryAttackEvent, bool Pressed, const float PressedTime)
+{
+	struct _Script_ProjectEclipse_eventPrimaryAttackEvent_Parms
+	{
+		bool Pressed;
+		float PressedTime;
+	};
+	_Script_ProjectEclipse_eventPrimaryAttackEvent_Parms Parms;
+	Parms.Pressed=Pressed ? true : false;
+	Parms.PressedTime=PressedTime;
+	PrimaryAttackEvent.ProcessMulticastDelegate<UObject>(&Parms);
+}
 	void AProjectEclipseCharacter::StaticRegisterNativesAProjectEclipseCharacter()
 	{
 	}
@@ -35,9 +105,9 @@ void EmptyLinkFunctionForGeneratedCodeProjectEclipseCharacter() {}
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_DefaultProjectile_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_PrimaryAttackEvent_MetaData[];
 #endif
-		static const UECodeGen_Private::FClassPropertyParams NewProp_DefaultProjectile;
+		static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_PrimaryAttackEvent;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_CameraBoom_MetaData[];
 #endif
@@ -62,6 +132,10 @@ void EmptyLinkFunctionForGeneratedCodeProjectEclipseCharacter() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_PrimaryAttackAction_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_PrimaryAttackAction;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_CycleAttackAction_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_CycleAttackAction;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_DodgeAction_MetaData[];
 #endif
@@ -95,13 +169,11 @@ void EmptyLinkFunctionForGeneratedCodeProjectEclipseCharacter() {}
 	};
 #endif
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_DefaultProjectile_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Primary Attack" },
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_PrimaryAttackEvent_MetaData[] = {
 		{ "ModuleRelativePath", "ProjectEclipseCharacter.h" },
 	};
 #endif
-	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_DefaultProjectile = { "DefaultProjectile", nullptr, (EPropertyFlags)0x0044000000000015, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectEclipseCharacter, DefaultProjectile), Z_Construct_UClass_UClass, Z_Construct_UClass_AProjectileActor_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_DefaultProjectile_MetaData), Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_DefaultProjectile_MetaData) };
+	const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_PrimaryAttackEvent = { "PrimaryAttackEvent", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectEclipseCharacter, PrimaryAttackEvent), Z_Construct_UDelegateFunction_ProjectEclipse_PrimaryAttackEvent__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_PrimaryAttackEvent_MetaData), Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_PrimaryAttackEvent_MetaData) }; // 1522899356
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_CameraBoom_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
@@ -189,6 +261,20 @@ void EmptyLinkFunctionForGeneratedCodeProjectEclipseCharacter() {}
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_PrimaryAttackAction = { "PrimaryAttackAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectEclipseCharacter, PrimaryAttackAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_PrimaryAttackAction_MetaData), Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_PrimaryAttackAction_MetaData) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_CycleAttackAction_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Input" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** Cycle Attack Input Action*/" },
+#endif
+		{ "ModuleRelativePath", "ProjectEclipseCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Cycle Attack Input Action" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_CycleAttackAction = { "CycleAttackAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectEclipseCharacter, CycleAttackAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_CycleAttackAction_MetaData), Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_CycleAttackAction_MetaData) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_DodgeAction_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Input" },
@@ -245,13 +331,14 @@ void EmptyLinkFunctionForGeneratedCodeProjectEclipseCharacter() {}
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_LookAction = { "LookAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectEclipseCharacter, LookAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_LookAction_MetaData), Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_LookAction_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AProjectEclipseCharacter_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_DefaultProjectile,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_PrimaryAttackEvent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_CameraBoom,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_ThirdPersonCamera,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_DefaultMappingContext,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_JumpAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_SprintAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_PrimaryAttackAction,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_CycleAttackAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_DodgeAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_CrouchAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_MoveAction,
@@ -295,9 +382,9 @@ void EmptyLinkFunctionForGeneratedCodeProjectEclipseCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AProjectEclipseCharacter, AProjectEclipseCharacter::StaticClass, TEXT("AProjectEclipseCharacter"), &Z_Registration_Info_UClass_AProjectEclipseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectEclipseCharacter), 3528282110U) },
+		{ Z_Construct_UClass_AProjectEclipseCharacter, AProjectEclipseCharacter::StaticClass, TEXT("AProjectEclipseCharacter"), &Z_Registration_Info_UClass_AProjectEclipseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectEclipseCharacter), 378738373U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_3827542724(TEXT("/Script/ProjectEclipse"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_3161328264(TEXT("/Script/ProjectEclipse"),
 		Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

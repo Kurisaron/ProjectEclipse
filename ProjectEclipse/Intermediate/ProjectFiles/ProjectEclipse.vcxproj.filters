@@ -66,7 +66,16 @@
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\DamageType_Slash.cpp">
       <Filter>Source\ProjectEclipse\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\FirearmComponent.cpp">
+      <Filter>Source\ProjectEclipse\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\FirearmMode.cpp">
+      <Filter>Source\ProjectEclipse\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\ProjectileActor.cpp">
+      <Filter>Source\ProjectEclipse\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\WeaponComponent.cpp">
       <Filter>Source\ProjectEclipse\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\WeatherManager.cpp">
@@ -84,7 +93,16 @@
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\DamageType_Slash.h">
       <Filter>Source\ProjectEclipse\Public</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\FirearmComponent.h">
+      <Filter>Source\ProjectEclipse\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\FirearmMode.h">
+      <Filter>Source\ProjectEclipse\Public</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\ProjectileActor.h">
+      <Filter>Source\ProjectEclipse\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\WeaponComponent.h">
       <Filter>Source\ProjectEclipse\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\WeatherManager.h">
