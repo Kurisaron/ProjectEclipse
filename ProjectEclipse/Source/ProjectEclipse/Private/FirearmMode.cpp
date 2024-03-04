@@ -3,7 +3,32 @@
 
 #include "FirearmMode.h"
 
-void UFirearmMode::Fire(APawn* Wielder, const bool Pressed, const float PressedTime)
+UFirearmMode::UFirearmMode()
 {
-	FireEvent.Broadcast(Wielder, Pressed, PressedTime);
+
+}
+
+void UFirearmMode::Fire_Implementation(APawn* Wielder, bool Pressed, float PressedTime)
+{
+
+}
+
+AProjectileActor* UFirearmMode::SpawnProjectile(FVector Location, FVector Direction, bool& Spawned)
+{
+	UWorld* CurrentWorld = GetWorld();
+	Spawned = false;
+
+	if (CurrentWorld != nullptr)
+	{
+		FRotator DirectionRotation = Direction.Rotation();
+		AProjectileActor* NewProjectile = CurrentWorld->SpawnActor<AProjectileActor>(Projectile->GetAuthoritativeClass(), Location, DirectionRotation);
+		Spawned = NewProjectile != nullptr;
+		return NewProjectile;
+	}
+	else return nullptr;
+}
+
+void UFirearmMode::TickMode_Implementation(APawn* Wielder, float DeltaTime)
+{
+
 }

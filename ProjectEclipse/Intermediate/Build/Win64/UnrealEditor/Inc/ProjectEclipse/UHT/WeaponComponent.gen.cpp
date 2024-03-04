@@ -11,6 +11,7 @@ void EmptyLinkFunctionForGeneratedCodeWeaponComponent() {}
 // Cross Module References
 	ENGINE_API UClass* Z_Construct_UClass_USceneComponent();
 	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
+	ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputMappingContext_NoRegister();
 	PROJECTECLIPSE_API UClass* Z_Construct_UClass_UWeaponComponent();
 	PROJECTECLIPSE_API UClass* Z_Construct_UClass_UWeaponComponent_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_ProjectEclipse();
@@ -33,6 +34,10 @@ void EmptyLinkFunctionForGeneratedCodeWeaponComponent() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_WeaponMesh_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_WeaponMesh;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_WeaponMappingContext_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_WeaponMappingContext;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -60,15 +65,30 @@ void EmptyLinkFunctionForGeneratedCodeWeaponComponent() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UWeaponComponent_Statics::NewProp_WeaponMesh = { "WeaponMesh", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UWeaponComponent, WeaponMesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UWeaponComponent_Statics::NewProp_WeaponMesh_MetaData), Z_Construct_UClass_UWeaponComponent_Statics::NewProp_WeaponMesh_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWeaponComponent_Statics::NewProp_WeaponMappingContext_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Input" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** MappingContext */" },
+#endif
+		{ "ModuleRelativePath", "Public/WeaponComponent.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "MappingContext" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UWeaponComponent_Statics::NewProp_WeaponMappingContext = { "WeaponMappingContext", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UWeaponComponent, WeaponMappingContext), Z_Construct_UClass_UInputMappingContext_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UWeaponComponent_Statics::NewProp_WeaponMappingContext_MetaData), Z_Construct_UClass_UWeaponComponent_Statics::NewProp_WeaponMappingContext_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UWeaponComponent_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWeaponComponent_Statics::NewProp_WeaponMesh,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWeaponComponent_Statics::NewProp_WeaponMappingContext,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UWeaponComponent_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UWeaponComponent>::IsAbstract,
 	};
 	const UECodeGen_Private::FClassParams Z_Construct_UClass_UWeaponComponent_Statics::ClassParams = {
 		&UWeaponComponent::StaticClass,
-		"Engine",
+		"Game",
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
 		nullptr,
@@ -101,9 +121,9 @@ void EmptyLinkFunctionForGeneratedCodeWeaponComponent() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_WeaponComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UWeaponComponent, UWeaponComponent::StaticClass, TEXT("UWeaponComponent"), &Z_Registration_Info_UClass_UWeaponComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWeaponComponent), 3112392595U) },
+		{ Z_Construct_UClass_UWeaponComponent, UWeaponComponent::StaticClass, TEXT("UWeaponComponent"), &Z_Registration_Info_UClass_UWeaponComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWeaponComponent), 331070300U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_WeaponComponent_h_1981558442(TEXT("/Script/ProjectEclipse"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_WeaponComponent_h_3903655672(TEXT("/Script/ProjectEclipse"),
 		Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_WeaponComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_WeaponComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

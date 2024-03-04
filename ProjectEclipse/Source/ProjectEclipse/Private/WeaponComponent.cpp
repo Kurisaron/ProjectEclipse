@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "WeaponComponent.h"
+#include "ProjectEclipse/ProjectEclipseCharacter.h"
 
 // Sets default values for this component's properties
 UWeaponComponent::UWeaponComponent()
@@ -10,8 +10,7 @@ UWeaponComponent::UWeaponComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// Add mesh component to weapon
-	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>("Weapon Mesh");
 	WeaponMesh->AttachToComponent(this, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
@@ -21,10 +20,13 @@ void UWeaponComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
 	
 }
 
+void UWeaponComponent::Equip(UWeapon* NewWeapon)
+{
+	NewWeapon->Equip(this);
+}
 
 // Called every frame
 void UWeaponComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -34,3 +36,7 @@ void UWeaponComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	// ...
 }
 
+void UWeaponComponent::SetMesh(UStaticMesh* NewMesh)
+{
+	WeaponMesh->SetStaticMesh(NewMesh);
+}

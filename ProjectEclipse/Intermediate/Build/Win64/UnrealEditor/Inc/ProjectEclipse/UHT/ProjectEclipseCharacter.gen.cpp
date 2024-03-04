@@ -133,10 +133,6 @@ void FPrimaryAttackEvent_DelegateWrapper(const FMulticastScriptDelegate& Primary
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_PrimaryAttackAction;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_CycleAttackAction_MetaData[];
-#endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_CycleAttackAction;
-#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_DodgeAction_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_DodgeAction;
@@ -261,20 +257,6 @@ void FPrimaryAttackEvent_DelegateWrapper(const FMulticastScriptDelegate& Primary
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_PrimaryAttackAction = { "PrimaryAttackAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectEclipseCharacter, PrimaryAttackAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_PrimaryAttackAction_MetaData), Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_PrimaryAttackAction_MetaData) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_CycleAttackAction_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Cycle Attack Input Action*/" },
-#endif
-		{ "ModuleRelativePath", "ProjectEclipseCharacter.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Cycle Attack Input Action" },
-#endif
-	};
-#endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_CycleAttackAction = { "CycleAttackAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectEclipseCharacter, CycleAttackAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_CycleAttackAction_MetaData), Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_CycleAttackAction_MetaData) };
-#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_DodgeAction_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Input" },
@@ -338,7 +320,6 @@ void FPrimaryAttackEvent_DelegateWrapper(const FMulticastScriptDelegate& Primary
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_JumpAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_SprintAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_PrimaryAttackAction,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_CycleAttackAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_DodgeAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_CrouchAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_MoveAction,
@@ -382,9 +363,9 @@ void FPrimaryAttackEvent_DelegateWrapper(const FMulticastScriptDelegate& Primary
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AProjectEclipseCharacter, AProjectEclipseCharacter::StaticClass, TEXT("AProjectEclipseCharacter"), &Z_Registration_Info_UClass_AProjectEclipseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectEclipseCharacter), 378738373U) },
+		{ Z_Construct_UClass_AProjectEclipseCharacter, AProjectEclipseCharacter::StaticClass, TEXT("AProjectEclipseCharacter"), &Z_Registration_Info_UClass_AProjectEclipseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectEclipseCharacter), 2873405363U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_3161328264(TEXT("/Script/ProjectEclipse"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_2742225561(TEXT("/Script/ProjectEclipse"),
 		Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

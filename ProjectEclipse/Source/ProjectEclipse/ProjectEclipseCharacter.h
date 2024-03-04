@@ -110,10 +110,6 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* PrimaryAttackAction;
 
-	/** Cycle Attack Input Action*/
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* CycleAttackAction;
-
 	/** Dodge Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* DodgeAction;
@@ -193,7 +189,7 @@ protected:
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	
+
 	// To add mapping context
 	virtual void BeginPlay();
 
@@ -205,6 +201,10 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return ThirdPersonCamera; }
+
+	virtual void AddMappingContext(UInputMappingContext* NewMappingContext, int32 Priority);
+
+	virtual void RemoveMappingContext(UInputMappingContext* MappingContext);
 
 	bool Sprinting() { return bSprinting; }
 

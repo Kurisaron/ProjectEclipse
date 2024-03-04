@@ -7,12 +7,10 @@
 #include "ProjectileActor.h"
 #include "FirearmMode.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FFirearmFireEvent, APawn*, Wielder, const bool, Pressed, const float, PressedTime);
-
 /**
  * 
  */
-UCLASS()
+UCLASS(ClassGroup = (Custom), config = Game, Blueprintable, BlueprintType)
 class PROJECTECLIPSE_API UFirearmMode : public UObject
 {
 	GENERATED_BODY()
@@ -20,10 +18,18 @@ class PROJECTECLIPSE_API UFirearmMode : public UObject
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectiles", meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<AProjectileActor> Projectile;
 
-	UPROPERTY(BlueprintAssignable)
-	FFirearmFireEvent FireEvent;
-
 public:
+	
+	UFirearmMode();
 
-	virtual void Fire(APawn* Wielder, const bool Pressed, const float PressedTime);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Firearm Mode")
+	void Fire(APawn* Wielder, bool Pressed, float PressedTime);
+	virtual void Fire_Implementation(APawn* Wielder, bool Pressed, float PressedTime);
+
+	UFUNCTION(BlueprintCallable, Category = "Firearm Mode")
+	AProjectileActor* SpawnProjectile(FVector Location, FVector Direction, bool& Spawned);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Firearm Mode")
+	void TickMode(APawn* Wielder, float DeltaTime);
+	virtual void TickMode_Implementation(APawn* Wielder, float DeltaTime);
 };

@@ -72,6 +72,7 @@ void AProjectEclipseCharacter::BeginPlay()
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
 		{
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
+			UE_LOG(LogTemp, Warning, TEXT("Default Mapping Context added to input"));
 		}
 	}
 }
@@ -119,10 +120,38 @@ void AProjectEclipseCharacter::SetupPlayerInputComponent(UInputComponent* Player
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Look);
+
+		UE_LOG(LogTemp, Warning, TEXT("Actions bound to input"));
 	}
 	else
 	{
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
+	}
+}
+
+void AProjectEclipseCharacter::AddMappingContext(UInputMappingContext* NewMappingContext, int32 Priority)
+{
+	//Add Input Mapping Context
+	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		{
+			Subsystem->AddMappingContext(NewMappingContext, Priority);
+			UE_LOG(LogTemp, Warning, TEXT("New Mapping Context added to input"));
+		}
+	}
+}
+
+void AProjectEclipseCharacter::RemoveMappingContext(UInputMappingContext* MappingContext)
+{
+	//Add Input Mapping Context
+	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		{
+			Subsystem->RemoveMappingContext(MappingContext);
+			UE_LOG(LogTemp, Warning, TEXT("New Mapping Context removed from input"));
+		}
 	}
 }
 

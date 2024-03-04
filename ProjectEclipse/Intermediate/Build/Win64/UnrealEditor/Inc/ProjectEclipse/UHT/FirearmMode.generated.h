@@ -10,32 +10,36 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class APawn;
+class AProjectileActor;
 #ifdef PROJECTECLIPSE_FirearmMode_generated_h
 #error "FirearmMode.generated.h already included, missing '#pragma once' in FirearmMode.h"
 #endif
 #define PROJECTECLIPSE_FirearmMode_generated_h
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_10_DELEGATE \
-PROJECTECLIPSE_API void FFirearmFireEvent_DelegateWrapper(const FMulticastScriptDelegate& FirearmFireEvent, APawn* Wielder, bool Pressed, const float PressedTime);
+#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_SPARSE_DATA
+#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_SPARSE_DATA_PROPERTY_ACCESSORS
+#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
+#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execTickMode); \
+	DECLARE_FUNCTION(execSpawnProjectile); \
+	DECLARE_FUNCTION(execFire);
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_18_SPARSE_DATA
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_18_SPARSE_DATA_PROPERTY_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_18_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_18_RPC_WRAPPERS_NO_PURE_DECLS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_18_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_18_INCLASS_NO_PURE_DECLS \
+#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_ACCESSORS
+#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_CALLBACK_WRAPPERS
+#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUFirearmMode(); \
 	friend struct Z_Construct_UClass_UFirearmMode_Statics; \
 public: \
 	DECLARE_CLASS(UFirearmMode, UObject, COMPILED_IN_FLAGS(0), CASTCLASS_None, TEXT("/Script/ProjectEclipse"), NO_API) \
-	DECLARE_SERIALIZER(UFirearmMode)
+	DECLARE_SERIALIZER(UFirearmMode) \
+	static const TCHAR* StaticConfigName() {return TEXT("Game");} \
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_18_ENHANCED_CONSTRUCTORS \
-	/** Standard constructor, called after all reflected properties have been initialized */ \
-	NO_API UFirearmMode(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
+
+#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API UFirearmMode(UFirearmMode&&); \
@@ -43,21 +47,22 @@ private: \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UFirearmMode); \
 	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UFirearmMode); \
-	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UFirearmMode) \
+	DEFINE_DEFAULT_CONSTRUCTOR_CALL(UFirearmMode) \
 	NO_API virtual ~UFirearmMode();
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_15_PROLOG
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_18_GENERATED_BODY \
+#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_13_PROLOG
+#define FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_18_SPARSE_DATA \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_18_SPARSE_DATA_PROPERTY_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_18_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_18_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_18_INCLASS_NO_PURE_DECLS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_18_ENHANCED_CONSTRUCTORS \
+	FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_SPARSE_DATA \
+	FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_SPARSE_DATA_PROPERTY_ACCESSORS \
+	FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS \
+	FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_ACCESSORS \
+	FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_CALLBACK_WRAPPERS \
+	FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_INCLASS_NO_PURE_DECLS \
+	FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_16_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
