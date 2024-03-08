@@ -7,6 +7,8 @@
 #include "ProjectileActor.h"
 #include "FirearmMode.generated.h"
 
+class UEquipmentComponent;
+
 /**
  * 
  */
@@ -23,8 +25,8 @@ public:
 	UFirearmMode();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Firearm Mode")
-	void Fire(APawn* Wielder, bool Pressed, float PressedTime);
-	virtual void Fire_Implementation(APawn* Wielder, bool Pressed, float PressedTime);
+	void Fire(UEquipmentComponent* Wielder, bool Pressed, float PressedTime);
+	virtual void Fire_Implementation(UEquipmentComponent* Wielder, bool Pressed, float PressedTime);
 
 	UFUNCTION(BlueprintCallable, Category = "Firearm Mode")
 	AProjectileActor* SpawnProjectile(FVector Location, FVector Direction, bool& Spawned);

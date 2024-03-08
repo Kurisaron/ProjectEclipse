@@ -9,7 +9,7 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeWeapon() {}
 // Cross Module References
-	COREUOBJECT_API UClass* Z_Construct_UClass_UObject();
+	PROJECTECLIPSE_API UClass* Z_Construct_UClass_UEquipment();
 	PROJECTECLIPSE_API UClass* Z_Construct_UClass_UWeapon();
 	PROJECTECLIPSE_API UClass* Z_Construct_UClass_UWeapon_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_ProjectEclipse();
@@ -32,16 +32,19 @@ void EmptyLinkFunctionForGeneratedCodeWeapon() {}
 		static const UECodeGen_Private::FClassParams ClassParams;
 	};
 	UObject* (*const Z_Construct_UClass_UWeapon_Statics::DependentSingletons[])() = {
-		(UObject* (*)())Z_Construct_UClass_UObject,
+		(UObject* (*)())Z_Construct_UClass_UEquipment,
 		(UObject* (*)())Z_Construct_UPackage__Script_ProjectEclipse,
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UWeapon_Statics::DependentSingletons) < 16);
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWeapon_Statics::Class_MetaDataParams[] = {
+		{ "BlueprintType", "true" },
+		{ "ClassGroupNames", "Custom" },
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "/**\n * \n */" },
 #endif
 		{ "IncludePath", "Weapon.h" },
+		{ "IsBlueprintBase", "true" },
 		{ "ModuleRelativePath", "Public/Weapon.h" },
 	};
 #endif
@@ -50,7 +53,7 @@ void EmptyLinkFunctionForGeneratedCodeWeapon() {}
 	};
 	const UECodeGen_Private::FClassParams Z_Construct_UClass_UWeapon_Statics::ClassParams = {
 		&UWeapon::StaticClass,
-		nullptr,
+		"Game",
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
 		nullptr,
@@ -75,7 +78,6 @@ void EmptyLinkFunctionForGeneratedCodeWeapon() {}
 	{
 		return UWeapon::StaticClass();
 	}
-	UWeapon::UWeapon(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UWeapon);
 	UWeapon::~UWeapon() {}
 	struct Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_Weapon_h_Statics
@@ -83,9 +85,9 @@ void EmptyLinkFunctionForGeneratedCodeWeapon() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_Weapon_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UWeapon, UWeapon::StaticClass, TEXT("UWeapon"), &Z_Registration_Info_UClass_UWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWeapon), 3482766715U) },
+		{ Z_Construct_UClass_UWeapon, UWeapon::StaticClass, TEXT("UWeapon"), &Z_Registration_Info_UClass_UWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWeapon), 3934480714U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_Weapon_h_1795145849(TEXT("/Script/ProjectEclipse"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_Weapon_h_3535287637(TEXT("/Script/ProjectEclipse"),
 		Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_Weapon_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_Weapon_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

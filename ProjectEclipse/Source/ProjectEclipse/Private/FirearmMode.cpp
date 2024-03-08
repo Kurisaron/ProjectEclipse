@@ -2,13 +2,14 @@
 
 
 #include "FirearmMode.h"
+#include "EquipmentComponent.h"
 
 UFirearmMode::UFirearmMode()
 {
 
 }
 
-void UFirearmMode::Fire_Implementation(APawn* Wielder, bool Pressed, float PressedTime)
+void UFirearmMode::Fire_Implementation(UEquipmentComponent* Wielder, bool Pressed, float PressedTime)
 {
 
 }

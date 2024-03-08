@@ -5,10 +5,5 @@
 
 UWeapon::UWeapon()
 {
-
-}
-
-void UWeapon::Equip(UWeaponComponent* WeaponComponent)
-{
-	WeaponComponent->SetMesh(Mesh);
+	
 }

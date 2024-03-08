@@ -66,6 +66,15 @@
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\DamageType_Slash.cpp">
       <Filter>Source\ProjectEclipse\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\Equipment.cpp">
+      <Filter>Source\ProjectEclipse\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\EquipmentComponent.cpp">
+      <Filter>Source\ProjectEclipse\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\Firearm.cpp">
+      <Filter>Source\ProjectEclipse\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\FirearmMode.cpp">
       <Filter>Source\ProjectEclipse\Private</Filter>
     </ClCompile>
@@ -73,9 +82,6 @@
       <Filter>Source\ProjectEclipse\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\Weapon.cpp">
-      <Filter>Source\ProjectEclipse\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\ProjectEclipse\Private\WeaponComponent.cpp">
       <Filter>Source\ProjectEclipse\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\WeatherManager.cpp">
@@ -93,6 +99,15 @@
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\DamageType_Slash.h">
       <Filter>Source\ProjectEclipse\Public</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\Equipment.h">
+      <Filter>Source\ProjectEclipse\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\EquipmentComponent.h">
+      <Filter>Source\ProjectEclipse\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\Firearm.h">
+      <Filter>Source\ProjectEclipse\Public</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\FirearmMode.h">
       <Filter>Source\ProjectEclipse\Public</Filter>
     </ClInclude>
@@ -100,9 +115,6 @@
       <Filter>Source\ProjectEclipse\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\Weapon.h">
-      <Filter>Source\ProjectEclipse\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\ProjectEclipse\Public\WeaponComponent.h">
       <Filter>Source\ProjectEclipse\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\WeatherManager.h">

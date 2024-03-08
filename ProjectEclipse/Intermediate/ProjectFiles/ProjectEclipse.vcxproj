@@ -149,6 +149,21 @@
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
       <AdditionalOptions>$(ClCompile_AdditionalOptions)</AdditionalOptions>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\Equipment.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalOptions>$(ClCompile_AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\EquipmentComponent.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalOptions>$(ClCompile_AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\Firearm.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalOptions>$(ClCompile_AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\FirearmMode.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -164,11 +179,6 @@
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
       <AdditionalOptions>$(ClCompile_AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-    <ClCompile Include="..\..\Source\ProjectEclipse\Private\WeaponComponent.cpp">
-      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
-      <AdditionalOptions>$(ClCompile_AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\WeatherManager.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -177,10 +187,12 @@
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\DamageType_Base.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\DamageType_Fire.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\DamageType_Slash.h"/>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\Equipment.h"/>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\EquipmentComponent.h"/>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\Firearm.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\FirearmMode.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\ProjectileActor.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\Weapon.h"/>
-    <ClInclude Include="..\..\Source\ProjectEclipse\Public\WeaponComponent.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\WeatherManager.h"/>
   </ItemGroup>
   <PropertyGroup>

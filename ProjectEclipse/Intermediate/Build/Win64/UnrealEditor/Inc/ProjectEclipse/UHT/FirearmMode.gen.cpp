@@ -14,6 +14,7 @@ void EmptyLinkFunctionForGeneratedCodeFirearmMode() {}
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	ENGINE_API UClass* Z_Construct_UClass_APawn_NoRegister();
 	PROJECTECLIPSE_API UClass* Z_Construct_UClass_AProjectileActor_NoRegister();
+	PROJECTECLIPSE_API UClass* Z_Construct_UClass_UEquipmentComponent_NoRegister();
 	PROJECTECLIPSE_API UClass* Z_Construct_UClass_UFirearmMode();
 	PROJECTECLIPSE_API UClass* Z_Construct_UClass_UFirearmMode_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_ProjectEclipse();
@@ -39,7 +40,7 @@ void EmptyLinkFunctionForGeneratedCodeFirearmMode() {}
 	}
 	DEFINE_FUNCTION(UFirearmMode::execFire)
 	{
-		P_GET_OBJECT(APawn,Z_Param_Wielder);
+		P_GET_OBJECT(UEquipmentComponent,Z_Param_Wielder);
 		P_GET_UBOOL(Z_Param_Pressed);
 		P_GET_PROPERTY(FFloatProperty,Z_Param_PressedTime);
 		P_FINISH;
@@ -49,7 +50,7 @@ void EmptyLinkFunctionForGeneratedCodeFirearmMode() {}
 	}
 	struct FirearmMode_eventFire_Parms
 	{
-		APawn* Wielder;
+		UEquipmentComponent* Wielder;
 		bool Pressed;
 		float PressedTime;
 	};
@@ -59,7 +60,7 @@ void EmptyLinkFunctionForGeneratedCodeFirearmMode() {}
 		float DeltaTime;
 	};
 	static FName NAME_UFirearmMode_Fire = FName(TEXT("Fire"));
-	void UFirearmMode::Fire(APawn* Wielder, bool Pressed, float PressedTime)
+	void UFirearmMode::Fire(UEquipmentComponent* Wielder, bool Pressed, float PressedTime)
 	{
 		FirearmMode_eventFire_Parms Parms;
 		Parms.Wielder=Wielder;
@@ -87,6 +88,9 @@ void EmptyLinkFunctionForGeneratedCodeFirearmMode() {}
 	}
 	struct Z_Construct_UFunction_UFirearmMode_Fire_Statics
 	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Wielder_MetaData[];
+#endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_Wielder;
 		static void NewProp_Pressed_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_Pressed;
@@ -97,7 +101,12 @@ void EmptyLinkFunctionForGeneratedCodeFirearmMode() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UFirearmMode_Fire_Statics::NewProp_Wielder = { "Wielder", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FirearmMode_eventFire_Parms, Wielder), Z_Construct_UClass_APawn_NoRegister, METADATA_PARAMS(0, nullptr) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UFirearmMode_Fire_Statics::NewProp_Wielder_MetaData[] = {
+		{ "EditInline", "true" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UFirearmMode_Fire_Statics::NewProp_Wielder = { "Wielder", nullptr, (EPropertyFlags)0x0010000000080080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FirearmMode_eventFire_Parms, Wielder), Z_Construct_UClass_UEquipmentComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UFirearmMode_Fire_Statics::NewProp_Wielder_MetaData), Z_Construct_UFunction_UFirearmMode_Fire_Statics::NewProp_Wielder_MetaData) };
 	void Z_Construct_UFunction_UFirearmMode_Fire_Statics::NewProp_Pressed_SetBit(void* Obj)
 	{
 		((FirearmMode_eventFire_Parms*)Obj)->Pressed = 1;
@@ -239,7 +248,7 @@ void EmptyLinkFunctionForGeneratedCodeFirearmMode() {}
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UFirearmMode_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_UFirearmMode_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UFirearmMode_Fire, "Fire" }, // 1688561997
+		{ &Z_Construct_UFunction_UFirearmMode_Fire, "Fire" }, // 2672997865
 		{ &Z_Construct_UFunction_UFirearmMode_SpawnProjectile, "SpawnProjectile" }, // 1816650005
 		{ &Z_Construct_UFunction_UFirearmMode_TickMode, "TickMode" }, // 2118060733
 	};
@@ -305,9 +314,9 @@ void EmptyLinkFunctionForGeneratedCodeFirearmMode() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UFirearmMode, UFirearmMode::StaticClass, TEXT("UFirearmMode"), &Z_Registration_Info_UClass_UFirearmMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UFirearmMode), 3145954959U) },
+		{ Z_Construct_UClass_UFirearmMode, UFirearmMode::StaticClass, TEXT("UFirearmMode"), &Z_Registration_Info_UClass_UFirearmMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UFirearmMode), 2676021932U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_3888374322(TEXT("/Script/ProjectEclipse"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_919182583(TEXT("/Script/ProjectEclipse"),
 		Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
