@@ -50,6 +50,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Equipment Actions")
 	virtual void PrimaryUse(bool Pressed, float PressedTime);
 
+	UFUNCTION(BlueprintCallable, Category = "Equipment Actions")
+	virtual void SecondaryUse(bool Pressed, float PressedTime);
+
 	void SetMesh(UStaticMesh* NewMesh);
 
 	AProjectEclipseCharacter* GetWieldingCharacter();

@@ -34,7 +34,13 @@ public:
 
 	virtual void Unequip();
 
-	virtual void PrimaryUse(bool Pressed, float PressedTime);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment Actions")
+	void PrimaryUse(bool Pressed, float PressedTime);
+	virtual void PrimaryUse_Implementation(bool Pressed, float PressedTime);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment Actions")
+	void SecondaryUse(bool Pressed, float PressedTime);
+	virtual void SecondaryUse_Implementation(bool Pressed, float PressedTime);
 
 	UEquipmentComponent* GetWielder();
 

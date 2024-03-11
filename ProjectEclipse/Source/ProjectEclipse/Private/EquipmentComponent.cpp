@@ -97,6 +97,17 @@ void UEquipmentComponent::PrimaryUse(bool Pressed, float PressedTime)
 	CurrentEquipment->PrimaryUse(Pressed, PressedTime);
 }
 
+void UEquipmentComponent::SecondaryUse(bool Pressed, float PressedTime)
+{
+	if (CurrentEquipment == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No current equipment (Secondary Use)"));
+		return;
+	}
+
+	CurrentEquipment->SecondaryUse(Pressed, PressedTime);
+}
+
 void UEquipmentComponent::SetMesh(UStaticMesh* NewMesh)
 {
 	EquipmentMesh->SetStaticMesh(NewMesh);

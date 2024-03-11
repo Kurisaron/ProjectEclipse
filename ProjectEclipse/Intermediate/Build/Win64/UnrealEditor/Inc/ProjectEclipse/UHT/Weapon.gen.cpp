@@ -85,9 +85,9 @@ void EmptyLinkFunctionForGeneratedCodeWeapon() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_Weapon_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UWeapon, UWeapon::StaticClass, TEXT("UWeapon"), &Z_Registration_Info_UClass_UWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWeapon), 3934480714U) },
+		{ Z_Construct_UClass_UWeapon, UWeapon::StaticClass, TEXT("UWeapon"), &Z_Registration_Info_UClass_UWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWeapon), 1052931776U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_Weapon_h_3535287637(TEXT("/Script/ProjectEclipse"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_Weapon_h_1164021809(TEXT("/Script/ProjectEclipse"),
 		Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_Weapon_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_Weapon_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

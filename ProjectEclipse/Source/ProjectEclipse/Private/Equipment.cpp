@@ -39,7 +39,12 @@ void UEquipment::Unequip()
 	}
 }
 
-void UEquipment::PrimaryUse(bool Pressed, float PressedTime)
+void UEquipment::PrimaryUse_Implementation(bool Pressed, float PressedTime)
+{
+
+}
+
+void UEquipment::SecondaryUse_Implementation(bool Pressed, float PressedTime)
 {
 
 }

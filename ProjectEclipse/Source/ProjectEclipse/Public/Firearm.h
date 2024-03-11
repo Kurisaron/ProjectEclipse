@@ -9,6 +9,7 @@
 class AProjectEclipseCharacter;
 class UEquipmentComponent;
 class UFirearmMode;
+class UCameraComponent;
 
 /**
  * 
@@ -26,6 +27,11 @@ class PROJECTECLIPSE_API UFirearm : public UWeapon
 	TArray<TSubclassOf<UFirearmMode>> PrimaryCycle;
 	UFirearmMode* CurrentPrimaryMode;
 
+	/** Default function for firearm, will use default zoom if set to none */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Modes, meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<UFirearmMode> DefaultSecondaryMode;
+	UFirearmMode* CurrentSecondaryMode;
+
 public:
 
 	UFirearm();
@@ -36,7 +42,11 @@ public:
 
 	virtual void Unequip() override;
 
-	virtual void PrimaryUse(bool Pressed, float PressedTime) override;
+	void PrimaryUse(bool Pressed, float PressedTime);
+	virtual void PrimaryUse_Implementation(bool Pressed, float PressedTime) override;
 
 	void CyclePrimary();
+
+	void SecondaryUse(bool Pressed, float PressedTime);
+	virtual void SecondaryUse_Implementation(bool Pressed, float PressedTime) override;
 };

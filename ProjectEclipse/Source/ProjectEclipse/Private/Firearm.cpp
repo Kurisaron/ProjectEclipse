@@ -2,6 +2,7 @@
 
 #include "Firearm.h"
 #include "EnhancedInputComponent.h"
+#include "Camera/CameraComponent.h"
 #include "ProjectEclipse/ProjectEclipseCharacter.h"
 #include "EquipmentComponent.h"
 #include "FirearmMode.h"
@@ -16,6 +17,7 @@ void UFirearm::Load()
 	if (PrimaryCycle.Num() <= 0) return;
 
 	CurrentPrimaryMode = NewObject<UFirearmMode>(this, PrimaryCycle[0]->GetAuthoritativeClass());
+	if (DefaultSecondaryMode != nullptr) CurrentSecondaryMode = NewObject<UFirearmMode>(this, DefaultSecondaryMode->GetAuthoritativeClass());
 }
 
 void UFirearm::Equip(UEquipmentComponent* NewWielder)
@@ -54,12 +56,13 @@ void UFirearm::Unequip()
 	}
 }
 
-void UFirearm::PrimaryUse(bool Pressed, float PressedTime)
+void UFirearm::PrimaryUse_Implementation(bool Pressed, float PressedTime)
 {
-	Super::PrimaryUse(Pressed, PressedTime);
+	Super::PrimaryUse_Implementation(Pressed, PressedTime);
 
+	UEquipmentComponent* MyWielder = GetWielder();
 	if (CurrentPrimaryMode != nullptr)
-		CurrentPrimaryMode->Fire(GetWielder(), Pressed, PressedTime);
+		CurrentPrimaryMode->Fire(MyWielder, Pressed, PressedTime);
 }
 
 void UFirearm::CyclePrimary()
@@ -68,4 +71,24 @@ void UFirearm::CyclePrimary()
 	index += 1;
 	if (index >= PrimaryCycle.Num()) index = 0;
 	CurrentPrimaryMode = NewObject<UFirearmMode>(this, PrimaryCycle[index]->GetAuthoritativeClass());
+}
+
+void UFirearm::SecondaryUse_Implementation(bool Pressed, float PressedTime)
+{
+	Super::SecondaryUse_Implementation(Pressed, PressedTime);
+
+	UEquipmentComponent* ThisWielder = GetWielder();
+	if (CurrentSecondaryMode != nullptr) CurrentSecondaryMode->Fire(ThisWielder, Pressed, PressedTime);
+	else
+	{
+		AProjectEclipseCharacter* WieldingCharacter = ThisWielder->GetWieldingCharacter();
+		if (WieldingCharacter != nullptr)
+		{
+			UCameraComponent* WieldingCamera = WieldingCharacter->GetFollowCamera();
+			if (WieldingCamera != nullptr)
+			{
+				WieldingCamera->SetFieldOfView(Pressed ? 60.0f : 90.0f);
+			}
+		}
+	}
 }

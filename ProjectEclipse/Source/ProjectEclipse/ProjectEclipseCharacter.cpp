@@ -109,8 +109,9 @@ void AProjectEclipseCharacter::SetupPlayerInputComponent(UInputComponent* Player
 		// Sprinting
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Sprint);
 
-		// Attacking
-		EnhancedInputComponent->BindAction(PrimaryAttackAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::PrimaryAttack);
+		// Equipment Use
+		EnhancedInputComponent->BindAction(PrimaryUseAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::PrimaryUse);
+		EnhancedInputComponent->BindAction(SecondaryUseAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::SecondaryUse);
 
 		// Dodging
 		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Dodge);
@@ -120,6 +121,7 @@ void AProjectEclipseCharacter::SetupPlayerInputComponent(UInputComponent* Player
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Look);
+		EnhancedInputComponent->BindAction(ToggleCamAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::ToggleCam);
 
 		UE_LOG(LogTemp, Warning, TEXT("Actions bound to input"));
 	}
@@ -319,27 +321,41 @@ bool AProjectEclipseCharacter::CheckForObstacle(const FVector& Start, const FVec
 }
 
 
-void AProjectEclipseCharacter::PrimaryAttack(const FInputActionValue& Value)
+void AProjectEclipseCharacter::PrimaryUse(const FInputActionValue& Value)
 {
 	// input is a bool
-	bool attacking = Value.Get<bool>();
+	bool isUsing = Value.Get<bool>();
 
 	if (Controller != nullptr)
 	{
 		float timePressed(0.0f);
-		if (attacking)
+		if (isUsing)
 		{
-			StartCounter(activeTimeCounters, PrimaryAttackCounterKey);
+			StartCounter(activeTimeCounters, PrimaryUseCounterKey);
 		}
 		else
 		{
-			timePressed = GetCounter(activeTimeCounters, PrimaryAttackCounterKey);
+			timePressed = GetCounter(activeTimeCounters, PrimaryUseCounterKey);
 
-			StopCounter(activeTimeCounters, PrimaryAttackCounterKey);
+			StopCounter(activeTimeCounters, PrimaryUseCounterKey);
 		}
 
-		PrimaryAttackEvent.Broadcast(attacking, timePressed);
+		PrimaryUseEvent.Broadcast(isUsing, timePressed);
 		//UE_LOG(LogTemp, Warning, TEXT("The attack button was pressed for %f seconds"), timePressed);
+	}
+}
+
+void AProjectEclipseCharacter::SecondaryUse(const FInputActionValue& Value)
+{
+	bool isUsing = Value.Get<bool>();
+
+	if (Controller != nullptr)
+	{
+		if (isUsing) StartCounter(activeTimeCounters, SecondaryUseCounterKey);
+
+		SecondaryUseEvent.Broadcast(isUsing, GetCounter(activeTimeCounters, SecondaryUseCounterKey));
+
+		if (!isUsing) StopCounter(activeTimeCounters, SecondaryUseCounterKey);
 	}
 }
 
@@ -413,6 +429,17 @@ void AProjectEclipseCharacter::Default_Crouch(AProjectEclipseCharacter* Characte
 {
 	UE_LOG(LogTemp, Warning, TEXT("The character is %s crouching"), (Pressed ? TEXT("now") : TEXT("NOT")));
 	Character->Crouch(Pressed);
+}
+
+void AProjectEclipseCharacter::ToggleCam(const FInputActionValue& Value)
+{
+	bool Pressed = Value.Get<bool>();
+
+	if (Pressed) StartCounter(activeTimeCounters, ToggleCamCounterKey);
+
+	if (ToggleCamEvent.IsBound()) ToggleCamEvent.Broadcast(Pressed, GetCounter(activeTimeCounters, ToggleCamCounterKey));
+
+	if (!Pressed) StopCounter(activeTimeCounters, ToggleCamCounterKey);
 }
 
 void AProjectEclipseCharacter::UpdateBounds()

@@ -555,6 +555,7 @@
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\serialization\\customversion.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\applicationcore\\public\\genericplatform\\icursor.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\applicationcore\\public\\genericplatform\\iinputinterface.h",
+            "d:\\github\\projecteclipse\\projecteclipse\\source\\projecteclipse\\public\\equipment.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\inputmappingcontext.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\enhancedactionkeymapping.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\inputaction.h",
@@ -577,6 +578,7 @@
             "c:\\program files\\epic games\\ue_5.3\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\inputaction.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\enhancedactionkeymapping.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\inputmappingcontext.generated.h",
+            "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\equipment.generated.h",
             "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\weapon.generated.h"
         ],
         "ImportedModules": [],

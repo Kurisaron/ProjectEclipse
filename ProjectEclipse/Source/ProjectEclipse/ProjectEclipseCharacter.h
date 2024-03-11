@@ -17,7 +17,8 @@ struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPrimaryAttackEvent, const bool, Pressed, const float, PressedTime);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPrimaryUseEvent, const bool, Pressed, const float, PressedTime);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPlayerCharacterInputEvent, const bool, Pressed, const float, PressedTime);
 
 UCLASS(config=Game)
 class AProjectEclipseCharacter : public ACharacter
@@ -49,13 +50,19 @@ class AProjectEclipseCharacter : public ACharacter
 	/** Broadcasts whenever the player presses the jump button in the air */
 	FDoubleJumpEvent DoubleJumpEvent;
 
-	/** Key used in time counter map for tracking how long the primary attack button has been pressed */
-	FString PrimaryAttackCounterKey = "PrimaryAttackPressed";
+	/** Key used in time counter map for tracking how long the primary use button has been pressed */
+	FString PrimaryUseCounterKey = "PrimaryUsePressed";
+
+	/** Key used in time counter map for tracking how long the secondary use button has been pressed */
+	FString SecondaryUseCounterKey = "SecondaryUsePressed";
 
 public:
 
 	UPROPERTY(BlueprintAssignable)
-	FPrimaryAttackEvent PrimaryAttackEvent;
+	FPrimaryUseEvent PrimaryUseEvent;
+
+	UPROPERTY(BlueprintAssignable)
+	FPlayerCharacterInputEvent SecondaryUseEvent;
 
 private:
 
@@ -86,6 +93,12 @@ private:
 	DECLARE_EVENT_ThreeParams(AProjectEclipseCharacter, FCrouchEvent, AProjectEclipseCharacter*, const bool, const float);
 	FCrouchEvent CrouchEvent;
 
+	/** Key used in time counter map for tracking how long the cam toggle button has been pressed */
+	FString ToggleCamCounterKey = "CamTogglePressed";
+
+	UPROPERTY(BlueprintAssignable)
+	FPlayerCharacterInputEvent ToggleCamEvent;
+
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	USpringArmComponent* CameraBoom;
@@ -106,9 +119,13 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* SprintAction;
 
-	/** Main Attack Input Action */
+	/** Primary Use Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* PrimaryAttackAction;
+	UInputAction* PrimaryUseAction;
+
+	/** Secondary Use Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* SecondaryUseAction;
 
 	/** Dodge Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -126,6 +143,9 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* ToggleCamAction;
+
 public:
 	AProjectEclipseCharacter();
 	
@@ -133,7 +153,7 @@ public:
 	FDoubleJumpEvent& GetDoubleJumpEvent() { return DoubleJumpEvent; }
 
 	/** Broadcasts whenever the player performs their primary attack */
-	FPrimaryAttackEvent& GetPrimaryAttackEvent() { return PrimaryAttackEvent; }
+	FPrimaryUseEvent& GetPrimaryAttackEvent() { return PrimaryUseEvent; }
 
 protected:
 
@@ -170,8 +190,11 @@ protected:
 	/** Called to check for a wall */
 	bool CheckForObstacle(const FVector& Start, const FVector& Direction);
 
-	/** Called to perform the main attack */
-	void PrimaryAttack(const FInputActionValue& Value);
+	/** Called to perform the primary use */
+	void PrimaryUse(const FInputActionValue& Value);
+
+	/** Called to perform the secondary use */
+	void SecondaryUse(const FInputActionValue& Value);
 
 	/** Called for dodge input */
 	void Dodge(const FInputActionValue& Value);
@@ -182,6 +205,9 @@ protected:
 	void Crouch(const FInputActionValue& Value);
 
 	void Default_Crouch(AProjectEclipseCharacter* Character, const bool Pressed, const float PressedTime);
+
+	/** Called to perform camera view toggle */
+	void ToggleCam(const FInputActionValue& Value);
 
 	/** Called to update bound information */
 	void UpdateBounds();

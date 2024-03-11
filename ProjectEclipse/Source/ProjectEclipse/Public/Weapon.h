@@ -20,4 +20,9 @@ public:
 
 	UWeapon();
 
+	void PrimaryUse(bool Pressed, float PressedTime);
+	virtual void PrimaryUse_Implementation(bool Pressed, float PressedTime) override;
+
+	void SecondaryUse(bool Pressed, float PressedTime);
+	virtual void SecondaryUse_Implementation(bool Pressed, float PressedTime) override;
 };
