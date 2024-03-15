@@ -77,11 +77,12 @@ UEquipment* UEquipmentComponent::SwitchEquipment(int32 Index)
 	return NewEquipment;
 }
 
-UEquipment* UEquipmentComponent::CycleEquipment()
+UEquipment* UEquipmentComponent::CycleEquipment(bool Ascending)
 {
 	int32 current = StoredEquipment.IndexOfByKey(CurrentEquipment->GetClass());
-	current += 1;
+	current += Ascending ? 1 : -1;
 	if (current >= StoredEquipment.Num()) current = 0;
+	else if (current < 0) current = StoredEquipment.Num() - 1;
 
 	return SwitchEquipment(current);
 }
@@ -106,6 +107,18 @@ void UEquipmentComponent::SecondaryUse(bool Pressed, float PressedTime)
 	}
 
 	CurrentEquipment->SecondaryUse(Pressed, PressedTime);
+}
+
+
+void UEquipmentComponent::AlternateUse(bool Pressed, float PressedTime)
+{
+	if (CurrentEquipment == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No current equipment (Secondary Use)"));
+		return;
+	}
+
+	CurrentEquipment->AlternateUse(Pressed, PressedTime);
 }
 
 void UEquipmentComponent::SetMesh(UStaticMesh* NewMesh)

@@ -19,3 +19,9 @@ void UWeapon::SecondaryUse_Implementation(bool Pressed, float PressedTime)
 	Super::SecondaryUse_Implementation(Pressed, PressedTime);
 
 }
+
+void UWeapon::AlternateUse_Implementation(bool Pressed, float PressedTime)
+{
+	Super::AlternateUse_Implementation(Pressed, PressedTime);
+
+}

@@ -56,6 +56,9 @@ class AProjectEclipseCharacter : public ACharacter
 	/** Key used in time counter map for tracking how long the secondary use button has been pressed */
 	FString SecondaryUseCounterKey = "SecondaryUsePressed";
 
+	/** Key used in time counter map for tracking how long the alternate use button has been pressed */
+	FString AlternateUseCounterKey = "AlternateUsePressed";
+
 public:
 
 	UPROPERTY(BlueprintAssignable)
@@ -63,6 +66,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 	FPlayerCharacterInputEvent SecondaryUseEvent;
+
+	UPROPERTY(BlueprintAssignable)
+	FPlayerCharacterInputEvent AlternateUseEvent;
 
 private:
 
@@ -126,6 +132,10 @@ private:
 	/** Secondary Use Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* SecondaryUseAction;
+
+	/** Alternate Use Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* AlternateUseAction;
 
 	/** Dodge Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -195,6 +205,9 @@ protected:
 
 	/** Called to perform the secondary use */
 	void SecondaryUse(const FInputActionValue& Value);
+
+	/** Called to perform the alternate use */
+	void AlternateUse(const FInputActionValue& Value);
 
 	/** Called for dodge input */
 	void Dodge(const FInputActionValue& Value);

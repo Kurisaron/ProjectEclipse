@@ -42,6 +42,10 @@ public:
 	void SecondaryUse(bool Pressed, float PressedTime);
 	virtual void SecondaryUse_Implementation(bool Pressed, float PressedTime);
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Equipment Actions")
+	void AlternateUse(bool Pressed, float PressedTime);
+	virtual void AlternateUse_Implementation(bool Pressed, float PressedTime);
+
 	UEquipmentComponent* GetWielder();
 
 	UStaticMesh* GetMesh();

@@ -44,6 +44,10 @@ void EmptyLinkFunctionForGeneratedCodeFirearm() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_DefaultSecondaryMode_MetaData[];
 #endif
 		static const UECodeGen_Private::FClassPropertyParams NewProp_DefaultSecondaryMode;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_DefaultAlternateMode_MetaData[];
+#endif
+		static const UECodeGen_Private::FClassPropertyParams NewProp_DefaultAlternateMode;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -87,20 +91,35 @@ void EmptyLinkFunctionForGeneratedCodeFirearm() {}
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Modes" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Default function for firearm, will use default zoom if set to none */" },
+		{ "Comment", "/** Default aim function for firearm, will use default zoom if set to none */" },
 #endif
 		{ "ModuleRelativePath", "Public/Firearm.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Default function for firearm, will use default zoom if set to none" },
+		{ "ToolTip", "Default aim function for firearm, will use default zoom if set to none" },
 #endif
 	};
 #endif
 	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UFirearm_Statics::NewProp_DefaultSecondaryMode = { "DefaultSecondaryMode", nullptr, (EPropertyFlags)0x0044000000000015, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFirearm, DefaultSecondaryMode), Z_Construct_UClass_UClass, Z_Construct_UClass_UFirearmMode_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UFirearm_Statics::NewProp_DefaultSecondaryMode_MetaData), Z_Construct_UClass_UFirearm_Statics::NewProp_DefaultSecondaryMode_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UFirearm_Statics::NewProp_DefaultAlternateMode_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Modes" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** Default alternate fire function firearm, not all weapons will  */" },
+#endif
+		{ "ModuleRelativePath", "Public/Firearm.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Default alternate fire function firearm, not all weapons will" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UFirearm_Statics::NewProp_DefaultAlternateMode = { "DefaultAlternateMode", nullptr, (EPropertyFlags)0x0044000000000015, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFirearm, DefaultAlternateMode), Z_Construct_UClass_UClass, Z_Construct_UClass_UFirearmMode_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UFirearm_Statics::NewProp_DefaultAlternateMode_MetaData), Z_Construct_UClass_UFirearm_Statics::NewProp_DefaultAlternateMode_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UFirearm_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFirearm_Statics::NewProp_CyclePrimaryAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFirearm_Statics::NewProp_PrimaryCycle_Inner,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFirearm_Statics::NewProp_PrimaryCycle,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFirearm_Statics::NewProp_DefaultSecondaryMode,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFirearm_Statics::NewProp_DefaultAlternateMode,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UFirearm_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UFirearm>::IsAbstract,
@@ -140,9 +159,9 @@ void EmptyLinkFunctionForGeneratedCodeFirearm() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_Firearm_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UFirearm, UFirearm::StaticClass, TEXT("UFirearm"), &Z_Registration_Info_UClass_UFirearm, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UFirearm), 2177306612U) },
+		{ Z_Construct_UClass_UFirearm, UFirearm::StaticClass, TEXT("UFirearm"), &Z_Registration_Info_UClass_UFirearm, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UFirearm), 4157929624U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_Firearm_h_1419272721(TEXT("/Script/ProjectEclipse"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_Firearm_h_3933408832(TEXT("/Script/ProjectEclipse"),
 		Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_Firearm_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_Firearm_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

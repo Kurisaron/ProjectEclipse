@@ -185,6 +185,10 @@ void FPlayerCharacterInputEvent_DelegateWrapper(const FMulticastScriptDelegate& 
 #endif
 		static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_SecondaryUseEvent;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_AlternateUseEvent_MetaData[];
+#endif
+		static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_AlternateUseEvent;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_ToggleCamEvent_MetaData[];
 #endif
 		static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_ToggleCamEvent;
@@ -216,6 +220,10 @@ void FPlayerCharacterInputEvent_DelegateWrapper(const FMulticastScriptDelegate& 
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_SecondaryUseAction_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_SecondaryUseAction;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_AlternateUseAction_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_AlternateUseAction;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_DodgeAction_MetaData[];
 #endif
@@ -264,6 +272,12 @@ void FPlayerCharacterInputEvent_DelegateWrapper(const FMulticastScriptDelegate& 
 	};
 #endif
 	const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_SecondaryUseEvent = { "SecondaryUseEvent", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectEclipseCharacter, SecondaryUseEvent), Z_Construct_UDelegateFunction_ProjectEclipse_PlayerCharacterInputEvent__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_SecondaryUseEvent_MetaData), Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_SecondaryUseEvent_MetaData) }; // 1543184920
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_AlternateUseEvent_MetaData[] = {
+		{ "ModuleRelativePath", "ProjectEclipseCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_AlternateUseEvent = { "AlternateUseEvent", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectEclipseCharacter, AlternateUseEvent), Z_Construct_UDelegateFunction_ProjectEclipse_PlayerCharacterInputEvent__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_AlternateUseEvent_MetaData), Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_AlternateUseEvent_MetaData) }; // 1543184920
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_ToggleCamEvent_MetaData[] = {
 		{ "ModuleRelativePath", "ProjectEclipseCharacter.h" },
@@ -371,6 +385,20 @@ void FPlayerCharacterInputEvent_DelegateWrapper(const FMulticastScriptDelegate& 
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_SecondaryUseAction = { "SecondaryUseAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectEclipseCharacter, SecondaryUseAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_SecondaryUseAction_MetaData), Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_SecondaryUseAction_MetaData) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_AlternateUseAction_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Input" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** Alternate Use Input Action */" },
+#endif
+		{ "ModuleRelativePath", "ProjectEclipseCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Alternate Use Input Action" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_AlternateUseAction = { "AlternateUseAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectEclipseCharacter, AlternateUseAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_AlternateUseAction_MetaData), Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_AlternateUseAction_MetaData) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_DodgeAction_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Input" },
@@ -437,6 +465,7 @@ void FPlayerCharacterInputEvent_DelegateWrapper(const FMulticastScriptDelegate& 
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AProjectEclipseCharacter_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_PrimaryUseEvent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_SecondaryUseEvent,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_AlternateUseEvent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_ToggleCamEvent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_CameraBoom,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_ThirdPersonCamera,
@@ -445,6 +474,7 @@ void FPlayerCharacterInputEvent_DelegateWrapper(const FMulticastScriptDelegate& 
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_SprintAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_PrimaryUseAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_SecondaryUseAction,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_AlternateUseAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_DodgeAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_CrouchAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectEclipseCharacter_Statics::NewProp_MoveAction,
@@ -489,9 +519,9 @@ void FPlayerCharacterInputEvent_DelegateWrapper(const FMulticastScriptDelegate& 
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AProjectEclipseCharacter, AProjectEclipseCharacter::StaticClass, TEXT("AProjectEclipseCharacter"), &Z_Registration_Info_UClass_AProjectEclipseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectEclipseCharacter), 2952036706U) },
+		{ Z_Construct_UClass_AProjectEclipseCharacter, AProjectEclipseCharacter::StaticClass, TEXT("AProjectEclipseCharacter"), &Z_Registration_Info_UClass_AProjectEclipseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectEclipseCharacter), 3259195291U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_3009782220(TEXT("/Script/ProjectEclipse"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_1757278031(TEXT("/Script/ProjectEclipse"),
 		Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

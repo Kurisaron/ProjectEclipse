@@ -45,13 +45,16 @@ public:
 	virtual UEquipment* SwitchEquipment(int32 Index = 0);
 
 	UFUNCTION(BlueprintCallable, Category = "Equipment")
-	virtual UEquipment* CycleEquipment();
+	virtual UEquipment* CycleEquipment(bool Ascending = true);
 
 	UFUNCTION(BlueprintCallable, Category = "Equipment Actions")
 	virtual void PrimaryUse(bool Pressed, float PressedTime);
 
 	UFUNCTION(BlueprintCallable, Category = "Equipment Actions")
 	virtual void SecondaryUse(bool Pressed, float PressedTime);
+
+	UFUNCTION(BlueprintCallable, Category = "Equipment Actions")
+	virtual void AlternateUse(bool Pressed, float PressedTime);
 
 	void SetMesh(UStaticMesh* NewMesh);
 

@@ -49,6 +49,11 @@ void UEquipment::SecondaryUse_Implementation(bool Pressed, float PressedTime)
 
 }
 
+void UEquipment::AlternateUse_Implementation(bool Pressed, float PressedTime)
+{
+
+}
+
 UEquipmentComponent* UEquipment::GetWielder()
 {
 	return Wielder;

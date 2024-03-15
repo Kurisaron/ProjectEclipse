@@ -18,6 +18,7 @@ void UFirearm::Load()
 
 	CurrentPrimaryMode = NewObject<UFirearmMode>(this, PrimaryCycle[0]->GetAuthoritativeClass());
 	if (DefaultSecondaryMode != nullptr) CurrentSecondaryMode = NewObject<UFirearmMode>(this, DefaultSecondaryMode->GetAuthoritativeClass());
+	if (DefaultAlternateMode != nullptr) CurrentAlternateMode = NewObject<UFirearmMode>(this, DefaultAlternateMode->GetAuthoritativeClass());
 }
 
 void UFirearm::Equip(UEquipmentComponent* NewWielder)
@@ -78,7 +79,8 @@ void UFirearm::SecondaryUse_Implementation(bool Pressed, float PressedTime)
 	Super::SecondaryUse_Implementation(Pressed, PressedTime);
 
 	UEquipmentComponent* ThisWielder = GetWielder();
-	if (CurrentSecondaryMode != nullptr) CurrentSecondaryMode->Fire(ThisWielder, Pressed, PressedTime);
+	if (CurrentSecondaryMode != nullptr)
+		CurrentSecondaryMode->Fire(ThisWielder, Pressed, PressedTime);
 	else
 	{
 		AProjectEclipseCharacter* WieldingCharacter = ThisWielder->GetWieldingCharacter();
@@ -87,8 +89,25 @@ void UFirearm::SecondaryUse_Implementation(bool Pressed, float PressedTime)
 			UCameraComponent* WieldingCamera = WieldingCharacter->GetFollowCamera();
 			if (WieldingCamera != nullptr)
 			{
-				WieldingCamera->SetFieldOfView(Pressed ? 60.0f : 90.0f);
+				float FOV = WieldingCamera->FieldOfView;
+				FOV *= Pressed ? 0.5f : 2.0f;
+				WieldingCamera->SetFieldOfView(FOV);
 			}
 		}
+	}
+}
+
+void UFirearm::AlternateUse_Implementation(bool Pressed, float PressedTime)
+{
+	Super::AlternateUse_Implementation(Pressed, PressedTime);
+
+	UEquipmentComponent* MyWielder = GetWielder();
+	if (CurrentAlternateMode != nullptr)
+		CurrentAlternateMode->Fire(MyWielder, Pressed, PressedTime);
+	else
+	{
+		if (!Pressed) return;
+		if (GEngine)
+			GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, TEXT("No alternate fire on current firearm."));
 	}
 }

@@ -112,6 +112,7 @@ void AProjectEclipseCharacter::SetupPlayerInputComponent(UInputComponent* Player
 		// Equipment Use
 		EnhancedInputComponent->BindAction(PrimaryUseAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::PrimaryUse);
 		EnhancedInputComponent->BindAction(SecondaryUseAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::SecondaryUse);
+		EnhancedInputComponent->BindAction(AlternateUseAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::AlternateUse);
 
 		// Dodging
 		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &AProjectEclipseCharacter::Dodge);
@@ -356,6 +357,20 @@ void AProjectEclipseCharacter::SecondaryUse(const FInputActionValue& Value)
 		SecondaryUseEvent.Broadcast(isUsing, GetCounter(activeTimeCounters, SecondaryUseCounterKey));
 
 		if (!isUsing) StopCounter(activeTimeCounters, SecondaryUseCounterKey);
+	}
+}
+
+void AProjectEclipseCharacter::AlternateUse(const FInputActionValue& Value)
+{
+	bool isUsing = Value.Get<bool>();
+
+	if (Controller != nullptr)
+	{
+		if (isUsing) StartCounter(activeTimeCounters, AlternateUseCounterKey);
+
+		if (AlternateUseEvent.IsBound()) AlternateUseEvent.Broadcast(isUsing, GetCounter(activeTimeCounters, AlternateUseCounterKey));
+
+		if (!isUsing) StopCounter(activeTimeCounters, AlternateUseCounterKey);
 	}
 }
 
