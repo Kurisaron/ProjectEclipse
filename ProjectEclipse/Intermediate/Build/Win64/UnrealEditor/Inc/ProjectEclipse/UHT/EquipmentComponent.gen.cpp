@@ -44,6 +44,13 @@ void EmptyLinkFunctionForGeneratedCodeEquipmentComponent() {}
 		P_THIS->PrimaryUse(Z_Param_Pressed,Z_Param_PressedTime);
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UEquipmentComponent::execEquipped)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=P_THIS->Equipped();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UEquipmentComponent::execCycleEquipment)
 	{
 		P_GET_UBOOL(Z_Param_Ascending);
@@ -66,6 +73,7 @@ void EmptyLinkFunctionForGeneratedCodeEquipmentComponent() {}
 		static const FNameNativePtrPair Funcs[] = {
 			{ "AlternateUse", &UEquipmentComponent::execAlternateUse },
 			{ "CycleEquipment", &UEquipmentComponent::execCycleEquipment },
+			{ "Equipped", &UEquipmentComponent::execEquipped },
 			{ "PrimaryUse", &UEquipmentComponent::execPrimaryUse },
 			{ "SecondaryUse", &UEquipmentComponent::execSecondaryUse },
 			{ "SwitchEquipment", &UEquipmentComponent::execSwitchEquipment },
@@ -158,6 +166,46 @@ void EmptyLinkFunctionForGeneratedCodeEquipmentComponent() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UEquipmentComponent_CycleEquipment_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UEquipmentComponent_Equipped_Statics
+	{
+		struct EquipmentComponent_eventEquipped_Parms
+		{
+			bool ReturnValue;
+		};
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_UEquipmentComponent_Equipped_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((EquipmentComponent_eventEquipped_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UEquipmentComponent_Equipped_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(EquipmentComponent_eventEquipped_Parms), &Z_Construct_UFunction_UEquipmentComponent_Equipped_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UEquipmentComponent_Equipped_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UEquipmentComponent_Equipped_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UEquipmentComponent_Equipped_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Equipment" },
+		{ "ModuleRelativePath", "Public/EquipmentComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UEquipmentComponent_Equipped_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UEquipmentComponent, nullptr, "Equipped", nullptr, nullptr, Z_Construct_UFunction_UEquipmentComponent_Equipped_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UEquipmentComponent_Equipped_Statics::PropPointers), sizeof(Z_Construct_UFunction_UEquipmentComponent_Equipped_Statics::EquipmentComponent_eventEquipped_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UEquipmentComponent_Equipped_Statics::Function_MetaDataParams), Z_Construct_UFunction_UEquipmentComponent_Equipped_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UEquipmentComponent_Equipped_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_UEquipmentComponent_Equipped_Statics::EquipmentComponent_eventEquipped_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_UEquipmentComponent_Equipped()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UEquipmentComponent_Equipped_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -326,6 +374,7 @@ void EmptyLinkFunctionForGeneratedCodeEquipmentComponent() {}
 	const FClassFunctionLinkInfo Z_Construct_UClass_UEquipmentComponent_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_UEquipmentComponent_AlternateUse, "AlternateUse" }, // 3508433167
 		{ &Z_Construct_UFunction_UEquipmentComponent_CycleEquipment, "CycleEquipment" }, // 1281728613
+		{ &Z_Construct_UFunction_UEquipmentComponent_Equipped, "Equipped" }, // 1317048644
 		{ &Z_Construct_UFunction_UEquipmentComponent_PrimaryUse, "PrimaryUse" }, // 2075243212
 		{ &Z_Construct_UFunction_UEquipmentComponent_SecondaryUse, "SecondaryUse" }, // 379496479
 		{ &Z_Construct_UFunction_UEquipmentComponent_SwitchEquipment, "SwitchEquipment" }, // 1348807005
@@ -416,9 +465,9 @@ void EmptyLinkFunctionForGeneratedCodeEquipmentComponent() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UEquipmentComponent, UEquipmentComponent::StaticClass, TEXT("UEquipmentComponent"), &Z_Registration_Info_UClass_UEquipmentComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UEquipmentComponent), 891055931U) },
+		{ Z_Construct_UClass_UEquipmentComponent, UEquipmentComponent::StaticClass, TEXT("UEquipmentComponent"), &Z_Registration_Info_UClass_UEquipmentComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UEquipmentComponent), 2244783483U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_1918615873(TEXT("/Script/ProjectEclipse"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_88378898(TEXT("/Script/ProjectEclipse"),
 		Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

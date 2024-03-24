@@ -64,6 +64,7 @@ void UFirearm::PrimaryUse_Implementation(bool Pressed, float PressedTime)
 	UEquipmentComponent* MyWielder = GetWielder();
 	if (CurrentPrimaryMode != nullptr)
 		CurrentPrimaryMode->Fire(MyWielder, Pressed, PressedTime);
+
 }
 
 void UFirearm::CyclePrimary()

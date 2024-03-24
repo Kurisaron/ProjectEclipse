@@ -13,7 +13,6 @@ void EmptyLinkFunctionForGeneratedCodeProjectileActor() {}
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
 	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
-	ENGINE_API UClass* Z_Construct_UClass_UPointLightComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UPrimitiveComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 	ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FHitResult();
@@ -324,10 +323,6 @@ void FProjectileHit_DelegateWrapper(const FMulticastScriptDelegate& ProjectileHi
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_Mesh;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_Light_MetaData[];
-#endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_Light;
-#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_VFX_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_VFX;
@@ -365,15 +360,6 @@ void FProjectileHit_DelegateWrapper(const FMulticastScriptDelegate& ProjectileHi
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProjectileActor_Statics::NewProp_Mesh = { "Mesh", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectileActor, Mesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectileActor_Statics::NewProp_Mesh_MetaData), Z_Construct_UClass_AProjectileActor_Statics::NewProp_Mesh_MetaData) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectileActor_Statics::NewProp_Light_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "VFX" },
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Public/ProjectileActor.h" },
-	};
-#endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProjectileActor_Statics::NewProp_Light = { "Light", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectileActor, Light), Z_Construct_UClass_UPointLightComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectileActor_Statics::NewProp_Light_MetaData), Z_Construct_UClass_AProjectileActor_Statics::NewProp_Light_MetaData) };
-#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectileActor_Statics::NewProp_VFX_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "VFX" },
@@ -390,7 +376,6 @@ void FProjectileHit_DelegateWrapper(const FMulticastScriptDelegate& ProjectileHi
 	const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AProjectileActor_Statics::NewProp_OnHit = { "OnHit", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectileActor, OnHit), Z_Construct_UDelegateFunction_ProjectEclipse_ProjectileHit__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectileActor_Statics::NewProp_OnHit_MetaData), Z_Construct_UClass_AProjectileActor_Statics::NewProp_OnHit_MetaData) }; // 2986617993
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AProjectileActor_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectileActor_Statics::NewProp_Mesh,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectileActor_Statics::NewProp_Light,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectileActor_Statics::NewProp_VFX,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectileActor_Statics::NewProp_OnHit,
 	};
@@ -432,9 +417,9 @@ void FProjectileHit_DelegateWrapper(const FMulticastScriptDelegate& ProjectileHi
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AProjectileActor, AProjectileActor::StaticClass, TEXT("AProjectileActor"), &Z_Registration_Info_UClass_AProjectileActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectileActor), 3324921159U) },
+		{ Z_Construct_UClass_AProjectileActor, AProjectileActor::StaticClass, TEXT("AProjectileActor"), &Z_Registration_Info_UClass_AProjectileActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectileActor), 3403608660U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_2102906540(TEXT("/Script/ProjectEclipse"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_2377276652(TEXT("/Script/ProjectEclipse"),
 		Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

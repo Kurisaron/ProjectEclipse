@@ -19,9 +19,6 @@ class PROJECTECLIPSE_API AProjectileActor : public AActor
 	UStaticMeshComponent* Mesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = VFX, meta = (AllowPrivateAccess = "true"))
-	UPointLightComponent* Light;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = VFX, meta = (AllowPrivateAccess = "true"))
 	UNiagaraComponent* VFX;
 
 public:	

@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\github\\projecteclipse\\projecteclipse\\source\\projecteclipse\\private\\objectpooler.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\x64\\projecteclipseeditor\\development\\engine\\sharedpch.engine.cpp20.h.pch",
+        "Includes": [
+            "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\projecteclipse\\definitions.projecteclipse.h",
+            "d:\\github\\projecteclipse\\projecteclipse\\source\\projecteclipse\\public\\objectpooler.h",
+            "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\objectpooler.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

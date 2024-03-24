@@ -23,6 +23,7 @@ class UEquipment;
 	DECLARE_FUNCTION(execAlternateUse); \
 	DECLARE_FUNCTION(execSecondaryUse); \
 	DECLARE_FUNCTION(execPrimaryUse); \
+	DECLARE_FUNCTION(execEquipped); \
 	DECLARE_FUNCTION(execCycleEquipment); \
 	DECLARE_FUNCTION(execSwitchEquipment);
 

@@ -78,6 +78,12 @@
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\FirearmMode.cpp">
       <Filter>Source\ProjectEclipse\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\ModifierKeyTrigger.cpp">
+      <Filter>Source\ProjectEclipse\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\ObjectPooler.cpp">
+      <Filter>Source\ProjectEclipse\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\ProjectileActor.cpp">
       <Filter>Source\ProjectEclipse\Private</Filter>
     </ClCompile>
@@ -109,6 +115,12 @@
       <Filter>Source\ProjectEclipse\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\FirearmMode.h">
+      <Filter>Source\ProjectEclipse\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\ModifierKeyTrigger.h">
+      <Filter>Source\ProjectEclipse\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\ObjectPooler.h">
       <Filter>Source\ProjectEclipse\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\ProjectileActor.h">

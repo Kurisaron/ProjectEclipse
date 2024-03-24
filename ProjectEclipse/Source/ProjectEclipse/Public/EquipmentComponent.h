@@ -47,6 +47,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Equipment")
 	virtual UEquipment* CycleEquipment(bool Ascending = true);
 
+	UFUNCTION(BlueprintCallable, Category = "Equipment")
+	bool Equipped() { return CurrentEquipment != nullptr; }
+
 	UFUNCTION(BlueprintCallable, Category = "Equipment Actions")
 	virtual void PrimaryUse(bool Pressed, float PressedTime);
 

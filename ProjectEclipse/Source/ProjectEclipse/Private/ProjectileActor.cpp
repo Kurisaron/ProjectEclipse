@@ -14,9 +14,6 @@ AProjectileActor::AProjectileActor()
 
 	RootComponent = Mesh;
 
-	Light = CreateDefaultSubobject<UPointLightComponent>(TEXT("Light"));
-	Light->AttachToComponent(Mesh, FAttachmentTransformRules::KeepRelativeTransform);
-
 	VFX = CreateDefaultSubobject<UNiagaraComponent>(TEXT("VFX"));
 	VFX->AttachToComponent(Mesh, FAttachmentTransformRules::KeepRelativeTransform);
 }

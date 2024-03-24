@@ -72,7 +72,7 @@ UEquipment* UEquipmentComponent::SwitchEquipment(int32 Index)
 	Equip(NewEquipment);
 
 	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, FString::Printf(TEXT("New equipment: %s"), *NewEquipment->GetName()));
+		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, FString::Printf(TEXT("%s New equipment: %s"), *GetName(), *NewEquipment->GetName()));
 
 	return NewEquipment;
 }
