@@ -3,6 +3,8 @@
 
 #include "FirearmMode.h"
 #include "EquipmentComponent.h"
+#include "ObjectPooler.h"
+#include "ProjectEclipseGameInstance.h"
 
 UFirearmMode::UFirearmMode()
 {
@@ -21,8 +23,19 @@ AProjectileActor* UFirearmMode::SpawnProjectile(FVector Location, FVector Direct
 
 	if (CurrentWorld != nullptr)
 	{
+		UGameInstance* Game = CurrentWorld->GetGameInstance();
+		UProjectEclipseGameInstance* ThisGame = Cast<UProjectEclipseGameInstance>(Game);
+		if (ThisGame == nullptr)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Game instance not set properly"));
+			return nullptr;
+		}
+
+		UObjectPooler* Pooler = ThisGame->GetPooler();
+		if (Pooler == nullptr) Pooler = ThisGame->NewPooler();
+		
 		FRotator DirectionRotation = Direction.Rotation();
-		AProjectileActor* NewProjectile = CurrentWorld->SpawnActor<AProjectileActor>(Projectile->GetAuthoritativeClass(), Location, DirectionRotation);
+		AProjectileActor* NewProjectile = Pooler->WakeProjectile(Projectile->GetAuthoritativeClass(), Location, DirectionRotation);
 		Spawned = NewProjectile != nullptr;
 		return NewProjectile;
 	}

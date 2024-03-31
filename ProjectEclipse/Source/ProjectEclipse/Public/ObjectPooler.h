@@ -3,28 +3,43 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
 #include "ObjectPooler.generated.h"
 
+class UProjectEclipseGameInstance;
+class AProjectileActor;
+
 UCLASS()
-class PROJECTECLIPSE_API AObjectPooler : public AActor
+class PROJECTECLIPSE_API UObjectPooler : public UObject
 {
 	GENERATED_BODY()
 
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Game Instance", meta = (AllowPrivateAccess = "true"))
+	UProjectEclipseGameInstance* GameInstance;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pool", meta = (AllowPrivateAccess = "true"))
 	TArray<AActor*> PooledActors;
 	
 public:	
 	// Sets default values for this actor's properties
-	AObjectPooler();
+	UObjectPooler();
+
+	void Init(UProjectEclipseGameInstance* NewInstance);
+
+	AProjectileActor* WakeProjectile(UClass* ToWake, FVector Position, FRotator Rotation);
+
+	template <class T>
+	T* WakeActor(UClass ToWake, FVector Position, FRotator Rotation);
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	template <class T>
+	T* SpawnActor(UClass ToSpawn, FVector Position, FRotator Rotation);
 
-	virtual void WakeActor(UClass ToSpawn, FVector Position, FRotator Rotation);
+public:
+
+	bool InPool(AActor* Check);
+
+	void AddToPool(AActor* NewActor);
+
+	void RemoveFromPool(AActor* OldActor);
 };

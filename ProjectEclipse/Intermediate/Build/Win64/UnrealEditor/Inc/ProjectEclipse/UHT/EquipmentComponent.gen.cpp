@@ -349,7 +349,12 @@ void EmptyLinkFunctionForGeneratedCodeEquipmentComponent() {}
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
-		static const UECodeGen_Private::FClassPropertyParams NewProp_StoredEquipment_Inner;
+		static const UECodeGen_Private::FClassPropertyParams NewProp_DefaultEquipment_Inner;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_DefaultEquipment_MetaData[];
+#endif
+		static const UECodeGen_Private::FArrayPropertyParams NewProp_DefaultEquipment;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_StoredEquipment_Inner;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_StoredEquipment_MetaData[];
 #endif
@@ -395,7 +400,16 @@ void EmptyLinkFunctionForGeneratedCodeEquipmentComponent() {}
 #endif
 	};
 #endif
-	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_StoredEquipment_Inner = { "StoredEquipment", nullptr, (EPropertyFlags)0x0004000000000000, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UClass, Z_Construct_UClass_UEquipment_NoRegister, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_DefaultEquipment_Inner = { "DefaultEquipment", nullptr, (EPropertyFlags)0x0004000000000000, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UClass, Z_Construct_UClass_UEquipment_NoRegister, METADATA_PARAMS(0, nullptr) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_DefaultEquipment_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Equipment" },
+		{ "ModuleRelativePath", "Public/EquipmentComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_DefaultEquipment = { "DefaultEquipment", nullptr, (EPropertyFlags)0x0044000000000015, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEquipmentComponent, DefaultEquipment), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_DefaultEquipment_MetaData), Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_DefaultEquipment_MetaData) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_StoredEquipment_Inner = { "StoredEquipment", nullptr, (EPropertyFlags)0x0000000000020000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UEquipment_NoRegister, METADATA_PARAMS(0, nullptr) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_StoredEquipment_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
@@ -403,7 +417,7 @@ void EmptyLinkFunctionForGeneratedCodeEquipmentComponent() {}
 		{ "ModuleRelativePath", "Public/EquipmentComponent.h" },
 	};
 #endif
-	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_StoredEquipment = { "StoredEquipment", nullptr, (EPropertyFlags)0x0044000000000015, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEquipmentComponent, StoredEquipment), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_StoredEquipment_MetaData), Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_StoredEquipment_MetaData) };
+	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_StoredEquipment = { "StoredEquipment", nullptr, (EPropertyFlags)0x0040000000020015, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEquipmentComponent, StoredEquipment), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_StoredEquipment_MetaData), Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_StoredEquipment_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_CurrentEquipment_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
@@ -422,6 +436,8 @@ void EmptyLinkFunctionForGeneratedCodeEquipmentComponent() {}
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_EquipmentMesh = { "EquipmentMesh", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEquipmentComponent, EquipmentMesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_EquipmentMesh_MetaData), Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_EquipmentMesh_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UEquipmentComponent_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_DefaultEquipment_Inner,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_DefaultEquipment,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_StoredEquipment_Inner,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_StoredEquipment,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEquipmentComponent_Statics::NewProp_CurrentEquipment,
@@ -465,9 +481,9 @@ void EmptyLinkFunctionForGeneratedCodeEquipmentComponent() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UEquipmentComponent, UEquipmentComponent::StaticClass, TEXT("UEquipmentComponent"), &Z_Registration_Info_UClass_UEquipmentComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UEquipmentComponent), 2244783483U) },
+		{ Z_Construct_UClass_UEquipmentComponent, UEquipmentComponent::StaticClass, TEXT("UEquipmentComponent"), &Z_Registration_Info_UClass_UEquipmentComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UEquipmentComponent), 3299570429U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_88378898(TEXT("/Script/ProjectEclipse"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_804357527(TEXT("/Script/ProjectEclipse"),
 		Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

@@ -21,6 +21,7 @@ class PROJECTECLIPSE_API AProjectileActor : public AActor
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = VFX, meta = (AllowPrivateAccess = "true"))
 	UNiagaraComponent* VFX;
 
+
 public:	
 
 	UPROPERTY(BlueprintAssignable)
@@ -51,6 +52,9 @@ public:
 		FVector NormalImpulse,
 		const FHitResult& Hit
 	) override;
+
+	UFUNCTION(BlueprintCallable)
+	void PoolProjectile();
 
 	virtual UStaticMeshComponent* GetMesh();
 

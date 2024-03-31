@@ -10,7 +10,9 @@ UEquipmentComponent::UEquipmentComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+	// Create static mesh subcomponent
+	EquipmentMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EquipmentMesh"));
+	EquipmentMesh->AttachToComponent(this, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 
@@ -20,6 +22,7 @@ void UEquipmentComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
+	LoadEquipment();
 	SwitchEquipment();
 }
 
@@ -42,19 +45,37 @@ void UEquipmentComponent::Equip(UEquipment* NewEquipment)
 	NewEquipment->Equip(this);
 }
 
+void UEquipmentComponent::LoadEquipment()
+{
+	StoredEquipment.Empty();
+	if (DefaultEquipment.Num() <= 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No default equipment"));
+		return;
+	}
+
+	for (TSubclassOf<UEquipment> Subclass : DefaultEquipment)
+	{
+		AddEquipment(Subclass);
+	}
+}
+
 void UEquipmentComponent::AddEquipment(TSubclassOf<UEquipment> NewEquipment, bool bEquip)
 {
-	if (!StoredEquipment.Contains(NewEquipment)) StoredEquipment.Add(NewEquipment);
-	if (bEquip)
+	if (StoredEquipment.ContainsByPredicate([NewEquipment](UEquipment* Equipment) { return Equipment->GetClass() == NewEquipment->GetClass(); }))
 	{
-		UEquipment* NewEquip = NewObject<UEquipment>(this, NewEquipment->GetAuthoritativeClass());
-		if (NewEquip == nullptr)
-		{
-			// Equipment not constructed
-			return;
-		}
-		Equip(NewEquip);
+		UE_LOG(LogTemp, Warning, TEXT("Equipment already stored"));
+		return;
 	}
+
+	UEquipment* NewEquip = NewObject<UEquipment>(this, NewEquipment->GetAuthoritativeClass());
+	if (NewEquip == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Error occured instantiating new equipment"));
+		return;
+	}
+	StoredEquipment.Add(NewEquip);
+	if (bEquip) Equip(NewEquip);
 }
 
 UEquipment* UEquipmentComponent::SwitchEquipment(int32 Index)
@@ -62,8 +83,7 @@ UEquipment* UEquipmentComponent::SwitchEquipment(int32 Index)
 	int32 num = StoredEquipment.Num();
 	if (Index >= num) return nullptr;
 
-	TSubclassOf<UEquipment> EquipmentClass = StoredEquipment[Index];
-	UEquipment* NewEquipment = NewObject<UEquipment>(this, EquipmentClass->GetAuthoritativeClass());
+	UEquipment* NewEquipment = StoredEquipment[Index];
 	if (NewEquipment == nullptr)
 	{
 		// Equipment not constructed
@@ -79,7 +99,7 @@ UEquipment* UEquipmentComponent::SwitchEquipment(int32 Index)
 
 UEquipment* UEquipmentComponent::CycleEquipment(bool Ascending)
 {
-	int32 current = StoredEquipment.IndexOfByKey(CurrentEquipment->GetClass());
+	int32 current = StoredEquipment.IndexOfByKey(CurrentEquipment);
 	current += Ascending ? 1 : -1;
 	if (current >= StoredEquipment.Num()) current = 0;
 	else if (current < 0) current = StoredEquipment.Num() - 1;
@@ -123,7 +143,31 @@ void UEquipmentComponent::AlternateUse(bool Pressed, float PressedTime)
 
 void UEquipmentComponent::SetMesh(UStaticMesh* NewMesh)
 {
+	if (EquipmentMesh == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No mesh component"));
+		return;
+	}
+
 	EquipmentMesh->SetStaticMesh(NewMesh);
+	/*
+	if (EquipmentMesh->DoesSocketExist(TEXT("Handle")))
+	{
+		const UStaticMeshSocket* Socket = EquipmentMesh->GetSocketByName(TEXT("Handle"));
+		FTransform SocketTransform;
+		if (Socket->GetSocketTransform(SocketTransform, EquipmentMesh))
+		{
+			FTransform RelativeTransform = SocketTransform.GetRelativeTransform(EquipmentMesh->GetComponentToWorld());
+			EquipmentMesh->AddRelativeLocation(-RelativeTransform.GetLocation());
+		}
+	}
+	*/
+	UE_LOG(LogTemp, Warning, TEXT("%s equipment mesh set to %s"), *GetName(), *NewMesh->GetName());
+}
+
+void UEquipmentComponent::ClearMesh()
+{
+	EquipmentMesh->SetStaticMesh(nullptr);
 }
 
 AProjectEclipseCharacter* UEquipmentComponent::GetWieldingCharacter()

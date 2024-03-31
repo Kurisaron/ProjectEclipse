@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/SceneComponent.h"
+#include "Engine/StaticMeshSocket.h"
 #include "ProjectEclipse/ProjectEclipseCharacter.h"
 #include "EquipmentComponent.generated.h"
 
@@ -16,7 +17,10 @@ class PROJECTECLIPSE_API UEquipmentComponent : public USceneComponent
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Equipment", meta = (AllowPrivateAccess = "true"))
-	TArray<TSubclassOf<UEquipment>> StoredEquipment;
+	TArray<TSubclassOf<UEquipment>> DefaultEquipment;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Equipment", meta = (AllowPrivateAccess = "true"))
+	TArray<UEquipment*> StoredEquipment;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Equipment", meta = (AllowPrivateAccess = "true"))
 	UEquipment* CurrentEquipment;
@@ -39,6 +43,8 @@ public:
 
 	virtual void Equip(UEquipment* NewEquipment);
 
+	virtual void LoadEquipment();
+
 	virtual void AddEquipment(TSubclassOf<UEquipment> NewEquipment, bool Equip = false);
 
 	UFUNCTION(BlueprintCallable, Category = "Equipment")
@@ -60,6 +66,8 @@ public:
 	virtual void AlternateUse(bool Pressed, float PressedTime);
 
 	void SetMesh(UStaticMesh* NewMesh);
+
+	void ClearMesh();
 
 	AProjectEclipseCharacter* GetWieldingCharacter();
 

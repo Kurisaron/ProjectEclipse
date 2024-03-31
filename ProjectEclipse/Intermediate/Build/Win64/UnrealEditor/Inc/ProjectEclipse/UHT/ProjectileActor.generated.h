@@ -27,6 +27,7 @@ PROJECTECLIPSE_API void FProjectileHit_DelegateWrapper(const FMulticastScriptDel
 #define FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
 #define FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execPoolProjectile); \
 	DECLARE_FUNCTION(execNotifyHit); \
 	DECLARE_FUNCTION(execFire);
 

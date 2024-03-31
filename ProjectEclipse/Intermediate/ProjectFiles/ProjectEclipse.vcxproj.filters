@@ -84,6 +84,9 @@
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\ObjectPooler.cpp">
       <Filter>Source\ProjectEclipse\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\ProjectEclipseGameInstance.cpp">
+      <Filter>Source\ProjectEclipse\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\ProjectileActor.cpp">
       <Filter>Source\ProjectEclipse\Private</Filter>
     </ClCompile>
@@ -121,6 +124,9 @@
       <Filter>Source\ProjectEclipse\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\ObjectPooler.h">
+      <Filter>Source\ProjectEclipse\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\ProjectEclipseGameInstance.h">
       <Filter>Source\ProjectEclipse\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\ProjectileActor.h">

@@ -179,6 +179,11 @@
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
       <AdditionalOptions>$(ClCompile_AdditionalOptions)</AdditionalOptions>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\ProjectEclipseGameInstance.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalOptions>$(ClCompile_AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\ProjectileActor.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -203,6 +208,7 @@
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\FirearmMode.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\ModifierKeyTrigger.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\ObjectPooler.h"/>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\ProjectEclipseGameInstance.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\ProjectileActor.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\Weapon.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\WeatherManager.h"/>

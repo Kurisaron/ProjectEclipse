@@ -17,6 +17,8 @@ void UEquipment::Equip(UEquipmentComponent* NewWielder)
 	UStaticMesh* NewMesh = GetMesh();
 	if (NewMesh != nullptr)
 		NewWielder->SetMesh(NewMesh);
+	else
+		NewWielder->ClearMesh();
 
 	UInputMappingContext* NewContext = GetInputMappingContext();
 	AProjectEclipseCharacter* Char = NewWielder->GetWieldingCharacter();
