@@ -50,6 +50,7 @@ void EmptyLinkFunctionForGeneratedCodeObjectPooler() {}
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UObjectPooler_Statics::DependentSingletons) < 16);
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UObjectPooler_Statics::Class_MetaDataParams[] = {
+		{ "ClassGroupNames", "Custom" },
 		{ "IncludePath", "ObjectPooler.h" },
 		{ "ModuleRelativePath", "Public/ObjectPooler.h" },
 	};
@@ -81,7 +82,7 @@ void EmptyLinkFunctionForGeneratedCodeObjectPooler() {}
 	};
 	const UECodeGen_Private::FClassParams Z_Construct_UClass_UObjectPooler_Statics::ClassParams = {
 		&UObjectPooler::StaticClass,
-		nullptr,
+		"Game",
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
 		nullptr,
@@ -114,9 +115,9 @@ void EmptyLinkFunctionForGeneratedCodeObjectPooler() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_ObjectPooler_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UObjectPooler, UObjectPooler::StaticClass, TEXT("UObjectPooler"), &Z_Registration_Info_UClass_UObjectPooler, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UObjectPooler), 2177533080U) },
+		{ Z_Construct_UClass_UObjectPooler, UObjectPooler::StaticClass, TEXT("UObjectPooler"), &Z_Registration_Info_UClass_UObjectPooler, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UObjectPooler), 3862716887U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_ObjectPooler_h_1469141446(TEXT("/Script/ProjectEclipse"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_ObjectPooler_h_610936932(TEXT("/Script/ProjectEclipse"),
 		Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_ObjectPooler_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectEclipse_Source_ProjectEclipse_Public_ObjectPooler_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

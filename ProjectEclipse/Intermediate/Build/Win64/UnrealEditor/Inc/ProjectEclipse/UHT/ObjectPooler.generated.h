@@ -25,7 +25,9 @@ private: \
 	friend struct Z_Construct_UClass_UObjectPooler_Statics; \
 public: \
 	DECLARE_CLASS(UObjectPooler, UObject, COMPILED_IN_FLAGS(0), CASTCLASS_None, TEXT("/Script/ProjectEclipse"), NO_API) \
-	DECLARE_SERIALIZER(UObjectPooler)
+	DECLARE_SERIALIZER(UObjectPooler) \
+	static const TCHAR* StaticConfigName() {return TEXT("Game");} \
+
 
 
 #define FID_ProjectEclipse_Source_ProjectEclipse_Public_ObjectPooler_h_13_ENHANCED_CONSTRUCTORS \

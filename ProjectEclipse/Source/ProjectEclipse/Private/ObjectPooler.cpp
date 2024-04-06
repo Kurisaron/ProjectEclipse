@@ -14,13 +14,8 @@ void UObjectPooler::Init(UProjectEclipseGameInstance* NewInstance)
 	GameInstance = NewInstance;
 }
 
-AProjectileActor* UObjectPooler::WakeProjectile(UClass* ToWake, FVector Position, FRotator Rotation)
-{
-	return WakeActor<AProjectileActor>(*ToWake, Position, Rotation);
-}
-
 template <class T>
-T* UObjectPooler::WakeActor(UClass ToWake, FVector Position, FRotator Rotation)
+T* UObjectPooler::WakeActor(TSubclassOf<T> ToWake, FVector Position, FRotator Rotation)
 {
 	AActor* FoundActor = PooledActors.FindByPredicate([ToWake](AActor* Actor) {
 		return Actor->IsA(ToWake) && Actor->IsHidden();
@@ -37,9 +32,9 @@ T* UObjectPooler::WakeActor(UClass ToWake, FVector Position, FRotator Rotation)
 }
 
 template <class T>
-T* UObjectPooler::SpawnActor(UClass ToSpawn, FVector Position, FRotator Rotation)
+T* UObjectPooler::SpawnActor(TSubclassOf<T> ToSpawn, FVector Position, FRotator Rotation)
 {
-	T* NewActor = GetWorld()->SpawnActor<T>(ToSpawn, Position, Rotation);
+	T* NewActor = GetWorld()->SpawnActor<T>(ToSpawn->GetAuthoritativeClass(), Position, Rotation);
 	if (NewActor != nullptr) PooledActors.Add(NewActor);
 	return NewActor;
 }

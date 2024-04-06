@@ -35,7 +35,7 @@ AProjectileActor* UFirearmMode::SpawnProjectile(FVector Location, FVector Direct
 		if (Pooler == nullptr) Pooler = ThisGame->NewPooler();
 		
 		FRotator DirectionRotation = Direction.Rotation();
-		AProjectileActor* NewProjectile = Pooler->WakeProjectile(Projectile->GetAuthoritativeClass(), Location, DirectionRotation);
+		AProjectileActor* NewProjectile = Pooler->WakeActor<AProjectileActor>(Projectile, Location, DirectionRotation);
 		Spawned = NewProjectile != nullptr;
 		return NewProjectile;
 	}

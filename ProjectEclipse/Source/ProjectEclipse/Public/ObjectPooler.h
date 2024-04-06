@@ -6,9 +6,8 @@
 #include "ObjectPooler.generated.h"
 
 class UProjectEclipseGameInstance;
-class AProjectileActor;
 
-UCLASS()
+UCLASS(ClassGroup = (Custom), config = Game)
 class PROJECTECLIPSE_API UObjectPooler : public UObject
 {
 	GENERATED_BODY()
@@ -25,15 +24,13 @@ public:
 
 	void Init(UProjectEclipseGameInstance* NewInstance);
 
-	AProjectileActor* WakeProjectile(UClass* ToWake, FVector Position, FRotator Rotation);
-
 	template <class T>
-	T* WakeActor(UClass ToWake, FVector Position, FRotator Rotation);
+	T* WakeActor(TSubclassOf<T> ToWake, FVector Position, FRotator Rotation);
 
 protected:
 
 	template <class T>
-	T* SpawnActor(UClass ToSpawn, FVector Position, FRotator Rotation);
+	T* SpawnActor(TSubclassOf<T> ToSpawn, FVector Position, FRotator Rotation);
 
 public:
 
