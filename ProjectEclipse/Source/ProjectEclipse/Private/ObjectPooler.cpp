@@ -2,6 +2,7 @@
 
 
 #include "ObjectPooler.h"
+#include "ProjectileActor.h"
 
 // Sets default values
 UObjectPooler::UObjectPooler()
@@ -14,37 +15,55 @@ void UObjectPooler::Init(UProjectEclipseGameInstance* NewInstance)
 	GameInstance = NewInstance;
 }
 
-template <class T>
-T* UObjectPooler::WakeActor(TSubclassOf<T> ToWake, FVector Position, FRotator Rotation)
+AProjectileActor* UObjectPooler::WakeProjectile(TSubclassOf<AProjectileActor> ToWake, FVector Position, FRotator Rotation)
 {
-	AActor* FoundActor = PooledActors.FindByPredicate([ToWake](AActor* Actor) {
-		return Actor->IsA(ToWake) && Actor->IsHidden();
-	});
+	if (PooledProjectiles.IsEmpty() || PooledProjectiles.Num() <= 0)
+		return SpawnProjectile(ToWake, Position, Rotation);
 
-	if (FoundActor == nullptr)
+	AProjectileActor* WakingActor = nullptr;
+	for (AProjectileActor* Projectile : PooledProjectiles)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("No actor in pool found that matches given class, spawning new actor"));
-		return SpawnActor<T>(ToWake, Position, Rotation);
+		if (Projectile == nullptr)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Projectile is null"));
+			continue;
+		}
+		
+		if (!Projectile->IsA(ToWake))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("%s not of type %s"), *Projectile->GetName(), *ToWake->GetName());
+			continue;
+		}
+
+		if (!Projectile->IsHidden())
+		{
+			UE_LOG(LogTemp, Warning, TEXT("%s not hidden"), *Projectile->GetName());
+			continue;
+		}
+
+		UE_LOG(LogTemp, Warning, TEXT("%s is of type %s and not hidden"), *Projectile->GetName(), *ToWake->GetName());
+		WakingActor = Projectile;
+		break;
 	}
 
-	FoundActor->SetActorHiddenInGame(false);
-	return Cast<T>(FoundActor);
+	if (WakingActor == nullptr) WakingActor = SpawnProjectile(ToWake, Position, Rotation);
+	return WakingActor;
 }
 
-template <class T>
-T* UObjectPooler::SpawnActor(TSubclassOf<T> ToSpawn, FVector Position, FRotator Rotation)
+AProjectileActor* UObjectPooler::SpawnProjectile(TSubclassOf<AProjectileActor> ToSpawn, FVector Position, FRotator Rotation)
 {
-	T* NewActor = GetWorld()->SpawnActor<T>(ToSpawn->GetAuthoritativeClass(), Position, Rotation);
-	if (NewActor != nullptr) PooledActors.Add(NewActor);
+	AProjectileActor* NewActor = GetWorld()->SpawnActor<AProjectileActor>(ToSpawn->GetAuthoritativeClass(), Position, Rotation);
+	if (NewActor != nullptr) PooledProjectiles.Add(NewActor);
 	return NewActor;
 }
 
-bool UObjectPooler::InPool(AActor* Check)
+
+bool UObjectPooler::InPool(AProjectileActor* Check)
 {
-	return PooledActors.Contains(Check);
+	return PooledProjectiles.Contains(Check);
 }
 
-void UObjectPooler::AddToPool(AActor* NewActor)
+void UObjectPooler::AddToPool(AProjectileActor* NewActor)
 {
 	if (NewActor == nullptr)
 	{
@@ -53,15 +72,15 @@ void UObjectPooler::AddToPool(AActor* NewActor)
 	}
 	
 	if (!InPool(NewActor))
-		PooledActors.Add(NewActor);
+		PooledProjectiles.Add(NewActor);
 	else
 		UE_LOG(LogTemp, Warning, TEXT("Actor already in pool, cannot be added"));
 }
 
-void UObjectPooler::RemoveFromPool(AActor* OldActor)
+void UObjectPooler::RemoveFromPool(AProjectileActor* OldActor)
 {
 	if (InPool(OldActor))
-		PooledActors.Remove(OldActor);
+		PooledProjectiles.Remove(OldActor);
 	else
 		UE_LOG(LogTemp, Warning, TEXT("Actor not in pool, cannot be removed"));
 }

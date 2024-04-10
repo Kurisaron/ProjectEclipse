@@ -6,6 +6,7 @@
 #include "ObjectPooler.generated.h"
 
 class UProjectEclipseGameInstance;
+class AProjectileActor;
 
 UCLASS(ClassGroup = (Custom), config = Game)
 class PROJECTECLIPSE_API UObjectPooler : public UObject
@@ -16,7 +17,7 @@ class PROJECTECLIPSE_API UObjectPooler : public UObject
 	UProjectEclipseGameInstance* GameInstance;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pool", meta = (AllowPrivateAccess = "true"))
-	TArray<AActor*> PooledActors;
+	TArray<AProjectileActor*> PooledProjectiles;
 	
 public:	
 	// Sets default values for this actor's properties
@@ -24,19 +25,17 @@ public:
 
 	void Init(UProjectEclipseGameInstance* NewInstance);
 
-	template <class T>
-	T* WakeActor(TSubclassOf<T> ToWake, FVector Position, FRotator Rotation);
+	AProjectileActor* WakeProjectile(TSubclassOf<AProjectileActor> ToWake, FVector Position, FRotator Rotation);
 
 protected:
 
-	template <class T>
-	T* SpawnActor(TSubclassOf<T> ToSpawn, FVector Position, FRotator Rotation);
+	AProjectileActor* SpawnProjectile(TSubclassOf<AProjectileActor> ToSpawn, FVector Position, FRotator Rotation);
 
 public:
 
-	bool InPool(AActor* Check);
+	bool InPool(AProjectileActor* Check);
 
-	void AddToPool(AActor* NewActor);
+	void AddToPool(AProjectileActor* NewActor);
 
-	void RemoveFromPool(AActor* OldActor);
+	void RemoveFromPool(AProjectileActor* OldActor);
 };
