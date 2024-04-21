@@ -47,7 +47,7 @@ public:
 
 	virtual void Unequip() override;
 
-	void PrimaryUse(bool Pressed, float PressedTime);
+	//void PrimaryUse(bool Pressed, float PressedTime);
 	virtual void PrimaryUse_Implementation(bool Pressed, float PressedTime) override;
 
 	void CyclePrimary();

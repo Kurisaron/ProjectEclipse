@@ -43,11 +43,7 @@
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\lightcomponent.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\locallightcomponent.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\pointlightcomponent.generated.h",
-            "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\projectileactor.generated.h",
-            "d:\\github\\projecteclipse\\projecteclipse\\source\\projecteclipse\\public\\objectpooler.h",
-            "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\objectpooler.generated.h",
-            "d:\\github\\projecteclipse\\projecteclipse\\source\\projecteclipse\\public\\projecteclipsegameinstance.h",
-            "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\projecteclipsegameinstance.generated.h"
+            "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\projectileactor.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

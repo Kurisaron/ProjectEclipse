@@ -64,11 +64,7 @@
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\rootmotionsource.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\character.generated.h",
             "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\projecteclipsecharacter.generated.h",
-            "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\equipmentcomponent.generated.h",
-            "d:\\github\\projecteclipse\\projecteclipse\\source\\projecteclipse\\public\\objectpooler.h",
-            "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\objectpooler.generated.h",
-            "d:\\github\\projecteclipse\\projecteclipse\\source\\projecteclipse\\public\\projecteclipsegameinstance.h",
-            "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\projecteclipsegameinstance.generated.h"
+            "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\equipmentcomponent.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

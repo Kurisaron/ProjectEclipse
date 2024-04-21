@@ -53,9 +53,6 @@ public:
 		const FHitResult& Hit
 	) override;
 
-	UFUNCTION(BlueprintCallable)
-	void PoolProjectile();
-
 	virtual UStaticMeshComponent* GetMesh();
 
 };

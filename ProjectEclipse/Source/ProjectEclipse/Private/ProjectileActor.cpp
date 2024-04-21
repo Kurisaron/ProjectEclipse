@@ -2,8 +2,6 @@
 
 
 #include "ProjectileActor.h"
-#include "ObjectPooler.h"
-#include "ProjectEclipseGameInstance.h"
 
 // Sets default values
 AProjectileActor::AProjectileActor()
@@ -52,23 +50,6 @@ void AProjectileActor::NotifyHit(
 {
 	
 	OnHit.Broadcast(this, MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
-}
-
-void AProjectileActor::PoolProjectile()
-{
-	UGameInstance* Game = GetGameInstance();
-	UProjectEclipseGameInstance* ThisGame = Cast<UProjectEclipseGameInstance>(Game);
-	if (ThisGame == nullptr)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Game instance not set properly"));
-		return;
-	}
-
-	UObjectPooler* Pooler = ThisGame->GetPooler();
-	if (Pooler == nullptr) Pooler = ThisGame->NewPooler();
-	if (!Pooler->InPool(this)) Pooler->AddToPool(this);
-
-	SetActorHiddenInGame(true);
 }
 
 UStaticMeshComponent* AProjectileActor::GetMesh() { return Mesh; }
