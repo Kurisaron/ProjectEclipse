@@ -66,6 +66,9 @@
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\DamageType_Slash.cpp">
       <Filter>Source\ProjectEclipse\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\EntityAttribute.cpp">
+      <Filter>Source\ProjectEclipse\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\Equipment.cpp">
       <Filter>Source\ProjectEclipse\Private</Filter>
     </ClCompile>
@@ -103,6 +106,9 @@
       <Filter>Source\ProjectEclipse\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\DamageType_Slash.h">
+      <Filter>Source\ProjectEclipse\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\EntityAttribute.h">
       <Filter>Source\ProjectEclipse\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\Equipment.h">

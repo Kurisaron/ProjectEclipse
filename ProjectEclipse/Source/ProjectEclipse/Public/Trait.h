@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "EntityAttribute.h"
 #include "Trait.generated.h"
 
 /**
- * 
+ * Traits are features that are held by an entity within the game. Traits extend the entities' core functionality, either modifying existing abilities or supplying new ones
  */
 UCLASS(ClassGroup = (Custom), config = Game, Blueprintable, BlueprintType)
 class PROJECTECLIPSE_API UTrait : public UObject
@@ -16,7 +17,7 @@ class PROJECTECLIPSE_API UTrait : public UObject
 
 	/** Modifiers meant to add/subtract flat values from the total */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stat Modifiers", meta = (AllowPrivateAccess = "true"))
-	TMap<FString, float> Modifiers;
+	TMap<TSubclassOf<UEntityAttribute>, float> Modifiers;
 
 public:
 
