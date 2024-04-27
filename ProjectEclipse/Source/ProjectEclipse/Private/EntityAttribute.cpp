@@ -10,6 +10,7 @@ UEntityAttribute::UEntityAttribute()
 
 	MinimumValue = 0;
 	MaximumValue = 99;
+	DefaultValue = 10;
 }
 
 FString UEntityAttribute::GetDisplayName()
@@ -36,4 +37,9 @@ int UEntityAttribute::GetMinimum()
 int UEntityAttribute::GetMaximum()
 {
 	return MaximumValue;
+}
+
+int UEntityAttribute::GetDefault()
+{
+	return DefaultValue;
 }

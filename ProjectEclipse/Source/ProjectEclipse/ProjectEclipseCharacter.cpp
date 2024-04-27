@@ -66,6 +66,22 @@ void AProjectEclipseCharacter::BeginPlay()
 	// Call the base class  
 	Super::BeginPlay();
 
+	AttributeValues.Empty();
+	for (TSubclassOf<UEntityAttribute> Subclass : DefaultAttributes)
+	{
+		UEntityAttribute* Attribute = NewObject<UEntityAttribute>(this, Subclass->GetAuthoritativeClass());
+		if (Attribute == nullptr) continue;
+		int AttributeLevel = Attribute->GetDefault(); // to-do: loading from save
+		AttributeValues.Add(Attribute, AttributeLevel);
+	}
+
+	CurrentTraits.Empty();
+	for (TSubclassOf<UTrait> Subclass : DefaultTraits)
+	{
+		UTrait* Trait = NewObject<UTrait>(this, Subclass->GetAuthoritativeClass());
+		if (Trait != nullptr) CurrentTraits.Add(Trait);
+	}
+
 	//Add Input Mapping Context
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
@@ -478,6 +494,73 @@ void AProjectEclipseCharacter::UpdateBounds()
 		DrawDebugCapsule(GetWorld(), capsule->GetComponentLocation(), capsule->GetScaledCapsuleHalfHeight(), capsule->GetScaledCapsuleRadius(), FQuat::Identity, FColor::Cyan);
 	}
 }
+
+
+
+
+bool AProjectEclipseCharacter::HasAttribute(FString Key)
+{
+	bool flag(false);
+	if (AttributeValues.IsEmpty()) return flag;
+
+	for (const auto& Pair : AttributeValues)
+	{
+		UEntityAttribute* Attribute = Pair.Key;
+		if (Attribute->IsKeyName(Key)) flag = true;
+	}
+
+	return flag;
+}
+
+UEntityAttribute* AProjectEclipseCharacter::GetAttribute(FString Key)
+{
+	if (!HasAttribute(Key))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s Attribute not found (PRE-CHECK)"), *Key);
+		return nullptr;
+	}
+
+	for (const auto& Pair : AttributeValues)
+	{
+		UEntityAttribute* Attribute = Pair.Key;
+		if (Attribute->IsKeyName(Key)) return Attribute;
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("%s Attribute not found (POST-CHECK)"), *Key);
+	return nullptr;
+}
+
+bool AProjectEclipseCharacter::HasTrait(FString Key)
+{
+	bool flag(false);
+	if (CurrentTraits.IsEmpty()) return flag;
+
+	for (UTrait* Trait : CurrentTraits)
+	{
+		if (Trait->IsKeyName(Key)) flag = true;
+	}
+
+	return flag;
+}
+
+UTrait* AProjectEclipseCharacter::GetTrait(FString Key)
+{
+	if (!HasTrait(Key))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s Trait not found (PRE-CHECK)"), *Key);
+		return nullptr;
+	}
+
+	for (UTrait* Trait : CurrentTraits)
+	{
+		if (Trait->IsKeyName(Key)) return Trait;
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("%s Trait not found (POST-CHECK)"), *Key);
+	return nullptr;
+}
+
+
 
 
 //////////////////////////////////////////////////////////////////////////

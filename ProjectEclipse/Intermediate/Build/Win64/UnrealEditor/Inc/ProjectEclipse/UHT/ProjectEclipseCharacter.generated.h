@@ -9,25 +9,29 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class UEntityAttribute;
+class UTrait;
 #ifdef PROJECTECLIPSE_ProjectEclipseCharacter_generated_h
 #error "ProjectEclipseCharacter.generated.h already included, missing '#pragma once' in ProjectEclipseCharacter.h"
 #endif
 #define PROJECTECLIPSE_ProjectEclipseCharacter_generated_h
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_20_DELEGATE \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_23_DELEGATE \
 PROJECTECLIPSE_API void FPrimaryUseEvent_DelegateWrapper(const FMulticastScriptDelegate& PrimaryUseEvent, bool Pressed, const float PressedTime);
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_21_DELEGATE \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_24_DELEGATE \
 PROJECTECLIPSE_API void FPlayerCharacterInputEvent_DelegateWrapper(const FMulticastScriptDelegate& PlayerCharacterInputEvent, bool Pressed, const float PressedTime);
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_26_SPARSE_DATA
-#define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_26_SPARSE_DATA_PROPERTY_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_26_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_26_RPC_WRAPPERS_NO_PURE_DECLS
-#define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_26_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_26_INCLASS_NO_PURE_DECLS \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_29_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execGetTrait); \
+	DECLARE_FUNCTION(execHasTrait); \
+	DECLARE_FUNCTION(execGetAttribute); \
+	DECLARE_FUNCTION(execHasAttribute);
+
+
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_29_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAProjectEclipseCharacter(); \
 	friend struct Z_Construct_UClass_AProjectEclipseCharacter_Statics; \
@@ -36,11 +40,11 @@ public: \
 	DECLARE_SERIALIZER(AProjectEclipseCharacter)
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_26_ENHANCED_CONSTRUCTORS \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_29_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
-	NO_API AProjectEclipseCharacter(AProjectEclipseCharacter&&); \
-	NO_API AProjectEclipseCharacter(const AProjectEclipseCharacter&); \
+	AProjectEclipseCharacter(AProjectEclipseCharacter&&); \
+	AProjectEclipseCharacter(const AProjectEclipseCharacter&); \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, AProjectEclipseCharacter); \
 	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AProjectEclipseCharacter); \
@@ -48,17 +52,13 @@ public: \
 	NO_API virtual ~AProjectEclipseCharacter();
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_23_PROLOG
-#define FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_26_GENERATED_BODY \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_26_PROLOG
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_29_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_26_SPARSE_DATA \
-	FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_26_SPARSE_DATA_PROPERTY_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_26_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_26_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_26_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_26_INCLASS_NO_PURE_DECLS \
-	FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_26_ENHANCED_CONSTRUCTORS \
+	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_29_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_29_INCLASS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h_29_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -66,7 +66,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> PROJECTECLIPSE_API UClass* StaticClass<class AProjectEclipseCharacter>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h
+#define CURRENT_FILE_ID FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_ProjectEclipseCharacter_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

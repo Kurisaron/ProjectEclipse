@@ -14,12 +14,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define PROJECTECLIPSE_DamageType_Base_generated_h
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_SPARSE_DATA
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_SPARSE_DATA_PROPERTY_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_RPC_WRAPPERS_NO_PURE_DECLS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_INCLASS_NO_PURE_DECLS \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUDamageType_Base(); \
 	friend struct Z_Construct_UClass_UDamageType_Base_Statics; \
@@ -28,13 +23,13 @@ public: \
 	DECLARE_SERIALIZER(UDamageType_Base)
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_ENHANCED_CONSTRUCTORS \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UDamageType_Base(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
-	NO_API UDamageType_Base(UDamageType_Base&&); \
-	NO_API UDamageType_Base(const UDamageType_Base&); \
+	UDamageType_Base(UDamageType_Base&&); \
+	UDamageType_Base(const UDamageType_Base&); \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UDamageType_Base); \
 	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UDamageType_Base); \
@@ -42,17 +37,12 @@ public: \
 	NO_API virtual ~UDamageType_Base();
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_12_PROLOG
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_GENERATED_BODY \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_12_PROLOG
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_SPARSE_DATA \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_SPARSE_DATA_PROPERTY_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_INCLASS_NO_PURE_DECLS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_ENHANCED_CONSTRUCTORS \
+	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_INCLASS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -60,7 +50,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> PROJECTECLIPSE_API UClass* StaticClass<class UDamageType_Base>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h
+#define CURRENT_FILE_ID FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_DamageType_Base_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -18,21 +18,16 @@ struct FHitResult;
 #endif
 #define PROJECTECLIPSE_ProjectileActor_generated_h
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_11_DELEGATE \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_11_DELEGATE \
 PROJECTECLIPSE_API void FProjectileHit_DelegateWrapper(const FMulticastScriptDelegate& ProjectileHit, AProjectileActor* Projectile, UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, FHitResult const& Hit);
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_SPARSE_DATA
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_SPARSE_DATA_PROPERTY_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
- \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execNotifyHit); \
 	DECLARE_FUNCTION(execFire);
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_INCLASS_NO_PURE_DECLS \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAProjectileActor(); \
 	friend struct Z_Construct_UClass_AProjectileActor_Statics; \
@@ -41,11 +36,11 @@ public: \
 	DECLARE_SERIALIZER(AProjectileActor)
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_ENHANCED_CONSTRUCTORS \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
-	NO_API AProjectileActor(AProjectileActor&&); \
-	NO_API AProjectileActor(const AProjectileActor&); \
+	AProjectileActor(AProjectileActor&&); \
+	AProjectileActor(const AProjectileActor&); \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, AProjectileActor); \
 	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AProjectileActor); \
@@ -53,17 +48,13 @@ public: \
 	NO_API virtual ~AProjectileActor();
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_13_PROLOG
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_GENERATED_BODY \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_13_PROLOG
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_SPARSE_DATA \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_SPARSE_DATA_PROPERTY_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_INCLASS_NO_PURE_DECLS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_ENHANCED_CONSTRUCTORS \
+	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_INCLASS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h_16_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -71,7 +62,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> PROJECTECLIPSE_API UClass* StaticClass<class AProjectileActor>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h
+#define CURRENT_FILE_ID FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ProjectileActor_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

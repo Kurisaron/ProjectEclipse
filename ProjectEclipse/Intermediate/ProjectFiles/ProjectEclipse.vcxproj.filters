@@ -75,6 +75,9 @@
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\EquipmentComponent.cpp">
       <Filter>Source\ProjectEclipse\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\Faction.cpp">
+      <Filter>Source\ProjectEclipse\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\Firearm.cpp">
       <Filter>Source\ProjectEclipse\Private</Filter>
     </ClCompile>
@@ -115,6 +118,9 @@
       <Filter>Source\ProjectEclipse\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\EquipmentComponent.h">
+      <Filter>Source\ProjectEclipse\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\Faction.h">
       <Filter>Source\ProjectEclipse\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\Firearm.h">

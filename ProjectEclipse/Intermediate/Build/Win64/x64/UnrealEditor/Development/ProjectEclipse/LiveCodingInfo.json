@@ -2,19 +2,6 @@
 	"RemapUnityFiles": 
 	{
 		"Module.ProjectEclipse.cpp.obj": [
-			"DamageType_Base.gen.cpp.obj",
-			"DamageType_Fire.gen.cpp.obj",
-			"DamageType_Slash.gen.cpp.obj",
-			"Equipment.gen.cpp.obj",
-			"EquipmentComponent.gen.cpp.obj",
-			"Firearm.gen.cpp.obj",
-			"FirearmMode.gen.cpp.obj",
-			"ModifierKeyTrigger.gen.cpp.obj",
-			"ProjectEclipseCharacter.gen.cpp.obj",
-			"ProjectEclipseGameMode.gen.cpp.obj",
-			"ProjectileActor.gen.cpp.obj",
-			"Weapon.gen.cpp.obj",
-			"WeatherManager.gen.cpp.obj",
 			"DamageType_Base.cpp.obj",
 			"DamageType_Fire.cpp.obj",
 			"DamageType_Slash.cpp.obj",
@@ -27,13 +14,28 @@
 			"Weapon.cpp.obj",
 			"WeatherManager.cpp.obj",
 			"ProjectEclipse.cpp.obj",
-			"ProjectEclipseCharacter.cpp.obj",
 			"ProjectEclipseGameMode.cpp.obj",
+			"DamageType_Base.gen.cpp.obj",
+			"DamageType_Fire.gen.cpp.obj",
+			"DamageType_Slash.gen.cpp.obj",
 			"EntityAttribute.gen.cpp.obj",
+			"Equipment.gen.cpp.obj",
+			"EquipmentComponent.gen.cpp.obj",
+			"Faction.gen.cpp.obj",
+			"Firearm.gen.cpp.obj",
+			"FirearmMode.gen.cpp.obj",
+			"ModifierKeyTrigger.gen.cpp.obj",
 			"ProjectEclipse.init.gen.cpp.obj",
+			"ProjectEclipseCharacter.gen.cpp.obj",
+			"ProjectEclipseGameMode.gen.cpp.obj",
+			"ProjectileActor.gen.cpp.obj",
 			"Trait.gen.cpp.obj",
+			"Weapon.gen.cpp.obj",
+			"WeatherManager.gen.cpp.obj",
 			"EntityAttribute.cpp.obj",
-			"Trait.cpp.obj"
+			"Faction.cpp.obj",
+			"Trait.cpp.obj",
+			"ProjectEclipseCharacter.cpp.obj"
 		]
 	}
 }

@@ -6,6 +6,9 @@
 #include "Components/PointLightComponent.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "EntityAttribute.h"
+#include "Trait.h"
+#include "Faction.h"
 #include "ProjectileActor.h"
 #include "ProjectEclipseCharacter.generated.h"
 
@@ -24,6 +27,31 @@ UCLASS(config=Game)
 class AProjectEclipseCharacter : public ACharacter
 {
 	GENERATED_BODY()
+
+	/** Default attributes for character */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stats|Attributes", meta = (AllowPrivateAccess = "true"))
+	TArray<TSubclassOf<UEntityAttribute>> DefaultAttributes;
+
+	/** Current values for various attributes */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stats|Attributes", meta = (AllowPrivateAccess = "true"))
+	TMap<UEntityAttribute*, int> AttributeValues;
+
+
+
+	/** Default traits for character */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stats|Traits", meta = (AllowPrivateAccess = "true"))
+	TArray<TSubclassOf<UTrait>> DefaultTraits;
+
+	/** Current traits held by character */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stats|Traits", meta = (AllowPrivateAccess = "true"))
+	TArray<UTrait*> CurrentTraits;
+
+
+
+	/** Current relationships with factions */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stats|Factions", meta = (AllowPrivateAccess = "true"))
+	TMap<UFaction*, float> Reputation;
+
 
 	/** List of time counters for tracking how long something has been active */
 	TMap<FString, float> activeTimeCounters;
@@ -259,6 +287,20 @@ public:
 	void Crouch(const bool State);
 
 	FVector2D GetMovementVector() { return MovementVector; }
+
+
+	UFUNCTION(BlueprintPure)
+	bool HasAttribute(FString Key);
+
+	UFUNCTION(BlueprintCallable)
+	UEntityAttribute* GetAttribute(FString Key);
+
+	UFUNCTION(BlueprintPure)
+	bool HasTrait(FString Key);
+
+	UFUNCTION(BlueprintCallable)
+	UTrait* GetTrait(FString Key);
+
 };
 
 void StartCounter(TMap<FString, float>& Tracker, FString Key);

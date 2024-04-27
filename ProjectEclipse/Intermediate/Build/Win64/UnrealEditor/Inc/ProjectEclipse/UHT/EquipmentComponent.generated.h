@@ -15,11 +15,7 @@ class UEquipment;
 #endif
 #define PROJECTECLIPSE_EquipmentComponent_generated_h
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_SPARSE_DATA
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_SPARSE_DATA_PROPERTY_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
- \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execAlternateUse); \
 	DECLARE_FUNCTION(execSecondaryUse); \
 	DECLARE_FUNCTION(execPrimaryUse); \
@@ -28,8 +24,7 @@ class UEquipment;
 	DECLARE_FUNCTION(execSwitchEquipment);
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_INCLASS_NO_PURE_DECLS \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUEquipmentComponent(); \
 	friend struct Z_Construct_UClass_UEquipmentComponent_Statics; \
@@ -40,11 +35,11 @@ public: \
 
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_ENHANCED_CONSTRUCTORS \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
-	NO_API UEquipmentComponent(UEquipmentComponent&&); \
-	NO_API UEquipmentComponent(const UEquipmentComponent&); \
+	UEquipmentComponent(UEquipmentComponent&&); \
+	UEquipmentComponent(const UEquipmentComponent&); \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UEquipmentComponent); \
 	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UEquipmentComponent); \
@@ -52,17 +47,13 @@ public: \
 	NO_API virtual ~UEquipmentComponent();
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_14_PROLOG
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_GENERATED_BODY \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_14_PROLOG
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_SPARSE_DATA \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_SPARSE_DATA_PROPERTY_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_INCLASS_NO_PURE_DECLS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_ENHANCED_CONSTRUCTORS \
+	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_INCLASS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h_17_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -70,7 +61,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> PROJECTECLIPSE_API UClass* StaticClass<class UEquipmentComponent>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h
+#define CURRENT_FILE_ID FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EquipmentComponent_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -17,3 +17,18 @@ void UTrait::RemoveTrait_Implementation(AActor* Recipient)
 {
 
 }
+
+FString UTrait::GetDisplayName()
+{
+	return DisplayName;
+}
+
+FString UTrait::GetKeyName()
+{
+	return KeyName;
+}
+
+bool UTrait::IsKeyName(FString Key)
+{
+	return Key == KeyName;
+}

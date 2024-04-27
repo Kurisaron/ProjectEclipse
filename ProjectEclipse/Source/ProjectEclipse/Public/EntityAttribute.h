@@ -27,23 +27,30 @@ class PROJECTECLIPSE_API UEntityAttribute : public UObject
 	/** Maximum value that the attribute can be */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Values", meta = (AllowPrivateAccess = "true"))
 	int MaximumValue;
+	/** Default value that the attribute is */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Values", meta = (AllowPrivateAccess = "true"))
+	int DefaultValue;
 
 public:
 
 	UEntityAttribute();
 
 	UFUNCTION(BlueprintPure)
-	FString GetDisplayName();
+	virtual FString GetDisplayName();
 
 	UFUNCTION(BlueprintPure)
-	FString GetKeyName();
+	virtual FString GetKeyName();
 
 	UFUNCTION(BlueprintPure)
-	bool IsKeyName(FString Value);
+	virtual bool IsKeyName(FString Value);
 
 	UFUNCTION(BlueprintPure)
-	int GetMinimum();
+	virtual int GetMinimum();
 
 	UFUNCTION(BlueprintPure)
-	int GetMaximum();
+	virtual int GetMaximum();
+
+	UFUNCTION(BlueprintPure)
+	virtual int GetDefault();
+
 };

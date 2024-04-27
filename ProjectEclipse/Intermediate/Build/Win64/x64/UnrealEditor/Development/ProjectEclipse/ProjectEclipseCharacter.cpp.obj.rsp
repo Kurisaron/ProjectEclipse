@@ -1,8 +1,8 @@
 "D:\Github\ProjectEclipse\ProjectEclipse\Source\ProjectEclipse\ProjectEclipseCharacter.cpp"
-/FI"D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\ProjectEclipseEditor\Development\Engine\SharedPCH.Engine.Cpp20.h"
+/FI"D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\ProjectEclipseEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.NoValFmtStr.ValApi.Cpp20.InclOrderUnreal5_3.h"
 /FI"D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\UnrealEditor\Development\ProjectEclipse\Definitions.ProjectEclipse.h"
-/Yu"D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\ProjectEclipseEditor\Development\Engine\SharedPCH.Engine.Cpp20.h"
-/Fp"D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\ProjectEclipseEditor\Development\Engine\SharedPCH.Engine.Cpp20.h.pch"
+/Yu"D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\ProjectEclipseEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.NoValFmtStr.ValApi.Cpp20.InclOrderUnreal5_3.h"
+/Fp"D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\ProjectEclipseEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.NoValFmtStr.ValApi.Cpp20.InclOrderUnreal5_3.h.pch"
 /Fo"D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\UnrealEditor\Development\ProjectEclipse\ProjectEclipseCharacter.cpp.obj"
 /sourceDependencies "D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\UnrealEditor\Development\ProjectEclipse\ProjectEclipseCharacter.cpp.dep.json"
 @"D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\UnrealEditor\Development\ProjectEclipse\ProjectEclipse.Shared.rsp"
@@ -24,6 +24,7 @@
 /D_WINDLL
 /D_DISABLE_EXTENDED_ALIGNED_STORAGE
 /Ob2
+/d2ExtendedWarningInfo
 /Ox
 /Ot
 /GF

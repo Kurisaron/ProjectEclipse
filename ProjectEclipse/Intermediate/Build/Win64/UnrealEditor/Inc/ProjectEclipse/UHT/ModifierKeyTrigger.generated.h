@@ -14,12 +14,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define PROJECTECLIPSE_ModifierKeyTrigger_generated_h
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_SPARSE_DATA
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_SPARSE_DATA_PROPERTY_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_RPC_WRAPPERS_NO_PURE_DECLS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_ACCESSORS
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_INCLASS_NO_PURE_DECLS \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUModifierKeyTrigger(); \
 	friend struct Z_Construct_UClass_UModifierKeyTrigger_Statics; \
@@ -28,13 +23,13 @@ public: \
 	DECLARE_SERIALIZER(UModifierKeyTrigger)
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_ENHANCED_CONSTRUCTORS \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UModifierKeyTrigger(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
-	NO_API UModifierKeyTrigger(UModifierKeyTrigger&&); \
-	NO_API UModifierKeyTrigger(const UModifierKeyTrigger&); \
+	UModifierKeyTrigger(UModifierKeyTrigger&&); \
+	UModifierKeyTrigger(const UModifierKeyTrigger&); \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UModifierKeyTrigger); \
 	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UModifierKeyTrigger); \
@@ -42,17 +37,12 @@ public: \
 	NO_API virtual ~UModifierKeyTrigger();
 
 
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_12_PROLOG
-#define FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_GENERATED_BODY \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_12_PROLOG
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_SPARSE_DATA \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_SPARSE_DATA_PROPERTY_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_ACCESSORS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_INCLASS_NO_PURE_DECLS \
-	FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_ENHANCED_CONSTRUCTORS \
+	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_INCLASS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -60,7 +50,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> PROJECTECLIPSE_API UClass* StaticClass<class UModifierKeyTrigger>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h
+#define CURRENT_FILE_ID FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_ModifierKeyTrigger_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
