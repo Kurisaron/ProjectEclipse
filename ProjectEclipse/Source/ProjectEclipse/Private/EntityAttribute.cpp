@@ -6,7 +6,7 @@
 UEntityAttribute::UEntityAttribute()
 {
 	DisplayName = "";
-	KeyName = "";
+	ID = "";
 
 	MinimumValue = 0;
 	MaximumValue = 99;
@@ -19,14 +19,14 @@ FString UEntityAttribute::GetDisplayName()
 }
 
 
-FString UEntityAttribute::GetKeyName()
+FString UEntityAttribute::GetID()
 {
-	return KeyName;
+	return ID;
 }
 
-bool UEntityAttribute::IsKeyName(FString Value)
+bool UEntityAttribute::IsID(FString Value)
 {
-	return KeyName == Value;
+	return ID == Value;
 }
 
 int UEntityAttribute::GetMinimum()

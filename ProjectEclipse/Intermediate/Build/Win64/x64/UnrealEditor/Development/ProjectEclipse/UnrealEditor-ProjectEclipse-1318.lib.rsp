@@ -1,0 +1,15 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-ProjectEclipse-1318.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\ProjectEclipseEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.NoValFmtStr.ValApi.Cpp20.InclOrderUnreal5_3.h.obj"
+"D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\UnrealEditor\Development\ProjectEclipse\Module.ProjectEclipse.cpp.obj"
+"D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\UnrealEditor\Development\ProjectEclipse\Faction.cpp.obj"
+"D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\UnrealEditor\Development\ProjectEclipse\Faction.gen.cpp.obj"
+"D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\UnrealEditor\Development\ProjectEclipse\ProjectEclipse.init.gen.cpp.obj"
+"D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\UnrealEditor\Development\ProjectEclipse\Default.rc2.res"
+/OUT:"D:\Github\ProjectEclipse\ProjectEclipse\Intermediate\Build\Win64\x64\UnrealEditor\Development\ProjectEclipse\UnrealEditor-ProjectEclipse-1318.lib"

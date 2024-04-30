@@ -19,7 +19,7 @@ class PROJECTECLIPSE_API UEntityAttribute : public UObject
 	FString DisplayName;
 	/** Name used to help check for matches */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Names", meta = (AllowPrivateAccess = "true"))
-	FString KeyName;
+	FString ID;
 
 	/** Minimum value that the attribute can be */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Values", meta = (AllowPrivateAccess = "true"))
@@ -39,10 +39,10 @@ public:
 	virtual FString GetDisplayName();
 
 	UFUNCTION(BlueprintPure)
-	virtual FString GetKeyName();
+	virtual FString GetID();
 
 	UFUNCTION(BlueprintPure)
-	virtual bool IsKeyName(FString Value);
+	virtual bool IsID(FString Value);
 
 	UFUNCTION(BlueprintPure)
 	virtual int GetMinimum();

@@ -7,6 +7,28 @@
 #include "EntityAttribute.h"
 #include "Trait.generated.h"
 
+UENUM(BlueprintType)
+enum class EAttributeModifierType : uint8
+{
+	AMTE_Additive	UMETA(DisplayName = "Additive"),
+	AMTE_Multiplicative	UMETA(DisplayName = "Multiplicative"),
+};
+
+USTRUCT(BlueprintType)
+struct FAttributeModifier
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<UEntityAttribute> Attribute;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	EAttributeModifierType Type;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	float Value;
+};
+
 /**
  * Traits are features that are held by an entity within the game. Traits extend the entities' core functionality, either modifying existing abilities or supplying new ones
  */
@@ -28,11 +50,11 @@ class PROJECTECLIPSE_API UTrait : public UObject
 	FString DisplayName;
 	/** Name used to help check for matches */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Names", meta = (AllowPrivateAccess = "true"))
-	FString KeyName;
+	FString ID;
 
 	/** Modifiers meant to add/subtract flat values from the total */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stat Modifiers", meta = (AllowPrivateAccess = "true"))
-	TMap<TSubclassOf<UEntityAttribute>, float> AttributeModifiers;
+	TArray<FAttributeModifier> AttributeModifiers;
 
 public:
 
@@ -51,8 +73,8 @@ public:
 	FString GetDisplayName();
 
 	UFUNCTION(BlueprintPure)
-	FString GetKeyName();
+	FString GetID();
 
 	UFUNCTION(BlueprintPure)
-	bool IsKeyName(FString Key);
+	bool IsID(FString Key);
 };

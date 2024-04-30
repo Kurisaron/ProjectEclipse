@@ -117,7 +117,9 @@
             "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\playermappablekeyslot.h",
             "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\playermappablekeyslot.generated.h",
             "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\enhancedinputsubsysteminterface.generated.h",
-            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\enhancedinputsubsystems.generated.h"
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\enhancedinputsubsystems.generated.h",
+            "d:\\github\\projecteclipse\\projecteclipse\\source\\projecteclipse\\public\\entitycomponent.h",
+            "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\entitycomponent.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

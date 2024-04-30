@@ -12,6 +12,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "EntityComponent.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -20,6 +21,9 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 AProjectEclipseCharacter::AProjectEclipseCharacter()
 {
+	// Setup Entity Component
+	EntityComponent = CreateDefaultSubobject<UEntityComponent>(TEXT("EntityComponent"));
+	
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 		
@@ -52,11 +56,6 @@ AProjectEclipseCharacter::AProjectEclipseCharacter()
 	ThirdPersonCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	ThirdPersonCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
-	// Bind delegates/events
-	DoubleJumpEvent.AddUObject<AProjectEclipseCharacter>(this, &AProjectEclipseCharacter::Default_DoubleJump);
-	CrouchEvent.AddUObject<AProjectEclipseCharacter>(this, &AProjectEclipseCharacter::Default_Crouch);
-	DodgeEvent.AddUObject<AProjectEclipseCharacter>(this, &AProjectEclipseCharacter::Default_Dodge);
-
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
@@ -65,22 +64,6 @@ void AProjectEclipseCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
-
-	AttributeValues.Empty();
-	for (TSubclassOf<UEntityAttribute> Subclass : DefaultAttributes)
-	{
-		UEntityAttribute* Attribute = NewObject<UEntityAttribute>(this, Subclass->GetAuthoritativeClass());
-		if (Attribute == nullptr) continue;
-		int AttributeLevel = Attribute->GetDefault(); // to-do: loading from save
-		AttributeValues.Add(Attribute, AttributeLevel);
-	}
-
-	CurrentTraits.Empty();
-	for (TSubclassOf<UTrait> Subclass : DefaultTraits)
-	{
-		UTrait* Trait = NewObject<UTrait>(this, Subclass->GetAuthoritativeClass());
-		if (Trait != nullptr) CurrentTraits.Add(Trait);
-	}
 
 	//Add Input Mapping Context
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
@@ -97,7 +80,7 @@ void AProjectEclipseCharacter::Tick(float DeltaSeconds)
 {
 	UpdateBounds();
 
-	UpdateCounters(activeTimeCounters, DeltaSeconds);
+	UpdateCounters(activeInputCounters, DeltaSeconds);
 
 	if (GetCharacterMovement()->IsMovingOnGround())
 	{
@@ -222,7 +205,7 @@ void AProjectEclipseCharacter::Jump(const FInputActionValue& Value)
 
 	if (pressed)
 	{
-		StartCounter(activeTimeCounters, JumpCounterKey);
+		StartCounter(activeInputCounters, JumpAction);
 		JumpFreerunThreshold = grounded ? 0.25f : 0.0f;
 		if (grounded)
 		{
@@ -235,7 +218,7 @@ void AProjectEclipseCharacter::Jump(const FInputActionValue& Value)
 	}
 	else
 	{
-		StopCounter(activeTimeCounters, JumpCounterKey);
+		StopCounter(activeInputCounters, JumpAction);
 		ACharacter::StopJumping();
 	}
 
@@ -301,7 +284,7 @@ void AProjectEclipseCharacter::FreerunTick()
 
 bool AProjectEclipseCharacter::IsFreerunning()
 {
-	return !GetCharacterMovement()->IsMovingOnGround() && GetCounter(activeTimeCounters, JumpCounterKey) > JumpFreerunThreshold;
+	return !GetCharacterMovement()->IsMovingOnGround() && GetCounter(activeInputCounters, JumpAction) > JumpFreerunThreshold;
 }
 
 bool AProjectEclipseCharacter::CheckForwardObstacle(TMap<FString, TTuple<FVector, bool>>& StartLocations)
@@ -348,13 +331,13 @@ void AProjectEclipseCharacter::PrimaryUse(const FInputActionValue& Value)
 		float timePressed(0.0f);
 		if (isUsing)
 		{
-			StartCounter(activeTimeCounters, PrimaryUseCounterKey);
+			StartCounter(activeInputCounters, PrimaryUseAction);
 		}
 		else
 		{
-			timePressed = GetCounter(activeTimeCounters, PrimaryUseCounterKey);
+			timePressed = GetCounter(activeInputCounters, PrimaryUseAction);
 
-			StopCounter(activeTimeCounters, PrimaryUseCounterKey);
+			StopCounter(activeInputCounters, PrimaryUseAction);
 		}
 
 		PrimaryUseEvent.Broadcast(isUsing, timePressed);
@@ -368,11 +351,11 @@ void AProjectEclipseCharacter::SecondaryUse(const FInputActionValue& Value)
 
 	if (Controller != nullptr)
 	{
-		if (isUsing) StartCounter(activeTimeCounters, SecondaryUseCounterKey);
+		if (isUsing) StartCounter(activeInputCounters, SecondaryUseAction);
 
-		SecondaryUseEvent.Broadcast(isUsing, GetCounter(activeTimeCounters, SecondaryUseCounterKey));
+		SecondaryUseEvent.Broadcast(isUsing, GetCounter(activeInputCounters, SecondaryUseAction));
 
-		if (!isUsing) StopCounter(activeTimeCounters, SecondaryUseCounterKey);
+		if (!isUsing) StopCounter(activeInputCounters, SecondaryUseAction);
 	}
 }
 
@@ -382,11 +365,11 @@ void AProjectEclipseCharacter::AlternateUse(const FInputActionValue& Value)
 
 	if (Controller != nullptr)
 	{
-		if (isUsing) StartCounter(activeTimeCounters, AlternateUseCounterKey);
+		if (isUsing) StartCounter(activeInputCounters, AlternateUseAction);
 
-		if (AlternateUseEvent.IsBound()) AlternateUseEvent.Broadcast(isUsing, GetCounter(activeTimeCounters, AlternateUseCounterKey));
+		if (AlternateUseEvent.IsBound()) AlternateUseEvent.Broadcast(isUsing, GetCounter(activeInputCounters, AlternateUseAction));
 
-		if (!isUsing) StopCounter(activeTimeCounters, AlternateUseCounterKey);
+		if (!isUsing) StopCounter(activeInputCounters, AlternateUseAction);
 	}
 }
 
@@ -394,12 +377,15 @@ void AProjectEclipseCharacter::Dodge(const FInputActionValue& Value)
 {
 	// input is a bool
 	bool dodging = Value.Get<bool>();
-	if (dodging) StartCounter(activeTimeCounters, DodgeCounterKey);
+	if (dodging) StartCounter(activeInputCounters, DodgeAction);
 
+	float CounterTime = GetCounter(activeInputCounters, DodgeAction);
 	if (DodgeEvent.IsBound())
-		DodgeEvent.Broadcast(this, dodging, GetCounter(activeTimeCounters, DodgeCounterKey));
+		DodgeEvent.Broadcast(this, dodging, CounterTime);
+	else
+		Default_Dodge(this, dodging, CounterTime);
 
-	if (dodging) StopCounter(activeTimeCounters, DodgeCounterKey);
+	if (dodging) StopCounter(activeInputCounters, DodgeAction);
 }
 
 void AProjectEclipseCharacter::Default_Dodge(AProjectEclipseCharacter* Character, const bool Pressed, const float PressedTime)
@@ -434,14 +420,16 @@ void AProjectEclipseCharacter::Crouch(const FInputActionValue& Value)
 {
 	// input is a bool
 	bCrouchPressed = Value.Get<bool>();
-	if (bCrouchPressed) StartCounter(activeTimeCounters, CrouchCounterKey);
 
+	if (bCrouchPressed) StartCounter(activeInputCounters, CrouchAction);
+
+	float CounterTime = GetCounter(activeInputCounters, CrouchAction);
 	if (CrouchEvent.IsBound())
-	{
-		CrouchEvent.Broadcast(this, bCrouchPressed, GetCounter(activeTimeCounters, CrouchCounterKey));
-	}
-
-	if (!bCrouchPressed) StopCounter(activeTimeCounters, CrouchCounterKey);
+		CrouchEvent.Broadcast(this, bCrouchPressed, CounterTime);
+	else
+		Default_Crouch(this, bCrouchPressed, CounterTime);
+	
+	if (!bCrouchPressed) StopCounter(activeInputCounters, CrouchAction);
 }
 
 void AProjectEclipseCharacter::Crouch(const bool State)
@@ -466,11 +454,11 @@ void AProjectEclipseCharacter::ToggleCam(const FInputActionValue& Value)
 {
 	bool Pressed = Value.Get<bool>();
 
-	if (Pressed) StartCounter(activeTimeCounters, ToggleCamCounterKey);
+	if (Pressed) StartCounter(activeInputCounters, ToggleCamAction);
 
-	if (ToggleCamEvent.IsBound()) ToggleCamEvent.Broadcast(Pressed, GetCounter(activeTimeCounters, ToggleCamCounterKey));
+	if (ToggleCamEvent.IsBound()) ToggleCamEvent.Broadcast(Pressed, GetCounter(activeInputCounters, ToggleCamAction));
 
-	if (!Pressed) StopCounter(activeTimeCounters, ToggleCamCounterKey);
+	if (!Pressed) StopCounter(activeInputCounters, ToggleCamAction);
 }
 
 void AProjectEclipseCharacter::UpdateBounds()
@@ -498,81 +486,16 @@ void AProjectEclipseCharacter::UpdateBounds()
 
 
 
-bool AProjectEclipseCharacter::HasAttribute(FString Key)
-{
-	bool flag(false);
-	if (AttributeValues.IsEmpty()) return flag;
-
-	for (const auto& Pair : AttributeValues)
-	{
-		UEntityAttribute* Attribute = Pair.Key;
-		if (Attribute->IsKeyName(Key)) flag = true;
-	}
-
-	return flag;
-}
-
-UEntityAttribute* AProjectEclipseCharacter::GetAttribute(FString Key)
-{
-	if (!HasAttribute(Key))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("%s Attribute not found (PRE-CHECK)"), *Key);
-		return nullptr;
-	}
-
-	for (const auto& Pair : AttributeValues)
-	{
-		UEntityAttribute* Attribute = Pair.Key;
-		if (Attribute->IsKeyName(Key)) return Attribute;
-	}
-
-	UE_LOG(LogTemp, Warning, TEXT("%s Attribute not found (POST-CHECK)"), *Key);
-	return nullptr;
-}
-
-bool AProjectEclipseCharacter::HasTrait(FString Key)
-{
-	bool flag(false);
-	if (CurrentTraits.IsEmpty()) return flag;
-
-	for (UTrait* Trait : CurrentTraits)
-	{
-		if (Trait->IsKeyName(Key)) flag = true;
-	}
-
-	return flag;
-}
-
-UTrait* AProjectEclipseCharacter::GetTrait(FString Key)
-{
-	if (!HasTrait(Key))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("%s Trait not found (PRE-CHECK)"), *Key);
-		return nullptr;
-	}
-
-	for (UTrait* Trait : CurrentTraits)
-	{
-		if (Trait->IsKeyName(Key)) return Trait;
-	}
-
-	UE_LOG(LogTemp, Warning, TEXT("%s Trait not found (POST-CHECK)"), *Key);
-	return nullptr;
-}
-
-
-
-
 //////////////////////////////////////////////////////////////////////////
 // Free Functions
 
-void StartCounter(TMap<FString, float>& Tracker, FString Key)
+void StartCounter(TMap<UInputAction*, float>& Tracker, UInputAction* Key)
 {
 	Tracker.Add(Key, 0.0f);
 	//UE_LOG(LogTemp, Warning, TEXT("%s counter added tracker"), *Key);
 }
 
-void StopCounter(TMap<FString, float>& Tracker, FString Key)
+void StopCounter(TMap<UInputAction*, float>& Tracker, UInputAction* Key)
 {
 	if (Tracker.Contains(Key))
 	{
@@ -585,12 +508,12 @@ void StopCounter(TMap<FString, float>& Tracker, FString Key)
 	}
 }
 
-bool HasCounter(TMap<FString, float>& Tracker, FString Key)
+bool HasCounter(TMap<UInputAction*, float>& Tracker, UInputAction* Key)
 {
 	return Tracker.Contains(Key);
 }
 
-float GetCounter(TMap<FString, float>& Tracker, FString Key)
+float GetCounter(TMap<UInputAction*, float>& Tracker, UInputAction* Key)
 {
 	if (Tracker.Contains(Key))
 	{
@@ -606,7 +529,7 @@ float GetCounter(TMap<FString, float>& Tracker, FString Key)
 		
 }
 
-void UpdateCounters(TMap<FString, float>& Tracker, float DeltaSeconds)
+void UpdateCounters(TMap<UInputAction*, float>& Tracker, float DeltaSeconds)
 {
 	for (auto& Element : Tracker)
 	{

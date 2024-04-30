@@ -23,12 +23,12 @@ FString UTrait::GetDisplayName()
 	return DisplayName;
 }
 
-FString UTrait::GetKeyName()
+FString UTrait::GetID()
 {
-	return KeyName;
+	return ID;
 }
 
-bool UTrait::IsKeyName(FString Key)
+bool UTrait::IsID(FString Key)
 {
-	return Key == KeyName;
+	return Key == ID;
 }

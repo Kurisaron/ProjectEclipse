@@ -283,6 +283,9 @@
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\EntityAttribute.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipse\Private\EntityComponent.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipse\Private\Equipment.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -317,6 +320,7 @@
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\DamageType_Fire.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\DamageType_Slash.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\EntityAttribute.h"/>
+    <ClInclude Include="..\..\Source\ProjectEclipse\Public\EntityComponent.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\Equipment.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\EquipmentComponent.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipse\Public\Faction.h"/>

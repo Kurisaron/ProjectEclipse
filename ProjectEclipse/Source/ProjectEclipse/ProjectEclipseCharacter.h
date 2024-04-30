@@ -17,10 +17,10 @@ class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+class UEntityComponent;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPrimaryUseEvent, const bool, Pressed, const float, PressedTime);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPlayerCharacterInputEvent, const bool, Pressed, const float, PressedTime);
 
 UCLASS(config=Game)
@@ -28,33 +28,11 @@ class AProjectEclipseCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
-	/** Default attributes for character */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stats|Attributes", meta = (AllowPrivateAccess = "true"))
-	TArray<TSubclassOf<UEntityAttribute>> DefaultAttributes;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Entity", meta = (AllowPrivateAccess = "true"))
+	UEntityComponent* EntityComponent;
 
-	/** Current values for various attributes */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stats|Attributes", meta = (AllowPrivateAccess = "true"))
-	TMap<UEntityAttribute*, int> AttributeValues;
-
-
-
-	/** Default traits for character */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stats|Traits", meta = (AllowPrivateAccess = "true"))
-	TArray<TSubclassOf<UTrait>> DefaultTraits;
-
-	/** Current traits held by character */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stats|Traits", meta = (AllowPrivateAccess = "true"))
-	TArray<UTrait*> CurrentTraits;
-
-
-
-	/** Current relationships with factions */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stats|Factions", meta = (AllowPrivateAccess = "true"))
-	TMap<UFaction*, float> Reputation;
-
-
-	/** List of time counters for tracking how long something has been active */
-	TMap<FString, float> activeTimeCounters;
+	/** List of time counters for tracking how long an input has been pressed */
+	TMap<UInputAction*, float> activeInputCounters;
 
 	/** Origin of character's bounds */
 	FVector BoundOrigin;
@@ -64,9 +42,6 @@ class AProjectEclipseCharacter : public ACharacter
 	
 	/** Direction of character movement*/
 	FVector2D MovementVector;
-
-	/** Key used in time counter map for tracking how long the jump button has been pressed */
-	FString JumpCounterKey = "JumpPressed";
 
 	/** Threshold value for time jump button has been pressed for the character to be considered freerunning */
 	float JumpFreerunThreshold = 0.25f;
@@ -78,19 +53,10 @@ class AProjectEclipseCharacter : public ACharacter
 	/** Broadcasts whenever the player presses the jump button in the air */
 	FDoubleJumpEvent DoubleJumpEvent;
 
-	/** Key used in time counter map for tracking how long the primary use button has been pressed */
-	FString PrimaryUseCounterKey = "PrimaryUsePressed";
-
-	/** Key used in time counter map for tracking how long the secondary use button has been pressed */
-	FString SecondaryUseCounterKey = "SecondaryUsePressed";
-
-	/** Key used in time counter map for tracking how long the alternate use button has been pressed */
-	FString AlternateUseCounterKey = "AlternateUsePressed";
-
 public:
 
 	UPROPERTY(BlueprintAssignable)
-	FPrimaryUseEvent PrimaryUseEvent;
+	FPlayerCharacterInputEvent PrimaryUseEvent;
 
 	UPROPERTY(BlueprintAssignable)
 	FPlayerCharacterInputEvent SecondaryUseEvent;
@@ -112,23 +78,14 @@ private:
 	/** Tracks whether character can dodge */
 	bool bCanDodge = true;
 
-	/** Key used in time counter map for tracking how long the dodge button has been pressed */
-	FString DodgeCounterKey = "DodgePressed";
-
 	DECLARE_EVENT_ThreeParams(AProjectEclipseCharacter, FDodgeEvent, AProjectEclipseCharacter*, const bool, const float);
 	FDodgeEvent DodgeEvent;
 
 	/** Tracks whether character is pressing crouch */
 	bool bCrouchPressed = false;
 
-	/** Key used in time counter map for tracking how long the crouch button has been pressed */
-	FString CrouchCounterKey = "CrouchPressed";
-
 	DECLARE_EVENT_ThreeParams(AProjectEclipseCharacter, FCrouchEvent, AProjectEclipseCharacter*, const bool, const float);
 	FCrouchEvent CrouchEvent;
-
-	/** Key used in time counter map for tracking how long the cam toggle button has been pressed */
-	FString ToggleCamCounterKey = "CamTogglePressed";
 
 	UPROPERTY(BlueprintAssignable)
 	FPlayerCharacterInputEvent ToggleCamEvent;
@@ -191,7 +148,7 @@ public:
 	FDoubleJumpEvent& GetDoubleJumpEvent() { return DoubleJumpEvent; }
 
 	/** Broadcasts whenever the player performs their primary attack */
-	FPrimaryUseEvent& GetPrimaryAttackEvent() { return PrimaryUseEvent; }
+	FPlayerCharacterInputEvent& GetPrimaryAttackEvent() { return PrimaryUseEvent; }
 
 protected:
 
@@ -288,23 +245,11 @@ public:
 
 	FVector2D GetMovementVector() { return MovementVector; }
 
-
-	UFUNCTION(BlueprintPure)
-	bool HasAttribute(FString Key);
-
-	UFUNCTION(BlueprintCallable)
-	UEntityAttribute* GetAttribute(FString Key);
-
-	UFUNCTION(BlueprintPure)
-	bool HasTrait(FString Key);
-
-	UFUNCTION(BlueprintCallable)
-	UTrait* GetTrait(FString Key);
-
+	UEntityComponent* GetEntityComponent() { return EntityComponent; }
 };
 
-void StartCounter(TMap<FString, float>& Tracker, FString Key);
-void StopCounter(TMap<FString, float>& Tracker, FString Key);
-bool HasCounter(TMap<FString, float>& Tracker, FString Key);
-float GetCounter(TMap<FString, float>& Tracker, FString Key);
-void UpdateCounters(TMap<FString, float>& Tracker, float DeltaSeconds);
+void StartCounter(TMap<UInputAction*, float>& Tracker, UInputAction* Key);
+void StopCounter(TMap<UInputAction*, float>& Tracker, UInputAction* Key);
+bool HasCounter(TMap<UInputAction*, float>& Tracker, UInputAction* Key);
+float GetCounter(TMap<UInputAction*, float>& Tracker, UInputAction* Key);
+void UpdateCounters(TMap<UInputAction*, float>& Tracker, float DeltaSeconds);

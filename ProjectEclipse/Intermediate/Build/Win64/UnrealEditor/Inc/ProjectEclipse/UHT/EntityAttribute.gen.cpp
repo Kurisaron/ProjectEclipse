@@ -98,10 +98,10 @@ DEFINE_FUNCTION(UEntityAttribute::execGetDisplayName)
 }
 // End Class UEntityAttribute Function GetDisplayName
 
-// Begin Class UEntityAttribute Function GetKeyName
-struct Z_Construct_UFunction_UEntityAttribute_GetKeyName_Statics
+// Begin Class UEntityAttribute Function GetID
+struct Z_Construct_UFunction_UEntityAttribute_GetID_Statics
 {
-	struct EntityAttribute_eventGetKeyName_Parms
+	struct EntityAttribute_eventGetID_Parms
 	{
 		FString ReturnValue;
 	};
@@ -114,30 +114,30 @@ struct Z_Construct_UFunction_UEntityAttribute_GetKeyName_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UEntityAttribute_GetKeyName_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EntityAttribute_eventGetKeyName_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UEntityAttribute_GetKeyName_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UEntityAttribute_GetKeyName_Statics::NewProp_ReturnValue,
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UEntityAttribute_GetID_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EntityAttribute_eventGetID_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UEntityAttribute_GetID_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UEntityAttribute_GetID_Statics::NewProp_ReturnValue,
 };
-static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityAttribute_GetKeyName_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UEntityAttribute_GetKeyName_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UEntityAttribute, nullptr, "GetKeyName", nullptr, nullptr, Z_Construct_UFunction_UEntityAttribute_GetKeyName_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityAttribute_GetKeyName_Statics::PropPointers), sizeof(Z_Construct_UFunction_UEntityAttribute_GetKeyName_Statics::EntityAttribute_eventGetKeyName_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020400, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityAttribute_GetKeyName_Statics::Function_MetaDataParams), Z_Construct_UFunction_UEntityAttribute_GetKeyName_Statics::Function_MetaDataParams) };
-static_assert(sizeof(Z_Construct_UFunction_UEntityAttribute_GetKeyName_Statics::EntityAttribute_eventGetKeyName_Parms) < MAX_uint16);
-UFunction* Z_Construct_UFunction_UEntityAttribute_GetKeyName()
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityAttribute_GetID_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UEntityAttribute_GetID_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UEntityAttribute, nullptr, "GetID", nullptr, nullptr, Z_Construct_UFunction_UEntityAttribute_GetID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityAttribute_GetID_Statics::PropPointers), sizeof(Z_Construct_UFunction_UEntityAttribute_GetID_Statics::EntityAttribute_eventGetID_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020400, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityAttribute_GetID_Statics::Function_MetaDataParams), Z_Construct_UFunction_UEntityAttribute_GetID_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UEntityAttribute_GetID_Statics::EntityAttribute_eventGetID_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UEntityAttribute_GetID()
 {
 	static UFunction* ReturnFunction = nullptr;
 	if (!ReturnFunction)
 	{
-		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UEntityAttribute_GetKeyName_Statics::FuncParams);
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UEntityAttribute_GetID_Statics::FuncParams);
 	}
 	return ReturnFunction;
 }
-DEFINE_FUNCTION(UEntityAttribute::execGetKeyName)
+DEFINE_FUNCTION(UEntityAttribute::execGetID)
 {
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	*(FString*)Z_Param__Result=P_THIS->GetKeyName();
+	*(FString*)Z_Param__Result=P_THIS->GetID();
 	P_NATIVE_END;
 }
-// End Class UEntityAttribute Function GetKeyName
+// End Class UEntityAttribute Function GetID
 
 // Begin Class UEntityAttribute Function GetMaximum
 struct Z_Construct_UFunction_UEntityAttribute_GetMaximum_Statics
@@ -221,10 +221,10 @@ DEFINE_FUNCTION(UEntityAttribute::execGetMinimum)
 }
 // End Class UEntityAttribute Function GetMinimum
 
-// Begin Class UEntityAttribute Function IsKeyName
-struct Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics
+// Begin Class UEntityAttribute Function IsID
+struct Z_Construct_UFunction_UEntityAttribute_IsID_Statics
 {
-	struct EntityAttribute_eventIsKeyName_Parms
+	struct EntityAttribute_eventIsID_Parms
 	{
 		FString Value;
 		bool ReturnValue;
@@ -240,37 +240,37 @@ struct Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics::NewProp_Value = { "Value", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EntityAttribute_eventIsKeyName_Parms, Value), METADATA_PARAMS(0, nullptr) };
-void Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UEntityAttribute_IsID_Statics::NewProp_Value = { "Value", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EntityAttribute_eventIsID_Parms, Value), METADATA_PARAMS(0, nullptr) };
+void Z_Construct_UFunction_UEntityAttribute_IsID_Statics::NewProp_ReturnValue_SetBit(void* Obj)
 {
-	((EntityAttribute_eventIsKeyName_Parms*)Obj)->ReturnValue = 1;
+	((EntityAttribute_eventIsID_Parms*)Obj)->ReturnValue = 1;
 }
-const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(EntityAttribute_eventIsKeyName_Parms), &Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics::NewProp_Value,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics::NewProp_ReturnValue,
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UEntityAttribute_IsID_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(EntityAttribute_eventIsID_Parms), &Z_Construct_UFunction_UEntityAttribute_IsID_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UEntityAttribute_IsID_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UEntityAttribute_IsID_Statics::NewProp_Value,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UEntityAttribute_IsID_Statics::NewProp_ReturnValue,
 };
-static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UEntityAttribute, nullptr, "IsKeyName", nullptr, nullptr, Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics::PropPointers), sizeof(Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics::EntityAttribute_eventIsKeyName_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020400, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics::Function_MetaDataParams), Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics::Function_MetaDataParams) };
-static_assert(sizeof(Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics::EntityAttribute_eventIsKeyName_Parms) < MAX_uint16);
-UFunction* Z_Construct_UFunction_UEntityAttribute_IsKeyName()
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityAttribute_IsID_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UEntityAttribute_IsID_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UEntityAttribute, nullptr, "IsID", nullptr, nullptr, Z_Construct_UFunction_UEntityAttribute_IsID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityAttribute_IsID_Statics::PropPointers), sizeof(Z_Construct_UFunction_UEntityAttribute_IsID_Statics::EntityAttribute_eventIsID_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020400, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityAttribute_IsID_Statics::Function_MetaDataParams), Z_Construct_UFunction_UEntityAttribute_IsID_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UEntityAttribute_IsID_Statics::EntityAttribute_eventIsID_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UEntityAttribute_IsID()
 {
 	static UFunction* ReturnFunction = nullptr;
 	if (!ReturnFunction)
 	{
-		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UEntityAttribute_IsKeyName_Statics::FuncParams);
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UEntityAttribute_IsID_Statics::FuncParams);
 	}
 	return ReturnFunction;
 }
-DEFINE_FUNCTION(UEntityAttribute::execIsKeyName)
+DEFINE_FUNCTION(UEntityAttribute::execIsID)
 {
 	P_GET_PROPERTY(FStrProperty,Z_Param_Value);
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	*(bool*)Z_Param__Result=P_THIS->IsKeyName(Z_Param_Value);
+	*(bool*)Z_Param__Result=P_THIS->IsID(Z_Param_Value);
 	P_NATIVE_END;
 }
-// End Class UEntityAttribute Function IsKeyName
+// End Class UEntityAttribute Function IsID
 
 // Begin Class UEntityAttribute
 void UEntityAttribute::StaticRegisterNativesUEntityAttribute()
@@ -279,10 +279,10 @@ void UEntityAttribute::StaticRegisterNativesUEntityAttribute()
 	static const FNameNativePtrPair Funcs[] = {
 		{ "GetDefault", &UEntityAttribute::execGetDefault },
 		{ "GetDisplayName", &UEntityAttribute::execGetDisplayName },
-		{ "GetKeyName", &UEntityAttribute::execGetKeyName },
+		{ "GetID", &UEntityAttribute::execGetID },
 		{ "GetMaximum", &UEntityAttribute::execGetMaximum },
 		{ "GetMinimum", &UEntityAttribute::execGetMinimum },
-		{ "IsKeyName", &UEntityAttribute::execIsKeyName },
+		{ "IsID", &UEntityAttribute::execIsID },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
@@ -318,7 +318,7 @@ struct Z_Construct_UClass_UEntityAttribute_Statics
 		{ "ToolTip", "Name that will be used for game UI" },
 #endif
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_KeyName_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ID_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Names" },
 #if !UE_BUILD_SHIPPING
@@ -364,7 +364,7 @@ struct Z_Construct_UClass_UEntityAttribute_Statics
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStrPropertyParams NewProp_DisplayName;
-	static const UECodeGen_Private::FStrPropertyParams NewProp_KeyName;
+	static const UECodeGen_Private::FStrPropertyParams NewProp_ID;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_MinimumValue;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_MaximumValue;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_DefaultValue;
@@ -373,10 +373,10 @@ struct Z_Construct_UClass_UEntityAttribute_Statics
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_UEntityAttribute_GetDefault, "GetDefault" }, // 4233672842
 		{ &Z_Construct_UFunction_UEntityAttribute_GetDisplayName, "GetDisplayName" }, // 4071095664
-		{ &Z_Construct_UFunction_UEntityAttribute_GetKeyName, "GetKeyName" }, // 1538470369
+		{ &Z_Construct_UFunction_UEntityAttribute_GetID, "GetID" }, // 470462116
 		{ &Z_Construct_UFunction_UEntityAttribute_GetMaximum, "GetMaximum" }, // 2105019764
 		{ &Z_Construct_UFunction_UEntityAttribute_GetMinimum, "GetMinimum" }, // 1014148492
-		{ &Z_Construct_UFunction_UEntityAttribute_IsKeyName, "IsKeyName" }, // 4171405198
+		{ &Z_Construct_UFunction_UEntityAttribute_IsID, "IsID" }, // 1582047725
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -385,13 +385,13 @@ struct Z_Construct_UClass_UEntityAttribute_Statics
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UEntityAttribute_Statics::NewProp_DisplayName = { "DisplayName", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEntityAttribute, DisplayName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DisplayName_MetaData), NewProp_DisplayName_MetaData) };
-const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UEntityAttribute_Statics::NewProp_KeyName = { "KeyName", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEntityAttribute, KeyName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_KeyName_MetaData), NewProp_KeyName_MetaData) };
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UEntityAttribute_Statics::NewProp_ID = { "ID", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEntityAttribute, ID), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ID_MetaData), NewProp_ID_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UEntityAttribute_Statics::NewProp_MinimumValue = { "MinimumValue", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEntityAttribute, MinimumValue), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MinimumValue_MetaData), NewProp_MinimumValue_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UEntityAttribute_Statics::NewProp_MaximumValue = { "MaximumValue", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEntityAttribute, MaximumValue), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MaximumValue_MetaData), NewProp_MaximumValue_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UEntityAttribute_Statics::NewProp_DefaultValue = { "DefaultValue", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEntityAttribute, DefaultValue), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DefaultValue_MetaData), NewProp_DefaultValue_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UEntityAttribute_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityAttribute_Statics::NewProp_DisplayName,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityAttribute_Statics::NewProp_KeyName,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityAttribute_Statics::NewProp_ID,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityAttribute_Statics::NewProp_MinimumValue,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityAttribute_Statics::NewProp_MaximumValue,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityAttribute_Statics::NewProp_DefaultValue,
@@ -437,10 +437,10 @@ UEntityAttribute::~UEntityAttribute() {}
 struct Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityAttribute_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UEntityAttribute, UEntityAttribute::StaticClass, TEXT("UEntityAttribute"), &Z_Registration_Info_UClass_UEntityAttribute, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UEntityAttribute), 657158770U) },
+		{ Z_Construct_UClass_UEntityAttribute, UEntityAttribute::StaticClass, TEXT("UEntityAttribute"), &Z_Registration_Info_UClass_UEntityAttribute, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UEntityAttribute), 2393491744U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityAttribute_h_2175641248(TEXT("/Script/ProjectEclipse"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityAttribute_h_2489028922(TEXT("/Script/ProjectEclipse"),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityAttribute_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityAttribute_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
