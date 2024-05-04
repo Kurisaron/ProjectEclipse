@@ -48,9 +48,12 @@ class PROJECTECLIPSE_API UTrait : public UObject
 	/** Name that will be used for game UI */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Names", meta = (AllowPrivateAccess = "true"))
 	FString DisplayName;
-	/** Name used to help check for matches */
+	/** ID used to help check for matches */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Names", meta = (AllowPrivateAccess = "true"))
 	FString ID;
+	/** Tags used by the system to check for categories/types the trait might fall under */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Names", meta = (AllowPrivateAccess = "true"))
+	TArray<FString> Tags;
 
 	/** Modifiers meant to add/subtract flat values from the total */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stat Modifiers", meta = (AllowPrivateAccess = "true"))
@@ -62,11 +65,9 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Traits")
 	void ApplyTrait(AActor* Recipient);
-	virtual void ApplyTrait_Implementation(AActor* Recipient);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Traits")
 	void RemoveTrait(AActor* Recipient);
-	virtual void RemoveTrait_Implementation(AActor* Recipient);
 
 
 	UFUNCTION(BlueprintPure)
@@ -77,4 +78,11 @@ public:
 
 	UFUNCTION(BlueprintPure)
 	bool IsID(FString Key);
+
+	UFUNCTION(BlueprintPure)
+	TArray<FString> GetTags();
+
+	UFUNCTION(BlueprintPure)
+	bool HasTag(FString Tag);
+
 };

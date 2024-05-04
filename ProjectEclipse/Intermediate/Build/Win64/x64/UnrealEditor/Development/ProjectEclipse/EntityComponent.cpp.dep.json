@@ -19,7 +19,17 @@
             "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\trait.generated.h",
             "d:\\github\\projecteclipse\\projecteclipse\\source\\projecteclipse\\public\\faction.h",
             "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\faction.generated.h",
-            "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\entitycomponent.generated.h"
+            "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\entitycomponent.generated.h",
+            "d:\\github\\projecteclipse\\projecteclipse\\source\\projecteclipse\\public\\entityaction.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\inputaction.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\inputmodifiers.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\inputactionvalue.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\inputactionvalue.generated.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\inputmodifiers.generated.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\inputtriggers.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\inputtriggers.generated.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\inputaction.generated.h",
+            "d:\\github\\projecteclipse\\projecteclipse\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipse\\uht\\entityaction.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

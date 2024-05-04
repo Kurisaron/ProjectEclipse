@@ -11,7 +11,7 @@ UFirearmMode::UFirearmMode()
 
 void UFirearmMode::Fire_Implementation(UEquipmentComponent* Wielder, bool Pressed, float PressedTime)
 {
-
+	UE_LOG(LogTemp, Warning, TEXT("FirearmMode Fire default implementation reached."));
 }
 
 AProjectileActor* UFirearmMode::SpawnProjectile(FVector Location, FVector Direction, bool& Spawned)

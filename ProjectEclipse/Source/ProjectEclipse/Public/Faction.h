@@ -31,16 +31,15 @@ class PROJECTECLIPSE_API UFaction : public UObject
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Icon", meta = (AllowPrivateAccess = "true"))
 	UTexture2D* Icon;
 
-	/** Category for faction to be organized under (Empire, Guild, etc.) */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Category", meta = (AllowPrivateAccess = "true"))
-	FString Category;
-
 	/** Name used to represent the faction to the player (via UI) */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Names", meta = (AllowPrivateAccess = "true"))
 	FString DisplayName;
-	/** Name used by the system/code to perform operations such as check for matches */
+	/** ID used by the system/code to perform operations such as check for matches */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Names", meta = (AllowPrivateAccess = "true"))
 	FString ID;
+	/** Tags used by the system to check for categories/types the faction might fall under */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Names", meta = (AllowPrivateAccess = "true"))
+	TArray<FString> Tags;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ranks", meta = (AllowPrivateAccess = "true"))
@@ -55,9 +54,6 @@ public:
 	UTexture2D* GetIcon();
 
 	UFUNCTION(BlueprintPure)
-	FString GetCategory();
-
-	UFUNCTION(BlueprintPure)
 	FString GetDisplayName();
 
 	UFUNCTION(BlueprintPure)
@@ -65,6 +61,12 @@ public:
 
 	UFUNCTION(BlueprintPure)
 	bool IsID(FString Check);
+
+	UFUNCTION(BlueprintPure)
+	TArray<FString> GetTags();
+
+	UFUNCTION(BlueprintPure)
+	bool HasTag(FString Tag);
 
 	UFUNCTION(BlueprintPure)
 	FFactionRank GetRank(int Level);

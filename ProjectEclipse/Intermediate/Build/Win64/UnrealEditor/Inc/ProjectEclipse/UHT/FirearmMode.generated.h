@@ -18,6 +18,7 @@ class UEquipmentComponent;
 #define PROJECTECLIPSE_FirearmMode_generated_h
 
 #define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_FirearmMode_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual void Fire_Implementation(UEquipmentComponent* Wielder, bool Pressed, float PressedTime); \
 	DECLARE_FUNCTION(execTickMode); \
 	DECLARE_FUNCTION(execSpawnProjectile); \
 	DECLARE_FUNCTION(execFire);

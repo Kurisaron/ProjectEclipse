@@ -26,7 +26,6 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Firearm Mode")
 	void Fire(UEquipmentComponent* Wielder, bool Pressed, float PressedTime);
-	virtual void Fire_Implementation(UEquipmentComponent* Wielder, bool Pressed, float PressedTime);
 
 	UFUNCTION(BlueprintCallable, Category = "Firearm Mode")
 	AProjectileActor* SpawnProjectile(FVector Location, FVector Direction, bool& Spawned);

@@ -23,6 +23,10 @@ class AActor;
 template<> PROJECTECLIPSE_API UScriptStruct* StaticStruct<struct FAttributeModifier>();
 
 #define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_Trait_h_38_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual void RemoveTrait_Implementation(AActor* Recipient); \
+	virtual void ApplyTrait_Implementation(AActor* Recipient); \
+	DECLARE_FUNCTION(execHasTag); \
+	DECLARE_FUNCTION(execGetTags); \
 	DECLARE_FUNCTION(execIsID); \
 	DECLARE_FUNCTION(execGetID); \
 	DECLARE_FUNCTION(execGetDisplayName); \

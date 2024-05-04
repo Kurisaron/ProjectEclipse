@@ -10,13 +10,15 @@ UFaction::UFaction()
 
 UTexture2D* UFaction::GetIcon() { return Icon; }
 
-FString UFaction::GetCategory() { return Category; }
-
 FString UFaction::GetDisplayName() { return DisplayName; }
 
 FString UFaction::GetID() { return ID; }
 
 bool UFaction::IsID(FString Check) { return ID == Check; }
+
+TArray<FString> UFaction::GetTags() { return Tags; }
+
+bool UFaction::HasTag(FString Tag) { return Tags.Contains(Tag); }
 
 FFactionRank UFaction::GetRank(int Level)
 {

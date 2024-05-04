@@ -25,17 +25,17 @@ class PROJECTECLIPSE_API UFirearm : public UWeapon
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Modes, meta = (AllowPrivateAccess = "true"))
 	TArray<TSubclassOf<UFirearmMode>> PrimaryCycle;
-	UFirearmMode* CurrentPrimaryMode;
+	TSubclassOf<UFirearmMode> CurrentPrimaryMode;
 
 	/** Default aim function for firearm, will use default zoom if set to none */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Modes, meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<UFirearmMode> DefaultSecondaryMode;
-	UFirearmMode* CurrentSecondaryMode;
+	TSubclassOf<UFirearmMode> CurrentSecondaryMode;
 
 	/** Default alternate fire function firearm, not all weapons will  */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Modes, meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<UFirearmMode> DefaultAlternateMode;
-	UFirearmMode* CurrentAlternateMode;
+	TSubclassOf<UFirearmMode> CurrentAlternateMode;
 
 public:
 

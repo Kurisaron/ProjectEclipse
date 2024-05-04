@@ -9,6 +9,8 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class UEntityAction;
+class UEntityAttribute;
 class UTrait;
 struct FFactionStatus;
 #ifdef PROJECTECLIPSE_EntityComponent_generated_h
@@ -16,22 +18,25 @@ struct FFactionStatus;
 #endif
 #define PROJECTECLIPSE_EntityComponent_generated_h
 
-#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_16_GENERATED_BODY \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_17_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FFactionStatus_Statics; \
 	PROJECTECLIPSE_API static class UScriptStruct* StaticStruct();
 
 
 template<> PROJECTECLIPSE_API UScriptStruct* StaticStruct<struct FFactionStatus>();
 
-#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_32_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_33_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execGetReputation); \
 	DECLARE_FUNCTION(execGetTrait); \
 	DECLARE_FUNCTION(execHasTrait); \
+	DECLARE_FUNCTION(execGetAction); \
+	DECLARE_FUNCTION(execHasAction); \
 	DECLARE_FUNCTION(execGetAttributeValue); \
+	DECLARE_FUNCTION(execGetAttribute); \
 	DECLARE_FUNCTION(execHasAttribute);
 
 
-#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_32_INCLASS_NO_PURE_DECLS \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_33_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUEntityComponent(); \
 	friend struct Z_Construct_UClass_UEntityComponent_Statics; \
@@ -40,7 +45,7 @@ public: \
 	DECLARE_SERIALIZER(UEntityComponent)
 
 
-#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_32_ENHANCED_CONSTRUCTORS \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_33_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	UEntityComponent(UEntityComponent&&); \
@@ -52,13 +57,13 @@ public: \
 	NO_API virtual ~UEntityComponent();
 
 
-#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_29_PROLOG
-#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_32_GENERATED_BODY \
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_30_PROLOG
+#define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_33_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_32_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_32_INCLASS_NO_PURE_DECLS \
-	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_32_ENHANCED_CONSTRUCTORS \
+	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_33_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_33_INCLASS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_33_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

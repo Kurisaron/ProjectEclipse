@@ -18,17 +18,12 @@ void UTrait::RemoveTrait_Implementation(AActor* Recipient)
 
 }
 
-FString UTrait::GetDisplayName()
-{
-	return DisplayName;
-}
+FString UTrait::GetDisplayName() { return DisplayName; }
 
-FString UTrait::GetID()
-{
-	return ID;
-}
+FString UTrait::GetID() { return ID; }
 
-bool UTrait::IsID(FString Key)
-{
-	return Key == ID;
-}
+bool UTrait::IsID(FString Key) { return Key == ID; }
+
+TArray<FString> UTrait::GetTags() { return Tags; }
+
+bool UTrait::HasTag(FString Tag) { return Tags.Contains(Tag); }

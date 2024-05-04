@@ -89,47 +89,6 @@ UScriptStruct* Z_Construct_UScriptStruct_FFactionRank()
 }
 // End ScriptStruct FFactionRank
 
-// Begin Class UFaction Function GetCategory
-struct Z_Construct_UFunction_UFaction_GetCategory_Statics
-{
-	struct Faction_eventGetCategory_Parms
-	{
-		FString ReturnValue;
-	};
-#if WITH_METADATA
-	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "Public/Faction.h" },
-	};
-#endif // WITH_METADATA
-	static const UECodeGen_Private::FStrPropertyParams NewProp_ReturnValue;
-	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-	static const UECodeGen_Private::FFunctionParams FuncParams;
-};
-const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UFaction_GetCategory_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(Faction_eventGetCategory_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UFaction_GetCategory_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UFaction_GetCategory_Statics::NewProp_ReturnValue,
-};
-static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UFaction_GetCategory_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UFaction_GetCategory_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UFaction, nullptr, "GetCategory", nullptr, nullptr, Z_Construct_UFunction_UFaction_GetCategory_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UFaction_GetCategory_Statics::PropPointers), sizeof(Z_Construct_UFunction_UFaction_GetCategory_Statics::Faction_eventGetCategory_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UFaction_GetCategory_Statics::Function_MetaDataParams), Z_Construct_UFunction_UFaction_GetCategory_Statics::Function_MetaDataParams) };
-static_assert(sizeof(Z_Construct_UFunction_UFaction_GetCategory_Statics::Faction_eventGetCategory_Parms) < MAX_uint16);
-UFunction* Z_Construct_UFunction_UFaction_GetCategory()
-{
-	static UFunction* ReturnFunction = nullptr;
-	if (!ReturnFunction)
-	{
-		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UFaction_GetCategory_Statics::FuncParams);
-	}
-	return ReturnFunction;
-}
-DEFINE_FUNCTION(UFaction::execGetCategory)
-{
-	P_FINISH;
-	P_NATIVE_BEGIN;
-	*(FString*)Z_Param__Result=P_THIS->GetCategory();
-	P_NATIVE_END;
-}
-// End Class UFaction Function GetCategory
-
 // Begin Class UFaction Function GetDisplayName
 struct Z_Construct_UFunction_UFaction_GetDisplayName_Statics
 {
@@ -299,6 +258,50 @@ DEFINE_FUNCTION(UFaction::execGetRank)
 }
 // End Class UFaction Function GetRank
 
+// Begin Class UFaction Function GetTags
+struct Z_Construct_UFunction_UFaction_GetTags_Statics
+{
+	struct Faction_eventGetTags_Parms
+	{
+		TArray<FString> ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Faction.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FStrPropertyParams NewProp_ReturnValue_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UFaction_GetTags_Statics::NewProp_ReturnValue_Inner = { "ReturnValue", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UFaction_GetTags_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(Faction_eventGetTags_Parms, ReturnValue), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UFaction_GetTags_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UFaction_GetTags_Statics::NewProp_ReturnValue_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UFaction_GetTags_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UFaction_GetTags_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UFaction_GetTags_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UFaction, nullptr, "GetTags", nullptr, nullptr, Z_Construct_UFunction_UFaction_GetTags_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UFaction_GetTags_Statics::PropPointers), sizeof(Z_Construct_UFunction_UFaction_GetTags_Statics::Faction_eventGetTags_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UFaction_GetTags_Statics::Function_MetaDataParams), Z_Construct_UFunction_UFaction_GetTags_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UFaction_GetTags_Statics::Faction_eventGetTags_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UFaction_GetTags()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UFaction_GetTags_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UFaction::execGetTags)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(TArray<FString>*)Z_Param__Result=P_THIS->GetTags();
+	P_NATIVE_END;
+}
+// End Class UFaction Function GetTags
+
 // Begin Class UFaction Function HasRank
 struct Z_Construct_UFunction_UFaction_HasRank_Statics
 {
@@ -349,6 +352,57 @@ DEFINE_FUNCTION(UFaction::execHasRank)
 	P_NATIVE_END;
 }
 // End Class UFaction Function HasRank
+
+// Begin Class UFaction Function HasTag
+struct Z_Construct_UFunction_UFaction_HasTag_Statics
+{
+	struct Faction_eventHasTag_Parms
+	{
+		FString Tag;
+		bool ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Faction.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FStrPropertyParams NewProp_Tag;
+	static void NewProp_ReturnValue_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UFaction_HasTag_Statics::NewProp_Tag = { "Tag", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(Faction_eventHasTag_Parms, Tag), METADATA_PARAMS(0, nullptr) };
+void Z_Construct_UFunction_UFaction_HasTag_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+{
+	((Faction_eventHasTag_Parms*)Obj)->ReturnValue = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UFaction_HasTag_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(Faction_eventHasTag_Parms), &Z_Construct_UFunction_UFaction_HasTag_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UFaction_HasTag_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UFaction_HasTag_Statics::NewProp_Tag,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UFaction_HasTag_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UFaction_HasTag_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UFaction_HasTag_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UFaction, nullptr, "HasTag", nullptr, nullptr, Z_Construct_UFunction_UFaction_HasTag_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UFaction_HasTag_Statics::PropPointers), sizeof(Z_Construct_UFunction_UFaction_HasTag_Statics::Faction_eventHasTag_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UFaction_HasTag_Statics::Function_MetaDataParams), Z_Construct_UFunction_UFaction_HasTag_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UFaction_HasTag_Statics::Faction_eventHasTag_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UFaction_HasTag()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UFaction_HasTag_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UFaction::execHasTag)
+{
+	P_GET_PROPERTY(FStrProperty,Z_Param_Tag);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(bool*)Z_Param__Result=P_THIS->HasTag(Z_Param_Tag);
+	P_NATIVE_END;
+}
+// End Class UFaction Function HasTag
 
 // Begin Class UFaction Function IsID
 struct Z_Construct_UFunction_UFaction_IsID_Statics
@@ -406,12 +460,13 @@ void UFaction::StaticRegisterNativesUFaction()
 {
 	UClass* Class = UFaction::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
-		{ "GetCategory", &UFaction::execGetCategory },
 		{ "GetDisplayName", &UFaction::execGetDisplayName },
 		{ "GetIcon", &UFaction::execGetIcon },
 		{ "GetID", &UFaction::execGetID },
 		{ "GetRank", &UFaction::execGetRank },
+		{ "GetTags", &UFaction::execGetTags },
 		{ "HasRank", &UFaction::execHasRank },
+		{ "HasTag", &UFaction::execHasTag },
 		{ "IsID", &UFaction::execIsID },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -445,17 +500,6 @@ struct Z_Construct_UClass_UFaction_Statics
 		{ "ToolTip", "Icon to be used to represent the faction (at least most often)" },
 #endif
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Category_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Category" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Category for faction to be organized under (Empire, Guild, etc.) */" },
-#endif
-		{ "ModuleRelativePath", "Public/Faction.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Category for faction to be organized under (Empire, Guild, etc.)" },
-#endif
-	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DisplayName_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Names" },
@@ -471,11 +515,22 @@ struct Z_Construct_UClass_UFaction_Statics
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Names" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Name used by the system/code to perform operations such as check for matches */" },
+		{ "Comment", "/** ID used by the system/code to perform operations such as check for matches */" },
 #endif
 		{ "ModuleRelativePath", "Public/Faction.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Name used by the system/code to perform operations such as check for matches" },
+		{ "ToolTip", "ID used by the system/code to perform operations such as check for matches" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Tags_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Names" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** Tags used by the system to check for categories/types the faction might fall under */" },
+#endif
+		{ "ModuleRelativePath", "Public/Faction.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Tags used by the system to check for categories/types the faction might fall under" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RankLevels_MetaData[] = {
@@ -485,21 +540,23 @@ struct Z_Construct_UClass_UFaction_Statics
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_Icon;
-	static const UECodeGen_Private::FStrPropertyParams NewProp_Category;
 	static const UECodeGen_Private::FStrPropertyParams NewProp_DisplayName;
 	static const UECodeGen_Private::FStrPropertyParams NewProp_ID;
+	static const UECodeGen_Private::FStrPropertyParams NewProp_Tags_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_Tags;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_RankLevels_ValueProp;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_RankLevels_Key_KeyProp;
 	static const UECodeGen_Private::FMapPropertyParams NewProp_RankLevels;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UFaction_GetCategory, "GetCategory" }, // 1303323428
 		{ &Z_Construct_UFunction_UFaction_GetDisplayName, "GetDisplayName" }, // 136885632
 		{ &Z_Construct_UFunction_UFaction_GetIcon, "GetIcon" }, // 2250909551
 		{ &Z_Construct_UFunction_UFaction_GetID, "GetID" }, // 2405239218
 		{ &Z_Construct_UFunction_UFaction_GetRank, "GetRank" }, // 3471179438
+		{ &Z_Construct_UFunction_UFaction_GetTags, "GetTags" }, // 2358390317
 		{ &Z_Construct_UFunction_UFaction_HasRank, "HasRank" }, // 152681062
+		{ &Z_Construct_UFunction_UFaction_HasTag, "HasTag" }, // 2680931948
 		{ &Z_Construct_UFunction_UFaction_IsID, "IsID" }, // 2087835289
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
@@ -509,17 +566,19 @@ struct Z_Construct_UClass_UFaction_Statics
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UFaction_Statics::NewProp_Icon = { "Icon", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFaction, Icon), Z_Construct_UClass_UTexture2D_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Icon_MetaData), NewProp_Icon_MetaData) };
-const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UFaction_Statics::NewProp_Category = { "Category", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFaction, Category), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Category_MetaData), NewProp_Category_MetaData) };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UFaction_Statics::NewProp_DisplayName = { "DisplayName", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFaction, DisplayName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DisplayName_MetaData), NewProp_DisplayName_MetaData) };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UFaction_Statics::NewProp_ID = { "ID", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFaction, ID), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ID_MetaData), NewProp_ID_MetaData) };
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UFaction_Statics::NewProp_Tags_Inner = { "Tags", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UFaction_Statics::NewProp_Tags = { "Tags", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFaction, Tags), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Tags_MetaData), NewProp_Tags_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UFaction_Statics::NewProp_RankLevels_ValueProp = { "RankLevels", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, Z_Construct_UScriptStruct_FFactionRank, METADATA_PARAMS(0, nullptr) }; // 2884047688
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UFaction_Statics::NewProp_RankLevels_Key_KeyProp = { "RankLevels_Key", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_UFaction_Statics::NewProp_RankLevels = { "RankLevels", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFaction, RankLevels), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RankLevels_MetaData), NewProp_RankLevels_MetaData) }; // 2884047688
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UFaction_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFaction_Statics::NewProp_Icon,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFaction_Statics::NewProp_Category,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFaction_Statics::NewProp_DisplayName,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFaction_Statics::NewProp_ID,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFaction_Statics::NewProp_Tags_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFaction_Statics::NewProp_Tags,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFaction_Statics::NewProp_RankLevels_ValueProp,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFaction_Statics::NewProp_RankLevels_Key_KeyProp,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFaction_Statics::NewProp_RankLevels,
@@ -568,10 +627,10 @@ struct Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_Pro
 		{ FFactionRank::StaticStruct, Z_Construct_UScriptStruct_FFactionRank_Statics::NewStructOps, TEXT("FactionRank"), &Z_Registration_Info_UScriptStruct_FactionRank, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FFactionRank), 2884047688U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UFaction, UFaction::StaticClass, TEXT("UFaction"), &Z_Registration_Info_UClass_UFaction, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UFaction), 1036809402U) },
+		{ Z_Construct_UClass_UFaction, UFaction::StaticClass, TEXT("UFaction"), &Z_Registration_Info_UClass_UFaction, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UFaction), 883222182U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_Faction_h_2842171596(TEXT("/Script/ProjectEclipse"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_Faction_h_2871697883(TEXT("/Script/ProjectEclipse"),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_Faction_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_Faction_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_Faction_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_Faction_h_Statics::ScriptStructInfo),
 	nullptr, 0);

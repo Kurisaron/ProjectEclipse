@@ -13,6 +13,7 @@ void EmptyLinkFunctionForGeneratedCodeEntityComponent() {}
 // Begin Cross Module References
 COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 ENGINE_API UClass* Z_Construct_UClass_UActorComponent();
+PROJECTECLIPSE_API UClass* Z_Construct_UClass_UEntityAction_NoRegister();
 PROJECTECLIPSE_API UClass* Z_Construct_UClass_UEntityAttribute_NoRegister();
 PROJECTECLIPSE_API UClass* Z_Construct_UClass_UEntityComponent();
 PROJECTECLIPSE_API UClass* Z_Construct_UClass_UEntityComponent_NoRegister();
@@ -93,6 +94,100 @@ UScriptStruct* Z_Construct_UScriptStruct_FFactionStatus()
 	return Z_Registration_Info_UScriptStruct_FactionStatus.InnerSingleton;
 }
 // End ScriptStruct FFactionStatus
+
+// Begin Class UEntityComponent Function GetAction
+struct Z_Construct_UFunction_UEntityComponent_GetAction_Statics
+{
+	struct EntityComponent_eventGetAction_Parms
+	{
+		FString ID;
+		TSubclassOf<UEntityAction> ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Stats|Actions" },
+		{ "ModuleRelativePath", "Public/EntityComponent.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FStrPropertyParams NewProp_ID;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UEntityComponent_GetAction_Statics::NewProp_ID = { "ID", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EntityComponent_eventGetAction_Parms, ID), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UFunction_UEntityComponent_GetAction_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0014000000000580, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EntityComponent_eventGetAction_Parms, ReturnValue), Z_Construct_UClass_UClass, Z_Construct_UClass_UEntityAction_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UEntityComponent_GetAction_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UEntityComponent_GetAction_Statics::NewProp_ID,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UEntityComponent_GetAction_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityComponent_GetAction_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UEntityComponent_GetAction_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UEntityComponent, nullptr, "GetAction", nullptr, nullptr, Z_Construct_UFunction_UEntityComponent_GetAction_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityComponent_GetAction_Statics::PropPointers), sizeof(Z_Construct_UFunction_UEntityComponent_GetAction_Statics::EntityComponent_eventGetAction_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityComponent_GetAction_Statics::Function_MetaDataParams), Z_Construct_UFunction_UEntityComponent_GetAction_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UEntityComponent_GetAction_Statics::EntityComponent_eventGetAction_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UEntityComponent_GetAction()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UEntityComponent_GetAction_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UEntityComponent::execGetAction)
+{
+	P_GET_PROPERTY(FStrProperty,Z_Param_ID);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(TSubclassOf<UEntityAction>*)Z_Param__Result=P_THIS->GetAction(Z_Param_ID);
+	P_NATIVE_END;
+}
+// End Class UEntityComponent Function GetAction
+
+// Begin Class UEntityComponent Function GetAttribute
+struct Z_Construct_UFunction_UEntityComponent_GetAttribute_Statics
+{
+	struct EntityComponent_eventGetAttribute_Parms
+	{
+		FString ID;
+		TSubclassOf<UEntityAttribute> ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Stats|Attributes" },
+		{ "ModuleRelativePath", "Public/EntityComponent.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FStrPropertyParams NewProp_ID;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UEntityComponent_GetAttribute_Statics::NewProp_ID = { "ID", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EntityComponent_eventGetAttribute_Parms, ID), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UFunction_UEntityComponent_GetAttribute_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0014000000000580, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EntityComponent_eventGetAttribute_Parms, ReturnValue), Z_Construct_UClass_UClass, Z_Construct_UClass_UEntityAttribute_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UEntityComponent_GetAttribute_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UEntityComponent_GetAttribute_Statics::NewProp_ID,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UEntityComponent_GetAttribute_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityComponent_GetAttribute_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UEntityComponent_GetAttribute_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UEntityComponent, nullptr, "GetAttribute", nullptr, nullptr, Z_Construct_UFunction_UEntityComponent_GetAttribute_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityComponent_GetAttribute_Statics::PropPointers), sizeof(Z_Construct_UFunction_UEntityComponent_GetAttribute_Statics::EntityComponent_eventGetAttribute_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityComponent_GetAttribute_Statics::Function_MetaDataParams), Z_Construct_UFunction_UEntityComponent_GetAttribute_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UEntityComponent_GetAttribute_Statics::EntityComponent_eventGetAttribute_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UEntityComponent_GetAttribute()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UEntityComponent_GetAttribute_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UEntityComponent::execGetAttribute)
+{
+	P_GET_PROPERTY(FStrProperty,Z_Param_ID);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(TSubclassOf<UEntityAttribute>*)Z_Param__Result=P_THIS->GetAttribute(Z_Param_ID);
+	P_NATIVE_END;
+}
+// End Class UEntityComponent Function GetAttribute
 
 // Begin Class UEntityComponent Function GetAttributeValue
 struct Z_Construct_UFunction_UEntityComponent_GetAttributeValue_Statics
@@ -194,7 +289,7 @@ struct Z_Construct_UFunction_UEntityComponent_GetTrait_Statics
 	struct EntityComponent_eventGetTrait_Parms
 	{
 		FString ID;
-		UTrait* ReturnValue;
+		TSubclassOf<UTrait> ReturnValue;
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
@@ -203,12 +298,12 @@ struct Z_Construct_UFunction_UEntityComponent_GetTrait_Statics
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStrPropertyParams NewProp_ID;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_ReturnValue;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UEntityComponent_GetTrait_Statics::NewProp_ID = { "ID", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EntityComponent_eventGetTrait_Parms, ID), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UEntityComponent_GetTrait_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EntityComponent_eventGetTrait_Parms, ReturnValue), Z_Construct_UClass_UTrait_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UFunction_UEntityComponent_GetTrait_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0014000000000580, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EntityComponent_eventGetTrait_Parms, ReturnValue), Z_Construct_UClass_UClass, Z_Construct_UClass_UTrait_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UEntityComponent_GetTrait_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UEntityComponent_GetTrait_Statics::NewProp_ID,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UEntityComponent_GetTrait_Statics::NewProp_ReturnValue,
@@ -230,10 +325,62 @@ DEFINE_FUNCTION(UEntityComponent::execGetTrait)
 	P_GET_PROPERTY(FStrProperty,Z_Param_ID);
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	*(UTrait**)Z_Param__Result=P_THIS->GetTrait(Z_Param_ID);
+	*(TSubclassOf<UTrait>*)Z_Param__Result=P_THIS->GetTrait(Z_Param_ID);
 	P_NATIVE_END;
 }
 // End Class UEntityComponent Function GetTrait
+
+// Begin Class UEntityComponent Function HasAction
+struct Z_Construct_UFunction_UEntityComponent_HasAction_Statics
+{
+	struct EntityComponent_eventHasAction_Parms
+	{
+		FString ID;
+		bool ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Stats|Actions" },
+		{ "ModuleRelativePath", "Public/EntityComponent.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FStrPropertyParams NewProp_ID;
+	static void NewProp_ReturnValue_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UEntityComponent_HasAction_Statics::NewProp_ID = { "ID", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(EntityComponent_eventHasAction_Parms, ID), METADATA_PARAMS(0, nullptr) };
+void Z_Construct_UFunction_UEntityComponent_HasAction_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+{
+	((EntityComponent_eventHasAction_Parms*)Obj)->ReturnValue = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UEntityComponent_HasAction_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(EntityComponent_eventHasAction_Parms), &Z_Construct_UFunction_UEntityComponent_HasAction_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UEntityComponent_HasAction_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UEntityComponent_HasAction_Statics::NewProp_ID,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UEntityComponent_HasAction_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityComponent_HasAction_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UEntityComponent_HasAction_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UEntityComponent, nullptr, "HasAction", nullptr, nullptr, Z_Construct_UFunction_UEntityComponent_HasAction_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityComponent_HasAction_Statics::PropPointers), sizeof(Z_Construct_UFunction_UEntityComponent_HasAction_Statics::EntityComponent_eventHasAction_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UEntityComponent_HasAction_Statics::Function_MetaDataParams), Z_Construct_UFunction_UEntityComponent_HasAction_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UEntityComponent_HasAction_Statics::EntityComponent_eventHasAction_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UEntityComponent_HasAction()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UEntityComponent_HasAction_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UEntityComponent::execHasAction)
+{
+	P_GET_PROPERTY(FStrProperty,Z_Param_ID);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(bool*)Z_Param__Result=P_THIS->HasAction(Z_Param_ID);
+	P_NATIVE_END;
+}
+// End Class UEntityComponent Function HasAction
 
 // Begin Class UEntityComponent Function HasAttribute
 struct Z_Construct_UFunction_UEntityComponent_HasAttribute_Statics
@@ -344,9 +491,12 @@ void UEntityComponent::StaticRegisterNativesUEntityComponent()
 {
 	UClass* Class = UEntityComponent::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
+		{ "GetAction", &UEntityComponent::execGetAction },
+		{ "GetAttribute", &UEntityComponent::execGetAttribute },
 		{ "GetAttributeValue", &UEntityComponent::execGetAttributeValue },
 		{ "GetReputation", &UEntityComponent::execGetReputation },
 		{ "GetTrait", &UEntityComponent::execGetTrait },
+		{ "HasAction", &UEntityComponent::execHasAction },
 		{ "HasAttribute", &UEntityComponent::execHasAttribute },
 		{ "HasTrait", &UEntityComponent::execHasTrait },
 	};
@@ -372,20 +522,9 @@ struct Z_Construct_UClass_UEntityComponent_Statics
 		{ "ToolTip", "Entity component is to be attached to actors (especially pawns and characters) that have a significant enough role within the game. These entities are things such as creatures, vehicles, and destructibles." },
 #endif
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DefaultAttributes_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Attributes_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Stats|Attributes" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Default attributes for character */" },
-#endif
-		{ "ModuleRelativePath", "Public/EntityComponent.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Default attributes for character" },
-#endif
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AttributeValues_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Stats|Attributes" },
+		{ "Category", "Stats" },
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "/** Current values for various attributes */" },
 #endif
@@ -394,26 +533,26 @@ struct Z_Construct_UClass_UEntityComponent_Statics
 		{ "ToolTip", "Current values for various attributes" },
 #endif
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DefaultTraits_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Actions_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Stats|Traits" },
+		{ "Category", "Stats" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Default traits for character */" },
+		{ "Comment", "/** Actions that the entity can perform */" },
 #endif
 		{ "ModuleRelativePath", "Public/EntityComponent.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Default traits for character" },
+		{ "ToolTip", "Actions that the entity can perform" },
 #endif
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentTraits_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Traits_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Stats|Traits" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Current traits held by character */" },
+		{ "Comment", "/** Traits held by entity */" },
 #endif
 		{ "ModuleRelativePath", "Public/EntityComponent.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Current traits held by character" },
+		{ "ToolTip", "Traits held by entity" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Reputation_MetaData[] = {
@@ -428,24 +567,25 @@ struct Z_Construct_UClass_UEntityComponent_Statics
 #endif
 	};
 #endif // WITH_METADATA
-	static const UECodeGen_Private::FClassPropertyParams NewProp_DefaultAttributes_Inner;
-	static const UECodeGen_Private::FArrayPropertyParams NewProp_DefaultAttributes;
-	static const UECodeGen_Private::FIntPropertyParams NewProp_AttributeValues_ValueProp;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_AttributeValues_Key_KeyProp;
-	static const UECodeGen_Private::FMapPropertyParams NewProp_AttributeValues;
-	static const UECodeGen_Private::FClassPropertyParams NewProp_DefaultTraits_Inner;
-	static const UECodeGen_Private::FArrayPropertyParams NewProp_DefaultTraits;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_CurrentTraits_Inner;
-	static const UECodeGen_Private::FArrayPropertyParams NewProp_CurrentTraits;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_Attributes_ValueProp;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_Attributes_Key_KeyProp;
+	static const UECodeGen_Private::FMapPropertyParams NewProp_Attributes;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_Actions_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_Actions;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_Traits_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_Traits;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_Reputation_ValueProp;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_Reputation_Key_KeyProp;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_Reputation_Key_KeyProp;
 	static const UECodeGen_Private::FMapPropertyParams NewProp_Reputation;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
+		{ &Z_Construct_UFunction_UEntityComponent_GetAction, "GetAction" }, // 2338322053
+		{ &Z_Construct_UFunction_UEntityComponent_GetAttribute, "GetAttribute" }, // 1752126769
 		{ &Z_Construct_UFunction_UEntityComponent_GetAttributeValue, "GetAttributeValue" }, // 3392368139
 		{ &Z_Construct_UFunction_UEntityComponent_GetReputation, "GetReputation" }, // 1307096640
-		{ &Z_Construct_UFunction_UEntityComponent_GetTrait, "GetTrait" }, // 2502671957
+		{ &Z_Construct_UFunction_UEntityComponent_GetTrait, "GetTrait" }, // 3460145938
+		{ &Z_Construct_UFunction_UEntityComponent_HasAction, "HasAction" }, // 2453074364
 		{ &Z_Construct_UFunction_UEntityComponent_HasAttribute, "HasAttribute" }, // 165241204
 		{ &Z_Construct_UFunction_UEntityComponent_HasTrait, "HasTrait" }, // 2722633415
 	};
@@ -455,28 +595,24 @@ struct Z_Construct_UClass_UEntityComponent_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_DefaultAttributes_Inner = { "DefaultAttributes", nullptr, (EPropertyFlags)0x0004000000000000, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UClass, Z_Construct_UClass_UEntityAttribute_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_DefaultAttributes = { "DefaultAttributes", nullptr, (EPropertyFlags)0x0044000000000015, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEntityComponent, DefaultAttributes), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DefaultAttributes_MetaData), NewProp_DefaultAttributes_MetaData) };
-const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_AttributeValues_ValueProp = { "AttributeValues", nullptr, (EPropertyFlags)0x0000000000020001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_AttributeValues_Key_KeyProp = { "AttributeValues_Key", nullptr, (EPropertyFlags)0x0000000000020001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UEntityAttribute_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_AttributeValues = { "AttributeValues", nullptr, (EPropertyFlags)0x0040000000020015, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEntityComponent, AttributeValues), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AttributeValues_MetaData), NewProp_AttributeValues_MetaData) };
-const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_DefaultTraits_Inner = { "DefaultTraits", nullptr, (EPropertyFlags)0x0004000000000000, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UClass, Z_Construct_UClass_UTrait_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_DefaultTraits = { "DefaultTraits", nullptr, (EPropertyFlags)0x0044000000000015, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEntityComponent, DefaultTraits), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DefaultTraits_MetaData), NewProp_DefaultTraits_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_CurrentTraits_Inner = { "CurrentTraits", nullptr, (EPropertyFlags)0x0000000000020000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UTrait_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_CurrentTraits = { "CurrentTraits", nullptr, (EPropertyFlags)0x0040000000020015, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEntityComponent, CurrentTraits), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentTraits_MetaData), NewProp_CurrentTraits_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_Reputation_ValueProp = { "Reputation", nullptr, (EPropertyFlags)0x0000000000020001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, Z_Construct_UScriptStruct_FFactionStatus, METADATA_PARAMS(0, nullptr) }; // 4101709380
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_Reputation_Key_KeyProp = { "Reputation_Key", nullptr, (EPropertyFlags)0x0000000000020001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UFaction_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_Reputation = { "Reputation", nullptr, (EPropertyFlags)0x0040000000020015, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEntityComponent, Reputation), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Reputation_MetaData), NewProp_Reputation_MetaData) }; // 4101709380
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_Attributes_ValueProp = { "Attributes", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_Attributes_Key_KeyProp = { "Attributes_Key", nullptr, (EPropertyFlags)0x0004000000000001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UClass, Z_Construct_UClass_UEntityAttribute_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_Attributes = { "Attributes", nullptr, (EPropertyFlags)0x0040000000010015, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEntityComponent, Attributes), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Attributes_MetaData), NewProp_Attributes_MetaData) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_Actions_Inner = { "Actions", nullptr, (EPropertyFlags)0x0004000000000000, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UClass, Z_Construct_UClass_UEntityAction_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_Actions = { "Actions", nullptr, (EPropertyFlags)0x0044000000010015, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEntityComponent, Actions), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Actions_MetaData), NewProp_Actions_MetaData) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_Traits_Inner = { "Traits", nullptr, (EPropertyFlags)0x0004000000000000, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UClass, Z_Construct_UClass_UTrait_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_Traits = { "Traits", nullptr, (EPropertyFlags)0x0044000000010015, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEntityComponent, Traits), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Traits_MetaData), NewProp_Traits_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_Reputation_ValueProp = { "Reputation", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, Z_Construct_UScriptStruct_FFactionStatus, METADATA_PARAMS(0, nullptr) }; // 4101709380
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_Reputation_Key_KeyProp = { "Reputation_Key", nullptr, (EPropertyFlags)0x0004000000000001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UClass, Z_Construct_UClass_UFaction_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_UEntityComponent_Statics::NewProp_Reputation = { "Reputation", nullptr, (EPropertyFlags)0x0040000000010015, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UEntityComponent, Reputation), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Reputation_MetaData), NewProp_Reputation_MetaData) }; // 4101709380
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UEntityComponent_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_DefaultAttributes_Inner,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_DefaultAttributes,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_AttributeValues_ValueProp,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_AttributeValues_Key_KeyProp,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_AttributeValues,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_DefaultTraits_Inner,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_DefaultTraits,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_CurrentTraits_Inner,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_CurrentTraits,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_Attributes_ValueProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_Attributes_Key_KeyProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_Attributes,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_Actions_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_Actions,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_Traits_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_Traits,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_Reputation_ValueProp,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_Reputation_Key_KeyProp,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UEntityComponent_Statics::NewProp_Reputation,
@@ -525,10 +661,10 @@ struct Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_Pro
 		{ FFactionStatus::StaticStruct, Z_Construct_UScriptStruct_FFactionStatus_Statics::NewStructOps, TEXT("FactionStatus"), &Z_Registration_Info_UScriptStruct_FactionStatus, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FFactionStatus), 4101709380U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UEntityComponent, UEntityComponent::StaticClass, TEXT("UEntityComponent"), &Z_Registration_Info_UClass_UEntityComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UEntityComponent), 2350053726U) },
+		{ Z_Construct_UClass_UEntityComponent, UEntityComponent::StaticClass, TEXT("UEntityComponent"), &Z_Registration_Info_UClass_UEntityComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UEntityComponent), 3118306488U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_543830272(TEXT("/Script/ProjectEclipse"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_2885602905(TEXT("/Script/ProjectEclipse"),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityComponent_h_Statics::ScriptStructInfo),
 	nullptr, 0);

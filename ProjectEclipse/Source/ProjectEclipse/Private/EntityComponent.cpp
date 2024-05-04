@@ -2,6 +2,7 @@
 
 
 #include "EntityComponent.h"
+#include "EntityAction.h"
 
 // Sets default values for this component's properties
 UEntityComponent::UEntityComponent()
@@ -19,24 +20,6 @@ void UEntityComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// Set up default attributes with default values
-	AttributeValues.Empty();
-	for (TSubclassOf<UEntityAttribute> Subclass : DefaultAttributes)
-	{
-		UEntityAttribute* Attribute = NewObject<UEntityAttribute>(this, Subclass->GetAuthoritativeClass());
-		if (Attribute == nullptr) continue;
-		int AttributeLevel = Attribute->GetDefault(); // to-do: loading from save
-		AttributeValues.Add(Attribute, AttributeLevel);
-	}
-
-	// Set up default traits
-	CurrentTraits.Empty();
-	for (TSubclassOf<UTrait> Subclass : DefaultTraits)
-	{
-		UTrait* Trait = NewObject<UTrait>(this, Subclass->GetAuthoritativeClass());
-		if (Trait != nullptr) CurrentTraits.Add(Trait);
-	}
-
 }
 
 
@@ -50,15 +33,16 @@ void UEntityComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 bool UEntityComponent::HasAttribute(FString ID)
 {
-	if (AttributeValues.IsEmpty())
+	if (Attributes.IsEmpty())
 	{
 		UE_LOG(LogTemp, Warning, TEXT("%s Entity does not have any attributes"), *GetOwner()->GetName());
 		return false;
 	}
 
-	for (const auto& Pair : AttributeValues)
+	for (const auto& Pair : Attributes)
 	{
-		UEntityAttribute* Attribute = Pair.Key;
+		TSubclassOf<UEntityAttribute> AttributeClass = Pair.Key;
+		UEntityAttribute* Attribute = NewObject<UEntityAttribute>(this, AttributeClass->GetAuthoritativeClass());
 		if (Attribute != nullptr && Attribute->IsID(ID)) return true;
 	}
 
@@ -66,21 +50,43 @@ bool UEntityComponent::HasAttribute(FString ID)
 	return false;
 }
 
-int UEntityComponent::GetAttributeValue(FString ID)
+TSubclassOf<UEntityAttribute> UEntityComponent::GetAttribute(FString ID)
 {
 	if (!HasAttribute(ID))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("%s Entity does not have the given attribute %s"), *GetOwner()->GetName(), *ID);
-		return 0;
+		return nullptr;
 	}
 
-	for (const auto& Pair : AttributeValues)
+	for (const auto& Pair : Attributes)
 	{
-		UEntityAttribute* Attribute = Pair.Key;
-		if (Attribute != nullptr && Attribute->IsID(ID)) return Pair.Value;
+		TSubclassOf<UEntityAttribute> AttributeClass = Pair.Key;
+		UEntityAttribute* Attribute = NewObject<UEntityAttribute>(this, AttributeClass->GetAuthoritativeClass());
+		if (Attribute != nullptr && Attribute->IsID(ID)) return AttributeClass;
 	}
 
-	return 0;
+	UE_LOG(LogTemp, Warning, TEXT("%s Entity does not have the requested attribute %s"), *GetOwner()->GetName(), *ID);
+	return nullptr;
+}
+
+int UEntityComponent::GetAttributeValue(FString ID)
+{
+	TSubclassOf<UEntityAttribute> AttributeClass = GetAttribute(ID);
+	return AttributeClass != nullptr ? Attributes[AttributeClass] : 0;
+}
+
+bool UEntityComponent::HasAction(FString ID)
+{
+	return GetAction(ID) != nullptr;
+}
+
+TSubclassOf<UEntityAction> UEntityComponent::GetAction(FString ID)
+{
+	return *Actions.FindByPredicate([this, ID](TSubclassOf<UEntityAction> ActionClass) -> bool
+		{
+			UEntityAction* Action = NewObject<UEntityAction>(this, ActionClass->GetAuthoritativeClass());
+			return Action != nullptr && Action->IsID(ID);
+		});
 }
 
 bool UEntityComponent::HasTrait(FString ID)
@@ -88,12 +94,13 @@ bool UEntityComponent::HasTrait(FString ID)
 	return GetTrait(ID) != nullptr;
 }
 
-UTrait* UEntityComponent::GetTrait(FString ID)
+TSubclassOf<UTrait> UEntityComponent::GetTrait(FString ID)
 {
-	return *CurrentTraits.FindByPredicate([ID](UTrait* Trait) -> bool
-	{
-		return Trait->IsID(ID);
-	});
+	return *Traits.FindByPredicate([this, ID](TSubclassOf<UTrait> TraitClass) -> bool
+		{
+			UTrait* Trait = NewObject<UTrait>(this, TraitClass->GetAuthoritativeClass());
+			return Trait != nullptr && Trait->IsID(ID);
+		});
 }
 
 FFactionStatus UEntityComponent::GetReputation(FString ID)
@@ -106,7 +113,8 @@ FFactionStatus UEntityComponent::GetReputation(FString ID)
 
 	for (const auto& Pair : Reputation)
 	{
-		UFaction* Faction = Pair.Key;
+		TSubclassOf<UFaction> FactionClass = Pair.Key;
+		UFaction* Faction = NewObject<UFaction>(this, FactionClass->GetAuthoritativeClass());
 		if (Faction != nullptr && Faction->IsID(ID)) return Pair.Value;
 	}
 

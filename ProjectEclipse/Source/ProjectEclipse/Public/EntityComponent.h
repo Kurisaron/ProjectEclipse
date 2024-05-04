@@ -9,6 +9,7 @@
 #include "Faction.h"
 #include "EntityComponent.generated.h"
 
+class UEntityAction;
 
 USTRUCT(BlueprintType)
 struct FFactionStatus
@@ -31,29 +32,21 @@ class PROJECTECLIPSE_API UEntityComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-	/** Default attributes for character */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stats|Attributes", meta = (AllowPrivateAccess = "true"))
-	TArray<TSubclassOf<UEntityAttribute>> DefaultAttributes;
-
 	/** Current values for various attributes */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stats|Attributes", meta = (AllowPrivateAccess = "true"))
-	TMap<UEntityAttribute*, int> AttributeValues;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stats", meta = (AllowPrivateAccess = "true"))
+	TMap<TSubclassOf<UEntityAttribute>, int> Attributes;
 
+	/** Actions that the entity can perform */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stats", meta = (AllowPrivateAccess = "true"))
+	TArray<TSubclassOf<UEntityAction>> Actions;
 
-
-	/** Default traits for character */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stats|Traits", meta = (AllowPrivateAccess = "true"))
-	TArray<TSubclassOf<UTrait>> DefaultTraits;
-
-	/** Current traits held by character */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stats|Traits", meta = (AllowPrivateAccess = "true"))
-	TArray<UTrait*> CurrentTraits;
-
-
+	/** Traits held by entity */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stats|Traits", meta = (AllowPrivateAccess = "true"))
+	TArray<TSubclassOf<UTrait>> Traits;
 
 	/** Current relationships with factions */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stats|Factions", meta = (AllowPrivateAccess = "true"))
-	TMap<UFaction*, FFactionStatus> Reputation;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stats|Factions", meta = (AllowPrivateAccess = "true"))
+	TMap<TSubclassOf<UFaction>, FFactionStatus> Reputation;
 
 public:	
 	// Sets default values for this component's properties
@@ -67,17 +60,28 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+
+
 	UFUNCTION(BlueprintPure, Category = "Stats|Attributes")
 	bool HasAttribute(FString ID);
 
 	UFUNCTION(BlueprintPure, Category = "Stats|Attributes")
+	TSubclassOf<UEntityAttribute> GetAttribute(FString ID);
+
+	UFUNCTION(BlueprintPure, Category = "Stats|Attributes")
 	int GetAttributeValue(FString ID);
+
+	UFUNCTION(BlueprintPure, Category = "Stats|Actions")
+	bool HasAction(FString ID);
+
+	UFUNCTION(BlueprintPure, Category = "Stats|Actions")
+	TSubclassOf<UEntityAction> GetAction(FString ID);
 
 	UFUNCTION(BlueprintPure, Category = "Stats|Traits")
 	bool HasTrait(FString ID);
 
 	UFUNCTION(BlueprintPure, Category = "Stats|Traits")
-	UTrait* GetTrait(FString ID);
+	TSubclassOf<UTrait> GetTrait(FString ID);
 
 	UFUNCTION(BlueprintPure, Category = "Stats|Factions")
 	FFactionStatus GetReputation(FString ID);

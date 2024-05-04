@@ -8,9 +8,9 @@ UEntityAttribute::UEntityAttribute()
 	DisplayName = "";
 	ID = "";
 
-	MinimumValue = 0;
+	MinimumValue = -99;
 	MaximumValue = 99;
-	DefaultValue = 10;
+	DefaultValue = 0;
 }
 
 FString UEntityAttribute::GetDisplayName()

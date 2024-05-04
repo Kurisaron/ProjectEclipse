@@ -17,7 +17,7 @@ class PROJECTECLIPSE_API UEntityAttribute : public UObject
 	/** Name that will be used for game UI */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Names", meta = (AllowPrivateAccess = "true"))
 	FString DisplayName;
-	/** Name used to help check for matches */
+	/** ID used to help check for matches */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Names", meta = (AllowPrivateAccess = "true"))
 	FString ID;
 

@@ -26,10 +26,11 @@ template<> PROJECTECLIPSE_API UScriptStruct* StaticStruct<struct FFactionRank>()
 #define FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_Faction_h_28_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execHasRank); \
 	DECLARE_FUNCTION(execGetRank); \
+	DECLARE_FUNCTION(execHasTag); \
+	DECLARE_FUNCTION(execGetTags); \
 	DECLARE_FUNCTION(execIsID); \
 	DECLARE_FUNCTION(execGetID); \
 	DECLARE_FUNCTION(execGetDisplayName); \
-	DECLARE_FUNCTION(execGetCategory); \
 	DECLARE_FUNCTION(execGetIcon);
 
 

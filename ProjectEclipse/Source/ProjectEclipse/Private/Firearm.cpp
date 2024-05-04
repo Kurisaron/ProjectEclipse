@@ -16,9 +16,9 @@ void UFirearm::Load()
 {
 	if (PrimaryCycle.Num() <= 0) return;
 
-	CurrentPrimaryMode = NewObject<UFirearmMode>(this, PrimaryCycle[0]->GetAuthoritativeClass());
-	if (DefaultSecondaryMode != nullptr) CurrentSecondaryMode = NewObject<UFirearmMode>(this, DefaultSecondaryMode->GetAuthoritativeClass());
-	if (DefaultAlternateMode != nullptr) CurrentAlternateMode = NewObject<UFirearmMode>(this, DefaultAlternateMode->GetAuthoritativeClass());
+	CurrentPrimaryMode = PrimaryCycle[0];
+	if (DefaultSecondaryMode != nullptr) CurrentSecondaryMode = DefaultSecondaryMode;
+	if (DefaultAlternateMode != nullptr) CurrentAlternateMode = DefaultAlternateMode;
 }
 
 void UFirearm::Equip(UEquipmentComponent* NewWielder)
@@ -62,8 +62,9 @@ void UFirearm::PrimaryUse_Implementation(bool Pressed, float PressedTime)
 	Super::PrimaryUse_Implementation(Pressed, PressedTime);
 
 	UEquipmentComponent* MyWielder = GetWielder();
-	if (CurrentPrimaryMode != nullptr)
-		CurrentPrimaryMode->Fire(MyWielder, Pressed, PressedTime);
+	UFirearmMode* Primary = NewObject<UFirearmMode>(this, CurrentPrimaryMode->GetAuthoritativeClass());
+	if (Primary != nullptr)
+		Primary->Fire(MyWielder, Pressed, PressedTime);
 
 }
 
@@ -72,7 +73,7 @@ void UFirearm::CyclePrimary()
 	int32 index = PrimaryCycle.IndexOfByKey(CurrentPrimaryMode->GetClass());
 	index += 1;
 	if (index >= PrimaryCycle.Num()) index = 0;
-	CurrentPrimaryMode = NewObject<UFirearmMode>(this, PrimaryCycle[index]->GetAuthoritativeClass());
+	CurrentPrimaryMode = PrimaryCycle[index];
 }
 
 void UFirearm::SecondaryUse_Implementation(bool Pressed, float PressedTime)
@@ -81,7 +82,10 @@ void UFirearm::SecondaryUse_Implementation(bool Pressed, float PressedTime)
 
 	UEquipmentComponent* ThisWielder = GetWielder();
 	if (CurrentSecondaryMode != nullptr)
-		CurrentSecondaryMode->Fire(ThisWielder, Pressed, PressedTime);
+	{
+		UFirearmMode* Secondary = NewObject<UFirearmMode>(this, CurrentSecondaryMode->GetAuthoritativeClass());
+		if (Secondary != nullptr) Secondary->Fire(ThisWielder, Pressed, PressedTime);
+	}
 	else
 	{
 		AProjectEclipseCharacter* WieldingCharacter = ThisWielder->GetWieldingCharacter();
@@ -104,7 +108,10 @@ void UFirearm::AlternateUse_Implementation(bool Pressed, float PressedTime)
 
 	UEquipmentComponent* MyWielder = GetWielder();
 	if (CurrentAlternateMode != nullptr)
-		CurrentAlternateMode->Fire(MyWielder, Pressed, PressedTime);
+	{
+		UFirearmMode* Alternate = NewObject<UFirearmMode>(this, CurrentAlternateMode->GetAuthoritativeClass());
+		if (Alternate != nullptr) Alternate->Fire(MyWielder, Pressed, PressedTime);
+	}
 	else
 	{
 		if (!Pressed) return;

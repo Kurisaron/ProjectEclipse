@@ -322,11 +322,11 @@ struct Z_Construct_UClass_UEntityAttribute_Statics
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Names" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Name used to help check for matches */" },
+		{ "Comment", "/** ID used to help check for matches */" },
 #endif
 		{ "ModuleRelativePath", "Public/EntityAttribute.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Name used to help check for matches" },
+		{ "ToolTip", "ID used to help check for matches" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MinimumValue_MetaData[] = {
@@ -437,10 +437,10 @@ UEntityAttribute::~UEntityAttribute() {}
 struct Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityAttribute_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UEntityAttribute, UEntityAttribute::StaticClass, TEXT("UEntityAttribute"), &Z_Registration_Info_UClass_UEntityAttribute, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UEntityAttribute), 2393491744U) },
+		{ Z_Construct_UClass_UEntityAttribute, UEntityAttribute::StaticClass, TEXT("UEntityAttribute"), &Z_Registration_Info_UClass_UEntityAttribute, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UEntityAttribute), 1104664429U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityAttribute_h_2489028922(TEXT("/Script/ProjectEclipse"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityAttribute_h_3239402288(TEXT("/Script/ProjectEclipse"),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityAttribute_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_EntityAttribute_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

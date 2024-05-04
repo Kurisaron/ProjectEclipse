@@ -291,6 +291,101 @@ DEFINE_FUNCTION(UTrait::execGetID)
 }
 // End Class UTrait Function GetID
 
+// Begin Class UTrait Function GetTags
+struct Z_Construct_UFunction_UTrait_GetTags_Statics
+{
+	struct Trait_eventGetTags_Parms
+	{
+		TArray<FString> ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Trait.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FStrPropertyParams NewProp_ReturnValue_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UTrait_GetTags_Statics::NewProp_ReturnValue_Inner = { "ReturnValue", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UTrait_GetTags_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(Trait_eventGetTags_Parms, ReturnValue), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UTrait_GetTags_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UTrait_GetTags_Statics::NewProp_ReturnValue_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UTrait_GetTags_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UTrait_GetTags_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UTrait_GetTags_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UTrait, nullptr, "GetTags", nullptr, nullptr, Z_Construct_UFunction_UTrait_GetTags_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UTrait_GetTags_Statics::PropPointers), sizeof(Z_Construct_UFunction_UTrait_GetTags_Statics::Trait_eventGetTags_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UTrait_GetTags_Statics::Function_MetaDataParams), Z_Construct_UFunction_UTrait_GetTags_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UTrait_GetTags_Statics::Trait_eventGetTags_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UTrait_GetTags()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UTrait_GetTags_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UTrait::execGetTags)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(TArray<FString>*)Z_Param__Result=P_THIS->GetTags();
+	P_NATIVE_END;
+}
+// End Class UTrait Function GetTags
+
+// Begin Class UTrait Function HasTag
+struct Z_Construct_UFunction_UTrait_HasTag_Statics
+{
+	struct Trait_eventHasTag_Parms
+	{
+		FString Tag;
+		bool ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Trait.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FStrPropertyParams NewProp_Tag;
+	static void NewProp_ReturnValue_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UTrait_HasTag_Statics::NewProp_Tag = { "Tag", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(Trait_eventHasTag_Parms, Tag), METADATA_PARAMS(0, nullptr) };
+void Z_Construct_UFunction_UTrait_HasTag_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+{
+	((Trait_eventHasTag_Parms*)Obj)->ReturnValue = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UTrait_HasTag_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(Trait_eventHasTag_Parms), &Z_Construct_UFunction_UTrait_HasTag_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UTrait_HasTag_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UTrait_HasTag_Statics::NewProp_Tag,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UTrait_HasTag_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UTrait_HasTag_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UTrait_HasTag_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UTrait, nullptr, "HasTag", nullptr, nullptr, Z_Construct_UFunction_UTrait_HasTag_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UTrait_HasTag_Statics::PropPointers), sizeof(Z_Construct_UFunction_UTrait_HasTag_Statics::Trait_eventHasTag_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UTrait_HasTag_Statics::Function_MetaDataParams), Z_Construct_UFunction_UTrait_HasTag_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UTrait_HasTag_Statics::Trait_eventHasTag_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UTrait_HasTag()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UTrait_HasTag_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UTrait::execHasTag)
+{
+	P_GET_PROPERTY(FStrProperty,Z_Param_Tag);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(bool*)Z_Param__Result=P_THIS->HasTag(Z_Param_Tag);
+	P_NATIVE_END;
+}
+// End Class UTrait Function HasTag
+
 // Begin Class UTrait Function IsID
 struct Z_Construct_UFunction_UTrait_IsID_Statics
 {
@@ -400,6 +495,8 @@ void UTrait::StaticRegisterNativesUTrait()
 		{ "ApplyTrait", &UTrait::execApplyTrait },
 		{ "GetDisplayName", &UTrait::execGetDisplayName },
 		{ "GetID", &UTrait::execGetID },
+		{ "GetTags", &UTrait::execGetTags },
+		{ "HasTag", &UTrait::execHasTag },
 		{ "IsID", &UTrait::execIsID },
 		{ "RemoveTrait", &UTrait::execRemoveTrait },
 	};
@@ -463,11 +560,22 @@ struct Z_Construct_UClass_UTrait_Statics
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Names" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Name used to help check for matches */" },
+		{ "Comment", "/** ID used to help check for matches */" },
 #endif
 		{ "ModuleRelativePath", "Public/Trait.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Name used to help check for matches" },
+		{ "ToolTip", "ID used to help check for matches" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Tags_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Names" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** Tags used by the system to check for categories/types the trait might fall under */" },
+#endif
+		{ "ModuleRelativePath", "Public/Trait.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Tags used by the system to check for categories/types the trait might fall under" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AttributeModifiers_MetaData[] = {
@@ -486,6 +594,8 @@ struct Z_Construct_UClass_UTrait_Statics
 	static const UECodeGen_Private::FStructPropertyParams NewProp_BackgroundColor;
 	static const UECodeGen_Private::FStrPropertyParams NewProp_DisplayName;
 	static const UECodeGen_Private::FStrPropertyParams NewProp_ID;
+	static const UECodeGen_Private::FStrPropertyParams NewProp_Tags_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_Tags;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_AttributeModifiers_Inner;
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_AttributeModifiers;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -494,6 +604,8 @@ struct Z_Construct_UClass_UTrait_Statics
 		{ &Z_Construct_UFunction_UTrait_ApplyTrait, "ApplyTrait" }, // 1034616548
 		{ &Z_Construct_UFunction_UTrait_GetDisplayName, "GetDisplayName" }, // 4163669402
 		{ &Z_Construct_UFunction_UTrait_GetID, "GetID" }, // 1937159939
+		{ &Z_Construct_UFunction_UTrait_GetTags, "GetTags" }, // 2457173193
+		{ &Z_Construct_UFunction_UTrait_HasTag, "HasTag" }, // 48933044
 		{ &Z_Construct_UFunction_UTrait_IsID, "IsID" }, // 685780191
 		{ &Z_Construct_UFunction_UTrait_RemoveTrait, "RemoveTrait" }, // 2069740036
 	};
@@ -507,6 +619,8 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UTrait_Statics
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UTrait_Statics::NewProp_BackgroundColor = { "BackgroundColor", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UTrait, BackgroundColor), Z_Construct_UScriptStruct_FColor, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BackgroundColor_MetaData), NewProp_BackgroundColor_MetaData) };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UTrait_Statics::NewProp_DisplayName = { "DisplayName", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UTrait, DisplayName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DisplayName_MetaData), NewProp_DisplayName_MetaData) };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UTrait_Statics::NewProp_ID = { "ID", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UTrait, ID), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ID_MetaData), NewProp_ID_MetaData) };
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UTrait_Statics::NewProp_Tags_Inner = { "Tags", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UTrait_Statics::NewProp_Tags = { "Tags", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UTrait, Tags), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Tags_MetaData), NewProp_Tags_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UTrait_Statics::NewProp_AttributeModifiers_Inner = { "AttributeModifiers", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FAttributeModifier, METADATA_PARAMS(0, nullptr) }; // 1373709932
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UTrait_Statics::NewProp_AttributeModifiers = { "AttributeModifiers", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UTrait, AttributeModifiers), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AttributeModifiers_MetaData), NewProp_AttributeModifiers_MetaData) }; // 1373709932
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UTrait_Statics::PropPointers[] = {
@@ -514,6 +628,8 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UTrait_St
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTrait_Statics::NewProp_BackgroundColor,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTrait_Statics::NewProp_DisplayName,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTrait_Statics::NewProp_ID,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTrait_Statics::NewProp_Tags_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTrait_Statics::NewProp_Tags,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTrait_Statics::NewProp_AttributeModifiers_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTrait_Statics::NewProp_AttributeModifiers,
 };
@@ -564,10 +680,10 @@ struct Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_Pro
 		{ FAttributeModifier::StaticStruct, Z_Construct_UScriptStruct_FAttributeModifier_Statics::NewStructOps, TEXT("AttributeModifier"), &Z_Registration_Info_UScriptStruct_AttributeModifier, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FAttributeModifier), 1373709932U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UTrait, UTrait::StaticClass, TEXT("UTrait"), &Z_Registration_Info_UClass_UTrait, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UTrait), 63482514U) },
+		{ Z_Construct_UClass_UTrait, UTrait::StaticClass, TEXT("UTrait"), &Z_Registration_Info_UClass_UTrait, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UTrait), 1242088736U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_Trait_h_3631215391(TEXT("/Script/ProjectEclipse"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_Trait_h_2693220060(TEXT("/Script/ProjectEclipse"),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_Trait_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_Trait_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_Trait_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_Trait_h_Statics::ScriptStructInfo),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_Trait_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipse_Source_ProjectEclipse_Public_Trait_h_Statics::EnumInfo));
