@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "ProjectEclipseVR",
+			"Path": "..\\Source\\ProjectEclipseVR.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "ProjectEclipseVREditor",
+			"Path": "..\\Source\\ProjectEclipseVREditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

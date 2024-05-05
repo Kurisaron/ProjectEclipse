@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"D:\\Github\\ProjectEclipse\\ProjectEclipseVR\\Source\\ProjectEclipseVR\\ProjectEclipseVR.Build.cs",
+		"D:\\Github\\ProjectEclipse\\ProjectEclipseVR\\Source\\ProjectEclipseVR.Target.cs",
+		"D:\\Github\\ProjectEclipse\\ProjectEclipseVR\\Source\\ProjectEclipseVREditor.Target.cs"
+	],
+	"EngineVersion": "5.4.1"
+}
