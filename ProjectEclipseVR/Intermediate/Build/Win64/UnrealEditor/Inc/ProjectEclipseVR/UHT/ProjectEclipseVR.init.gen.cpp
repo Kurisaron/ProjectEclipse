@@ -17,13 +17,13 @@ void EmptyLinkFunctionForGeneratedCodeProjectEclipseVR_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0x74571648,
-				0xA4D19C06,
+				0xDBEA36C7,
+				0xCC5080C3,
 				METADATA_PARAMS(0, nullptr)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_ProjectEclipseVR.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_ProjectEclipseVR.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_ProjectEclipseVR(Z_Construct_UPackage__Script_ProjectEclipseVR, TEXT("/Script/ProjectEclipseVR"), Z_Registration_Info_UPackage__Script_ProjectEclipseVR, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x74571648, 0xA4D19C06));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_ProjectEclipseVR(Z_Construct_UPackage__Script_ProjectEclipseVR, TEXT("/Script/ProjectEclipseVR"), Z_Registration_Info_UPackage__Script_ProjectEclipseVR, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xDBEA36C7, 0xCC5080C3));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

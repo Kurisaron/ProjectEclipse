@@ -2,6 +2,9 @@
 
 
 #include "EntityComponent.h"
+#include "EntityAttribute.h"
+#include "Trait.h"
+#include "Faction.h"
 
 // Sets default values for this component's properties
 UEntityComponent::UEntityComponent()
@@ -32,3 +35,15 @@ void UEntityComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	// ...
 }
 
+TMap<TSubclassOf<UEntityAttribute>, int> UEntityComponent::GetAttributes() { return Attributes; }
+
+TArray<TSubclassOf<UEntityAttribute>> UEntityComponent::GetAttributeTypes()
+{
+	TArray<TSubclassOf<UEntityAttribute>> List;
+	for (const auto& Pair : Attributes)
+	{
+		TSubclassOf<UEntityAttribute> Attribute = Pair.Key;
+		if (Attribute != nullptr) List.Add(Attribute);
+	}
+	return List;
+}

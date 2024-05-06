@@ -11,6 +11,7 @@
     <None Include="..\..\Source\ProjectEclipseVREditor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\.vsconfig" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -47,13 +48,55 @@
     <Filter Include="Source\ProjectEclipseVR\Private">
       <UniqueIdentifier>{CFC101E2-F546-3CC6-9EBD-08CF9D42B770}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\EntityAttribute.cpp">
+      <Filter>Source\ProjectEclipseVR\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\EntityComponent.cpp">
+      <Filter>Source\ProjectEclipseVR\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\Equipment.cpp">
+      <Filter>Source\ProjectEclipseVR\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\Faction.cpp">
+      <Filter>Source\ProjectEclipseVR\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\GripComponent.cpp">
+      <Filter>Source\ProjectEclipseVR\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\Item.cpp">
+      <Filter>Source\ProjectEclipseVR\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\Trait.cpp">
+      <Filter>Source\ProjectEclipseVR\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\Weapon.cpp">
       <Filter>Source\ProjectEclipseVR\Private</Filter>
     </ClCompile>
     <Filter Include="Source\ProjectEclipseVR\Public">
       <UniqueIdentifier>{016C5AB8-6C68-3FCD-B508-77EEB08F1E79}</UniqueIdentifier>
     </Filter>
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\EntityAttribute.h">
+      <Filter>Source\ProjectEclipseVR\Public</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\EntityComponent.h">
+      <Filter>Source\ProjectEclipseVR\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Equipment.h">
+      <Filter>Source\ProjectEclipseVR\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Faction.h">
+      <Filter>Source\ProjectEclipseVR\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\GripComponent.h">
+      <Filter>Source\ProjectEclipseVR\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Item.h">
+      <Filter>Source\ProjectEclipseVR\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Trait.h">
+      <Filter>Source\ProjectEclipseVR\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Weapon.h">
       <Filter>Source\ProjectEclipseVR\Public</Filter>
     </ClInclude>
   </ItemGroup>

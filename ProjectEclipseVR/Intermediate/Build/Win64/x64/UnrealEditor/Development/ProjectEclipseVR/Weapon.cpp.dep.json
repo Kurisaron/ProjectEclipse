@@ -1,0 +1,31 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\github\\projecteclipse\\projecteclipsevr\\source\\projecteclipsevr\\private\\weapon.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\x64\\projecteclipsevreditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.inclorderoldest.h.pch",
+        "Includes": [
+            "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\projecteclipsevr\\definitions.projecteclipsevr.h",
+            "d:\\github\\projecteclipse\\projecteclipsevr\\source\\projecteclipsevr\\public\\weapon.h",
+            "d:\\github\\projecteclipse\\projecteclipsevr\\source\\projecteclipsevr\\public\\equipment.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\inputmappingcontext.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\enhancedactionkeymapping.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\inputaction.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\inputmodifiers.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\inputactionvalue.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\inputactionvalue.generated.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\inputmodifiers.generated.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\source\\enhancedinput\\public\\inputtriggers.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\inputtriggers.generated.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\inputaction.generated.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\enhancedactionkeymapping.generated.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\plugins\\enhancedinput\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedinput\\uht\\inputmappingcontext.generated.h",
+            "d:\\github\\projecteclipse\\projecteclipsevr\\source\\projecteclipsevr\\public\\item.h",
+            "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipsevr\\uht\\item.generated.h",
+            "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipsevr\\uht\\equipment.generated.h",
+            "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipsevr\\uht\\weapon.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

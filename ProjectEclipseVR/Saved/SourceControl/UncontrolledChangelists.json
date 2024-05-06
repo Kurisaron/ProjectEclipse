@@ -5,7 +5,17 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
-				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/StarterContent/Architecture/Floor_400x400.uasset"
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/StarterContent/Architecture/Floor_400x400.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/VRTemplate/Blueprints/VRPawn.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/VRTemplate/Blueprints/Pistol.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/VRTemplate/Blueprints/Projectile.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Items/Equipment/Weapons/TestSword/BroadSword1.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Items/Equipment/Weapons/TestSword/BroadSword.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Items/Equipment/Weapons/TestSword/BroadSword_BaseColor.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Items/Equipment/Weapons/TestSword/BroadSword_Metallic.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Items/Equipment/Weapons/TestSword/BroadSword_Normal.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Items/Equipment/Weapons/TestSword/BroadSword_Roughness.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/VRTemplate/Maps/VRTemplateMap.umap"
 			]
 		}
 	]

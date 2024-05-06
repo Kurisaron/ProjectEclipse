@@ -1,0 +1,17 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipsevr\\uht\\gripcomponent.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\x64\\projecteclipsevreditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.inclorderoldest.h.pch",
+        "Includes": [
+            "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\projecteclipsevr\\definitions.projecteclipsevr.h",
+            "d:\\github\\projecteclipse\\projecteclipsevr\\source\\projecteclipsevr\\public\\gripcomponent.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\haptics\\hapticfeedbackeffect_base.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\hapticfeedbackeffect_base.generated.h",
+            "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipsevr\\uht\\gripcomponent.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
