@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GripComponent.h"
 #include "Item.generated.h"
 
 class UEntityComponent;
@@ -56,6 +57,12 @@ class PROJECTECLIPSEVR_API AItem : public AActor
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Item|Wielder", meta = (AllowPrivateAccess = "true"))
 	FItemWielderStatus Wielder;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Grips", meta = (AllowPrivateAccess = "true"))
+	UGripComponent* MainGrip;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Grips", meta = (AllowPrivateAccess = "true"))
+	TMap<FString, UGripComponent*> AdditionalGrips;
 
 public:	
 	// Sets default values for this actor's properties
@@ -72,4 +79,7 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Item|Data")
 	virtual FItemData GetItemData();
 
+	UGripComponent* GetMainGrip();
+
+	UGripComponent* GetAdditionalGrip(FString Key);
 };

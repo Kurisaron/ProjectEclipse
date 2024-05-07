@@ -9,12 +9,30 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class UMotionControllerComponent;
+enum class EControllerHand : uint8;
 #ifdef PROJECTECLIPSEVR_GripComponent_generated_h
 #error "GripComponent.generated.h already included, missing '#pragma once' in GripComponent.h"
 #endif
 #define PROJECTECLIPSEVR_GripComponent_generated_h
 
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_25_INCLASS_NO_PURE_DECLS \
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_11_DELEGATE \
+PROJECTECLIPSEVR_API void FGripGrabEvent_DelegateWrapper(const FMulticastScriptDelegate& GripGrabEvent);
+
+
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_12_DELEGATE \
+PROJECTECLIPSEVR_API void FGripReleaseEvent_DelegateWrapper(const FMulticastScriptDelegate& GripReleaseEvent);
+
+
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_27_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execGetHeldByHand); \
+	DECLARE_FUNCTION(execSetPrimitiveCompPhysics); \
+	DECLARE_FUNCTION(execSetShouldSimulateOnDrop); \
+	DECLARE_FUNCTION(execTryRelease); \
+	DECLARE_FUNCTION(execTryGrab);
+
+
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_27_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUGripComponent(); \
 	friend struct Z_Construct_UClass_UGripComponent_Statics; \
@@ -23,7 +41,7 @@ public: \
 	DECLARE_SERIALIZER(UGripComponent)
 
 
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_25_ENHANCED_CONSTRUCTORS \
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_27_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	UGripComponent(UGripComponent&&); \
@@ -35,12 +53,13 @@ public: \
 	NO_API virtual ~UGripComponent();
 
 
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_22_PROLOG
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_25_GENERATED_BODY \
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_24_PROLOG
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_27_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_25_INCLASS_NO_PURE_DECLS \
-	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_25_ENHANCED_CONSTRUCTORS \
+	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_27_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_27_INCLASS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_27_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

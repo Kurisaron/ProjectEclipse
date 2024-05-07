@@ -28,3 +28,13 @@ void AItem::Tick(float DeltaTime)
 }
 
 FItemData AItem::GetItemData() { return ItemData; }
+
+UGripComponent* AItem::GetMainGrip() { return MainGrip; }
+
+UGripComponent* AItem::GetAdditionalGrip(FString Key)
+{
+	if (AdditionalGrips.IsEmpty())
+		return nullptr;
+
+	return AdditionalGrips[Key];
+}

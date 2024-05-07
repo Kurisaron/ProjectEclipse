@@ -15,7 +15,8 @@
 				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Items/Equipment/Weapons/TestSword/BroadSword_Metallic.uasset",
 				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Items/Equipment/Weapons/TestSword/BroadSword_Normal.uasset",
 				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Items/Equipment/Weapons/TestSword/BroadSword_Roughness.uasset",
-				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/VRTemplate/Maps/VRTemplateMap.umap"
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/VRTemplate/Maps/VRTemplateMap.umap",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/VRTemplate/Blueprints/GrabComponent.uasset"
 			]
 		}
 	]
