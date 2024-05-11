@@ -1,8 +1,10 @@
-D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\EntityAttribute.h
-D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\Equipment.h
-D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\Faction.h
-D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\EntityComponent.h
-D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\GripComponent.h
-D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\Trait.h
-D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\Weapon.h
+D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\EntityPawn.h
 D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\Item.h
+D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\Trait.h
+D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\EntityComponent.h
+D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\EntityAttribute.h
+D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\Faction.h
+D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\Equipment.h
+D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\VREntityPawn.h
+D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\GripComponent.h
+D:\Github\ProjectEclipse\ProjectEclipseVR\Source\ProjectEclipseVR\Public\Weapon.h

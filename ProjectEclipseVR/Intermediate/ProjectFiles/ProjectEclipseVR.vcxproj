@@ -269,6 +269,9 @@
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\EntityComponent.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\EntityPawn.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\Equipment.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -284,16 +287,21 @@
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\Trait.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VREntityPawn.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\Weapon.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\EntityAttribute.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\EntityComponent.h"/>
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\EntityPawn.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Equipment.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Faction.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\GripComponent.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Item.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Trait.h"/>
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VREntityPawn.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Weapon.h"/>
   </ItemGroup>
   <PropertyGroup>

@@ -16,7 +16,12 @@
 				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Items/Equipment/Weapons/TestSword/BroadSword_Normal.uasset",
 				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Items/Equipment/Weapons/TestSword/BroadSword_Roughness.uasset",
 				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/VRTemplate/Maps/VRTemplateMap.umap",
-				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/VRTemplate/Blueprints/GrabComponent.uasset"
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/VRTemplate/Blueprints/GrabComponent.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Characters/MannequinsXR/Materials/Instances/Manny/MI_Manny_02.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Player/BP_VREntityPawn.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/VRTemplate/Blueprints/VRGameMode.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/VRTemplate/Blueprints/Grabbable_SmallCube.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Misc/WorldGridMat.uasset"
 			]
 		}
 	]

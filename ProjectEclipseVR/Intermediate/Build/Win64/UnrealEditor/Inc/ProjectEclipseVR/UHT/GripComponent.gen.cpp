@@ -421,12 +421,10 @@ struct Z_Construct_UClass_UGripComponent_Statics
 		{ "ModuleRelativePath", "Public/GripComponent.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnGrabbed_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Events" },
 		{ "ModuleRelativePath", "Public/GripComponent.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnDropped_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Events" },
 		{ "ModuleRelativePath", "Public/GripComponent.h" },
 	};
@@ -474,8 +472,8 @@ const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UGripComponent_S
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_UGripComponent_Statics::NewProp_GripType_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_UGripComponent_Statics::NewProp_GripType = { "GripType", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UGripComponent, GripType), Z_Construct_UEnum_ProjectEclipseVR_EGripType, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_GripType_MetaData), NewProp_GripType_MetaData) }; // 2996865120
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UGripComponent_Statics::NewProp_OnGrabHapticEffect = { "OnGrabHapticEffect", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UGripComponent, OnGrabHapticEffect), Z_Construct_UClass_UHapticFeedbackEffect_Base_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnGrabHapticEffect_MetaData), NewProp_OnGrabHapticEffect_MetaData) };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UGripComponent_Statics::NewProp_OnGrabbed = { "OnGrabbed", nullptr, (EPropertyFlags)0x00401000100a0015, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UGripComponent, OnGrabbed), Z_Construct_UDelegateFunction_ProjectEclipseVR_GripGrabEvent__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnGrabbed_MetaData), NewProp_OnGrabbed_MetaData) }; // 1124112056
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UGripComponent_Statics::NewProp_OnDropped = { "OnDropped", nullptr, (EPropertyFlags)0x00401000100a0015, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UGripComponent, OnDropped), Z_Construct_UDelegateFunction_ProjectEclipseVR_GripReleaseEvent__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnDropped_MetaData), NewProp_OnDropped_MetaData) }; // 1929307175
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UGripComponent_Statics::NewProp_OnGrabbed = { "OnGrabbed", nullptr, (EPropertyFlags)0x0040100010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UGripComponent, OnGrabbed), Z_Construct_UDelegateFunction_ProjectEclipseVR_GripGrabEvent__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnGrabbed_MetaData), NewProp_OnGrabbed_MetaData) }; // 1124112056
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UGripComponent_Statics::NewProp_OnDropped = { "OnDropped", nullptr, (EPropertyFlags)0x0040100010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UGripComponent, OnDropped), Z_Construct_UDelegateFunction_ProjectEclipseVR_GripReleaseEvent__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnDropped_MetaData), NewProp_OnDropped_MetaData) }; // 1929307175
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UGripComponent_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UGripComponent_Statics::NewProp_MotionController,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UGripComponent_Statics::NewProp_PrimaryGrip,
@@ -532,10 +530,10 @@ struct Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_P
 		{ EGripType_StaticEnum, TEXT("EGripType"), &Z_Registration_Info_UEnum_EGripType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2996865120U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UGripComponent, UGripComponent::StaticClass, TEXT("UGripComponent"), &Z_Registration_Info_UClass_UGripComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UGripComponent), 328862038U) },
+		{ Z_Construct_UClass_UGripComponent, UGripComponent::StaticClass, TEXT("UGripComponent"), &Z_Registration_Info_UClass_UGripComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UGripComponent), 1038759392U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_2077842778(TEXT("/Script/ProjectEclipseVR"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_1903298229(TEXT("/Script/ProjectEclipseVR"),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_Statics::ClassInfo),
 	nullptr, 0,
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_Statics::EnumInfo));

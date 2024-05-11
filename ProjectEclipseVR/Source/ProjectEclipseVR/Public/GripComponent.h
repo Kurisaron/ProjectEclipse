@@ -47,9 +47,9 @@ class PROJECTECLIPSEVR_API UGripComponent : public USceneComponent
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UHapticFeedbackEffect_Base* OnGrabHapticEffect;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, BlueprintCallable, BlueprintAssignable, Category = "Events", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, Category = "Events")
 	FGripGrabEvent OnGrabbed;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, BlueprintCallable, BlueprintAssignable, Category = "Events", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, Category = "Events")
 	FGripReleaseEvent OnDropped;
 	
 
