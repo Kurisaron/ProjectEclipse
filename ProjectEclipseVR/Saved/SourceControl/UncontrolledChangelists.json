@@ -21,6 +21,10 @@
 				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Player/BP_VREntityPawn.uasset",
 				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/VRTemplate/Blueprints/VRGameMode.uasset",
 				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/VRTemplate/Blueprints/Grabbable_SmallCube.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/VRTemplate/Input/Actions/IA_Move.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/VRTemplate/Input/IMC_Default.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Player/BP_VREntityCharacter.uasset",
+				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Player/BP_VREntityCharacter.uasset",
 				"D:/Github/ProjectEclipse/ProjectEclipseVR/Content/Misc/WorldGridMat.uasset"
 			]
 		}

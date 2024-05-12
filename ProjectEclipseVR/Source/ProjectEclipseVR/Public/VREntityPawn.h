@@ -6,15 +6,29 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Camera/CameraComponent.h"
+#include "Components/SphereComponent.h"
+#include "GameFramework/PawnMovementComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "HeadMountedDisplayTypes.h"
 #include "IXRTrackingSystem.h"
 #include "MotionControllerComponent.h"
 #include "EntityPawn.h"
+#include "VRMovementComponent.h"
 #include "VREntityPawn.generated.h"
 
 class UGripComponent;
+
+USTRUCT(BlueprintType)
+struct FVRHandPoseData
+{
+	GENERATED_BODY()
+	
+	float Point = 0.0f;
+	float ThumbUp = 0.0f;
+	float Grasp = 0.0f;
+	float IndexCurl = 0.0f;
+};
 
 /**
  * 
@@ -24,11 +38,17 @@ class PROJECTECLIPSEVR_API AVREntityPawn : public AEntityPawn
 {
 	GENERATED_BODY()
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Origin", meta = (AllowPrivateAccess = "true"))
+	USphereComponent* VROrigin;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Camera", meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* Camera;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Body", meta = (AllowPrivateAccess = "true"))
 	USkeletalMeshComponent* Body;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Motion Controllers", meta = (AllowPrivateAccess = "true"))
+	UMotionControllerComponent* MotionController_Head;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Motion Controllers", meta = (AllowPrivateAccess = "true"))
 	UMotionControllerComponent* MotionController_LeftGrip;
@@ -101,6 +121,11 @@ class PROJECTECLIPSEVR_API AVREntityPawn : public AEntityPawn
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Hands Context", meta = (AllowPrivateAccess = "true"))
 	UInputAction* RightIndexCurlAction;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Input|Hands Context", meta = (AllowPrivateAccess = "true"))
+	FVRHandPoseData LeftHandPose;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Input|Hands Context", meta = (AllowPrivateAccess = "true"))
+	FVRHandPoseData RightHandPose;
 
 
 
@@ -120,6 +145,12 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	virtual void SetupTrackingOrigin();
+
+	UFUNCTION(BlueprintPure, Category = "VR|Input|Hands Context")
+	FVRHandPoseData GetLeftHandPose();
+
+	UFUNCTION(BlueprintPure, Category = "VR|Input|Hands Context")
+	FVRHandPoseData GetRightHandPose();
 
 	//============================================
 	// INPUT ACTION SUBSCRIBERS

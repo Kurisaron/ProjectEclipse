@@ -7,7 +7,12 @@
 
 AVREntityPawn::AVREntityPawn() : AEntityPawn()
 {
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("VROrigin"));
+	VROrigin = CreateDefaultSubobject<USphereComponent>(TEXT("VROrigin"));
+	SetRootComponent(VROrigin);
+	VROrigin->SetSphereRadius(10.0f);
+	VROrigin->bDynamicObstacle = true;
+	VROrigin->SetSimulatePhysics(false);
+	VROrigin->SetEnableGravity(true);
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	FAttachmentTransformRules AttachmentRules = FAttachmentTransformRules::KeepWorldTransform;
@@ -18,7 +23,12 @@ AVREntityPawn::AVREntityPawn() : AEntityPawn()
 	Body = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("VRBody"));
 	Body->AttachToComponent(RootComponent, AttachmentRules);
 
-	FName SourceName = TEXT("LeftGrip");
+	FName SourceName = TEXT("Head");
+	MotionController_Head = CreateDefaultSubobject<UMotionControllerComponent>(SourceName);
+	MotionController_Head->AttachToComponent(RootComponent, AttachmentRules);
+	MotionController_Head->SetTrackingMotionSource(SourceName);
+
+	SourceName = TEXT("LeftGrip");
 	MotionController_LeftGrip = CreateDefaultSubobject<UMotionControllerComponent>(SourceName);
 	MotionController_LeftGrip->AttachToComponent(RootComponent, AttachmentRules);
 	MotionController_LeftGrip->SetTrackingMotionSource(SourceName);
@@ -60,10 +70,18 @@ void AVREntityPawn::Tick(float DeltaTime)
 {
 	AEntityPawn::Tick(DeltaTime);
 
+	DrawDebugSphere(GetWorld(), RootComponent->GetComponentLocation(), 20.0f, 32, FColor::Red);
+	EHMDTrackingOrigin::Type TrackingOriginType = GEngine->XRSystem->GetTrackingOrigin();
+	FTransform TrackingOriginTransform;
+	if (GEngine->XRSystem->GetTrackingOriginTransform(TrackingOriginType, TrackingOriginTransform))
+	{
+		DrawDebugSphere(GetWorld(), TrackingOriginTransform.GetLocation(), 25.0f, 32, FColor::Magenta);
+	}
+
 	if (bDrawMotionControllerDebug)
 	{
 		UWorld* World = GetWorld();
-		float GripRadius(10.0f), AimRadius(10.0f);
+		float GripRadius(5.0f), AimRadius(3.0f);
 		int Segments(20);
 		FColor GripColor(FColor::Blue), AimColor(FColor::Green);
 		DrawDebugSphere(World, MotionController_LeftGrip->GetComponentLocation(), GripRadius, Segments, GripColor, false);
@@ -106,14 +124,21 @@ void AVREntityPawn::SetupTrackingOrigin()
 	GEngine->XRSystem->SetTrackingOrigin(EHMDTrackingOrigin::Stage);
 }
 
+FVRHandPoseData AVREntityPawn::GetLeftHandPose() { return LeftHandPose; }
+
+FVRHandPoseData AVREntityPawn::GetRightHandPose() { return RightHandPose; }
+
 void AVREntityPawn::Move(const FInputActionValue& Value)
 {
 	FVector2D MovementVector = Value.Get<FVector2D>();
+
 }
 
 void AVREntityPawn::Turn(const FInputActionValue& Value)
 {
 	float TurnScale = Value.Get<float>();
+
+	// TO-DO: Rotate the character
 }
 
 void AVREntityPawn::LeftGrab()
@@ -189,40 +214,40 @@ UGripComponent* AVREntityPawn::GetGripNearController(UMotionControllerComponent*
 
 void AVREntityPawn::LeftPoint(const FInputActionValue& Value)
 {
-	
+	LeftHandPose.Point = Value.Get<float>();
 }
 
 void AVREntityPawn::RightPoint(const FInputActionValue& Value)
 {
-	
+	RightHandPose.Point = Value.Get<float>();
 }
 
 void AVREntityPawn::LeftThumbUp(const FInputActionValue& Value)
 {
-	
+	LeftHandPose.ThumbUp = Value.Get<float>();
 }
 
 void AVREntityPawn::RightThumbUp(const FInputActionValue& Value)
 {
-	
+	RightHandPose.ThumbUp = Value.Get<float>();
 }
 
 void AVREntityPawn::LeftGrasp(const FInputActionValue& Value)
 {
-	
+	LeftHandPose.Grasp = Value.Get<float>();
 }
 
 void AVREntityPawn::RightGrasp(const FInputActionValue& Value)
 {
-	
+	RightHandPose.Grasp = Value.Get<float>();
 }
 
 void AVREntityPawn::LeftIndexCurl(const FInputActionValue& Value)
 {
-	
+	LeftHandPose.IndexCurl = Value.Get<float>();
 }
 
 void AVREntityPawn::RightIndexCurl(const FInputActionValue& Value)
 {
-	
+	RightHandPose.IndexCurl = Value.Get<float>();
 }

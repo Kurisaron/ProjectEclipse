@@ -9,12 +9,25 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+struct FVRHandPoseData;
 #ifdef PROJECTECLIPSEVR_VREntityPawn_generated_h
 #error "VREntityPawn.generated.h already included, missing '#pragma once' in VREntityPawn.h"
 #endif
 #define PROJECTECLIPSEVR_VREntityPawn_generated_h
 
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityPawn_h_25_INCLASS_NO_PURE_DECLS \
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityPawn_h_25_GENERATED_BODY \
+	friend struct Z_Construct_UScriptStruct_FVRHandPoseData_Statics; \
+	PROJECTECLIPSEVR_API static class UScriptStruct* StaticStruct();
+
+
+template<> PROJECTECLIPSEVR_API UScriptStruct* StaticStruct<struct FVRHandPoseData>();
+
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityPawn_h_39_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execGetRightHandPose); \
+	DECLARE_FUNCTION(execGetLeftHandPose);
+
+
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityPawn_h_39_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAVREntityPawn(); \
 	friend struct Z_Construct_UClass_AVREntityPawn_Statics; \
@@ -23,7 +36,7 @@ public: \
 	DECLARE_SERIALIZER(AVREntityPawn)
 
 
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityPawn_h_25_ENHANCED_CONSTRUCTORS \
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityPawn_h_39_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	AVREntityPawn(AVREntityPawn&&); \
@@ -35,12 +48,13 @@ public: \
 	NO_API virtual ~AVREntityPawn();
 
 
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityPawn_h_22_PROLOG
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityPawn_h_25_GENERATED_BODY \
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityPawn_h_36_PROLOG
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityPawn_h_39_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityPawn_h_25_INCLASS_NO_PURE_DECLS \
-	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityPawn_h_25_ENHANCED_CONSTRUCTORS \
+	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityPawn_h_39_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityPawn_h_39_INCLASS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityPawn_h_39_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
