@@ -10,7 +10,7 @@ class UEntityAttribute;
 class UTrait;
 class UFaction;
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( BlueprintType, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class PROJECTECLIPSEVR_API UEntityComponent : public UActorComponent
 {
 	GENERATED_BODY()

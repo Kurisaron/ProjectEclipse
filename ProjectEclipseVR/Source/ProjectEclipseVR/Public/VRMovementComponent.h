@@ -21,5 +21,4 @@ public:
 
 	UVRMovementComponent();
 
-	virtual void SetUpdatedComponent(USceneComponent* NewUpdatedComponent) override;
 };

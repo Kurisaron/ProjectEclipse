@@ -293,10 +293,10 @@
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VREntityCharacter.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VREntityPawn.cpp">
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VRMovementComponent.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VRMovementComponent.cpp">
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VRRootComponent.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\Weapon.cpp">
@@ -312,8 +312,8 @@
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Item.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Trait.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VREntityCharacter.h"/>
-    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VREntityPawn.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VRMovementComponent.h"/>
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VRRootComponent.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Weapon.h"/>
   </ItemGroup>
   <PropertyGroup>

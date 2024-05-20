@@ -11,7 +11,7 @@ void EmptyLinkFunctionForGeneratedCodeVREntityCharacter() {}
 
 // Begin Cross Module References
 ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
-ENGINE_API UClass* Z_Construct_UClass_USphereComponent_NoRegister();
+ENGINE_API UClass* Z_Construct_UClass_USceneComponent_NoRegister();
 ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputAction_NoRegister();
 ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputMappingContext_NoRegister();
 HEADMOUNTEDDISPLAY_API UClass* Z_Construct_UClass_UMotionControllerComponent_NoRegister();
@@ -225,7 +225,7 @@ struct Z_Construct_UClass_AVREntityCharacter_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_VROrigin = { "VROrigin", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, VROrigin), Z_Construct_UClass_USphereComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_VROrigin_MetaData), NewProp_VROrigin_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_VROrigin = { "VROrigin", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, VROrigin), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_VROrigin_MetaData), NewProp_VROrigin_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_Camera = { "Camera", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, Camera), Z_Construct_UClass_UCameraComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Camera_MetaData), NewProp_Camera_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_MotionController_Head = { "MotionController_Head", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, MotionController_Head), Z_Construct_UClass_UMotionControllerComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MotionController_Head_MetaData), NewProp_MotionController_Head_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_MotionController_LeftGrip = { "MotionController_LeftGrip", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, MotionController_LeftGrip), Z_Construct_UClass_UMotionControllerComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MotionController_LeftGrip_MetaData), NewProp_MotionController_LeftGrip_MetaData) };
@@ -322,10 +322,10 @@ AVREntityCharacter::~AVREntityCharacter() {}
 struct Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AVREntityCharacter, AVREntityCharacter::StaticClass, TEXT("AVREntityCharacter"), &Z_Registration_Info_UClass_AVREntityCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AVREntityCharacter), 1347195544U) },
+		{ Z_Construct_UClass_AVREntityCharacter, AVREntityCharacter::StaticClass, TEXT("AVREntityCharacter"), &Z_Registration_Info_UClass_AVREntityCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AVREntityCharacter), 1387943469U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_2681492244(TEXT("/Script/ProjectEclipseVR"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_1493703412(TEXT("/Script/ProjectEclipseVR"),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

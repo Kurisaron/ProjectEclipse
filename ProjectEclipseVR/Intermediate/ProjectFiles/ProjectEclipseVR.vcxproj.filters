@@ -78,10 +78,10 @@
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VREntityCharacter.cpp">
       <Filter>Source\ProjectEclipseVR\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VREntityPawn.cpp">
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VRMovementComponent.cpp">
       <Filter>Source\ProjectEclipseVR\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VRMovementComponent.cpp">
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VRRootComponent.cpp">
       <Filter>Source\ProjectEclipseVR\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\Weapon.cpp">
@@ -120,10 +120,10 @@
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VREntityCharacter.h">
       <Filter>Source\ProjectEclipseVR\Public</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VREntityPawn.h">
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VRMovementComponent.h">
       <Filter>Source\ProjectEclipseVR\Public</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VRMovementComponent.h">
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VRRootComponent.h">
       <Filter>Source\ProjectEclipseVR\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Weapon.h">

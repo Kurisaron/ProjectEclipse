@@ -28,7 +28,7 @@ class PROJECTECLIPSEVR_API AVREntityCharacter : public AEntityCharacter
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Origin", meta = (AllowPrivateAccess = "true"))
-	USphereComponent* VROrigin;
+	USceneComponent* VROrigin;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Camera", meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* Camera;
@@ -126,9 +126,11 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	//============================================
-	// INPUT ACTION SUBSCRIBERS
-	//============================================
+
+	/**
+	 * INPUT ACTION SUBSCRIBERS
+	 */
+
 
 	void Move(const FInputActionValue& Value);
 
@@ -157,6 +159,13 @@ public:
 	void LeftIndexCurl(const FInputActionValue& Value);
 
 	void RightIndexCurl(const FInputActionValue& Value);
+
+
+	/**
+	 * MOVEMENT
+	 */
+
+	virtual void Crouch(bool bClientSimulation = false) override;
 
 protected:
 

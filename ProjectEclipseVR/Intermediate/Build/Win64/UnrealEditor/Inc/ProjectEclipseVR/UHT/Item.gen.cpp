@@ -12,6 +12,8 @@ void EmptyLinkFunctionForGeneratedCodeItem() {}
 // Begin Cross Module References
 ENGINE_API UClass* Z_Construct_UClass_AActor();
 ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
+ENGINE_API UClass* Z_Construct_UClass_USceneComponent_NoRegister();
+ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 PROJECTECLIPSEVR_API UClass* Z_Construct_UClass_AItem();
 PROJECTECLIPSEVR_API UClass* Z_Construct_UClass_AItem_NoRegister();
 PROJECTECLIPSEVR_API UClass* Z_Construct_UClass_UEntityComponent_NoRegister();
@@ -257,13 +259,19 @@ struct Z_Construct_UClass_AItem_Statics
 		{ "Category", "Item|Wielder" },
 		{ "ModuleRelativePath", "Public/Item.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MainGrip_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ItemRoot_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Item|Grips" },
+		{ "Category", "Item|Root" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/Item.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AdditionalGrips_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Mesh_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Item|Mesh" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/Item.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Grips_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Item|Grips" },
 		{ "EditInline", "true" },
@@ -272,10 +280,11 @@ struct Z_Construct_UClass_AItem_Statics
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStructPropertyParams NewProp_ItemData;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_Wielder;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_MainGrip;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_AdditionalGrips_ValueProp;
-	static const UECodeGen_Private::FStrPropertyParams NewProp_AdditionalGrips_Key_KeyProp;
-	static const UECodeGen_Private::FMapPropertyParams NewProp_AdditionalGrips;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_ItemRoot;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_Mesh;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_Grips_ValueProp;
+	static const UECodeGen_Private::FStrPropertyParams NewProp_Grips_Key_KeyProp;
+	static const UECodeGen_Private::FMapPropertyParams NewProp_Grips;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
@@ -289,17 +298,19 @@ struct Z_Construct_UClass_AItem_Statics
 };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AItem_Statics::NewProp_ItemData = { "ItemData", nullptr, (EPropertyFlags)0x0040000000010015, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AItem, ItemData), Z_Construct_UScriptStruct_FItemData, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ItemData_MetaData), NewProp_ItemData_MetaData) }; // 2393644858
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AItem_Statics::NewProp_Wielder = { "Wielder", nullptr, (EPropertyFlags)0x0040008000020015, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AItem, Wielder), Z_Construct_UScriptStruct_FItemWielderStatus, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Wielder_MetaData), NewProp_Wielder_MetaData) }; // 1377347903
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AItem_Statics::NewProp_MainGrip = { "MainGrip", nullptr, (EPropertyFlags)0x004000000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AItem, MainGrip), Z_Construct_UClass_UGripComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MainGrip_MetaData), NewProp_MainGrip_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AItem_Statics::NewProp_AdditionalGrips_ValueProp = { "AdditionalGrips", nullptr, (EPropertyFlags)0x0000000000080009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, Z_Construct_UClass_UGripComponent_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_AItem_Statics::NewProp_AdditionalGrips_Key_KeyProp = { "AdditionalGrips_Key", nullptr, (EPropertyFlags)0x0000000000080009, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_AItem_Statics::NewProp_AdditionalGrips = { "AdditionalGrips", nullptr, (EPropertyFlags)0x004000800000000d, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AItem, AdditionalGrips), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AdditionalGrips_MetaData), NewProp_AdditionalGrips_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AItem_Statics::NewProp_ItemRoot = { "ItemRoot", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AItem, ItemRoot), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ItemRoot_MetaData), NewProp_ItemRoot_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AItem_Statics::NewProp_Mesh = { "Mesh", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AItem, Mesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Mesh_MetaData), NewProp_Mesh_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AItem_Statics::NewProp_Grips_ValueProp = { "Grips", nullptr, (EPropertyFlags)0x0000000000080009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, Z_Construct_UClass_UGripComponent_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_AItem_Statics::NewProp_Grips_Key_KeyProp = { "Grips_Key", nullptr, (EPropertyFlags)0x0000000000080009, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_AItem_Statics::NewProp_Grips = { "Grips", nullptr, (EPropertyFlags)0x004000800000000d, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AItem, Grips), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Grips_MetaData), NewProp_Grips_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AItem_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AItem_Statics::NewProp_ItemData,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AItem_Statics::NewProp_Wielder,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AItem_Statics::NewProp_MainGrip,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AItem_Statics::NewProp_AdditionalGrips_ValueProp,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AItem_Statics::NewProp_AdditionalGrips_Key_KeyProp,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AItem_Statics::NewProp_AdditionalGrips,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AItem_Statics::NewProp_ItemRoot,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AItem_Statics::NewProp_Mesh,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AItem_Statics::NewProp_Grips_ValueProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AItem_Statics::NewProp_Grips_Key_KeyProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AItem_Statics::NewProp_Grips,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AItem_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_AItem_Statics::DependentSingletons[])() = {
@@ -346,10 +357,10 @@ struct Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_P
 		{ FItemWielderStatus::StaticStruct, Z_Construct_UScriptStruct_FItemWielderStatus_Statics::NewStructOps, TEXT("ItemWielderStatus"), &Z_Registration_Info_UScriptStruct_ItemWielderStatus, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FItemWielderStatus), 1377347903U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AItem, AItem::StaticClass, TEXT("AItem"), &Z_Registration_Info_UClass_AItem, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AItem), 877698518U) },
+		{ Z_Construct_UClass_AItem, AItem::StaticClass, TEXT("AItem"), &Z_Registration_Info_UClass_AItem, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AItem), 1994014732U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_994536612(TEXT("/Script/ProjectEclipseVR"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_290670566(TEXT("/Script/ProjectEclipseVR"),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_Statics::ScriptStructInfo),
 	nullptr, 0);

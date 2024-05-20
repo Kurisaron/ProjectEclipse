@@ -1,0 +1,21 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\github\\projecteclipse\\projecteclipsevr\\source\\projecteclipsevr\\private\\vrrootcomponent.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\x64\\projecteclipsevreditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.inclorderoldest.h.pch",
+        "Includes": [
+            "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\projecteclipsevr\\definitions.projecteclipsevr.h",
+            "d:\\github\\projecteclipse\\projecteclipsevr\\source\\projecteclipsevr\\public\\vrrootcomponent.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\camera\\cameracomponent.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\cameracomponent.generated.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\components\\capsulecomponent.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\components\\shapecomponent.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\shapecomponent.generated.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\capsulecomponent.generated.h",
+            "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipsevr\\uht\\vrrootcomponent.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

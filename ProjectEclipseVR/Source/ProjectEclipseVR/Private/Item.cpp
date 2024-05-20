@@ -11,6 +11,12 @@ AItem::AItem()
 	PrimaryActorTick.bCanEverTick = true;
 
 	ItemData = FItemData(TEXT("Test"), TEXT("Test"));
+
+	ItemRoot = CreateDefaultSubobject<USceneComponent>(TEXT("ItemRoot"));
+	SetRootComponent(ItemRoot);
+
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMesh"));
+	Mesh->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
@@ -29,12 +35,12 @@ void AItem::Tick(float DeltaTime)
 
 FItemData AItem::GetItemData() { return ItemData; }
 
-UGripComponent* AItem::GetMainGrip() { return MainGrip; }
+UGripComponent* AItem::GetMainGrip() { return Grips[TEXT("Main")]; }
 
-UGripComponent* AItem::GetAdditionalGrip(FString Key)
+UGripComponent* AItem::GetGrip(FString Key)
 {
-	if (AdditionalGrips.IsEmpty())
+	if (Grips.IsEmpty())
 		return nullptr;
 
-	return AdditionalGrips[Key];
+	return Grips[Key];
 }

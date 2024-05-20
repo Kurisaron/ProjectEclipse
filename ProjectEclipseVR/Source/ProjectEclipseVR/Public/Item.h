@@ -57,12 +57,15 @@ class PROJECTECLIPSEVR_API AItem : public AActor
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Item|Wielder", meta = (AllowPrivateAccess = "true"))
 	FItemWielderStatus Wielder;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item|Root", meta = (AllowPrivateAccess = "true"))
+	USceneComponent* ItemRoot;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item|Mesh", meta = (AllowPrivateAccess = "true"))
+	UStaticMeshComponent* Mesh;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Grips", meta = (AllowPrivateAccess = "true"))
-	UGripComponent* MainGrip;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Grips", meta = (AllowPrivateAccess = "true"))
-	TMap<FString, UGripComponent*> AdditionalGrips;
+	TMap<FString, UGripComponent*> Grips;
 
 public:	
 	// Sets default values for this actor's properties
@@ -81,5 +84,5 @@ public:
 
 	UGripComponent* GetMainGrip();
 
-	UGripComponent* GetAdditionalGrip(FString Key);
+	UGripComponent* GetGrip(FString Key);
 };

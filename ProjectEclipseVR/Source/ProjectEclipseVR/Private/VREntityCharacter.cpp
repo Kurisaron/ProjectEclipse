@@ -2,24 +2,23 @@
 
 
 #include "VREntityCharacter.h"
+#include "VRRootComponent.h"
 #include "GripComponent.h"
 
-AVREntityCharacter::AVREntityCharacter(const FObjectInitializer& ObjectInitializer) : AEntityCharacter(ObjectInitializer.SetDefaultSubobjectClass<UVRMovementComponent>(ACharacter::CharacterMovementComponentName))
+AVREntityCharacter::AVREntityCharacter(const FObjectInitializer& ObjectInitializer) : AEntityCharacter(ObjectInitializer.SetDefaultSubobjectClass<UVRMovementComponent>(ACharacter::CharacterMovementComponentName).SetDefaultSubobjectClass<UVRRootComponent>(ACharacter::CapsuleComponentName))
 {
-	SetRootComponent(VROrigin = CreateDefaultSubobject<USphereComponent>(TEXT("VROrigin")));
-	VROrigin->SetSphereRadius(10.0f);
-	VROrigin->bDynamicObstacle = true;
-	VROrigin->SetSimulatePhysics(false);
-	VROrigin->SetEnableGravity(true);
-
+	
 	UCapsuleComponent* Capsule = GetCapsuleComponent();
-	Capsule->InitCapsuleSize(42.f, 96.0f);
-	Capsule->SetupAttachment(RootComponent);
-	Capsule->AddLocalOffset(FVector(0.0f, 0.0f, Capsule->GetScaledCapsuleHalfHeight()));
+	UVRRootComponent* VRRootComp = Cast<UVRRootComponent>(Capsule);
+	if (VRRootComp == nullptr)
+	{
+		return;
+	}
+	VRRootComp->InitCapsuleSize(42.f, 96.0f);
 
 	// Only enable the character to rotate the yaw
 	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = true;
+	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 
 	GetCharacterMovement()->SetUpdatedComponent(RootComponent);
@@ -34,33 +33,40 @@ AVREntityCharacter::AVREntityCharacter(const FObjectInitializer& ObjectInitializ
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 	GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
 
+	VROrigin = CreateDefaultSubobject<USceneComponent>(TEXT("VROrigin"));
+	VROrigin->SetupAttachment(Capsule);
+	VROrigin->SetRelativeLocation(FVector(0.0, 0.0, -90.0));
+
 	// Create the HMD camera
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	FAttachmentTransformRules AttachmentRules = FAttachmentTransformRules::KeepWorldTransform;
 	AttachmentRules.bWeldSimulatedBodies = true;
-	Camera->AttachToComponent(RootComponent, AttachmentRules);
+	Camera->AttachToComponent(VROrigin, AttachmentRules);
 	Camera->bLockToHmd = true;
+
+	// Setup roomscale movement
+	VRRootComp->SetupRoomscale(VROrigin, Camera);
 
 	// Create the motion controllers
 	FName SourceName = TEXT("Head");
 	MotionController_Head = CreateDefaultSubobject<UMotionControllerComponent>(SourceName);
-	MotionController_Head->AttachToComponent(RootComponent, AttachmentRules);
+	MotionController_Head->AttachToComponent(VROrigin, AttachmentRules);
 	MotionController_Head->SetTrackingMotionSource(SourceName);
 	SourceName = TEXT("LeftGrip");
 	MotionController_LeftGrip = CreateDefaultSubobject<UMotionControllerComponent>(SourceName);
-	MotionController_LeftGrip->AttachToComponent(RootComponent, AttachmentRules);
+	MotionController_LeftGrip->AttachToComponent(VROrigin, AttachmentRules);
 	MotionController_LeftGrip->SetTrackingMotionSource(SourceName);
 	SourceName = TEXT("LeftAim");
 	MotionController_LeftAim = CreateDefaultSubobject<UMotionControllerComponent>(SourceName);
-	MotionController_LeftAim->AttachToComponent(RootComponent, AttachmentRules);
+	MotionController_LeftAim->AttachToComponent(VROrigin, AttachmentRules);
 	MotionController_LeftAim->SetTrackingMotionSource(SourceName);
 	SourceName = TEXT("RightGrip");
 	MotionController_RightGrip = CreateDefaultSubobject<UMotionControllerComponent>(SourceName);
-	MotionController_RightGrip->AttachToComponent(RootComponent, AttachmentRules);
+	MotionController_RightGrip->AttachToComponent(VROrigin, AttachmentRules);
 	MotionController_RightGrip->SetTrackingMotionSource(SourceName);
 	SourceName = TEXT("RightAim");
 	MotionController_RightAim = CreateDefaultSubobject<UMotionControllerComponent>(SourceName);
-	MotionController_RightAim->AttachToComponent(RootComponent, AttachmentRules);
+	MotionController_RightAim->AttachToComponent(VROrigin, AttachmentRules);
 	MotionController_RightAim->SetTrackingMotionSource(SourceName);
 
 }
@@ -92,17 +98,6 @@ void AVREntityCharacter::Tick(float DeltaTime)
 		DrawDebugSphere(GetWorld(), TrackingOriginTransform.GetLocation(), 25.0f, 32, FColor::Magenta);
 	}
 
-	if (bDrawMotionControllerDebug)
-	{
-		UWorld* World = GetWorld();
-		float GripRadius(5.0f), AimRadius(3.0f);
-		int Segments(20);
-		FColor GripColor(FColor::Blue), AimColor(FColor::Green);
-		DrawDebugSphere(World, MotionController_LeftGrip->GetComponentLocation(), GripRadius, Segments, GripColor, false);
-		DrawDebugSphere(World, MotionController_RightGrip->GetComponentLocation(), GripRadius, Segments, GripColor, false);
-		DrawDebugSphere(World, MotionController_LeftAim->GetComponentLocation(), AimRadius, Segments, AimColor, false);
-		DrawDebugSphere(World, MotionController_RightAim->GetComponentLocation(), AimRadius, Segments, AimColor, false);
-	}
 }
 
 void AVREntityCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -288,4 +283,11 @@ void AVREntityCharacter::RightIndexCurl(const FInputActionValue& Value)
 
 }
 
+void AVREntityCharacter::Crouch(bool bClientSimulation)
+{
+	// TO-DO: Fill-in crouching for VR character
+	// Only currently defined to override ACharacter::Crouch default logic
+}
+
 UVRMovementComponent* AVREntityCharacter::GetVRMovement() { return GetCharacterMovement<UVRMovementComponent>(); }
+
