@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "HeadMountedDisplayTypes.h"
+#include "IXRTrackingSystem.h"
 #include "VRRootComponent.generated.h"
 
 /**
@@ -19,9 +21,15 @@ class PROJECTECLIPSEVR_API UVRRootComponent : public UCapsuleComponent
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Tracking", meta = (AllowPrivateAccess = "true"))
 	float TrackingRate = 0.2f;
 
+	// Should the editor draw debug tools during gameplay for ensuring the root component is working correctly
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Tracking", AdvancedDisplay, meta = (AllowPrivateAccess = "true"))
+	bool bDisplayTrackingDebug = false;
+
 	USceneComponent* TrackedOrigin;
 
 	UCameraComponent* TrackedCamera;
+
+	FTimerHandle MemberHandle;
 	
 public:
 
@@ -31,5 +39,12 @@ public:
 
 	virtual void BeginPlay() override;
 
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
 	void UpdateRoomscaleMovement();
+
+private:
+
+	void DisplayTrackingDebug(bool bPreUpdate);
+
 };

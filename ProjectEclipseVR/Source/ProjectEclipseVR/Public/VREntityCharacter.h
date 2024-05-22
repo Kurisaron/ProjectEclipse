@@ -171,6 +171,12 @@ protected:
 
 	UGripComponent* GetGripNearController(UMotionControllerComponent* MotionController);
 
+	// Perform all debug displays for character's motion controllers (except head)
+	virtual void DisplayMotionControllerDebug();
+
+	// Perform debug display on specific motion controller
+	void DisplayMotionControllerDebug(UMotionControllerComponent* MotionController);
+
 public:
 
 	UVRMovementComponent* GetVRMovement();

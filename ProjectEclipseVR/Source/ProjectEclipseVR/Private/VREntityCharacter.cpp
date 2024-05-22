@@ -18,7 +18,7 @@ AVREntityCharacter::AVREntityCharacter(const FObjectInitializer& ObjectInitializ
 
 	// Only enable the character to rotate the yaw
 	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = false;
+	bUseControllerRotationYaw = true;
 	bUseControllerRotationRoll = false;
 
 	GetCharacterMovement()->SetUpdatedComponent(RootComponent);
@@ -83,21 +83,15 @@ void AVREntityCharacter::BeginPlay()
 
 void AVREntityCharacter::SetupTrackingOrigin()
 {
-	GEngine->XRSystem->SetTrackingOrigin(EHMDTrackingOrigin::Stage);
+	if (GEngine && GEngine->XRSystem)
+		GEngine->XRSystem->SetTrackingOrigin(EHMDTrackingOrigin::Stage);
 }
 
 void AVREntityCharacter::Tick(float DeltaTime)
 {
 	AEntityCharacter::Tick(DeltaTime);
 
-	DrawDebugSphere(GetWorld(), RootComponent->GetComponentLocation(), 20.0f, 32, FColor::Red);
-	EHMDTrackingOrigin::Type TrackingOriginType = GEngine->XRSystem->GetTrackingOrigin();
-	FTransform TrackingOriginTransform;
-	if (GEngine->XRSystem->GetTrackingOriginTransform(TrackingOriginType, TrackingOriginTransform))
-	{
-		DrawDebugSphere(GetWorld(), TrackingOriginTransform.GetLocation(), 25.0f, 32, FColor::Magenta);
-	}
-
+	DisplayMotionControllerDebug();
 }
 
 void AVREntityCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -145,7 +139,7 @@ void AVREntityCharacter::Move(const FInputActionValue& Value)
 	if (Controller != nullptr)
 	{
 		// find out which way is forward
-		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator Rotation = Camera->GetComponentRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
 
 		// get forward vector
@@ -291,3 +285,33 @@ void AVREntityCharacter::Crouch(bool bClientSimulation)
 
 UVRMovementComponent* AVREntityCharacter::GetVRMovement() { return GetCharacterMovement<UVRMovementComponent>(); }
 
+void AVREntityCharacter::DisplayMotionControllerDebug()
+{
+	if (!bDrawMotionControllerDebug) return;
+	
+	DisplayMotionControllerDebug(MotionController_LeftAim);
+	DisplayMotionControllerDebug(MotionController_LeftGrip);
+	DisplayMotionControllerDebug(MotionController_RightAim);
+	DisplayMotionControllerDebug(MotionController_RightGrip);
+}
+
+void AVREntityCharacter::DisplayMotionControllerDebug(UMotionControllerComponent* MotionController)
+{
+	FString MotionSource = MotionController->GetTrackingMotionSource().ToString();
+
+	bool bIsHead = MotionSource.Contains(TEXT("Head"));
+	if (bIsHead) return;
+	bool bIsGrip = MotionSource.Contains(TEXT("Grip"));
+	bool bIsAim = !bIsGrip && MotionSource.Contains(TEXT("Aim"));
+
+	UWorld* World = MotionController->GetWorld();
+	FVector ControllerLocation = MotionController->GetComponentLocation();
+	FColor DebugColor = bIsGrip ? FColor::Green /* Grip Color */ : (bIsAim ? FColor::Emerald /* Aim Color */ : FColor::White /* Default Color */);
+	float Radius = bIsGrip ? 3.0f /* Grip */ : (bIsAim ? 2.5f /* Aim */ : 2.0f /* Default */);
+	int Segments = 16;
+
+	DrawDebugSphere(World, ControllerLocation, Radius, Segments, DebugColor);
+	DrawDebugLine(World, ControllerLocation, ControllerLocation + (MotionController->GetForwardVector() * Radius * 1.5f), FColor::Red);
+	DrawDebugLine(World, ControllerLocation, ControllerLocation + (MotionController->GetRightVector() * Radius * 1.5f), FColor::Green);
+	DrawDebugLine(World, ControllerLocation, ControllerLocation + (MotionController->GetUpVector() * Radius * 1.5f), FColor::Blue);
+}

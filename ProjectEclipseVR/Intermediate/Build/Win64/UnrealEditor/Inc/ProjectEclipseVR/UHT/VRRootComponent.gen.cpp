@@ -51,8 +51,21 @@ struct Z_Construct_UClass_UVRRootComponent_Statics
 		{ "ToolTip", "Time in seconds between roomscale movement updates. Changes after play has begun will not affect further updates" },
 #endif
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bDisplayTrackingDebug_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Tracking" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Should the editor draw debug tools during gameplay for ensuring the root component is working correctly\n" },
+#endif
+		{ "ModuleRelativePath", "Public/VRRootComponent.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Should the editor draw debug tools during gameplay for ensuring the root component is working correctly" },
+#endif
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_TrackingRate;
+	static void NewProp_bDisplayTrackingDebug_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_bDisplayTrackingDebug;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -61,8 +74,14 @@ struct Z_Construct_UClass_UVRRootComponent_Statics
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UVRRootComponent_Statics::NewProp_TrackingRate = { "TrackingRate", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UVRRootComponent, TrackingRate), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TrackingRate_MetaData), NewProp_TrackingRate_MetaData) };
+void Z_Construct_UClass_UVRRootComponent_Statics::NewProp_bDisplayTrackingDebug_SetBit(void* Obj)
+{
+	((UVRRootComponent*)Obj)->bDisplayTrackingDebug = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UVRRootComponent_Statics::NewProp_bDisplayTrackingDebug = { "bDisplayTrackingDebug", nullptr, (EPropertyFlags)0x0040040000000015, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UVRRootComponent), &Z_Construct_UClass_UVRRootComponent_Statics::NewProp_bDisplayTrackingDebug_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bDisplayTrackingDebug_MetaData), NewProp_bDisplayTrackingDebug_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UVRRootComponent_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UVRRootComponent_Statics::NewProp_TrackingRate,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UVRRootComponent_Statics::NewProp_bDisplayTrackingDebug,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UVRRootComponent_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_UVRRootComponent_Statics::DependentSingletons[])() = {
@@ -105,10 +124,10 @@ UVRRootComponent::~UVRRootComponent() {}
 struct Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VRRootComponent_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UVRRootComponent, UVRRootComponent::StaticClass, TEXT("UVRRootComponent"), &Z_Registration_Info_UClass_UVRRootComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UVRRootComponent), 978434301U) },
+		{ Z_Construct_UClass_UVRRootComponent, UVRRootComponent::StaticClass, TEXT("UVRRootComponent"), &Z_Registration_Info_UClass_UVRRootComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UVRRootComponent), 2903512358U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VRRootComponent_h_1812670130(TEXT("/Script/ProjectEclipseVR"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VRRootComponent_h_4055313477(TEXT("/Script/ProjectEclipseVR"),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VRRootComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VRRootComponent_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
