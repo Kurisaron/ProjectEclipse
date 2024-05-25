@@ -2,6 +2,7 @@
 
 
 #include "VRRootComponent.h"
+#include "VREntityCharacter.h"
 
 UVRRootComponent::UVRRootComponent(const FObjectInitializer& ObjectInitializer) : UCapsuleComponent(ObjectInitializer)
 {
@@ -39,14 +40,17 @@ void UVRRootComponent::UpdateRoomscaleMovement()
 {
 	DisplayTrackingDebug(true);
 	
-	FVector CameraLocation = TrackedCamera->GetComponentLocation();
-	FVector RootLocation = GetComponentLocation();
-	FVector LocationDifference = CameraLocation - RootLocation;
-	LocationDifference.Z = 0.0;
+	if (bTrackRoomscaleMovement)
+	{
+		FVector CameraLocation = TrackedCamera->GetComponentLocation();
+		FVector RootLocation = GetComponentLocation();
+		FVector LocationDifference = CameraLocation - RootLocation;
+		LocationDifference.Z = 0.0;
 
-	AddWorldOffset(LocationDifference, false, nullptr, ETeleportType::TeleportPhysics);
-	TrackedOrigin->AddWorldOffset(-LocationDifference, false, nullptr, ETeleportType::TeleportPhysics);
-
+		AddWorldOffset(LocationDifference, false, nullptr, ETeleportType::TeleportPhysics);
+		TrackedOrigin->AddWorldOffset(-LocationDifference, false, nullptr, ETeleportType::TeleportPhysics);
+	}
+	
 	DisplayTrackingDebug(false);
 }
 
@@ -70,4 +74,15 @@ void UVRRootComponent::DisplayTrackingDebug(bool bPreUpdate)
 		DrawDebugSphere(GetWorld(), TrackingOriginTransform.GetLocation(), 25.0f, 32, FColor::Yellow);
 	}
 
+}
+
+FVector UVRRootComponent::GetGravityDirection()
+{
+	if (AVREntityCharacter* VRCharacter = Cast<AVREntityCharacter>(GetOwner()))
+	{
+		if (UVRMovementComponent* VRMovement = VRCharacter->GetVRMovement())
+			return VRMovement->GetGravityDirection();
+	}
+
+	return FVector::DownVector;
 }

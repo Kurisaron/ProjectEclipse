@@ -75,6 +75,9 @@
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\Trait.cpp">
       <Filter>Source\ProjectEclipseVR\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VRController.cpp">
+      <Filter>Source\ProjectEclipseVR\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VREntityCharacter.cpp">
       <Filter>Source\ProjectEclipseVR\Private</Filter>
     </ClCompile>
@@ -115,6 +118,9 @@
       <Filter>Source\ProjectEclipseVR\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Trait.h">
+      <Filter>Source\ProjectEclipseVR\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VRController.h">
       <Filter>Source\ProjectEclipseVR\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VREntityCharacter.h">

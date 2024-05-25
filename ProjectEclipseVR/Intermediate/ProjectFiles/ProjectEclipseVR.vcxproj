@@ -290,6 +290,9 @@
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\Trait.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VRController.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VREntityCharacter.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -311,6 +314,7 @@
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\GripComponent.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Item.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Trait.h"/>
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VRController.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VREntityCharacter.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VRMovementComponent.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VRRootComponent.h"/>

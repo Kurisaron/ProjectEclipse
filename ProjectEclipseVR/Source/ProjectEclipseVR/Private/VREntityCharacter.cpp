@@ -2,6 +2,7 @@
 
 
 #include "VREntityCharacter.h"
+#include "VRController.h"
 #include "VRRootComponent.h"
 #include "GripComponent.h"
 
@@ -114,6 +115,8 @@ void AVREntityCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 		// Bind default context inputs
 		EnhancedInput->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Move);
 		EnhancedInput->BindAction(TurnAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Turn);
+		EnhancedInput->BindAction(LeftTriggerAction, ETriggerEvent::Started, this, &AVREntityCharacter::LeftTrigger);
+		EnhancedInput->BindAction(RightTriggerAction, ETriggerEvent::Started, this, &AVREntityCharacter::RightTrigger);
 		EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Started, this, &AVREntityCharacter::LeftGrab);
 		EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Completed, this, &AVREntityCharacter::LeftRelease);
 		EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Started, this, &AVREntityCharacter::RightGrab);
@@ -138,15 +141,22 @@ void AVREntityCharacter::Move(const FInputActionValue& Value)
 
 	if (Controller != nullptr)
 	{
+		AVRController* VRController = GetVRController();
+		if (!VRController) return;
+
 		// find out which way is forward
 		const FRotator Rotation = Camera->GetComponentRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
+		//const FRotator YawRotation(0, Rotation.Yaw, 0);
+		const FVector GravDirection = GetCharacterMovement()->GetGravityDirection();
+		const FRotator GravRelativeRotation = VRController->GetGravityRelativeRotation(Rotation, GravDirection);
+		const FRotator ForwardWorldRotation = VRController->GetGravityWorldRotation(FRotator(0.0, GravRelativeRotation.Yaw, 0.0), GravDirection);
+		const FRotator RightWorldRotation = VRController->GetGravityWorldRotation(FRotator(0.0, GravRelativeRotation.Yaw, GravRelativeRotation.Roll), GravDirection);
 
 		// get forward vector
-		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+		const FVector ForwardDirection = FRotationMatrix(ForwardWorldRotation).GetUnitAxis(EAxis::X);
 
 		// get right vector 
-		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+		const FVector RightDirection = FRotationMatrix(RightWorldRotation).GetUnitAxis(EAxis::Y);
 
 		// add movement 
 		AddMovementInput(ForwardDirection, MovementVector.Y);
@@ -164,6 +174,17 @@ void AVREntityCharacter::Turn(const FInputActionValue& Value)
 		// add yaw and pitch input to controller
 		AddControllerYawInput(TurnScale);
 	}
+}
+
+void AVREntityCharacter::LeftTrigger()
+{
+	FVector PalmDirection = MotionController_LeftGrip->GetRightVector();
+	SetGravityDirection(PalmDirection);
+}
+
+void AVREntityCharacter::RightTrigger()
+{
+
 }
 
 void AVREntityCharacter::LeftGrab()
@@ -282,6 +303,16 @@ void AVREntityCharacter::Crouch(bool bClientSimulation)
 	// TO-DO: Fill-in crouching for VR character
 	// Only currently defined to override ACharacter::Crouch default logic
 }
+
+void AVREntityCharacter::SetGravityDirection(FVector WorldDirection)
+{
+	if (UCharacterMovementComponent* CharMoveComp = GetCharacterMovement())
+	{
+		CharMoveComp->SetGravityDirection(WorldDirection);
+	}
+}
+
+AVRController* AVREntityCharacter::GetVRController() { return Controller != nullptr ? Cast<AVRController>(Controller) : nullptr; }
 
 UVRMovementComponent* AVREntityCharacter::GetVRMovement() { return GetCharacterMovement<UVRMovementComponent>(); }
 

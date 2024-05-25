@@ -17,6 +17,7 @@
 #include "VRMovementComponent.h"
 #include "VREntityCharacter.generated.h"
 
+class AVRController;
 class UGripComponent;
 
 /**
@@ -78,6 +79,12 @@ class PROJECTECLIPSEVR_API AVREntityCharacter : public AEntityCharacter
 	UInputAction* TurnAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
+	UInputAction* LeftTriggerAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
+	UInputAction* RightTriggerAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
 	UInputAction* LeftGrabAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
@@ -136,6 +143,10 @@ public:
 
 	void Turn(const FInputActionValue& Value);
 
+	void LeftTrigger();
+
+	void RightTrigger();
+
 	void LeftGrab();
 
 	void LeftRelease();
@@ -167,6 +178,8 @@ public:
 
 	virtual void Crouch(bool bClientSimulation = false) override;
 
+	virtual void SetGravityDirection(FVector WorldDirection);
+
 protected:
 
 	UGripComponent* GetGripNearController(UMotionControllerComponent* MotionController);
@@ -178,6 +191,8 @@ protected:
 	void DisplayMotionControllerDebug(UMotionControllerComponent* MotionController);
 
 public:
+
+	AVRController* GetVRController();
 
 	UVRMovementComponent* GetVRMovement();
 
