@@ -53,6 +53,5 @@ private:
 
 	void DisplayTrackingDebug(bool bPreUpdate);
 
-	FVector GetGravityDirection();
 
 };

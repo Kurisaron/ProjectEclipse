@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\TPTest.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\TPTest.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\TPTestEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.vsconfig" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\TPTest">
+      <UniqueIdentifier>{A1569C3D-C2A7-30B1-AD47-57BF6D499C0B}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\TPTest\GravityController.cpp">
+      <Filter>Source\TPTest</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\TPTest\GravityController.h">
+      <Filter>Source\TPTest</Filter>
+    </ClInclude>
+    <None Include="..\..\Source\TPTest\TPTest.Build.cs">
+      <Filter>Source\TPTest</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\TPTest\TPTest.cpp">
+      <Filter>Source\TPTest</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\TPTest\TPTest.h">
+      <Filter>Source\TPTest</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\TPTest\TPTestCharacter.cpp">
+      <Filter>Source\TPTest</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\TPTest\TPTestCharacter.h">
+      <Filter>Source\TPTest</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\TPTest\TPTestGameMode.cpp">
+      <Filter>Source\TPTest</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\TPTest\TPTestGameMode.h">
+      <Filter>Source\TPTest</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

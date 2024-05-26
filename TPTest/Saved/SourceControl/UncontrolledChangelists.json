@@ -1,0 +1,16 @@
+{
+	"version": 1,
+	"changelists": [
+		{
+			"guid": "00000000000000000000000000000000",
+			"description": "Default Uncontrolled Changelist",
+			"files": [
+				"D:/Github/ProjectEclipse/TPTest/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset",
+				"D:/Github/ProjectEclipse/TPTest/Content/Characters/Mannequins/Animations/ABP_Manny.uasset",
+				"D:/Github/ProjectEclipse/TPTest/Content/ThirdPerson/Input/Actions/IA_Flip.uasset",
+				"D:/Github/ProjectEclipse/TPTest/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset",
+				"D:/Github/ProjectEclipse/TPTest/Content/ThirdPerson/Input/IMC_Default.uasset"
+			]
+		}
+	]
+}

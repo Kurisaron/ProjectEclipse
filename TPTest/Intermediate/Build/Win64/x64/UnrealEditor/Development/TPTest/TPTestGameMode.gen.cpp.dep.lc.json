@@ -1,0 +1,19 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\github\\projecteclipse\\tptest\\intermediate\\build\\win64\\unrealeditor\\inc\\tptest\\uht\\tptestgamemode.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\github\\projecteclipse\\tptest\\intermediate\\build\\win64\\x64\\tptesteditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "Includes": [
+            "d:\\github\\projecteclipse\\tptest\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\tptest\\definitions.tptest.h",
+            "d:\\github\\projecteclipse\\tptest\\source\\tptest\\tptestgamemode.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\gameframework\\gamemodebase.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\engine\\serverstatreplicator.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\serverstatreplicator.generated.h",
+            "d:\\epiclibrary\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gamemodebase.generated.h",
+            "d:\\github\\projecteclipse\\tptest\\intermediate\\build\\win64\\unrealeditor\\inc\\tptest\\uht\\tptestgamemode.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

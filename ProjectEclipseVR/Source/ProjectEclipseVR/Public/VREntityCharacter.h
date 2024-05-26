@@ -15,13 +15,22 @@
 #include "MotionControllerComponent.h"
 #include "EntityCharacter.h"
 #include "VRMovementComponent.h"
+#include "GripMotionControllerComponent.h"
 #include "VREntityCharacter.generated.h"
 
-class AVRController;
 class UGripComponent;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FPlayerInputEvent, AVREntityCharacter*, PlayerCharacter, bool, Pressed, float, PressedTime);
+
+USTRUCT(BlueprintType)
+struct FInputCounterTracker
+{
+	GENERATED_BODY()
+
+};
+
 /**
- * 
+ * Character class that facilitates VR gameplay
  */
 UCLASS(Blueprintable, BlueprintType)
 class PROJECTECLIPSEVR_API AVREntityCharacter : public AEntityCharacter
@@ -38,10 +47,10 @@ class PROJECTECLIPSEVR_API AVREntityCharacter : public AEntityCharacter
 	UMotionControllerComponent* MotionController_Head;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Motion Controllers", meta = (AllowPrivateAccess = "true"))
-	UMotionControllerComponent* MotionController_LeftGrip;
+	UGripMotionControllerComponent* MotionController_LeftGrip;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Motion Controllers", meta = (AllowPrivateAccess = "true"))
-	UMotionControllerComponent* MotionController_RightGrip;
+	UGripMotionControllerComponent* MotionController_RightGrip;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Motion Controllers", meta = (AllowPrivateAccess = "true"))
 	UMotionControllerComponent* MotionController_LeftAim;
@@ -58,10 +67,6 @@ class PROJECTECLIPSEVR_API AVREntityCharacter : public AEntityCharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VR|Held Grips", meta = (AllowPrivateAccess = "true"))
 	UGripComponent* RightHeldGrip;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Held Grips", meta = (AllowPrivateAccess = "true"))
-	float GrabRadius = 6.0f;
-
-
 	// Inputs in this mapping context are the core functions for gameplay
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
 	UInputMappingContext* DefaultContext;
@@ -70,7 +75,12 @@ class PROJECTECLIPSEVR_API AVREntityCharacter : public AEntityCharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Hands Context", meta = (AllowPrivateAccess = "true"))
 	UInputMappingContext* HandsContext;
 
+	///////////////////
+	// INPUT ACTIONS //
+	///////////////////
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Input", AdvancedDisplay, meta = (AllowPrivateAccess = "true"))
+	FInputCounterTracker InputCounters;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
 	UInputAction* MoveAction;
@@ -79,16 +89,19 @@ class PROJECTECLIPSEVR_API AVREntityCharacter : public AEntityCharacter
 	UInputAction* TurnAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* LeftTriggerAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* RightTriggerAction;
+	UInputAction* JumpAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
 	UInputAction* LeftGrabAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
 	UInputAction* RightGrabAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
+	UInputAction* LeftTriggerAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
+	UInputAction* RightTriggerAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Hands Context", meta = (AllowPrivateAccess = "true"))
 	UInputAction* LeftPointAction;
@@ -115,6 +128,9 @@ class PROJECTECLIPSEVR_API AVREntityCharacter : public AEntityCharacter
 	UInputAction* RightIndexCurlAction;
 
 
+	//////////////////////
+	// DELEGATES/EVENTS //
+	//////////////////////
 
 public:
 
@@ -134,18 +150,16 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 
-	/**
-	 * INPUT ACTION SUBSCRIBERS
-	 */
+	//////////////////////////////
+	// INPUT ACTION SUBSCRIBERS //
+	//////////////////////////////
 
 
 	void Move(const FInputActionValue& Value);
 
 	void Turn(const FInputActionValue& Value);
 
-	void LeftTrigger();
-
-	void RightTrigger();
+	void Jump(const FInputActionValue& Value);
 
 	void LeftGrab();
 
@@ -154,6 +168,10 @@ public:
 	void RightGrab();
 
 	void RightRelease();
+
+	void LeftTrigger(const FInputActionValue& Value);
+
+	void RightTrigger(const FInputActionValue& Value);
 
 	void LeftPoint(const FInputActionValue& Value);
 
@@ -172,17 +190,13 @@ public:
 	void RightIndexCurl(const FInputActionValue& Value);
 
 
-	/**
-	 * MOVEMENT
-	 */
+	//////////////
+	// MOVEMENT //
+	//////////////
 
 	virtual void Crouch(bool bClientSimulation = false) override;
 
-	virtual void SetGravityDirection(FVector WorldDirection);
-
 protected:
-
-	UGripComponent* GetGripNearController(UMotionControllerComponent* MotionController);
 
 	// Perform all debug displays for character's motion controllers (except head)
 	virtual void DisplayMotionControllerDebug();
@@ -191,8 +205,6 @@ protected:
 	void DisplayMotionControllerDebug(UMotionControllerComponent* MotionController);
 
 public:
-
-	AVRController* GetVRController();
 
 	UVRMovementComponent* GetVRMovement();
 

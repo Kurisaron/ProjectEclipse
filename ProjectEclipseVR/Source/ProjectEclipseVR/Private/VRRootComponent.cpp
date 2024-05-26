@@ -6,7 +6,7 @@
 
 UVRRootComponent::UVRRootComponent(const FObjectInitializer& ObjectInitializer) : UCapsuleComponent(ObjectInitializer)
 {
-
+	
 }
 
 void UVRRootComponent::SetupRoomscale(USceneComponent* Origin, UCameraComponent* Camera)
@@ -74,15 +74,4 @@ void UVRRootComponent::DisplayTrackingDebug(bool bPreUpdate)
 		DrawDebugSphere(GetWorld(), TrackingOriginTransform.GetLocation(), 25.0f, 32, FColor::Yellow);
 	}
 
-}
-
-FVector UVRRootComponent::GetGravityDirection()
-{
-	if (AVREntityCharacter* VRCharacter = Cast<AVREntityCharacter>(GetOwner()))
-	{
-		if (UVRMovementComponent* VRMovement = VRCharacter->GetVRMovement())
-			return VRMovement->GetGravityDirection();
-	}
-
-	return FVector::DownVector;
 }

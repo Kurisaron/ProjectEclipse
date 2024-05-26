@@ -2,7 +2,6 @@
 
 
 #include "VREntityCharacter.h"
-#include "VRController.h"
 #include "VRRootComponent.h"
 #include "GripComponent.h"
 
@@ -40,9 +39,7 @@ AVREntityCharacter::AVREntityCharacter(const FObjectInitializer& ObjectInitializ
 
 	// Create the HMD camera
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-	FAttachmentTransformRules AttachmentRules = FAttachmentTransformRules::KeepWorldTransform;
-	AttachmentRules.bWeldSimulatedBodies = true;
-	Camera->AttachToComponent(VROrigin, AttachmentRules);
+	Camera->SetupAttachment(VROrigin);
 	Camera->bLockToHmd = true;
 
 	// Setup roomscale movement
@@ -51,23 +48,23 @@ AVREntityCharacter::AVREntityCharacter(const FObjectInitializer& ObjectInitializ
 	// Create the motion controllers
 	FName SourceName = TEXT("Head");
 	MotionController_Head = CreateDefaultSubobject<UMotionControllerComponent>(SourceName);
-	MotionController_Head->AttachToComponent(VROrigin, AttachmentRules);
+	MotionController_Head->SetupAttachment(VROrigin);
 	MotionController_Head->SetTrackingMotionSource(SourceName);
 	SourceName = TEXT("LeftGrip");
-	MotionController_LeftGrip = CreateDefaultSubobject<UMotionControllerComponent>(SourceName);
-	MotionController_LeftGrip->AttachToComponent(VROrigin, AttachmentRules);
+	MotionController_LeftGrip = CreateDefaultSubobject<UGripMotionControllerComponent>(SourceName);
+	MotionController_LeftGrip->SetupAttachment(VROrigin);
 	MotionController_LeftGrip->SetTrackingMotionSource(SourceName);
 	SourceName = TEXT("LeftAim");
 	MotionController_LeftAim = CreateDefaultSubobject<UMotionControllerComponent>(SourceName);
-	MotionController_LeftAim->AttachToComponent(VROrigin, AttachmentRules);
+	MotionController_LeftAim->SetupAttachment(VROrigin);
 	MotionController_LeftAim->SetTrackingMotionSource(SourceName);
 	SourceName = TEXT("RightGrip");
-	MotionController_RightGrip = CreateDefaultSubobject<UMotionControllerComponent>(SourceName);
-	MotionController_RightGrip->AttachToComponent(VROrigin, AttachmentRules);
+	MotionController_RightGrip = CreateDefaultSubobject<UGripMotionControllerComponent>(SourceName);
+	MotionController_RightGrip->SetupAttachment(VROrigin);
 	MotionController_RightGrip->SetTrackingMotionSource(SourceName);
 	SourceName = TEXT("RightAim");
 	MotionController_RightAim = CreateDefaultSubobject<UMotionControllerComponent>(SourceName);
-	MotionController_RightAim->AttachToComponent(VROrigin, AttachmentRules);
+	MotionController_RightAim->SetupAttachment(VROrigin);
 	MotionController_RightAim->SetTrackingMotionSource(SourceName);
 
 }
@@ -115,12 +112,13 @@ void AVREntityCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 		// Bind default context inputs
 		EnhancedInput->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Move);
 		EnhancedInput->BindAction(TurnAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Turn);
-		EnhancedInput->BindAction(LeftTriggerAction, ETriggerEvent::Started, this, &AVREntityCharacter::LeftTrigger);
-		EnhancedInput->BindAction(RightTriggerAction, ETriggerEvent::Started, this, &AVREntityCharacter::RightTrigger);
+		EnhancedInput->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Jump);
 		EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Started, this, &AVREntityCharacter::LeftGrab);
 		EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Completed, this, &AVREntityCharacter::LeftRelease);
 		EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Started, this, &AVREntityCharacter::RightGrab);
 		EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Completed, this, &AVREntityCharacter::RightRelease);
+		EnhancedInput->BindAction(LeftTriggerAction, ETriggerEvent::Completed, this, &AVREntityCharacter::LeftTrigger);
+		EnhancedInput->BindAction(RightTriggerAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightTrigger);
 
 		// Bind hands context inputs
 		EnhancedInput->BindAction(LeftPointAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftPoint);
@@ -141,22 +139,15 @@ void AVREntityCharacter::Move(const FInputActionValue& Value)
 
 	if (Controller != nullptr)
 	{
-		AVRController* VRController = GetVRController();
-		if (!VRController) return;
-
 		// find out which way is forward
 		const FRotator Rotation = Camera->GetComponentRotation();
-		//const FRotator YawRotation(0, Rotation.Yaw, 0);
-		const FVector GravDirection = GetCharacterMovement()->GetGravityDirection();
-		const FRotator GravRelativeRotation = VRController->GetGravityRelativeRotation(Rotation, GravDirection);
-		const FRotator ForwardWorldRotation = VRController->GetGravityWorldRotation(FRotator(0.0, GravRelativeRotation.Yaw, 0.0), GravDirection);
-		const FRotator RightWorldRotation = VRController->GetGravityWorldRotation(FRotator(0.0, GravRelativeRotation.Yaw, GravRelativeRotation.Roll), GravDirection);
+		const FRotator YawRotation(0, Rotation.Yaw, 0);
 
 		// get forward vector
-		const FVector ForwardDirection = FRotationMatrix(ForwardWorldRotation).GetUnitAxis(EAxis::X);
+		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 
 		// get right vector 
-		const FVector RightDirection = FRotationMatrix(RightWorldRotation).GetUnitAxis(EAxis::Y);
+		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 
 		// add movement 
 		AddMovementInput(ForwardDirection, MovementVector.Y);
@@ -176,86 +167,45 @@ void AVREntityCharacter::Turn(const FInputActionValue& Value)
 	}
 }
 
-void AVREntityCharacter::LeftTrigger()
+void AVREntityCharacter::Jump(const FInputActionValue& Value)
 {
-	FVector PalmDirection = MotionController_LeftGrip->GetRightVector();
-	SetGravityDirection(PalmDirection);
-}
+	float JumpScale = Value.Get<float>();
 
-void AVREntityCharacter::RightTrigger()
-{
-
+	UE_LOG(LogTemp, Warning, TEXT("Jump scale is: %f"), JumpScale);
 }
 
 void AVREntityCharacter::LeftGrab()
 {
-	UGripComponent* FoundGrip = GetGripNearController(MotionController_LeftGrip);
-	if (IsValid(FoundGrip) && FoundGrip->TryGrab(MotionController_LeftGrip))
-	{
-		LeftHeldGrip = FoundGrip;
-		if (RightHeldGrip == LeftHeldGrip) RightHeldGrip = nullptr;
-	}
+	MotionController_LeftGrip->Grab();
+	if (MotionController_LeftGrip->GetHeldGrip() == MotionController_RightGrip->GetHeldGrip())
+		MotionController_RightGrip->ClearGrip();
 }
 
 void AVREntityCharacter::LeftRelease()
 {
-	if (IsValid(LeftHeldGrip) && LeftHeldGrip->TryRelease())
-		LeftHeldGrip = nullptr;
+	MotionController_LeftGrip->Release();
 }
 
 void AVREntityCharacter::RightGrab()
 {
-	UGripComponent* FoundGrip = GetGripNearController(MotionController_RightGrip);
-	if (IsValid(FoundGrip) && FoundGrip->TryGrab(MotionController_RightGrip))
-	{
-		RightHeldGrip = FoundGrip;
-		if (LeftHeldGrip == RightHeldGrip) LeftHeldGrip = nullptr;
-	}
+	MotionController_RightGrip->Grab();
+	if (MotionController_LeftGrip->GetHeldGrip() == MotionController_RightGrip->GetHeldGrip())
+		MotionController_LeftGrip->ClearGrip();
 }
 
 void AVREntityCharacter::RightRelease()
 {
-	if (IsValid(RightHeldGrip) && RightHeldGrip->TryRelease())
-		RightHeldGrip = nullptr;
+	MotionController_RightGrip->Release();
 }
 
-UGripComponent* AVREntityCharacter::GetGripNearController(UMotionControllerComponent* MotionController)
+void AVREntityCharacter::LeftTrigger(const FInputActionValue& Value)
 {
-	FVector ControllerGripPosition = MotionController->GetComponentLocation();
+	
+}
 
-	UWorld* World = GetWorld();
-	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
-	ObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECollisionChannel::ECC_PhysicsBody));
+void AVREntityCharacter::RightTrigger(const FInputActionValue& Value)
+{
 
-	FHitResult HitResult;
-
-	UGripComponent* ClosestGrip = nullptr;
-	float ClosestDistance = 9999999.0f;
-
-	bool hit = UKismetSystemLibrary::SphereTraceSingleForObjects(World, ControllerGripPosition, ControllerGripPosition, GrabRadius, ObjectTypes, false, TArray<AActor*, FDefaultAllocator>(), EDrawDebugTrace::None, HitResult, true, FColor::Cyan, FColor::Green, 1.0f);
-	if (hit)
-	{
-		AActor* HitActor = HitResult.GetActor();
-		TArray<UGripComponent*> Grips;
-		HitActor->GetComponents<UGripComponent>(Grips, true);
-
-		if (Grips.Num() > 0)
-		{
-			for (auto Element : Grips)
-			{
-				FVector ItemGripPosition = Element->GetComponentLocation();
-				FVector PositionDifference = ItemGripPosition - ControllerGripPosition;
-				float DifferenceLengthSquared = PositionDifference.SquaredLength();
-				if (DifferenceLengthSquared <= ClosestDistance)
-				{
-					ClosestDistance = DifferenceLengthSquared;
-					ClosestGrip = Element;
-				}
-			}
-		}
-	}
-
-	return ClosestGrip;
 }
 
 void AVREntityCharacter::LeftPoint(const FInputActionValue& Value)
@@ -303,16 +253,6 @@ void AVREntityCharacter::Crouch(bool bClientSimulation)
 	// TO-DO: Fill-in crouching for VR character
 	// Only currently defined to override ACharacter::Crouch default logic
 }
-
-void AVREntityCharacter::SetGravityDirection(FVector WorldDirection)
-{
-	if (UCharacterMovementComponent* CharMoveComp = GetCharacterMovement())
-	{
-		CharMoveComp->SetGravityDirection(WorldDirection);
-	}
-}
-
-AVRController* AVREntityCharacter::GetVRController() { return Controller != nullptr ? Cast<AVRController>(Controller) : nullptr; }
 
 UVRMovementComponent* AVREntityCharacter::GetVRMovement() { return GetCharacterMovement<UVRMovementComponent>(); }
 

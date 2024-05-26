@@ -69,13 +69,16 @@
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\GripComponent.cpp">
       <Filter>Source\ProjectEclipseVR\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\GripMotionControllerComponent.cpp">
+      <Filter>Source\ProjectEclipseVR\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\InputModifierClampAxesbySign.cpp">
+      <Filter>Source\ProjectEclipseVR\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\Item.cpp">
       <Filter>Source\ProjectEclipseVR\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\Trait.cpp">
-      <Filter>Source\ProjectEclipseVR\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VRController.cpp">
       <Filter>Source\ProjectEclipseVR\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\VREntityCharacter.cpp">
@@ -114,13 +117,16 @@
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\GripComponent.h">
       <Filter>Source\ProjectEclipseVR\Public</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\GripMotionControllerComponent.h">
+      <Filter>Source\ProjectEclipseVR\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\InputModifierClampAxesbySign.h">
+      <Filter>Source\ProjectEclipseVR\Public</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Item.h">
       <Filter>Source\ProjectEclipseVR\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Trait.h">
-      <Filter>Source\ProjectEclipseVR\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VRController.h">
       <Filter>Source\ProjectEclipseVR\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VREntityCharacter.h">
