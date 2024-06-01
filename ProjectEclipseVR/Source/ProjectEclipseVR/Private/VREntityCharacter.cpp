@@ -77,6 +77,9 @@ void AVREntityCharacter::BeginPlay()
 
 	UKismetSystemLibrary::ExecuteConsoleCommand(GetWorld(), TEXT("vr.PixelDensity 1.0"));
 
+	// Create instance of input counter tracker
+	InputCounters = FInputCounterTracker();
+
 }
 
 void AVREntityCharacter::SetupTrackingOrigin()
@@ -89,6 +92,7 @@ void AVREntityCharacter::Tick(float DeltaTime)
 {
 	AEntityCharacter::Tick(DeltaTime);
 
+	InputCounters.TickCounters(DeltaTime);
 	DisplayMotionControllerDebug();
 }
 
@@ -112,7 +116,10 @@ void AVREntityCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 		// Bind default context inputs
 		EnhancedInput->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Move);
 		EnhancedInput->BindAction(TurnAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Turn);
-		EnhancedInput->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Jump);
+		EnhancedInput->BindAction(JumpAction, ETriggerEvent::Started, this, &AVREntityCharacter::Jump);
+		EnhancedInput->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::JumpTriggered);
+		EnhancedInput->BindAction(JumpAction, ETriggerEvent::Completed, this, &AVREntityCharacter::StopJumping);
+		EnhancedInput->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Dodge);
 		EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Started, this, &AVREntityCharacter::LeftGrab);
 		EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Completed, this, &AVREntityCharacter::LeftRelease);
 		EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Started, this, &AVREntityCharacter::RightGrab);
@@ -135,7 +142,7 @@ void AVREntityCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 
 void AVREntityCharacter::Move(const FInputActionValue& Value)
 {
-	FVector2D MovementVector = Value.Get<FVector2D>();
+	MoveInput = Value.Get<FVector2D>();
 
 	if (Controller != nullptr)
 	{
@@ -150,8 +157,8 @@ void AVREntityCharacter::Move(const FInputActionValue& Value)
 		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 
 		// add movement 
-		AddMovementInput(ForwardDirection, MovementVector.Y);
-		AddMovementInput(RightDirection, MovementVector.X);
+		AddMovementInput(ForwardDirection, MoveInput.Y);
+		AddMovementInput(RightDirection, MoveInput.X);
 	}
 
 }
@@ -167,11 +174,86 @@ void AVREntityCharacter::Turn(const FInputActionValue& Value)
 	}
 }
 
-void AVREntityCharacter::Jump(const FInputActionValue& Value)
+void AVREntityCharacter::JumpTriggered(const FInputActionValue& Value)
 {
 	float JumpScale = Value.Get<float>();
+	float PressedTime = InputCounters.GetCounter(JumpAction);
 
-	UE_LOG(LogTemp, Warning, TEXT("Jump scale is: %f"), JumpScale);
+	UE_LOG(LogTemp, Warning, TEXT("Jump scale is %f and jump pressed time is %f"), JumpScale, PressedTime);
+}
+
+void AVREntityCharacter::Jump()
+{
+	UE_LOG(LogTemp, Warning, TEXT("VR Character now jumping"));
+
+	if (InputCounters.StartCounter(JumpAction))
+	{
+		if (JumpEvent.IsBound())
+			JumpEvent.Broadcast(this, true, 0.0f);
+		else
+			ACharacter::Jump();
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Jump counter already present"));
+	}
+}
+
+void AVREntityCharacter::StopJumping()
+{
+	UE_LOG(LogTemp, Warning, TEXT("VR Character now NOT jumping"));
+
+	float FinalValue;
+	if (InputCounters.StopCounter(JumpAction, FinalValue))
+	{
+		if (JumpEvent.IsBound())
+			JumpEvent.Broadcast(this, false, FinalValue);
+		else
+			ACharacter::StopJumping();
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Jump counter not present"));
+	}
+}
+
+void AVREntityCharacter::Dodge(const FInputActionValue& Value)
+{
+	bool Dodging = Value.Get<bool>();
+
+	// Start/stop the counter for dodge input
+	float PressTime(0.0f);
+	if (Dodging)
+	{
+		if (!InputCounters.StartCounter(DodgeAction)) return;
+	}
+	else
+	{
+		if (!InputCounters.StopCounter(DodgeAction, PressTime)) return;
+	}
+		
+	// Broadcast the dodge event if any alternate dodge behaviours are bound
+	if (DodgeEvent.IsBound())
+		DodgeEvent.Broadcast(this, Dodging, PressTime);
+	else
+	{
+		// Perform default behaviour for dodging
+		FVector2D DodgeDirection = MoveInput.IsZero() ? MoveInput : FVector2D(0.0, -1.0);
+
+		// find out which way is forward
+		const FRotator Rotation = Camera->GetComponentRotation();
+		const FRotator YawRotation(0, Rotation.Yaw, 0);
+
+		// get forward vector
+		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+
+		// get right vector 
+		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+
+		// add force
+		FVector DodgeVector = (ForwardDirection * DodgeDirection.Y) + (RightDirection * DodgeDirection.X);
+		GetVRMovement()->AddImpulse(DodgeVector, true);
+	}
 }
 
 void AVREntityCharacter::LeftGrab()
@@ -285,4 +367,47 @@ void AVREntityCharacter::DisplayMotionControllerDebug(UMotionControllerComponent
 	DrawDebugLine(World, ControllerLocation, ControllerLocation + (MotionController->GetForwardVector() * Radius * 1.5f), FColor::Red);
 	DrawDebugLine(World, ControllerLocation, ControllerLocation + (MotionController->GetRightVector() * Radius * 1.5f), FColor::Green);
 	DrawDebugLine(World, ControllerLocation, ControllerLocation + (MotionController->GetUpVector() * Radius * 1.5f), FColor::Blue);
+}
+
+
+////////////////////
+// INPUT COUNTERS //
+////////////////////
+
+
+bool FInputCounterTracker::StartCounter(UInputAction* InputAction)
+{
+	if (Counters.Contains(InputAction)) return false;
+
+	Counters.Add(InputAction, 0.0f);
+	return true;
+}
+
+bool FInputCounterTracker::StopCounter(UInputAction* InputAction, float& OutFinalValue)
+{
+	if (!Counters.Contains(InputAction)) return false;
+
+	return Counters.RemoveAndCopyValue(InputAction, OutFinalValue);
+}
+
+bool FInputCounterTracker::HasCounter(UInputAction* InputAction, float& OutValue)
+{
+	bool ReturnValue = Counters.Contains(InputAction);
+	OutValue = ReturnValue ? Counters[InputAction] : 0.0f;
+	return ReturnValue;
+}
+
+float FInputCounterTracker::GetCounter(UInputAction* InputAction)
+{
+	return Counters.Contains(InputAction) ? Counters[InputAction] : 0.0f;
+}
+
+void FInputCounterTracker::TickCounters(float DeltaTime)
+{
+	if (Counters.IsEmpty()) return;
+
+	for (const auto& Pair : Counters)
+	{
+		Counters[Pair.Key] += DeltaTime;
+	}
 }

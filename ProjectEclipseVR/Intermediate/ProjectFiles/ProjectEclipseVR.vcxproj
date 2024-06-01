@@ -287,9 +287,6 @@
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\GripMotionControllerComponent.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\InputModifierClampAxesbySign.cpp">
-      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\Item.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -316,7 +313,6 @@
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Faction.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\GripComponent.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\GripMotionControllerComponent.h"/>
-    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\InputModifierClampAxesbySign.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Item.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Trait.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\VREntityCharacter.h"/>

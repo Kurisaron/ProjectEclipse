@@ -72,9 +72,6 @@
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\GripMotionControllerComponent.cpp">
       <Filter>Source\ProjectEclipseVR\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\InputModifierClampAxesbySign.cpp">
-      <Filter>Source\ProjectEclipseVR\Private</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\Item.cpp">
       <Filter>Source\ProjectEclipseVR\Private</Filter>
     </ClCompile>
@@ -118,9 +115,6 @@
       <Filter>Source\ProjectEclipseVR\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\GripMotionControllerComponent.h">
-      <Filter>Source\ProjectEclipseVR\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\InputModifierClampAxesbySign.h">
       <Filter>Source\ProjectEclipseVR\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Item.h">

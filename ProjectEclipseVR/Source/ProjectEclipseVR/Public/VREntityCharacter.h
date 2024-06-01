@@ -27,6 +27,47 @@ struct FInputCounterTracker
 {
 	GENERATED_BODY()
 
+private:
+
+	UPROPERTY(VisibleAnywhere)
+	TMap<UInputAction*, float> Counters;
+
+public:
+
+	FInputCounterTracker() = default;
+
+	/*
+	* Start a counter associated with the given input action
+	* @param InputAction - action to be associated with counter
+	* @returns True if there was no counter already associated with the input action
+	 */
+	bool StartCounter(UInputAction* InputAction);
+
+	/*
+	* Stops the counter associated with the given input action and passes back the final value for the counter via reference
+	* @param InputAction - action associated with counter
+	* @param OutFinalValue - final value for the counter passed via reference
+	* @returns True if there was a counter associated with the input action
+	 */
+	bool StopCounter(UInputAction* InputAction, float& OutFinalValue);
+
+	/*
+	* Returns true if this tracker has a counter associated with the input action
+	* @param InputAction - action associated with counter
+	* @param OutValue - value for the counter passed via reference
+	* @returns True if there was a counter associated with the input action
+	 */
+	bool HasCounter(UInputAction* InputAction, float& OutValue);
+
+	/*
+	* Return the value of the counter associated with an input action
+	* @param InputAction - action to be associated with counter
+	* @returns Value of the counter associated with the input action
+	 */
+	float GetCounter(UInputAction* InputAction);
+
+	// Increment the active counters based on the passed time between tick updates
+	void TickCounters(float DeltaTime);
 };
 
 /**
@@ -82,6 +123,8 @@ class PROJECTECLIPSEVR_API AVREntityCharacter : public AEntityCharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Input", AdvancedDisplay, meta = (AllowPrivateAccess = "true"))
 	FInputCounterTracker InputCounters;
 
+	FVector2D MoveInput = FVector2D::ZeroVector;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
 	UInputAction* MoveAction;
 
@@ -90,6 +133,9 @@ class PROJECTECLIPSEVR_API AVREntityCharacter : public AEntityCharacter
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
 	UInputAction* JumpAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
+	UInputAction* DodgeAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
 	UInputAction* LeftGrabAction;
@@ -132,6 +178,12 @@ class PROJECTECLIPSEVR_API AVREntityCharacter : public AEntityCharacter
 	// DELEGATES/EVENTS //
 	//////////////////////
 
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
+	FPlayerInputEvent JumpEvent;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
+	FPlayerInputEvent DodgeEvent;
+
 public:
 
 	AVREntityCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
@@ -150,6 +202,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 
+protected:
+
 	//////////////////////////////
 	// INPUT ACTION SUBSCRIBERS //
 	//////////////////////////////
@@ -159,7 +213,13 @@ public:
 
 	void Turn(const FInputActionValue& Value);
 
-	void Jump(const FInputActionValue& Value);
+	void JumpTriggered(const FInputActionValue& Value);
+
+	virtual void Jump() override;
+
+	virtual void StopJumping() override;
+
+	void Dodge(const FInputActionValue& Value);
 
 	void LeftGrab();
 
