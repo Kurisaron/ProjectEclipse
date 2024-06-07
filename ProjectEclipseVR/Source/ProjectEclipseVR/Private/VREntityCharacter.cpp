@@ -105,7 +105,9 @@ void AVREntityCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
 		{
+			UInputMappingContext* DefaultContext = InputPools[TEXT("Default")].GetMappingContext();
 			Subsystem->AddMappingContext(DefaultContext, 0);
+			UInputMappingContext* HandsContext = InputPools[TEXT("Hands")].GetMappingContext();
 			Subsystem->AddMappingContext(HandsContext, 0);
 		}
 	}
@@ -114,29 +116,118 @@ void AVREntityCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 	if (auto EnhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		// Bind default context inputs
-		EnhancedInput->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Move);
-		EnhancedInput->BindAction(TurnAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Turn);
-		EnhancedInput->BindAction(JumpAction, ETriggerEvent::Started, this, &AVREntityCharacter::Jump);
-		EnhancedInput->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::JumpTriggered);
-		EnhancedInput->BindAction(JumpAction, ETriggerEvent::Completed, this, &AVREntityCharacter::StopJumping);
-		EnhancedInput->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Dodge);
-		EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Started, this, &AVREntityCharacter::LeftGrab);
-		EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Completed, this, &AVREntityCharacter::LeftRelease);
-		EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Started, this, &AVREntityCharacter::RightGrab);
-		EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Completed, this, &AVREntityCharacter::RightRelease);
-		EnhancedInput->BindAction(LeftTriggerAction, ETriggerEvent::Completed, this, &AVREntityCharacter::LeftTrigger);
-		EnhancedInput->BindAction(RightTriggerAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightTrigger);
+		if (InputPools.Contains("Default"))
+		{
+			FInputActionPool DefaultPool = InputPools["Default"];
 
-		// Bind hands context inputs
-		EnhancedInput->BindAction(LeftPointAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftPoint);
-		EnhancedInput->BindAction(RightPointAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightPoint);
-		EnhancedInput->BindAction(LeftThumbUpAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftThumbUp);
-		EnhancedInput->BindAction(RightThumbUpAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightThumbUp);
-		EnhancedInput->BindAction(LeftGraspAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftGrasp);
-		EnhancedInput->BindAction(RightGraspAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightGrasp);
-		EnhancedInput->BindAction(LeftIndexCurlAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftIndexCurl);
-		EnhancedInput->BindAction(RightIndexCurlAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightIndexCurl);
+			// Bind move input
+			if (UInputAction* MoveAction = DefaultPool.GetAction("Move"))
+			{
+				EnhancedInput->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Move);
+			}
 
+			// Bind turn input
+			if (UInputAction* TurnAction = DefaultPool.GetAction("Turn"))
+			{
+				EnhancedInput->BindAction(TurnAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Turn);
+			}
+
+			// Bind jump input
+			if (UInputAction* JumpAction = DefaultPool.GetAction("Jump"))
+			{
+				EnhancedInput->BindAction(JumpAction, ETriggerEvent::Started, this, &AVREntityCharacter::Jump);
+				EnhancedInput->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::JumpTriggered);
+				EnhancedInput->BindAction(JumpAction, ETriggerEvent::Completed, this, &AVREntityCharacter::StopJumping);
+			}
+
+			// Bind dodge input
+			if (UInputAction* DodgeAction = DefaultPool.GetAction("Dodge"))
+			{
+				EnhancedInput->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Dodge);
+			}
+
+			// Bind left grab input
+			if (UInputAction* LeftGrabAction = DefaultPool.GetAction("Left Grab"))
+			{
+				EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Started, this, &AVREntityCharacter::LeftGrab);
+				EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Completed, this, &AVREntityCharacter::LeftRelease);
+			}
+
+			// Bind right grab input
+			if (UInputAction* RightGrabAction = DefaultPool.GetAction("Right Grab"))
+			{
+				EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Started, this, &AVREntityCharacter::RightGrab);
+				EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Completed, this, &AVREntityCharacter::RightRelease);
+			}
+
+			// Bind left trigger input
+			if (UInputAction* LeftTriggerAction = DefaultPool.GetAction("Left Trigger"))
+			{
+				EnhancedInput->BindAction(LeftTriggerAction, ETriggerEvent::Completed, this, &AVREntityCharacter::LeftTrigger);
+			}
+
+			// Bind right trigger input
+			if (UInputAction* RightTriggerAction = DefaultPool.GetAction("Right Trigger"))
+			{
+				EnhancedInput->BindAction(RightTriggerAction, ETriggerEvent::Completed, this, &AVREntityCharacter::RightTrigger);
+			}
+		}
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("Default pool not present"));
+		}
+		
+		// Bind hands context inputs for hand animation
+		if (InputPools.Contains("Hands"))
+		{
+			FInputActionPool HandsPool = InputPools["Hands"];
+
+			if (UInputAction* LeftPointAction = HandsPool.GetAction("Left Point"))
+			{
+				EnhancedInput->BindAction(LeftPointAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftPoint);
+			}
+
+			if (UInputAction* RightPointAction = HandsPool.GetAction("Right Point"))
+			{
+				EnhancedInput->BindAction(RightPointAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightPoint);
+			}
+
+			if (UInputAction* LeftThumbUpAction = HandsPool.GetAction("Left Thumb Up"))
+			{
+				EnhancedInput->BindAction(LeftThumbUpAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftThumbUp);
+			}
+
+			if (UInputAction* RightThumbUpAction = HandsPool.GetAction("Right Thumb Up"))
+			{
+				EnhancedInput->BindAction(RightThumbUpAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightThumbUp);
+			}
+
+			if (UInputAction* LeftGraspAction = HandsPool.GetAction("Left Grasp"))
+			{
+				EnhancedInput->BindAction(LeftGraspAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftGrasp);
+			}
+
+			if (UInputAction* RightGraspAction = HandsPool.GetAction("Right Grasp"))
+			{
+				EnhancedInput->BindAction(RightGraspAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightGrasp);
+			}
+
+			if (UInputAction* LeftIndexCurlAction = HandsPool.GetAction("Left Index Curl"))
+			{
+				EnhancedInput->BindAction(LeftIndexCurlAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftIndexCurl);
+			}
+
+			if (UInputAction* RightIndexCurlAction = HandsPool.GetAction("Right Index Curl"))
+			{
+				EnhancedInput->BindAction(RightIndexCurlAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightIndexCurl);
+			}
+		}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Default pool not present"));
+	}
+
+		
 	}
 }
 
@@ -177,6 +268,7 @@ void AVREntityCharacter::Turn(const FInputActionValue& Value)
 void AVREntityCharacter::JumpTriggered(const FInputActionValue& Value)
 {
 	float JumpScale = Value.Get<float>();
+	UInputAction* JumpAction = InputPools["Default"].GetAction("Jump");
 	float PressedTime = InputCounters.GetCounter(JumpAction);
 
 	UE_LOG(LogTemp, Warning, TEXT("Jump scale is %f and jump pressed time is %f"), JumpScale, PressedTime);
@@ -185,6 +277,8 @@ void AVREntityCharacter::JumpTriggered(const FInputActionValue& Value)
 void AVREntityCharacter::Jump()
 {
 	UE_LOG(LogTemp, Warning, TEXT("VR Character now jumping"));
+
+	UInputAction* JumpAction = InputPools["Default"].GetAction("Jump");
 
 	if (InputCounters.StartCounter(JumpAction))
 	{
@@ -203,6 +297,8 @@ void AVREntityCharacter::StopJumping()
 {
 	UE_LOG(LogTemp, Warning, TEXT("VR Character now NOT jumping"));
 
+	UInputAction* JumpAction = InputPools["Default"].GetAction("Jump");
+
 	float FinalValue;
 	if (InputCounters.StopCounter(JumpAction, FinalValue))
 	{
@@ -220,6 +316,8 @@ void AVREntityCharacter::StopJumping()
 void AVREntityCharacter::Dodge(const FInputActionValue& Value)
 {
 	bool Dodging = Value.Get<bool>();
+
+	UInputAction* DodgeAction = InputPools["Default"].GetAction("Dodge");
 
 	// Start/stop the counter for dodge input
 	float PressTime(0.0f);
@@ -252,7 +350,7 @@ void AVREntityCharacter::Dodge(const FInputActionValue& Value)
 
 		// add force
 		FVector DodgeVector = (ForwardDirection * DodgeDirection.Y) + (RightDirection * DodgeDirection.X);
-		GetVRMovement()->AddImpulse(DodgeVector, true);
+		GetVRMovement()->Dodge(DodgeVector);
 	}
 }
 
@@ -292,42 +390,42 @@ void AVREntityCharacter::RightTrigger(const FInputActionValue& Value)
 
 void AVREntityCharacter::LeftPoint(const FInputActionValue& Value)
 {
-
+	LeftHandPose.Point = Value.Get<float>();
 }
 
 void AVREntityCharacter::RightPoint(const FInputActionValue& Value)
 {
-
+	RightHandPose.Point = Value.Get<float>();
 }
 
 void AVREntityCharacter::LeftThumbUp(const FInputActionValue& Value)
 {
-
+	LeftHandPose.ThumbUp = Value.Get<float>();
 }
 
 void AVREntityCharacter::RightThumbUp(const FInputActionValue& Value)
 {
-
+	RightHandPose.ThumbUp = Value.Get<float>();
 }
 
 void AVREntityCharacter::LeftGrasp(const FInputActionValue& Value)
 {
-
+	LeftHandPose.Grasp = Value.Get<float>();
 }
 
 void AVREntityCharacter::RightGrasp(const FInputActionValue& Value)
 {
-
+	RightHandPose.Grasp = Value.Get<float>();
 }
 
 void AVREntityCharacter::LeftIndexCurl(const FInputActionValue& Value)
 {
-
+	LeftHandPose.IndexCurl = Value.Get<float>();
 }
 
 void AVREntityCharacter::RightIndexCurl(const FInputActionValue& Value)
 {
-
+	RightHandPose.IndexCurl = Value.Get<float>();
 }
 
 void AVREntityCharacter::Crouch(bool bClientSimulation)
@@ -410,4 +508,22 @@ void FInputCounterTracker::TickCounters(float DeltaTime)
 	{
 		Counters[Pair.Key] += DeltaTime;
 	}
+}
+
+
+///////////////////////
+// INPUT ACTION POOL //
+///////////////////////
+
+
+UInputMappingContext* FInputActionPool::GetMappingContext() { return MappingContext; }
+
+bool FInputActionPool::HasAction(FString Key) { return InputActions.Contains(Key); }
+
+UInputAction* FInputActionPool::GetAction(FString Key)
+{
+	if (!HasAction(Key))
+		return nullptr;
+	else
+		return InputActions[Key];
 }

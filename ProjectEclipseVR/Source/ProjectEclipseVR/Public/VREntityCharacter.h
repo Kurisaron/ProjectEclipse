@@ -70,6 +70,50 @@ public:
 	void TickCounters(float DeltaTime);
 };
 
+// Input Action Pools are utilized to facilitate modularity for input actions on player-controlled actors
+USTRUCT(BlueprintType)
+struct FInputActionPool
+{
+	GENERATED_BODY()
+
+private:
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UInputMappingContext* MappingContext;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	TMap<FString, UInputAction*> InputActions;
+
+public:
+
+	UInputMappingContext* GetMappingContext();
+
+	bool HasAction(FString Key);
+
+	UInputAction* GetAction(FString Key);
+
+};
+
+
+USTRUCT(BlueprintType)
+struct FHandPoseData
+{
+	GENERATED_BODY()
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	float Point = 0;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	float ThumbUp = 0;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	float Grasp = 0;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	float IndexCurl = 0;
+};
+
+
 /**
  * Character class that facilitates VR gameplay
  */
@@ -83,6 +127,10 @@ class PROJECTECLIPSEVR_API AVREntityCharacter : public AEntityCharacter
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Camera", meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* Camera;
+
+	////////////////////////
+	// MOTION CONTROLLERS //
+	////////////////////////
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Motion Controllers", meta = (AllowPrivateAccess = "true"))
 	UMotionControllerComponent* MotionController_Head;
@@ -102,77 +150,34 @@ class PROJECTECLIPSEVR_API AVREntityCharacter : public AEntityCharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Motion Controllers", meta = (AllowPrivateAccess = "true"))
 	bool bDrawMotionControllerDebug = false;
 
+	/////////////
+	// HOLDING //
+	/////////////
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VR|Held Grips", meta = (AllowPrivateAccess = "true"))
 	UGripComponent* LeftHeldGrip;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VR|Held Grips", meta = (AllowPrivateAccess = "true"))
 	UGripComponent* RightHeldGrip;
 
-	// Inputs in this mapping context are the core functions for gameplay
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
-	UInputMappingContext* DefaultContext;
-
-	// Inputs in this mapping context correlate to moving the player's body parts
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Hands Context", meta = (AllowPrivateAccess = "true"))
-	UInputMappingContext* HandsContext;
-
-	///////////////////
-	// INPUT ACTIONS //
-	///////////////////
+	///////////
+	// INPUT //
+	///////////
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Input", AdvancedDisplay, meta = (AllowPrivateAccess = "true"))
 	FInputCounterTracker InputCounters;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Input", AdvancedDisplay, meta = (AllowPrivateAccess = "true"))
 	FVector2D MoveInput = FVector2D::ZeroVector;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* MoveAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
+	TMap<FString, FInputActionPool> InputPools;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* TurnAction;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Input", AdvancedDisplay, meta = (AllowPrivateAccess = "true"))
+	FHandPoseData LeftHandPose;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* JumpAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* DodgeAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* LeftGrabAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* RightGrabAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* LeftTriggerAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Default Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* RightTriggerAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Hands Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* LeftPointAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Hands Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* RightPointAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Hands Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* LeftThumbUpAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Hands Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* RightThumbUpAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Hands Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* LeftGraspAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Hands Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* RightGraspAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Hands Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* LeftIndexCurlAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input|Hands Context", meta = (AllowPrivateAccess = "true"))
-	UInputAction* RightIndexCurlAction;
-
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Input", AdvancedDisplay, meta = (AllowPrivateAccess = "true"))
+	FHandPoseData RightHandPose;
 
 	//////////////////////
 	// DELEGATES/EVENTS //
@@ -192,6 +197,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	// Called to set the XR tracking origin
 	virtual void SetupTrackingOrigin();
 
 public:
@@ -208,30 +214,41 @@ protected:
 	// INPUT ACTION SUBSCRIBERS //
 	//////////////////////////////
 
-
+	// Called via Move Input Action to perform locomotion-style movement
 	void Move(const FInputActionValue& Value);
 
+	// Called via Turn Input Action to turn the player on the spot
 	void Turn(const FInputActionValue& Value);
 
+	// Called via Jump Input Action to collect input value
 	void JumpTriggered(const FInputActionValue& Value);
 
+	// Called via Jump Input Action when it has started being pressed
 	virtual void Jump() override;
 
+	// Called via Jump Input Action when it has stopped being pressed
 	virtual void StopJumping() override;
 
+	// Called via Dodge Input Action to perform dodging/dashing behaviour
 	void Dodge(const FInputActionValue& Value);
 
+	// Called via Left Grab Input Action when it has started being pressed
 	void LeftGrab();
 
+	// Called via Left Grab Input Action when it has stopped being pressed
 	void LeftRelease();
 
+	// Called via Right Grab Input Action when it has started being pressed
 	void RightGrab();
 
+	// Called via Right Grab Input Action when it has stopped being pressed
 	void RightRelease();
 
 	void LeftTrigger(const FInputActionValue& Value);
 
 	void RightTrigger(const FInputActionValue& Value);
+
+
 
 	void LeftPoint(const FInputActionValue& Value);
 

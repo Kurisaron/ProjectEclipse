@@ -16,9 +16,13 @@ UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class PROJECTECLIPSEVR_API UVRMovementComponent : public UCharacterMovementComponent
 {
 	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dodging", meta = (AllowPrivateAccess = "true"))
+	float DodgePowerMultiplier = 10.0f;
 	
 public:
 
 	UVRMovementComponent();
 
+	virtual void Dodge(FVector Direction);
 };

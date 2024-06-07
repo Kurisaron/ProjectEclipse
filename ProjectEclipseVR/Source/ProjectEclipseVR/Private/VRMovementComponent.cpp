@@ -7,3 +7,9 @@ UVRMovementComponent::UVRMovementComponent()
 {
 
 }
+
+
+void UVRMovementComponent::Dodge(FVector Direction)
+{
+	AddImpulse(Direction * DodgePowerMultiplier, true);
+}

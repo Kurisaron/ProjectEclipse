@@ -10,6 +10,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeVREntityCharacter() {}
 
 // Begin Cross Module References
+COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector2D();
 ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_USceneComponent_NoRegister();
 ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputAction_NoRegister();
@@ -21,6 +22,8 @@ PROJECTECLIPSEVR_API UClass* Z_Construct_UClass_AVREntityCharacter_NoRegister();
 PROJECTECLIPSEVR_API UClass* Z_Construct_UClass_UGripComponent_NoRegister();
 PROJECTECLIPSEVR_API UClass* Z_Construct_UClass_UGripMotionControllerComponent_NoRegister();
 PROJECTECLIPSEVR_API UFunction* Z_Construct_UDelegateFunction_ProjectEclipseVR_PlayerInputEvent__DelegateSignature();
+PROJECTECLIPSEVR_API UScriptStruct* Z_Construct_UScriptStruct_FHandPoseData();
+PROJECTECLIPSEVR_API UScriptStruct* Z_Construct_UScriptStruct_FInputActionPool();
 PROJECTECLIPSEVR_API UScriptStruct* Z_Construct_UScriptStruct_FInputCounterTracker();
 UPackage* Z_Construct_UPackage__Script_ProjectEclipseVR();
 // End Cross Module References
@@ -154,6 +157,176 @@ UScriptStruct* Z_Construct_UScriptStruct_FInputCounterTracker()
 }
 // End ScriptStruct FInputCounterTracker
 
+// Begin ScriptStruct FInputActionPool
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_InputActionPool;
+class UScriptStruct* FInputActionPool::StaticStruct()
+{
+	if (!Z_Registration_Info_UScriptStruct_InputActionPool.OuterSingleton)
+	{
+		Z_Registration_Info_UScriptStruct_InputActionPool.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FInputActionPool, (UObject*)Z_Construct_UPackage__Script_ProjectEclipseVR(), TEXT("InputActionPool"));
+	}
+	return Z_Registration_Info_UScriptStruct_InputActionPool.OuterSingleton;
+}
+template<> PROJECTECLIPSEVR_API UScriptStruct* StaticStruct<FInputActionPool>()
+{
+	return FInputActionPool::StaticStruct();
+}
+struct Z_Construct_UScriptStruct_FInputActionPool_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[] = {
+		{ "BlueprintType", "true" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Input Action Pools are utilized to facilitate modularity for input actions on player-controlled actors\n" },
+#endif
+		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Input Action Pools are utilized to facilitate modularity for input actions on player-controlled actors" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MappingContext_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "InputActionPool" },
+		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InputActions_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "InputActionPool" },
+		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_MappingContext;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_InputActions_ValueProp;
+	static const UECodeGen_Private::FStrPropertyParams NewProp_InputActions_Key_KeyProp;
+	static const UECodeGen_Private::FMapPropertyParams NewProp_InputActions;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static void* NewStructOps()
+	{
+		return (UScriptStruct::ICppStructOps*)new UScriptStruct::TCppStructOps<FInputActionPool>();
+	}
+	static const UECodeGen_Private::FStructParams StructParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UScriptStruct_FInputActionPool_Statics::NewProp_MappingContext = { "MappingContext", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FInputActionPool, MappingContext), Z_Construct_UClass_UInputMappingContext_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MappingContext_MetaData), NewProp_MappingContext_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UScriptStruct_FInputActionPool_Statics::NewProp_InputActions_ValueProp = { "InputActions", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FInputActionPool_Statics::NewProp_InputActions_Key_KeyProp = { "InputActions_Key", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FMapPropertyParams Z_Construct_UScriptStruct_FInputActionPool_Statics::NewProp_InputActions = { "InputActions", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FInputActionPool, InputActions), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InputActions_MetaData), NewProp_InputActions_MetaData) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FInputActionPool_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FInputActionPool_Statics::NewProp_MappingContext,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FInputActionPool_Statics::NewProp_InputActions_ValueProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FInputActionPool_Statics::NewProp_InputActions_Key_KeyProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FInputActionPool_Statics::NewProp_InputActions,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FInputActionPool_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FInputActionPool_Statics::StructParams = {
+	(UObject* (*)())Z_Construct_UPackage__Script_ProjectEclipseVR,
+	nullptr,
+	&NewStructOps,
+	"InputActionPool",
+	Z_Construct_UScriptStruct_FInputActionPool_Statics::PropPointers,
+	UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FInputActionPool_Statics::PropPointers),
+	sizeof(FInputActionPool),
+	alignof(FInputActionPool),
+	RF_Public|RF_Transient|RF_MarkAsNative,
+	EStructFlags(0x00000001),
+	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FInputActionPool_Statics::Struct_MetaDataParams), Z_Construct_UScriptStruct_FInputActionPool_Statics::Struct_MetaDataParams)
+};
+UScriptStruct* Z_Construct_UScriptStruct_FInputActionPool()
+{
+	if (!Z_Registration_Info_UScriptStruct_InputActionPool.InnerSingleton)
+	{
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_InputActionPool.InnerSingleton, Z_Construct_UScriptStruct_FInputActionPool_Statics::StructParams);
+	}
+	return Z_Registration_Info_UScriptStruct_InputActionPool.InnerSingleton;
+}
+// End ScriptStruct FInputActionPool
+
+// Begin ScriptStruct FHandPoseData
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_HandPoseData;
+class UScriptStruct* FHandPoseData::StaticStruct()
+{
+	if (!Z_Registration_Info_UScriptStruct_HandPoseData.OuterSingleton)
+	{
+		Z_Registration_Info_UScriptStruct_HandPoseData.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FHandPoseData, (UObject*)Z_Construct_UPackage__Script_ProjectEclipseVR(), TEXT("HandPoseData"));
+	}
+	return Z_Registration_Info_UScriptStruct_HandPoseData.OuterSingleton;
+}
+template<> PROJECTECLIPSEVR_API UScriptStruct* StaticStruct<FHandPoseData>()
+{
+	return FHandPoseData::StaticStruct();
+}
+struct Z_Construct_UScriptStruct_FHandPoseData_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[] = {
+		{ "BlueprintType", "true" },
+		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Point_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "HandPoseData" },
+		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ThumbUp_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "HandPoseData" },
+		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Grasp_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "HandPoseData" },
+		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_IndexCurl_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "HandPoseData" },
+		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_Point;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_ThumbUp;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_Grasp;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_IndexCurl;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static void* NewStructOps()
+	{
+		return (UScriptStruct::ICppStructOps*)new UScriptStruct::TCppStructOps<FHandPoseData>();
+	}
+	static const UECodeGen_Private::FStructParams StructParams;
+};
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FHandPoseData_Statics::NewProp_Point = { "Point", nullptr, (EPropertyFlags)0x0010000000020015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FHandPoseData, Point), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Point_MetaData), NewProp_Point_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FHandPoseData_Statics::NewProp_ThumbUp = { "ThumbUp", nullptr, (EPropertyFlags)0x0010000000020015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FHandPoseData, ThumbUp), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ThumbUp_MetaData), NewProp_ThumbUp_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FHandPoseData_Statics::NewProp_Grasp = { "Grasp", nullptr, (EPropertyFlags)0x0010000000020015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FHandPoseData, Grasp), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Grasp_MetaData), NewProp_Grasp_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FHandPoseData_Statics::NewProp_IndexCurl = { "IndexCurl", nullptr, (EPropertyFlags)0x0010000000020015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FHandPoseData, IndexCurl), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_IndexCurl_MetaData), NewProp_IndexCurl_MetaData) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FHandPoseData_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FHandPoseData_Statics::NewProp_Point,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FHandPoseData_Statics::NewProp_ThumbUp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FHandPoseData_Statics::NewProp_Grasp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FHandPoseData_Statics::NewProp_IndexCurl,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FHandPoseData_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FHandPoseData_Statics::StructParams = {
+	(UObject* (*)())Z_Construct_UPackage__Script_ProjectEclipseVR,
+	nullptr,
+	&NewStructOps,
+	"HandPoseData",
+	Z_Construct_UScriptStruct_FHandPoseData_Statics::PropPointers,
+	UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FHandPoseData_Statics::PropPointers),
+	sizeof(FHandPoseData),
+	alignof(FHandPoseData),
+	RF_Public|RF_Transient|RF_MarkAsNative,
+	EStructFlags(0x00000001),
+	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FHandPoseData_Statics::Struct_MetaDataParams), Z_Construct_UScriptStruct_FHandPoseData_Statics::Struct_MetaDataParams)
+};
+UScriptStruct* Z_Construct_UScriptStruct_FHandPoseData()
+{
+	if (!Z_Registration_Info_UScriptStruct_HandPoseData.InnerSingleton)
+	{
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_HandPoseData.InnerSingleton, Z_Construct_UScriptStruct_FHandPoseData_Statics::StructParams);
+	}
+	return Z_Registration_Info_UScriptStruct_HandPoseData.InnerSingleton;
+}
+// End ScriptStruct FHandPoseData
+
 // Begin Class AVREntityCharacter
 void AVREntityCharacter::StaticRegisterNativesAVREntityCharacter()
 {
@@ -195,8 +368,14 @@ struct Z_Construct_UClass_AVREntityCharacter_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MotionController_Head_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "VR|Motion Controllers" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "////////////////////////\n// MOTION CONTROLLERS //\n////////////////////////\n" },
+#endif
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "MOTION CONTROLLERS" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MotionController_LeftGrip_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
@@ -230,8 +409,14 @@ struct Z_Construct_UClass_AVREntityCharacter_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LeftHeldGrip_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "VR|Held Grips" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/////////////\n// HOLDING //\n/////////////\n" },
+#endif
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "/\n HOLDING\n/" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RightHeldGrip_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
@@ -239,112 +424,35 @@ struct Z_Construct_UClass_AVREntityCharacter_Statics
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DefaultContext_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Default Context" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "// Inputs in this mapping context are the core functions for gameplay\n" },
-#endif
-		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Inputs in this mapping context are the core functions for gameplay" },
-#endif
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_HandsContext_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Hands Context" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "// Inputs in this mapping context correlate to moving the player's body parts\n" },
-#endif
-		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Inputs in this mapping context correlate to moving the player's body parts" },
-#endif
-	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InputCounters_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Input" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "///////////////////\n// INPUT ACTIONS //\n///////////////////\n" },
+		{ "Comment", "///////////\n// INPUT //\n///////////\n" },
 #endif
 		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "/\n INPUT ACTIONS\n/" },
+		{ "ToolTip", "INPUT" },
 #endif
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MoveAction_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MoveInput_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Default Context" },
+		{ "Category", "Input" },
 		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_TurnAction_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InputPools_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Default Context" },
+		{ "Category", "Input" },
 		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_JumpAction_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LeftHandPose_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Default Context" },
+		{ "Category", "Input" },
 		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LeftGrabAction_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RightHandPose_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Default Context" },
-		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RightGrabAction_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Default Context" },
-		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LeftTriggerAction_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Default Context" },
-		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RightTriggerAction_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Default Context" },
-		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LeftPointAction_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Hands Context" },
-		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RightPointAction_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Hands Context" },
-		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LeftThumbUpAction_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Hands Context" },
-		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RightThumbUpAction_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Hands Context" },
-		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LeftGraspAction_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Hands Context" },
-		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RightGraspAction_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Hands Context" },
-		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LeftIndexCurlAction_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Hands Context" },
-		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RightIndexCurlAction_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Input|Hands Context" },
+		{ "Category", "Input" },
 		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_JumpEvent_MetaData[] = {
@@ -358,6 +466,11 @@ struct Z_Construct_UClass_AVREntityCharacter_Statics
 		{ "ToolTip", "/\n DELEGATES/EVENTS\n/" },
 #endif
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DodgeEvent_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "VREntityCharacter" },
+		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_VROrigin;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_Camera;
@@ -370,25 +483,15 @@ struct Z_Construct_UClass_AVREntityCharacter_Statics
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bDrawMotionControllerDebug;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_LeftHeldGrip;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_RightHeldGrip;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_DefaultContext;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_HandsContext;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_InputCounters;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_MoveAction;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_TurnAction;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_JumpAction;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_LeftGrabAction;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_RightGrabAction;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_LeftTriggerAction;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_RightTriggerAction;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_LeftPointAction;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_RightPointAction;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_LeftThumbUpAction;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_RightThumbUpAction;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_LeftGraspAction;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_RightGraspAction;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_LeftIndexCurlAction;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_RightIndexCurlAction;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_MoveInput;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_InputPools_ValueProp;
+	static const UECodeGen_Private::FStrPropertyParams NewProp_InputPools_Key_KeyProp;
+	static const UECodeGen_Private::FMapPropertyParams NewProp_InputPools;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_LeftHandPose;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_RightHandPose;
 	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_JumpEvent;
+	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_DodgeEvent;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -410,25 +513,15 @@ void Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_bDrawMotionControlle
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_bDrawMotionControllerDebug = { "bDrawMotionControllerDebug", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AVREntityCharacter), &Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_bDrawMotionControllerDebug_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bDrawMotionControllerDebug_MetaData), NewProp_bDrawMotionControllerDebug_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftHeldGrip = { "LeftHeldGrip", nullptr, (EPropertyFlags)0x00400000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, LeftHeldGrip), Z_Construct_UClass_UGripComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LeftHeldGrip_MetaData), NewProp_LeftHeldGrip_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightHeldGrip = { "RightHeldGrip", nullptr, (EPropertyFlags)0x00400000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, RightHeldGrip), Z_Construct_UClass_UGripComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RightHeldGrip_MetaData), NewProp_RightHeldGrip_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_DefaultContext = { "DefaultContext", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, DefaultContext), Z_Construct_UClass_UInputMappingContext_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DefaultContext_MetaData), NewProp_DefaultContext_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_HandsContext = { "HandsContext", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, HandsContext), Z_Construct_UClass_UInputMappingContext_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_HandsContext_MetaData), NewProp_HandsContext_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputCounters = { "InputCounters", nullptr, (EPropertyFlags)0x0040040000020015, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, InputCounters), Z_Construct_UScriptStruct_FInputCounterTracker, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InputCounters_MetaData), NewProp_InputCounters_MetaData) }; // 3030304300
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_MoveAction = { "MoveAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, MoveAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MoveAction_MetaData), NewProp_MoveAction_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_TurnAction = { "TurnAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, TurnAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TurnAction_MetaData), NewProp_TurnAction_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_JumpAction = { "JumpAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, JumpAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_JumpAction_MetaData), NewProp_JumpAction_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftGrabAction = { "LeftGrabAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, LeftGrabAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LeftGrabAction_MetaData), NewProp_LeftGrabAction_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightGrabAction = { "RightGrabAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, RightGrabAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RightGrabAction_MetaData), NewProp_RightGrabAction_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftTriggerAction = { "LeftTriggerAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, LeftTriggerAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LeftTriggerAction_MetaData), NewProp_LeftTriggerAction_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightTriggerAction = { "RightTriggerAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, RightTriggerAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RightTriggerAction_MetaData), NewProp_RightTriggerAction_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftPointAction = { "LeftPointAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, LeftPointAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LeftPointAction_MetaData), NewProp_LeftPointAction_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightPointAction = { "RightPointAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, RightPointAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RightPointAction_MetaData), NewProp_RightPointAction_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftThumbUpAction = { "LeftThumbUpAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, LeftThumbUpAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LeftThumbUpAction_MetaData), NewProp_LeftThumbUpAction_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightThumbUpAction = { "RightThumbUpAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, RightThumbUpAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RightThumbUpAction_MetaData), NewProp_RightThumbUpAction_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftGraspAction = { "LeftGraspAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, LeftGraspAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LeftGraspAction_MetaData), NewProp_LeftGraspAction_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightGraspAction = { "RightGraspAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, RightGraspAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RightGraspAction_MetaData), NewProp_RightGraspAction_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftIndexCurlAction = { "LeftIndexCurlAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, LeftIndexCurlAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LeftIndexCurlAction_MetaData), NewProp_LeftIndexCurlAction_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightIndexCurlAction = { "RightIndexCurlAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, RightIndexCurlAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RightIndexCurlAction_MetaData), NewProp_RightIndexCurlAction_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_MoveInput = { "MoveInput", nullptr, (EPropertyFlags)0x0040040000020015, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, MoveInput), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MoveInput_MetaData), NewProp_MoveInput_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputPools_ValueProp = { "InputPools", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, Z_Construct_UScriptStruct_FInputActionPool, METADATA_PARAMS(0, nullptr) }; // 97180969
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputPools_Key_KeyProp = { "InputPools_Key", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputPools = { "InputPools", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, InputPools), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InputPools_MetaData), NewProp_InputPools_MetaData) }; // 97180969
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftHandPose = { "LeftHandPose", nullptr, (EPropertyFlags)0x0040040000020015, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, LeftHandPose), Z_Construct_UScriptStruct_FHandPoseData, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LeftHandPose_MetaData), NewProp_LeftHandPose_MetaData) }; // 1650407348
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightHandPose = { "RightHandPose", nullptr, (EPropertyFlags)0x0040040000020015, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, RightHandPose), Z_Construct_UScriptStruct_FHandPoseData, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RightHandPose_MetaData), NewProp_RightHandPose_MetaData) }; // 1650407348
 const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_JumpEvent = { "JumpEvent", nullptr, (EPropertyFlags)0x00401000100a0001, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, JumpEvent), Z_Construct_UDelegateFunction_ProjectEclipseVR_PlayerInputEvent__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_JumpEvent_MetaData), NewProp_JumpEvent_MetaData) }; // 3250303426
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_DodgeEvent = { "DodgeEvent", nullptr, (EPropertyFlags)0x00401000100a0001, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, DodgeEvent), Z_Construct_UDelegateFunction_ProjectEclipseVR_PlayerInputEvent__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DodgeEvent_MetaData), NewProp_DodgeEvent_MetaData) }; // 3250303426
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AVREntityCharacter_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_VROrigin,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_Camera,
@@ -440,25 +533,15 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AVREntity
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_bDrawMotionControllerDebug,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftHeldGrip,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightHeldGrip,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_DefaultContext,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_HandsContext,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputCounters,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_MoveAction,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_TurnAction,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_JumpAction,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftGrabAction,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightGrabAction,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftTriggerAction,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightTriggerAction,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftPointAction,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightPointAction,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftThumbUpAction,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightThumbUpAction,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftGraspAction,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightGraspAction,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftIndexCurlAction,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightIndexCurlAction,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_MoveInput,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputPools_ValueProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputPools_Key_KeyProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputPools,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftHandPose,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightHandPose,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_JumpEvent,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_DodgeEvent,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AVREntityCharacter_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_AVREntityCharacter_Statics::DependentSingletons[])() = {
@@ -502,12 +585,14 @@ struct Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_P
 {
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
 		{ FInputCounterTracker::StaticStruct, Z_Construct_UScriptStruct_FInputCounterTracker_Statics::NewStructOps, TEXT("InputCounterTracker"), &Z_Registration_Info_UScriptStruct_InputCounterTracker, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FInputCounterTracker), 3030304300U) },
+		{ FInputActionPool::StaticStruct, Z_Construct_UScriptStruct_FInputActionPool_Statics::NewStructOps, TEXT("InputActionPool"), &Z_Registration_Info_UScriptStruct_InputActionPool, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FInputActionPool), 97180969U) },
+		{ FHandPoseData::StaticStruct, Z_Construct_UScriptStruct_FHandPoseData_Statics::NewStructOps, TEXT("HandPoseData"), &Z_Registration_Info_UScriptStruct_HandPoseData, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FHandPoseData), 1650407348U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AVREntityCharacter, AVREntityCharacter::StaticClass, TEXT("AVREntityCharacter"), &Z_Registration_Info_UClass_AVREntityCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AVREntityCharacter), 2450874291U) },
+		{ Z_Construct_UClass_AVREntityCharacter, AVREntityCharacter::StaticClass, TEXT("AVREntityCharacter"), &Z_Registration_Info_UClass_AVREntityCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AVREntityCharacter), 3033528739U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_3521143119(TEXT("/Script/ProjectEclipseVR"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_1965131922(TEXT("/Script/ProjectEclipseVR"),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_Statics::ScriptStructInfo),
 	nullptr, 0);
