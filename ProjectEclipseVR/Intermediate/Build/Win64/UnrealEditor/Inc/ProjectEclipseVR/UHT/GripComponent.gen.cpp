@@ -144,6 +144,7 @@ struct Z_Construct_UFunction_UGripComponent_GetHeldByHand_Statics
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Grip Component" },
 		{ "ModuleRelativePath", "Public/GripComponent.h" },
 	};
 #endif // WITH_METADATA
@@ -179,6 +180,128 @@ DEFINE_FUNCTION(UGripComponent::execGetHeldByHand)
 }
 // End Class UGripComponent Function GetHeldByHand
 
+// Begin Class UGripComponent Function PrimaryUse
+struct GripComponent_eventPrimaryUse_Parms
+{
+	bool Pressed;
+	float PressedTime;
+};
+static FName NAME_UGripComponent_PrimaryUse = FName(TEXT("PrimaryUse"));
+void UGripComponent::PrimaryUse(bool Pressed, float PressedTime)
+{
+	GripComponent_eventPrimaryUse_Parms Parms;
+	Parms.Pressed=Pressed ? true : false;
+	Parms.PressedTime=PressedTime;
+	ProcessEvent(FindFunctionChecked(NAME_UGripComponent_PrimaryUse),&Parms);
+}
+struct Z_Construct_UFunction_UGripComponent_PrimaryUse_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Grip Component" },
+		{ "ModuleRelativePath", "Public/GripComponent.h" },
+	};
+#endif // WITH_METADATA
+	static void NewProp_Pressed_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_Pressed;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_PressedTime;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+void Z_Construct_UFunction_UGripComponent_PrimaryUse_Statics::NewProp_Pressed_SetBit(void* Obj)
+{
+	((GripComponent_eventPrimaryUse_Parms*)Obj)->Pressed = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UGripComponent_PrimaryUse_Statics::NewProp_Pressed = { "Pressed", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(GripComponent_eventPrimaryUse_Parms), &Z_Construct_UFunction_UGripComponent_PrimaryUse_Statics::NewProp_Pressed_SetBit, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UGripComponent_PrimaryUse_Statics::NewProp_PressedTime = { "PressedTime", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(GripComponent_eventPrimaryUse_Parms, PressedTime), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UGripComponent_PrimaryUse_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UGripComponent_PrimaryUse_Statics::NewProp_Pressed,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UGripComponent_PrimaryUse_Statics::NewProp_PressedTime,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UGripComponent_PrimaryUse_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UGripComponent_PrimaryUse_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UGripComponent, nullptr, "PrimaryUse", nullptr, nullptr, Z_Construct_UFunction_UGripComponent_PrimaryUse_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UGripComponent_PrimaryUse_Statics::PropPointers), sizeof(GripComponent_eventPrimaryUse_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020C00, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UGripComponent_PrimaryUse_Statics::Function_MetaDataParams), Z_Construct_UFunction_UGripComponent_PrimaryUse_Statics::Function_MetaDataParams) };
+static_assert(sizeof(GripComponent_eventPrimaryUse_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UGripComponent_PrimaryUse()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UGripComponent_PrimaryUse_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UGripComponent::execPrimaryUse)
+{
+	P_GET_UBOOL(Z_Param_Pressed);
+	P_GET_PROPERTY(FFloatProperty,Z_Param_PressedTime);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->PrimaryUse_Implementation(Z_Param_Pressed,Z_Param_PressedTime);
+	P_NATIVE_END;
+}
+// End Class UGripComponent Function PrimaryUse
+
+// Begin Class UGripComponent Function SecondaryUse
+struct GripComponent_eventSecondaryUse_Parms
+{
+	bool Pressed;
+	float PressedTime;
+};
+static FName NAME_UGripComponent_SecondaryUse = FName(TEXT("SecondaryUse"));
+void UGripComponent::SecondaryUse(bool Pressed, float PressedTime)
+{
+	GripComponent_eventSecondaryUse_Parms Parms;
+	Parms.Pressed=Pressed ? true : false;
+	Parms.PressedTime=PressedTime;
+	ProcessEvent(FindFunctionChecked(NAME_UGripComponent_SecondaryUse),&Parms);
+}
+struct Z_Construct_UFunction_UGripComponent_SecondaryUse_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Grip Component" },
+		{ "ModuleRelativePath", "Public/GripComponent.h" },
+	};
+#endif // WITH_METADATA
+	static void NewProp_Pressed_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_Pressed;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_PressedTime;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+void Z_Construct_UFunction_UGripComponent_SecondaryUse_Statics::NewProp_Pressed_SetBit(void* Obj)
+{
+	((GripComponent_eventSecondaryUse_Parms*)Obj)->Pressed = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UGripComponent_SecondaryUse_Statics::NewProp_Pressed = { "Pressed", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(GripComponent_eventSecondaryUse_Parms), &Z_Construct_UFunction_UGripComponent_SecondaryUse_Statics::NewProp_Pressed_SetBit, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UGripComponent_SecondaryUse_Statics::NewProp_PressedTime = { "PressedTime", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(GripComponent_eventSecondaryUse_Parms, PressedTime), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UGripComponent_SecondaryUse_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UGripComponent_SecondaryUse_Statics::NewProp_Pressed,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UGripComponent_SecondaryUse_Statics::NewProp_PressedTime,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UGripComponent_SecondaryUse_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UGripComponent_SecondaryUse_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UGripComponent, nullptr, "SecondaryUse", nullptr, nullptr, Z_Construct_UFunction_UGripComponent_SecondaryUse_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UGripComponent_SecondaryUse_Statics::PropPointers), sizeof(GripComponent_eventSecondaryUse_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020C00, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UGripComponent_SecondaryUse_Statics::Function_MetaDataParams), Z_Construct_UFunction_UGripComponent_SecondaryUse_Statics::Function_MetaDataParams) };
+static_assert(sizeof(GripComponent_eventSecondaryUse_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UGripComponent_SecondaryUse()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UGripComponent_SecondaryUse_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UGripComponent::execSecondaryUse)
+{
+	P_GET_UBOOL(Z_Param_Pressed);
+	P_GET_PROPERTY(FFloatProperty,Z_Param_PressedTime);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->SecondaryUse_Implementation(Z_Param_Pressed,Z_Param_PressedTime);
+	P_NATIVE_END;
+}
+// End Class UGripComponent Function SecondaryUse
+
 // Begin Class UGripComponent Function SetPrimitiveCompPhysics
 struct Z_Construct_UFunction_UGripComponent_SetPrimitiveCompPhysics_Statics
 {
@@ -188,6 +311,7 @@ struct Z_Construct_UFunction_UGripComponent_SetPrimitiveCompPhysics_Statics
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Grip Component" },
 		{ "ModuleRelativePath", "Public/GripComponent.h" },
 	};
 #endif // WITH_METADATA
@@ -231,6 +355,7 @@ struct Z_Construct_UFunction_UGripComponent_SetShouldSimulateOnDrop_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Grip Component" },
 		{ "ModuleRelativePath", "Public/GripComponent.h" },
 	};
 #endif // WITH_METADATA
@@ -361,6 +486,8 @@ void UGripComponent::StaticRegisterNativesUGripComponent()
 	UClass* Class = UGripComponent::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
 		{ "GetHeldByHand", &UGripComponent::execGetHeldByHand },
+		{ "PrimaryUse", &UGripComponent::execPrimaryUse },
+		{ "SecondaryUse", &UGripComponent::execSecondaryUse },
 		{ "SetPrimitiveCompPhysics", &UGripComponent::execSetPrimitiveCompPhysics },
 		{ "SetShouldSimulateOnDrop", &UGripComponent::execSetShouldSimulateOnDrop },
 		{ "TryGrab", &UGripComponent::execTryGrab },
@@ -444,9 +571,11 @@ struct Z_Construct_UClass_UGripComponent_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UGripComponent_GetHeldByHand, "GetHeldByHand" }, // 1900393522
-		{ &Z_Construct_UFunction_UGripComponent_SetPrimitiveCompPhysics, "SetPrimitiveCompPhysics" }, // 2225277913
-		{ &Z_Construct_UFunction_UGripComponent_SetShouldSimulateOnDrop, "SetShouldSimulateOnDrop" }, // 1313512097
+		{ &Z_Construct_UFunction_UGripComponent_GetHeldByHand, "GetHeldByHand" }, // 2629515336
+		{ &Z_Construct_UFunction_UGripComponent_PrimaryUse, "PrimaryUse" }, // 2589048141
+		{ &Z_Construct_UFunction_UGripComponent_SecondaryUse, "SecondaryUse" }, // 1778842224
+		{ &Z_Construct_UFunction_UGripComponent_SetPrimitiveCompPhysics, "SetPrimitiveCompPhysics" }, // 3047807755
+		{ &Z_Construct_UFunction_UGripComponent_SetShouldSimulateOnDrop, "SetShouldSimulateOnDrop" }, // 3312881808
 		{ &Z_Construct_UFunction_UGripComponent_TryGrab, "TryGrab" }, // 1192918956
 		{ &Z_Construct_UFunction_UGripComponent_TryRelease, "TryRelease" }, // 2619850597
 	};
@@ -530,10 +659,10 @@ struct Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_P
 		{ EGripType_StaticEnum, TEXT("EGripType"), &Z_Registration_Info_UEnum_EGripType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2996865120U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UGripComponent, UGripComponent::StaticClass, TEXT("UGripComponent"), &Z_Registration_Info_UClass_UGripComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UGripComponent), 1038759392U) },
+		{ Z_Construct_UClass_UGripComponent, UGripComponent::StaticClass, TEXT("UGripComponent"), &Z_Registration_Info_UClass_UGripComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UGripComponent), 1453563901U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_1903298229(TEXT("/Script/ProjectEclipseVR"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_1928402807(TEXT("/Script/ProjectEclipseVR"),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_Statics::ClassInfo),
 	nullptr, 0,
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_Statics::EnumInfo));

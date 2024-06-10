@@ -22,18 +22,18 @@ struct FItemData;
 
 template<> PROJECTECLIPSEVR_API UScriptStruct* StaticStruct<struct FItemData>();
 
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_38_GENERATED_BODY \
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_36_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FItemWielderStatus_Statics; \
 	PROJECTECLIPSEVR_API static class UScriptStruct* StaticStruct();
 
 
 template<> PROJECTECLIPSEVR_API UScriptStruct* StaticStruct<struct FItemWielderStatus>();
 
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_53_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_62_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execGetItemData);
 
 
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_53_INCLASS_NO_PURE_DECLS \
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_62_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAItem(); \
 	friend struct Z_Construct_UClass_AItem_Statics; \
@@ -42,7 +42,7 @@ public: \
 	DECLARE_SERIALIZER(AItem)
 
 
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_53_ENHANCED_CONSTRUCTORS \
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_62_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	AItem(AItem&&); \
@@ -54,13 +54,13 @@ public: \
 	NO_API virtual ~AItem();
 
 
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_50_PROLOG
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_53_GENERATED_BODY \
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_59_PROLOG
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_62_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_53_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_53_INCLASS_NO_PURE_DECLS \
-	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_53_ENHANCED_CONSTRUCTORS \
+	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_62_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_62_INCLASS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_Item_h_62_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

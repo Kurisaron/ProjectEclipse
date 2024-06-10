@@ -14,8 +14,63 @@ HEADMOUNTEDDISPLAY_API UClass* Z_Construct_UClass_UMotionControllerComponent();
 PROJECTECLIPSEVR_API UClass* Z_Construct_UClass_UGripComponent_NoRegister();
 PROJECTECLIPSEVR_API UClass* Z_Construct_UClass_UGripMotionControllerComponent();
 PROJECTECLIPSEVR_API UClass* Z_Construct_UClass_UGripMotionControllerComponent_NoRegister();
+PROJECTECLIPSEVR_API UEnum* Z_Construct_UEnum_ProjectEclipseVR_EHandSide();
 UPackage* Z_Construct_UPackage__Script_ProjectEclipseVR();
 // End Cross Module References
+
+// Begin Enum EHandSide
+static FEnumRegistrationInfo Z_Registration_Info_UEnum_EHandSide;
+static UEnum* EHandSide_StaticEnum()
+{
+	if (!Z_Registration_Info_UEnum_EHandSide.OuterSingleton)
+	{
+		Z_Registration_Info_UEnum_EHandSide.OuterSingleton = GetStaticEnum(Z_Construct_UEnum_ProjectEclipseVR_EHandSide, (UObject*)Z_Construct_UPackage__Script_ProjectEclipseVR(), TEXT("EHandSide"));
+	}
+	return Z_Registration_Info_UEnum_EHandSide.OuterSingleton;
+}
+template<> PROJECTECLIPSEVR_API UEnum* StaticEnum<EHandSide>()
+{
+	return EHandSide_StaticEnum();
+}
+struct Z_Construct_UEnum_ProjectEclipseVR_EHandSide_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[] = {
+		{ "BlueprintType", "true" },
+		{ "HSE_Left.DisplayName", "Left" },
+		{ "HSE_Left.Name", "EHandSide::HSE_Left" },
+		{ "HSE_Right.DisplayName", "Right" },
+		{ "HSE_Right.Name", "EHandSide::HSE_Right" },
+		{ "ModuleRelativePath", "Public/GripMotionControllerComponent.h" },
+	};
+#endif // WITH_METADATA
+	static constexpr UECodeGen_Private::FEnumeratorParam Enumerators[] = {
+		{ "EHandSide::HSE_Left", (int64)EHandSide::HSE_Left },
+		{ "EHandSide::HSE_Right", (int64)EHandSide::HSE_Right },
+	};
+	static const UECodeGen_Private::FEnumParams EnumParams;
+};
+const UECodeGen_Private::FEnumParams Z_Construct_UEnum_ProjectEclipseVR_EHandSide_Statics::EnumParams = {
+	(UObject*(*)())Z_Construct_UPackage__Script_ProjectEclipseVR,
+	nullptr,
+	"EHandSide",
+	"EHandSide",
+	Z_Construct_UEnum_ProjectEclipseVR_EHandSide_Statics::Enumerators,
+	RF_Public|RF_Transient|RF_MarkAsNative,
+	UE_ARRAY_COUNT(Z_Construct_UEnum_ProjectEclipseVR_EHandSide_Statics::Enumerators),
+	EEnumFlags::None,
+	(uint8)UEnum::ECppForm::EnumClass,
+	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_ProjectEclipseVR_EHandSide_Statics::Enum_MetaDataParams), Z_Construct_UEnum_ProjectEclipseVR_EHandSide_Statics::Enum_MetaDataParams)
+};
+UEnum* Z_Construct_UEnum_ProjectEclipseVR_EHandSide()
+{
+	if (!Z_Registration_Info_UEnum_EHandSide.InnerSingleton)
+	{
+		UECodeGen_Private::ConstructUEnum(Z_Registration_Info_UEnum_EHandSide.InnerSingleton, Z_Construct_UEnum_ProjectEclipseVR_EHandSide_Statics::EnumParams);
+	}
+	return Z_Registration_Info_UEnum_EHandSide.InnerSingleton;
+}
+// End Enum EHandSide
 
 // Begin Class UGripMotionControllerComponent
 void UGripMotionControllerComponent::StaticRegisterNativesUGripMotionControllerComponent()
@@ -45,6 +100,11 @@ struct Z_Construct_UClass_UGripMotionControllerComponent_Statics
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/GripMotionControllerComponent.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_GripPressure_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Grabbing" },
+		{ "ModuleRelativePath", "Public/GripMotionControllerComponent.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_GrabRadius_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Grabbing" },
@@ -52,6 +112,7 @@ struct Z_Construct_UClass_UGripMotionControllerComponent_Statics
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_HeldGrip;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_GripPressure;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_GrabRadius;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
@@ -61,9 +122,11 @@ struct Z_Construct_UClass_UGripMotionControllerComponent_Statics
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UGripMotionControllerComponent_Statics::NewProp_HeldGrip = { "HeldGrip", nullptr, (EPropertyFlags)0x00400000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UGripMotionControllerComponent, HeldGrip), Z_Construct_UClass_UGripComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_HeldGrip_MetaData), NewProp_HeldGrip_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UGripMotionControllerComponent_Statics::NewProp_GripPressure = { "GripPressure", nullptr, (EPropertyFlags)0x0040000000020015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UGripMotionControllerComponent, GripPressure), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_GripPressure_MetaData), NewProp_GripPressure_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UGripMotionControllerComponent_Statics::NewProp_GrabRadius = { "GrabRadius", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UGripMotionControllerComponent, GrabRadius), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_GrabRadius_MetaData), NewProp_GrabRadius_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UGripMotionControllerComponent_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UGripMotionControllerComponent_Statics::NewProp_HeldGrip,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UGripMotionControllerComponent_Statics::NewProp_GripPressure,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UGripMotionControllerComponent_Statics::NewProp_GrabRadius,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UGripMotionControllerComponent_Statics::PropPointers) < 2048);
@@ -106,13 +169,16 @@ UGripMotionControllerComponent::~UGripMotionControllerComponent() {}
 // Begin Registration
 struct Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripMotionControllerComponent_h_Statics
 {
+	static constexpr FEnumRegisterCompiledInInfo EnumInfo[] = {
+		{ EHandSide_StaticEnum, TEXT("EHandSide"), &Z_Registration_Info_UEnum_EHandSide, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3405160416U) },
+	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UGripMotionControllerComponent, UGripMotionControllerComponent::StaticClass, TEXT("UGripMotionControllerComponent"), &Z_Registration_Info_UClass_UGripMotionControllerComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UGripMotionControllerComponent), 223806772U) },
+		{ Z_Construct_UClass_UGripMotionControllerComponent, UGripMotionControllerComponent::StaticClass, TEXT("UGripMotionControllerComponent"), &Z_Registration_Info_UClass_UGripMotionControllerComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UGripMotionControllerComponent), 1066047062U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripMotionControllerComponent_h_2827393318(TEXT("/Script/ProjectEclipseVR"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripMotionControllerComponent_h_1456196458(TEXT("/Script/ProjectEclipseVR"),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripMotionControllerComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripMotionControllerComponent_h_Statics::ClassInfo),
 	nullptr, 0,
-	nullptr, 0);
+	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripMotionControllerComponent_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripMotionControllerComponent_h_Statics::EnumInfo));
 // End Registration
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

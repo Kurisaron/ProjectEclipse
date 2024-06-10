@@ -6,7 +6,14 @@
 
 UGripMotionControllerComponent::UGripMotionControllerComponent(const FObjectInitializer& ObjectInitializer) : UMotionControllerComponent(ObjectInitializer)
 {
+	
+}
 
+
+void UGripMotionControllerComponent::InitializeComponent()
+{
+	Super::InitializeComponent();
+	//UE_LOG(LogTemp, Warning, TEXT("Grip motion controller initialized"));
 }
 
 void UGripMotionControllerComponent::Grab()
@@ -22,11 +29,6 @@ void UGripMotionControllerComponent::Release()
 {
 	if (IsValid(HeldGrip) && HeldGrip->TryRelease())
 		HeldGrip = nullptr;
-}
-
-void UGripMotionControllerComponent::ClearGrip()
-{
-	HeldGrip = nullptr;
 }
 
 UGripComponent* UGripMotionControllerComponent::FindGripNearController()
@@ -68,4 +70,27 @@ UGripComponent* UGripMotionControllerComponent::FindGripNearController()
 	return ClosestGrip;
 }
 
+bool UGripMotionControllerComponent::IsHoldingGrip() { return HeldGrip != nullptr; }
+
 UGripComponent* UGripMotionControllerComponent::GetHeldGrip() { return HeldGrip; }
+
+void UGripMotionControllerComponent::SetGripPressure(float Value)
+{
+	GripPressure = Value;
+
+	// Perform operations on the held grip if there is one
+	if (HeldGrip != nullptr)
+	{
+		
+	}
+}
+
+void UGripMotionControllerComponent::SetConstrainedHand(UStaticMeshComponent* NewHand)
+{
+	ConstrainedHand = NewHand;
+}
+
+UStaticMeshComponent* UGripMotionControllerComponent::GetConstrainedHand()
+{
+	return ConstrainedHand;
+}

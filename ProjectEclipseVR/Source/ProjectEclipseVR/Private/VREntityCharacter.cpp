@@ -14,7 +14,7 @@ AVREntityCharacter::AVREntityCharacter(const FObjectInitializer& ObjectInitializ
 	{
 		return;
 	}
-	VRRootComp->InitCapsuleSize(42.f, 96.0f);
+	VRRootComp->InitCapsuleSize(10.0f, 96.0f);
 
 	// Only enable the character to rotate the yaw
 	bUseControllerRotationPitch = false;
@@ -26,7 +26,7 @@ AVREntityCharacter::AVREntityCharacter(const FObjectInitializer& ObjectInitializ
 
 	// Note: For faster iteration times these variables, and many more, can be tweaked in the Character Blueprint
 	// instead of recompiling to adjust them
-	GetCharacterMovement()->JumpZVelocity = 700.f;
+	GetCharacterMovement()->JumpZVelocity = 800.f;
 	GetCharacterMovement()->AirControl = 0.35f;
 	GetCharacterMovement()->MaxWalkSpeed = 500.f;
 	GetCharacterMovement()->MinAnalogWalkSpeed = 20.f;
@@ -67,6 +67,23 @@ AVREntityCharacter::AVREntityCharacter(const FObjectInitializer& ObjectInitializ
 	MotionController_RightAim->SetupAttachment(VROrigin);
 	MotionController_RightAim->SetTrackingMotionSource(SourceName);
 
+	// Set up constrained hands
+	StableMeshL = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("LeftStableMesh"));
+	StableMeshL->SetupAttachment(MotionController_LeftGrip);
+	StableMeshR = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RightStableMesh"));
+	StableMeshR->SetupAttachment(MotionController_RightGrip);
+	ConstrainedMeshL = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("LeftConstrainedMesh"));
+	ConstrainedMeshL->SetupAttachment(MotionController_LeftGrip);
+	ConstrainedMeshR = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RightConstrainedMesh"));
+	ConstrainedMeshR->SetupAttachment(MotionController_RightGrip);
+	HandConstraintL = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("LeftConstraint"));
+	HandConstraintL->SetupAttachment(MotionController_LeftGrip);
+	HandConstraintL->SetConstrainedComponents(StableMeshL, TEXT(""), ConstrainedMeshL, TEXT(""));
+	HandConstraintR = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("RightConstraint"));
+	HandConstraintR->SetupAttachment(MotionController_RightGrip);
+	HandConstraintR->SetConstrainedComponents(StableMeshR, TEXT(""), ConstrainedMeshR, TEXT(""));
+	MotionController_LeftGrip->SetConstrainedHand(ConstrainedMeshL);
+	MotionController_RightGrip->SetConstrainedHand(ConstrainedMeshR);
 }
 
 void AVREntityCharacter::BeginPlay()
@@ -100,15 +117,22 @@ void AVREntityCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 {
 	AEntityCharacter::SetupPlayerInputComponent(PlayerInputComponent);
 
+	UInputActionPool* DefaultPool = GetDefaultPool();
+	UInputActionPool* HandsPool = GetHandsPool();
+	
 	// Add Input Mapping Contexts
 	if (auto PlayerController = Cast<APlayerController>(Controller))
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
 		{
-			UInputMappingContext* DefaultContext = InputPools[TEXT("Default")].GetMappingContext();
-			Subsystem->AddMappingContext(DefaultContext, 0);
-			UInputMappingContext* HandsContext = InputPools[TEXT("Hands")].GetMappingContext();
-			Subsystem->AddMappingContext(HandsContext, 0);
+			if (DefaultPool)
+				if (UInputMappingContext* DefaultContext = DefaultPool->GetMappingContext())
+					Subsystem->AddMappingContext(DefaultContext, 0);
+
+			if (HandsPool)
+				if (UInputMappingContext* HandsContext = HandsPool->GetMappingContext())
+					Subsystem->AddMappingContext(HandsContext, 0);
+			
 		}
 	}
 
@@ -116,24 +140,30 @@ void AVREntityCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 	if (auto EnhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		// Bind default context inputs
-		if (InputPools.Contains("Default"))
+		
+		if (DefaultPool)
 		{
-			FInputActionPool DefaultPool = InputPools["Default"];
 
 			// Bind move input
-			if (UInputAction* MoveAction = DefaultPool.GetAction("Move"))
+			if (UInputAction* MoveAction = DefaultPool->GetAction("Move"))
 			{
 				EnhancedInput->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Move);
 			}
 
 			// Bind turn input
-			if (UInputAction* TurnAction = DefaultPool.GetAction("Turn"))
+			if (UInputAction* TurnAction = DefaultPool->GetAction("Turn"))
 			{
 				EnhancedInput->BindAction(TurnAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Turn);
 			}
 
+			// Bind sprint input
+			if (UInputAction* SprintAction = DefaultPool->GetAction("Sprint"))
+			{
+				EnhancedInput->BindAction(SprintAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Sprint);
+			}
+
 			// Bind jump input
-			if (UInputAction* JumpAction = DefaultPool.GetAction("Jump"))
+			if (UInputAction* JumpAction = DefaultPool->GetAction("Jump"))
 			{
 				EnhancedInput->BindAction(JumpAction, ETriggerEvent::Started, this, &AVREntityCharacter::Jump);
 				EnhancedInput->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::JumpTriggered);
@@ -141,94 +171,97 @@ void AVREntityCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 			}
 
 			// Bind dodge input
-			if (UInputAction* DodgeAction = DefaultPool.GetAction("Dodge"))
+			if (UInputAction* DodgeAction = DefaultPool->GetAction("Dodge"))
 			{
 				EnhancedInput->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Dodge);
 			}
 
 			// Bind left grab input
-			if (UInputAction* LeftGrabAction = DefaultPool.GetAction("Left Grab"))
+			if (UInputAction* LeftGrabAction = DefaultPool->GetAction("Left Grab"))
 			{
 				EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Started, this, &AVREntityCharacter::LeftGrab);
 				EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Completed, this, &AVREntityCharacter::LeftRelease);
+				EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftGrabValue);
 			}
 
 			// Bind right grab input
-			if (UInputAction* RightGrabAction = DefaultPool.GetAction("Right Grab"))
+			if (UInputAction* RightGrabAction = DefaultPool->GetAction("Right Grab"))
 			{
 				EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Started, this, &AVREntityCharacter::RightGrab);
 				EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Completed, this, &AVREntityCharacter::RightRelease);
+				EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightGrabValue);
 			}
 
 			// Bind left trigger input
-			if (UInputAction* LeftTriggerAction = DefaultPool.GetAction("Left Trigger"))
+			if (UInputAction* LeftTriggerAction = DefaultPool->GetAction("Left Trigger"))
 			{
 				EnhancedInput->BindAction(LeftTriggerAction, ETriggerEvent::Completed, this, &AVREntityCharacter::LeftTrigger);
 			}
 
 			// Bind right trigger input
-			if (UInputAction* RightTriggerAction = DefaultPool.GetAction("Right Trigger"))
+			if (UInputAction* RightTriggerAction = DefaultPool->GetAction("Right Trigger"))
 			{
 				EnhancedInput->BindAction(RightTriggerAction, ETriggerEvent::Completed, this, &AVREntityCharacter::RightTrigger);
 			}
 		}
 		else
 		{
-			UE_LOG(LogTemp, Error, TEXT("Default pool not present"));
+			UE_LOG(LogTemp, Error, TEXT("Default pool not present or invalid"));
 		}
 		
 		// Bind hands context inputs for hand animation
-		if (InputPools.Contains("Hands"))
+		if (HandsPool)
 		{
-			FInputActionPool HandsPool = InputPools["Hands"];
-
-			if (UInputAction* LeftPointAction = HandsPool.GetAction("Left Point"))
+			
+			if (UInputAction* LeftPointAction = HandsPool->GetAction("Left Point"))
 			{
 				EnhancedInput->BindAction(LeftPointAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftPoint);
 			}
 
-			if (UInputAction* RightPointAction = HandsPool.GetAction("Right Point"))
+			if (UInputAction* RightPointAction = HandsPool->GetAction("Right Point"))
 			{
 				EnhancedInput->BindAction(RightPointAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightPoint);
 			}
 
-			if (UInputAction* LeftThumbUpAction = HandsPool.GetAction("Left Thumb Up"))
+			if (UInputAction* LeftThumbUpAction = HandsPool->GetAction("Left Thumb Up"))
 			{
 				EnhancedInput->BindAction(LeftThumbUpAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftThumbUp);
 			}
 
-			if (UInputAction* RightThumbUpAction = HandsPool.GetAction("Right Thumb Up"))
+			if (UInputAction* RightThumbUpAction = HandsPool->GetAction("Right Thumb Up"))
 			{
 				EnhancedInput->BindAction(RightThumbUpAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightThumbUp);
 			}
 
-			if (UInputAction* LeftGraspAction = HandsPool.GetAction("Left Grasp"))
+			if (UInputAction* LeftGraspAction = HandsPool->GetAction("Left Grasp"))
 			{
 				EnhancedInput->BindAction(LeftGraspAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftGrasp);
 			}
 
-			if (UInputAction* RightGraspAction = HandsPool.GetAction("Right Grasp"))
+			if (UInputAction* RightGraspAction = HandsPool->GetAction("Right Grasp"))
 			{
 				EnhancedInput->BindAction(RightGraspAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightGrasp);
 			}
 
-			if (UInputAction* LeftIndexCurlAction = HandsPool.GetAction("Left Index Curl"))
+			if (UInputAction* LeftIndexCurlAction = HandsPool->GetAction("Left Index Curl"))
 			{
 				EnhancedInput->BindAction(LeftIndexCurlAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftIndexCurl);
 			}
 
-			if (UInputAction* RightIndexCurlAction = HandsPool.GetAction("Right Index Curl"))
+			if (UInputAction* RightIndexCurlAction = HandsPool->GetAction("Right Index Curl"))
 			{
 				EnhancedInput->BindAction(RightIndexCurlAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightIndexCurl);
 			}
 		}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("Default pool not present"));
-	}
-
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("Hands pool not present or invalid"));
+		}
 		
+
+		// End of action binding setup
 	}
+	
 }
 
 void AVREntityCharacter::Move(const FInputActionValue& Value)
@@ -265,12 +298,26 @@ void AVREntityCharacter::Turn(const FInputActionValue& Value)
 	}
 }
 
+void AVREntityCharacter::Sprint(const FInputActionValue& Value)
+{
+	// Input value is a bool
+	bool Sprinting = Value.Get<bool>();
+}
+
 void AVREntityCharacter::JumpTriggered(const FInputActionValue& Value)
 {
 	float JumpScale = Value.Get<float>();
-	UInputAction* JumpAction = InputPools["Default"].GetAction("Jump");
-	float PressedTime = InputCounters.GetCounter(JumpAction);
+	float PressedTime(0.0f);
 
+	if (UInputActionPool* DefaultPool = GetDefaultPool())
+	{
+		if (UInputAction* JumpAction = DefaultPool->GetAction("Jump"))
+		{
+			PressedTime = InputCounters.GetCounter(JumpAction);
+		}
+	}
+	;
+	
 	UE_LOG(LogTemp, Warning, TEXT("Jump scale is %f and jump pressed time is %f"), JumpScale, PressedTime);
 }
 
@@ -278,87 +325,109 @@ void AVREntityCharacter::Jump()
 {
 	UE_LOG(LogTemp, Warning, TEXT("VR Character now jumping"));
 
-	UInputAction* JumpAction = InputPools["Default"].GetAction("Jump");
+	// Attempt to access the default input pool
+	if (UInputActionPool* DefaultPool = GetDefaultPool())
+	{
+		// Attempt to access the jump input action from the input pool
+		if (UInputAction* JumpAction = DefaultPool->GetAction("Jump"))
+		{
+			// Attempt to start the counter for jump input
+			if (InputCounters.StartCounter(JumpAction))
+			{
+				// All prerequisites met for performing jump
 
-	if (InputCounters.StartCounter(JumpAction))
-	{
-		if (JumpEvent.IsBound())
-			JumpEvent.Broadcast(this, true, 0.0f);
-		else
-			ACharacter::Jump();
+				// Broadcast the Jump Event if alternate behaviour has been bound
+				// Otherwise perform default jump
+				if (JumpEvent.IsBound())
+					JumpEvent.Broadcast(this, true, 0.0f);
+				else
+					ACharacter::Jump();
+			}
+			else
+				UE_LOG(LogTemp, Error, TEXT("Jump counter already present"));
+		}
 	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("Jump counter already present"));
-	}
+
 }
 
 void AVREntityCharacter::StopJumping()
 {
 	UE_LOG(LogTemp, Warning, TEXT("VR Character now NOT jumping"));
 
-	UInputAction* JumpAction = InputPools["Default"].GetAction("Jump");
+	// Attempt to access the default input pool
+	if (UInputActionPool* DefaultPool = GetDefaultPool())
+	{
+		// Attempt to access the jump input action from the input pool
+		if (UInputAction* JumpAction = DefaultPool->GetAction("Jump"))
+		{
+			// Attempt to stop the counter for jump input
+			float FinalValue;
+			if (InputCounters.StopCounter(JumpAction, FinalValue))
+			{
+				// All prerequisites met for stopping jump
 
-	float FinalValue;
-	if (InputCounters.StopCounter(JumpAction, FinalValue))
-	{
-		if (JumpEvent.IsBound())
-			JumpEvent.Broadcast(this, false, FinalValue);
-		else
-			ACharacter::StopJumping();
+				// Broadcast the Jump Event if alternate behaviour has been bound
+				// Otherwise perform default jump
+				if (JumpEvent.IsBound())
+					JumpEvent.Broadcast(this, false, FinalValue);
+				else
+					ACharacter::StopJumping();
+			}
+			else
+				UE_LOG(LogTemp, Error, TEXT("Jump counter not present"));
+		}
 	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("Jump counter not present"));
-	}
+
 }
 
 void AVREntityCharacter::Dodge(const FInputActionValue& Value)
 {
 	bool Dodging = Value.Get<bool>();
 
-	UInputAction* DodgeAction = InputPools["Default"].GetAction("Dodge");
-
-	// Start/stop the counter for dodge input
-	float PressTime(0.0f);
-	if (Dodging)
+	// Attempt to access the default input pool
+	if (UInputActionPool* DefaultPool = GetDefaultPool())
 	{
-		if (!InputCounters.StartCounter(DodgeAction)) return;
-	}
-	else
-	{
-		if (!InputCounters.StopCounter(DodgeAction, PressTime)) return;
-	}
-		
-	// Broadcast the dodge event if any alternate dodge behaviours are bound
-	if (DodgeEvent.IsBound())
-		DodgeEvent.Broadcast(this, Dodging, PressTime);
-	else
-	{
-		// Perform default behaviour for dodging
-		FVector2D DodgeDirection = MoveInput.IsZero() ? MoveInput : FVector2D(0.0, -1.0);
+		// Attempt to access the dodge input action from the input pool
+		if (UInputAction* DodgeAction = DefaultPool->GetAction("Dodge"))
+		{
+			// Attempt to start/stop the counter for dodge input
+			float PressTime(0.0f);
+			if ((Dodging ? !InputCounters.StartCounter(DodgeAction) : !InputCounters.StopCounter(DodgeAction, PressTime))) return;
 
-		// find out which way is forward
-		const FRotator Rotation = Camera->GetComponentRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
+			// All prerequisites met for performing dodge behaviour
 
-		// get forward vector
-		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+			// Broadcast the Dodge Event if alternate behaviour has been bound
+			// Otherwise perform default dodge
+			if (DodgeEvent.IsBound())
+				DodgeEvent.Broadcast(this, Dodging, PressTime);
+			else
+			{
+				// DEFAULT DODGE
 
-		// get right vector 
-		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+				// Get dodge direction (backward if not moving)
+				FVector2D DodgeDirection = MoveInput.IsZero() ? MoveInput : FVector2D(0.0, -1.0);
 
-		// add force
-		FVector DodgeVector = (ForwardDirection * DodgeDirection.Y) + (RightDirection * DodgeDirection.X);
-		GetVRMovement()->Dodge(DodgeVector);
+				// Find out which way is forward
+				const FRotator Rotation = Camera->GetComponentRotation();
+				const FRotator YawRotation(0, Rotation.Yaw, 0);
+
+				// Get forward vector
+				const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+
+				// Get right vector 
+				const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+
+				// Perform dodge
+				FVector DodgeVector = (ForwardDirection * DodgeDirection.Y) + (RightDirection * DodgeDirection.X);
+				GetVRMovement()->Dodge(DodgeVector);
+			}
+		}
 	}
 }
 
 void AVREntityCharacter::LeftGrab()
 {
 	MotionController_LeftGrip->Grab();
-	if (MotionController_LeftGrip->GetHeldGrip() == MotionController_RightGrip->GetHeldGrip())
-		MotionController_RightGrip->ClearGrip();
 }
 
 void AVREntityCharacter::LeftRelease()
@@ -366,16 +435,31 @@ void AVREntityCharacter::LeftRelease()
 	MotionController_LeftGrip->Release();
 }
 
+void AVREntityCharacter::LeftGrabValue(const FInputActionValue& Value)
+{
+	// Input value is a float
+	float GripValue = Value.Get<float>();
+
+	// Set the pressure on the left grip controller
+	MotionController_LeftGrip->SetGripPressure(GripValue);
+}
+
 void AVREntityCharacter::RightGrab()
 {
 	MotionController_RightGrip->Grab();
-	if (MotionController_LeftGrip->GetHeldGrip() == MotionController_RightGrip->GetHeldGrip())
-		MotionController_LeftGrip->ClearGrip();
 }
 
 void AVREntityCharacter::RightRelease()
 {
 	MotionController_RightGrip->Release();
+}
+
+void AVREntityCharacter::RightGrabValue(const FInputActionValue& Value)
+{
+	// Input value is a float
+	float GripValue = Value.Get<float>();
+
+	MotionController_RightGrip->SetGripPressure(GripValue);
 }
 
 void AVREntityCharacter::LeftTrigger(const FInputActionValue& Value)
@@ -432,6 +516,28 @@ void AVREntityCharacter::Crouch(bool bClientSimulation)
 {
 	// TO-DO: Fill-in crouching for VR character
 	// Only currently defined to override ACharacter::Crouch default logic
+}
+
+UInputActionPool* AVREntityCharacter::GetDefaultPool()
+{
+	FString DefaultKey(TEXT("Default"));
+	bool ContainsDefault = InputPools.Contains(DefaultKey);
+	
+	if (!ContainsDefault)
+		UE_LOG(LogTemp, Warning, TEXT("VR Character does not contain default input pool"));
+
+	return ContainsDefault ? NewObject<UInputActionPool>(this, InputPools[DefaultKey]->GetAuthoritativeClass()) : nullptr;
+}
+
+UInputActionPool* AVREntityCharacter::GetHandsPool()
+{
+	FString HandsKey(TEXT("Hands"));
+	bool ContainsHands = InputPools.Contains(HandsKey);
+
+	if (!ContainsHands)
+		UE_LOG(LogTemp, Warning, TEXT("VR Character does not contain hands input pool"));
+
+	return ContainsHands ? NewObject<UInputActionPool>(this, InputPools[HandsKey]->GetAuthoritativeClass()) : nullptr;
 }
 
 UVRMovementComponent* AVREntityCharacter::GetVRMovement() { return GetCharacterMovement<UVRMovementComponent>(); }
@@ -515,15 +621,22 @@ void FInputCounterTracker::TickCounters(float DeltaTime)
 // INPUT ACTION POOL //
 ///////////////////////
 
+UInputActionPool::UInputActionPool()
+{
 
-UInputMappingContext* FInputActionPool::GetMappingContext() { return MappingContext; }
+}
 
-bool FInputActionPool::HasAction(FString Key) { return InputActions.Contains(Key); }
+UInputMappingContext* UInputActionPool::GetMappingContext() { return MappingContext; }
 
-UInputAction* FInputActionPool::GetAction(FString Key)
+bool UInputActionPool::HasAction(FString Key) { return InputActions.Contains(Key); }
+
+UInputAction* UInputActionPool::GetAction(FString Key)
 {
 	if (!HasAction(Key))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s input pool does not have action %s"), *GetName(), *Key);
 		return nullptr;
+	}
 	else
 		return InputActions[Key];
 }

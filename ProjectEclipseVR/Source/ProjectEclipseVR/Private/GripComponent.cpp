@@ -3,6 +3,7 @@
 
 #include "GripComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "GripMotionControllerComponent.h"
 
 // Sets default values for this component's properties
 UGripComponent::UGripComponent()
@@ -168,10 +169,21 @@ bool UGripComponent::TryAttachParentToMotionController(UMotionControllerComponen
 	USceneComponent* Parent = GetAttachParent();
 	FAttachmentTransformRules AttachmentRules = FAttachmentTransformRules::KeepWorldTransform;
 	AttachmentRules.bWeldSimulatedBodies = true;
-	bool Success = Parent->AttachToComponent(NewMotionController, AttachmentRules);
+	UStaticMeshComponent* ControllerConstrainedHand = Cast<UGripMotionControllerComponent>(NewMotionController)->GetConstrainedHand();
+	bool Success = Parent->AttachToComponent(ControllerConstrainedHand, AttachmentRules);
 	if (!Success)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Attaching %s to %s FAILED - object not grabbed"), *Parent->GetName(), *NewMotionController->GetName());
 	}
 	return Success;
+}
+
+void UGripComponent::PrimaryUse_Implementation(bool Pressed, float PressedTime)
+{
+
+}
+
+void UGripComponent::SecondaryUse_Implementation(bool Pressed, float PressedTime)
+{
+
 }

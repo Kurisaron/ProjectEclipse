@@ -10,20 +10,24 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeVREntityCharacter() {}
 
 // Begin Cross Module References
+COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector2D();
 ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
+ENGINE_API UClass* Z_Construct_UClass_UDataAsset();
+ENGINE_API UClass* Z_Construct_UClass_UPhysicsConstraintComponent_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_USceneComponent_NoRegister();
+ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputAction_NoRegister();
 ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputMappingContext_NoRegister();
 HEADMOUNTEDDISPLAY_API UClass* Z_Construct_UClass_UMotionControllerComponent_NoRegister();
 PROJECTECLIPSEVR_API UClass* Z_Construct_UClass_AEntityCharacter();
 PROJECTECLIPSEVR_API UClass* Z_Construct_UClass_AVREntityCharacter();
 PROJECTECLIPSEVR_API UClass* Z_Construct_UClass_AVREntityCharacter_NoRegister();
-PROJECTECLIPSEVR_API UClass* Z_Construct_UClass_UGripComponent_NoRegister();
 PROJECTECLIPSEVR_API UClass* Z_Construct_UClass_UGripMotionControllerComponent_NoRegister();
+PROJECTECLIPSEVR_API UClass* Z_Construct_UClass_UInputActionPool();
+PROJECTECLIPSEVR_API UClass* Z_Construct_UClass_UInputActionPool_NoRegister();
 PROJECTECLIPSEVR_API UFunction* Z_Construct_UDelegateFunction_ProjectEclipseVR_PlayerInputEvent__DelegateSignature();
 PROJECTECLIPSEVR_API UScriptStruct* Z_Construct_UScriptStruct_FHandPoseData();
-PROJECTECLIPSEVR_API UScriptStruct* Z_Construct_UScriptStruct_FInputActionPool();
 PROJECTECLIPSEVR_API UScriptStruct* Z_Construct_UScriptStruct_FInputCounterTracker();
 UPackage* Z_Construct_UPackage__Script_ProjectEclipseVR();
 // End Cross Module References
@@ -157,28 +161,25 @@ UScriptStruct* Z_Construct_UScriptStruct_FInputCounterTracker()
 }
 // End ScriptStruct FInputCounterTracker
 
-// Begin ScriptStruct FInputActionPool
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_InputActionPool;
-class UScriptStruct* FInputActionPool::StaticStruct()
+// Begin Class UInputActionPool
+void UInputActionPool::StaticRegisterNativesUInputActionPool()
 {
-	if (!Z_Registration_Info_UScriptStruct_InputActionPool.OuterSingleton)
-	{
-		Z_Registration_Info_UScriptStruct_InputActionPool.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FInputActionPool, (UObject*)Z_Construct_UPackage__Script_ProjectEclipseVR(), TEXT("InputActionPool"));
-	}
-	return Z_Registration_Info_UScriptStruct_InputActionPool.OuterSingleton;
 }
-template<> PROJECTECLIPSEVR_API UScriptStruct* StaticStruct<FInputActionPool>()
+IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(UInputActionPool);
+UClass* Z_Construct_UClass_UInputActionPool_NoRegister()
 {
-	return FInputActionPool::StaticStruct();
+	return UInputActionPool::StaticClass();
 }
-struct Z_Construct_UScriptStruct_FInputActionPool_Statics
+struct Z_Construct_UClass_UInputActionPool_Statics
 {
 #if WITH_METADATA
-	static constexpr UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "// Input Action Pools are utilized to facilitate modularity for input actions on player-controlled actors\n" },
 #endif
+		{ "IncludePath", "VREntityCharacter.h" },
+		{ "IsBlueprintBase", "true" },
 		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Input Action Pools are utilized to facilitate modularity for input actions on player-controlled actors" },
@@ -200,45 +201,58 @@ struct Z_Construct_UScriptStruct_FInputActionPool_Statics
 	static const UECodeGen_Private::FStrPropertyParams NewProp_InputActions_Key_KeyProp;
 	static const UECodeGen_Private::FMapPropertyParams NewProp_InputActions;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-	static void* NewStructOps()
-	{
-		return (UScriptStruct::ICppStructOps*)new UScriptStruct::TCppStructOps<FInputActionPool>();
-	}
-	static const UECodeGen_Private::FStructParams StructParams;
+	static UObject* (*const DependentSingletons[])();
+	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
+		TCppClassTypeTraits<UInputActionPool>::IsAbstract,
+	};
+	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UScriptStruct_FInputActionPool_Statics::NewProp_MappingContext = { "MappingContext", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FInputActionPool, MappingContext), Z_Construct_UClass_UInputMappingContext_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MappingContext_MetaData), NewProp_MappingContext_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UScriptStruct_FInputActionPool_Statics::NewProp_InputActions_ValueProp = { "InputActions", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FInputActionPool_Statics::NewProp_InputActions_Key_KeyProp = { "InputActions_Key", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FMapPropertyParams Z_Construct_UScriptStruct_FInputActionPool_Statics::NewProp_InputActions = { "InputActions", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FInputActionPool, InputActions), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InputActions_MetaData), NewProp_InputActions_MetaData) };
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FInputActionPool_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FInputActionPool_Statics::NewProp_MappingContext,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FInputActionPool_Statics::NewProp_InputActions_ValueProp,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FInputActionPool_Statics::NewProp_InputActions_Key_KeyProp,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FInputActionPool_Statics::NewProp_InputActions,
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UInputActionPool_Statics::NewProp_MappingContext = { "MappingContext", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UInputActionPool, MappingContext), Z_Construct_UClass_UInputMappingContext_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MappingContext_MetaData), NewProp_MappingContext_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UInputActionPool_Statics::NewProp_InputActions_ValueProp = { "InputActions", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UInputActionPool_Statics::NewProp_InputActions_Key_KeyProp = { "InputActions_Key", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_UInputActionPool_Statics::NewProp_InputActions = { "InputActions", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UInputActionPool, InputActions), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InputActions_MetaData), NewProp_InputActions_MetaData) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UInputActionPool_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UInputActionPool_Statics::NewProp_MappingContext,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UInputActionPool_Statics::NewProp_InputActions_ValueProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UInputActionPool_Statics::NewProp_InputActions_Key_KeyProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UInputActionPool_Statics::NewProp_InputActions,
 };
-static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FInputActionPool_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FInputActionPool_Statics::StructParams = {
+static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UInputActionPool_Statics::PropPointers) < 2048);
+UObject* (*const Z_Construct_UClass_UInputActionPool_Statics::DependentSingletons[])() = {
+	(UObject* (*)())Z_Construct_UClass_UDataAsset,
 	(UObject* (*)())Z_Construct_UPackage__Script_ProjectEclipseVR,
-	nullptr,
-	&NewStructOps,
-	"InputActionPool",
-	Z_Construct_UScriptStruct_FInputActionPool_Statics::PropPointers,
-	UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FInputActionPool_Statics::PropPointers),
-	sizeof(FInputActionPool),
-	alignof(FInputActionPool),
-	RF_Public|RF_Transient|RF_MarkAsNative,
-	EStructFlags(0x00000001),
-	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FInputActionPool_Statics::Struct_MetaDataParams), Z_Construct_UScriptStruct_FInputActionPool_Statics::Struct_MetaDataParams)
 };
-UScriptStruct* Z_Construct_UScriptStruct_FInputActionPool()
+static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UInputActionPool_Statics::DependentSingletons) < 16);
+const UECodeGen_Private::FClassParams Z_Construct_UClass_UInputActionPool_Statics::ClassParams = {
+	&UInputActionPool::StaticClass,
+	nullptr,
+	&StaticCppClassTypeInfo,
+	DependentSingletons,
+	nullptr,
+	Z_Construct_UClass_UInputActionPool_Statics::PropPointers,
+	nullptr,
+	UE_ARRAY_COUNT(DependentSingletons),
+	0,
+	UE_ARRAY_COUNT(Z_Construct_UClass_UInputActionPool_Statics::PropPointers),
+	0,
+	0x000000A0u,
+	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UInputActionPool_Statics::Class_MetaDataParams), Z_Construct_UClass_UInputActionPool_Statics::Class_MetaDataParams)
+};
+UClass* Z_Construct_UClass_UInputActionPool()
 {
-	if (!Z_Registration_Info_UScriptStruct_InputActionPool.InnerSingleton)
+	if (!Z_Registration_Info_UClass_UInputActionPool.OuterSingleton)
 	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_InputActionPool.InnerSingleton, Z_Construct_UScriptStruct_FInputActionPool_Statics::StructParams);
+		UECodeGen_Private::ConstructUClass(Z_Registration_Info_UClass_UInputActionPool.OuterSingleton, Z_Construct_UClass_UInputActionPool_Statics::ClassParams);
 	}
-	return Z_Registration_Info_UScriptStruct_InputActionPool.InnerSingleton;
+	return Z_Registration_Info_UClass_UInputActionPool.OuterSingleton;
 }
-// End ScriptStruct FInputActionPool
+template<> PROJECTECLIPSEVR_API UClass* StaticClass<UInputActionPool>()
+{
+	return UInputActionPool::StaticClass();
+}
+DEFINE_VTABLE_PTR_HELPER_CTOR(UInputActionPool);
+UInputActionPool::~UInputActionPool() {}
+// End Class UInputActionPool
 
 // Begin ScriptStruct FHandPoseData
 static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_HandPoseData;
@@ -406,25 +420,43 @@ struct Z_Construct_UClass_AVREntityCharacter_Statics
 		{ "Category", "VR|Motion Controllers" },
 		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LeftHeldGrip_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_StableMeshL_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
-		{ "Category", "VR|Held Grips" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/////////////\n// HOLDING //\n/////////////\n" },
-#endif
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "/\n HOLDING\n/" },
-#endif
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RightHeldGrip_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "VR|Held Grips" },
+		{ "Category", "VR|Motion Controllers" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InputCounters_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_StableMeshR_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "VR|Motion Controllers" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_HandConstraintL_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "VR|Motion Controllers" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_HandConstraintR_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "VR|Motion Controllers" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ConstrainedMeshL_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "VR|Motion Controllers" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ConstrainedMeshR_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "VR|Motion Controllers" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InputPools_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Input" },
 #if !UE_BUILD_SHIPPING
@@ -435,12 +467,12 @@ struct Z_Construct_UClass_AVREntityCharacter_Statics
 		{ "ToolTip", "INPUT" },
 #endif
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MoveInput_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InputCounters_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Input" },
 		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InputPools_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MoveInput_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Input" },
 		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
@@ -455,7 +487,7 @@ struct Z_Construct_UClass_AVREntityCharacter_Statics
 		{ "Category", "Input" },
 		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_JumpEvent_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SprintEvent_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "VREntityCharacter" },
 #if !UE_BUILD_SHIPPING
@@ -465,6 +497,11 @@ struct Z_Construct_UClass_AVREntityCharacter_Statics
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "/\n DELEGATES/EVENTS\n/" },
 #endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_JumpEvent_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "VREntityCharacter" },
+		{ "ModuleRelativePath", "Public/VREntityCharacter.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DodgeEvent_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
@@ -481,15 +518,20 @@ struct Z_Construct_UClass_AVREntityCharacter_Statics
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_MotionController_RightAim;
 	static void NewProp_bDrawMotionControllerDebug_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bDrawMotionControllerDebug;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_LeftHeldGrip;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_RightHeldGrip;
-	static const UECodeGen_Private::FStructPropertyParams NewProp_InputCounters;
-	static const UECodeGen_Private::FStructPropertyParams NewProp_MoveInput;
-	static const UECodeGen_Private::FStructPropertyParams NewProp_InputPools_ValueProp;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_StableMeshL;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_StableMeshR;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_HandConstraintL;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_HandConstraintR;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_ConstrainedMeshL;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_ConstrainedMeshR;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_InputPools_ValueProp;
 	static const UECodeGen_Private::FStrPropertyParams NewProp_InputPools_Key_KeyProp;
 	static const UECodeGen_Private::FMapPropertyParams NewProp_InputPools;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_InputCounters;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_MoveInput;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_LeftHandPose;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_RightHandPose;
+	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_SprintEvent;
 	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_JumpEvent;
 	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_DodgeEvent;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -511,15 +553,20 @@ void Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_bDrawMotionControlle
 	((AVREntityCharacter*)Obj)->bDrawMotionControllerDebug = 1;
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_bDrawMotionControllerDebug = { "bDrawMotionControllerDebug", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AVREntityCharacter), &Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_bDrawMotionControllerDebug_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bDrawMotionControllerDebug_MetaData), NewProp_bDrawMotionControllerDebug_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftHeldGrip = { "LeftHeldGrip", nullptr, (EPropertyFlags)0x00400000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, LeftHeldGrip), Z_Construct_UClass_UGripComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LeftHeldGrip_MetaData), NewProp_LeftHeldGrip_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightHeldGrip = { "RightHeldGrip", nullptr, (EPropertyFlags)0x00400000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, RightHeldGrip), Z_Construct_UClass_UGripComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RightHeldGrip_MetaData), NewProp_RightHeldGrip_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_StableMeshL = { "StableMeshL", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, StableMeshL), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_StableMeshL_MetaData), NewProp_StableMeshL_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_StableMeshR = { "StableMeshR", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, StableMeshR), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_StableMeshR_MetaData), NewProp_StableMeshR_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_HandConstraintL = { "HandConstraintL", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, HandConstraintL), Z_Construct_UClass_UPhysicsConstraintComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_HandConstraintL_MetaData), NewProp_HandConstraintL_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_HandConstraintR = { "HandConstraintR", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, HandConstraintR), Z_Construct_UClass_UPhysicsConstraintComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_HandConstraintR_MetaData), NewProp_HandConstraintR_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_ConstrainedMeshL = { "ConstrainedMeshL", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, ConstrainedMeshL), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ConstrainedMeshL_MetaData), NewProp_ConstrainedMeshL_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_ConstrainedMeshR = { "ConstrainedMeshR", nullptr, (EPropertyFlags)0x004000000008001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, ConstrainedMeshR), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ConstrainedMeshR_MetaData), NewProp_ConstrainedMeshR_MetaData) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputPools_ValueProp = { "InputPools", nullptr, (EPropertyFlags)0x0004000000000001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, Z_Construct_UClass_UClass, Z_Construct_UClass_UInputActionPool_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputPools_Key_KeyProp = { "InputPools_Key", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputPools = { "InputPools", nullptr, (EPropertyFlags)0x0044000000000015, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, InputPools), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InputPools_MetaData), NewProp_InputPools_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputCounters = { "InputCounters", nullptr, (EPropertyFlags)0x0040040000020015, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, InputCounters), Z_Construct_UScriptStruct_FInputCounterTracker, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InputCounters_MetaData), NewProp_InputCounters_MetaData) }; // 3030304300
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_MoveInput = { "MoveInput", nullptr, (EPropertyFlags)0x0040040000020015, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, MoveInput), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MoveInput_MetaData), NewProp_MoveInput_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputPools_ValueProp = { "InputPools", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, Z_Construct_UScriptStruct_FInputActionPool, METADATA_PARAMS(0, nullptr) }; // 97180969
-const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputPools_Key_KeyProp = { "InputPools_Key", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputPools = { "InputPools", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, InputPools), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InputPools_MetaData), NewProp_InputPools_MetaData) }; // 97180969
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftHandPose = { "LeftHandPose", nullptr, (EPropertyFlags)0x0040040000020015, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, LeftHandPose), Z_Construct_UScriptStruct_FHandPoseData, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LeftHandPose_MetaData), NewProp_LeftHandPose_MetaData) }; // 1650407348
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightHandPose = { "RightHandPose", nullptr, (EPropertyFlags)0x0040040000020015, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, RightHandPose), Z_Construct_UScriptStruct_FHandPoseData, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RightHandPose_MetaData), NewProp_RightHandPose_MetaData) }; // 1650407348
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_SprintEvent = { "SprintEvent", nullptr, (EPropertyFlags)0x00401000100a0001, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, SprintEvent), Z_Construct_UDelegateFunction_ProjectEclipseVR_PlayerInputEvent__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SprintEvent_MetaData), NewProp_SprintEvent_MetaData) }; // 3250303426
 const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_JumpEvent = { "JumpEvent", nullptr, (EPropertyFlags)0x00401000100a0001, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, JumpEvent), Z_Construct_UDelegateFunction_ProjectEclipseVR_PlayerInputEvent__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_JumpEvent_MetaData), NewProp_JumpEvent_MetaData) }; // 3250303426
 const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_DodgeEvent = { "DodgeEvent", nullptr, (EPropertyFlags)0x00401000100a0001, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AVREntityCharacter, DodgeEvent), Z_Construct_UDelegateFunction_ProjectEclipseVR_PlayerInputEvent__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DodgeEvent_MetaData), NewProp_DodgeEvent_MetaData) }; // 3250303426
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AVREntityCharacter_Statics::PropPointers[] = {
@@ -531,15 +578,20 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AVREntity
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_MotionController_LeftAim,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_MotionController_RightAim,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_bDrawMotionControllerDebug,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftHeldGrip,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightHeldGrip,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputCounters,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_MoveInput,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_StableMeshL,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_StableMeshR,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_HandConstraintL,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_HandConstraintR,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_ConstrainedMeshL,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_ConstrainedMeshR,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputPools_ValueProp,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputPools_Key_KeyProp,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputPools,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_InputCounters,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_MoveInput,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_LeftHandPose,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_RightHandPose,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_SprintEvent,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_JumpEvent,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVREntityCharacter_Statics::NewProp_DodgeEvent,
 };
@@ -585,14 +637,14 @@ struct Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_P
 {
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
 		{ FInputCounterTracker::StaticStruct, Z_Construct_UScriptStruct_FInputCounterTracker_Statics::NewStructOps, TEXT("InputCounterTracker"), &Z_Registration_Info_UScriptStruct_InputCounterTracker, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FInputCounterTracker), 3030304300U) },
-		{ FInputActionPool::StaticStruct, Z_Construct_UScriptStruct_FInputActionPool_Statics::NewStructOps, TEXT("InputActionPool"), &Z_Registration_Info_UScriptStruct_InputActionPool, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FInputActionPool), 97180969U) },
 		{ FHandPoseData::StaticStruct, Z_Construct_UScriptStruct_FHandPoseData_Statics::NewStructOps, TEXT("HandPoseData"), &Z_Registration_Info_UScriptStruct_HandPoseData, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FHandPoseData), 1650407348U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AVREntityCharacter, AVREntityCharacter::StaticClass, TEXT("AVREntityCharacter"), &Z_Registration_Info_UClass_AVREntityCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AVREntityCharacter), 3033528739U) },
+		{ Z_Construct_UClass_UInputActionPool, UInputActionPool::StaticClass, TEXT("UInputActionPool"), &Z_Registration_Info_UClass_UInputActionPool, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UInputActionPool), 2482296072U) },
+		{ Z_Construct_UClass_AVREntityCharacter, AVREntityCharacter::StaticClass, TEXT("AVREntityCharacter"), &Z_Registration_Info_UClass_AVREntityCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AVREntityCharacter), 1147054953U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_1965131922(TEXT("/Script/ProjectEclipseVR"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_2690814933(TEXT("/Script/ProjectEclipseVR"),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_VREntityCharacter_h_Statics::ScriptStructInfo),
 	nullptr, 0);

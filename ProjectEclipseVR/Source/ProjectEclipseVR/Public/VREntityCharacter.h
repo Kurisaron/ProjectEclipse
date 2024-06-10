@@ -8,6 +8,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "PhysicsEngine/PhysicsConstraintComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "HeadMountedDisplayTypes.h"
@@ -71,12 +72,10 @@ public:
 };
 
 // Input Action Pools are utilized to facilitate modularity for input actions on player-controlled actors
-USTRUCT(BlueprintType)
-struct FInputActionPool
+UCLASS(Blueprintable, BlueprintType)
+class UInputActionPool : public UDataAsset
 {
 	GENERATED_BODY()
-
-private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UInputMappingContext* MappingContext;
@@ -85,6 +84,8 @@ private:
 	TMap<FString, UInputAction*> InputActions;
 
 public:
+
+	UInputActionPool();
 
 	UInputMappingContext* GetMappingContext();
 
@@ -150,28 +151,40 @@ class PROJECTECLIPSEVR_API AVREntityCharacter : public AEntityCharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Motion Controllers", meta = (AllowPrivateAccess = "true"))
 	bool bDrawMotionControllerDebug = false;
 
-	/////////////
-	// HOLDING //
-	/////////////
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VR|Held Grips", meta = (AllowPrivateAccess = "true"))
-	UGripComponent* LeftHeldGrip;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VR|Held Grips", meta = (AllowPrivateAccess = "true"))
-	UGripComponent* RightHeldGrip;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Motion Controllers", meta = (AllowPrivateAccess = "true"))
+	UStaticMeshComponent* StableMeshL;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Motion Controllers", meta = (AllowPrivateAccess = "true"))
+	UStaticMeshComponent* StableMeshR;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Motion Controllers", meta = (AllowPrivateAccess = "true"))
+	UPhysicsConstraintComponent* HandConstraintL;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Motion Controllers", meta = (AllowPrivateAccess = "true"))
+	UPhysicsConstraintComponent* HandConstraintR;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Motion Controllers", meta = (AllowPrivateAccess = "true"))
+	UStaticMeshComponent* ConstrainedMeshL;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "VR|Motion Controllers", meta = (AllowPrivateAccess = "true"))
+	UStaticMeshComponent* ConstrainedMeshR;
+
+
 
 	///////////
 	// INPUT //
 	///////////
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
+	TMap<FString, TSubclassOf<UInputActionPool>> InputPools;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Input", AdvancedDisplay, meta = (AllowPrivateAccess = "true"))
 	FInputCounterTracker InputCounters;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Input", AdvancedDisplay, meta = (AllowPrivateAccess = "true"))
 	FVector2D MoveInput = FVector2D::ZeroVector;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
-	TMap<FString, FInputActionPool> InputPools;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Input", AdvancedDisplay, meta = (AllowPrivateAccess = "true"))
 	FHandPoseData LeftHandPose;
@@ -182,6 +195,9 @@ class PROJECTECLIPSEVR_API AVREntityCharacter : public AEntityCharacter
 	//////////////////////
 	// DELEGATES/EVENTS //
 	//////////////////////
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
+	FPlayerInputEvent SprintEvent;
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
 	FPlayerInputEvent JumpEvent;
@@ -220,6 +236,9 @@ protected:
 	// Called via Turn Input Action to turn the player on the spot
 	void Turn(const FInputActionValue& Value);
 
+	// Called via Sprint Input Action to engage/disengage sprinting behaviour
+	void Sprint(const FInputActionValue& Value);
+
 	// Called via Jump Input Action to collect input value
 	void JumpTriggered(const FInputActionValue& Value);
 
@@ -238,11 +257,17 @@ protected:
 	// Called via Left Grab Input Action when it has stopped being pressed
 	void LeftRelease();
 
+	// Called via Left Grab Input Action to collect input value
+	void LeftGrabValue(const FInputActionValue& Value);
+
 	// Called via Right Grab Input Action when it has started being pressed
 	void RightGrab();
 
 	// Called via Right Grab Input Action when it has stopped being pressed
 	void RightRelease();
+
+	// Called via Right Grab Input Action to collect input value
+	void RightGrabValue(const FInputActionValue& Value);
 
 	void LeftTrigger(const FInputActionValue& Value);
 
@@ -282,6 +307,10 @@ protected:
 	void DisplayMotionControllerDebug(UMotionControllerComponent* MotionController);
 
 public:
+
+	UInputActionPool* GetDefaultPool();
+
+	UInputActionPool* GetHandsPool();
 
 	UVRMovementComponent* GetVRMovement();
 

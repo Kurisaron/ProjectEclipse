@@ -77,14 +77,23 @@ private:
 
 public:
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Grip Component")
 	void SetShouldSimulateOnDrop();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Grip Component")
 	void SetPrimitiveCompPhysics(bool bSimulate);
 
-	UFUNCTION(BlueprintPure)
+	UFUNCTION(BlueprintPure, Category = "Grip Component")
 	EControllerHand GetHeldByHand();
 
 	bool TryAttachParentToMotionController(UMotionControllerComponent* NewMotionController);
+
+	UFUNCTION(BlueprintNativeEvent, Category = "Grip Component")
+	void PrimaryUse(bool Pressed, float PressedTime);
+	void PrimaryUse_Implementation(bool Pressed, float PressedTime);
+
+	UFUNCTION(BlueprintNativeEvent, Category = "Grip Component")
+	void SecondaryUse(bool Pressed, float PressedTime);
+	void SecondaryUse_Implementation(bool Pressed, float PressedTime);
+
 };

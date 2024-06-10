@@ -22,8 +22,6 @@ struct FItemData
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	FString ID;
 
-public:
-
 	FItemData() { DisplayName = ID = TEXT(""); }
 	FItemData(FString NewName, FString NewID)
 	{
@@ -42,10 +40,21 @@ struct FItemWielderStatus
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UEntityComponent* Entity;
+
+	FItemWielderStatus()
+	{
+		Actor = nullptr;
+		Entity = nullptr;
+	}
+	FItemWielderStatus(AActor* NewActor, UEntityComponent* NewEntity)
+	{
+		Actor = NewActor;
+		Entity = NewEntity;
+	}
 };
 
 /**
- * Items are any object that can be held
+ * Items are any object that can be held and stored
  */
 UCLASS(Blueprintable, BlueprintType)
 class PROJECTECLIPSEVR_API AItem : public AActor
@@ -61,11 +70,6 @@ class PROJECTECLIPSEVR_API AItem : public AActor
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item|Root", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* ItemRoot;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item|Mesh", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* Mesh;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Grips", meta = (AllowPrivateAccess = "true"))
-	TMap<FString, UGripComponent*> Grips;
 
 public:	
 	// Sets default values for this actor's properties
@@ -82,7 +86,4 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Item|Data")
 	virtual FItemData GetItemData();
 
-	UGripComponent* GetMainGrip();
-
-	UGripComponent* GetGrip(FString Key);
 };

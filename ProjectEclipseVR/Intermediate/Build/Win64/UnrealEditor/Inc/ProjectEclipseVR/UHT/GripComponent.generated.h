@@ -25,6 +25,8 @@ PROJECTECLIPSEVR_API void FGripReleaseEvent_DelegateWrapper(const FMulticastScri
 
 
 #define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_27_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execSecondaryUse); \
+	DECLARE_FUNCTION(execPrimaryUse); \
 	DECLARE_FUNCTION(execGetHeldByHand); \
 	DECLARE_FUNCTION(execSetPrimitiveCompPhysics); \
 	DECLARE_FUNCTION(execSetShouldSimulateOnDrop); \
@@ -32,6 +34,7 @@ PROJECTECLIPSEVR_API void FGripReleaseEvent_DelegateWrapper(const FMulticastScri
 	DECLARE_FUNCTION(execTryGrab);
 
 
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_27_CALLBACK_WRAPPERS
 #define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_27_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUGripComponent(); \
@@ -58,6 +61,7 @@ public: \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
 	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_27_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_27_CALLBACK_WRAPPERS \
 	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_27_INCLASS_NO_PURE_DECLS \
 	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_27_ENHANCED_CONSTRUCTORS \
 private: \
