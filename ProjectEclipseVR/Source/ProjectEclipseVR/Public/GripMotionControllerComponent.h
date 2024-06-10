@@ -44,6 +44,8 @@ public:
 
 	virtual void InitializeComponent() override;
 
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 	void Grab();
 
 	void Release();

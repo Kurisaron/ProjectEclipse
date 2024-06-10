@@ -178,12 +178,12 @@ bool UGripComponent::TryAttachParentToMotionController(UMotionControllerComponen
 	return Success;
 }
 
-void UGripComponent::PrimaryUse_Implementation(bool Pressed, float PressedTime)
+void UGripComponent::Trigger_Implementation(bool Pressed, float PressedTime)
 {
 
 }
 
-void UGripComponent::SecondaryUse_Implementation(bool Pressed, float PressedTime)
+void UGripComponent::Use_Implementation(bool Pressed, float PressedTime)
 {
 
 }

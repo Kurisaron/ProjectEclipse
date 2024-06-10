@@ -6,7 +6,8 @@
 
 UGripMotionControllerComponent::UGripMotionControllerComponent(const FObjectInitializer& ObjectInitializer) : UMotionControllerComponent(ObjectInitializer)
 {
-	
+	// Slow tick rate to facilitate frame-rate optimization
+	PrimaryComponentTick.TickInterval = 0.01f;
 }
 
 
@@ -16,19 +17,19 @@ void UGripMotionControllerComponent::InitializeComponent()
 	//UE_LOG(LogTemp, Warning, TEXT("Grip motion controller initialized"));
 }
 
+void UGripMotionControllerComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+}
+
 void UGripMotionControllerComponent::Grab()
 {
-	UGripComponent* FoundGrip = FindGripNearController();
-	if (IsValid(FoundGrip) && FoundGrip->TryGrab(this))
-	{
-		HeldGrip = FoundGrip;
-	}
+	
 }
 
 void UGripMotionControllerComponent::Release()
 {
-	if (IsValid(HeldGrip) && HeldGrip->TryRelease())
-		HeldGrip = nullptr;
+	
 }
 
 UGripComponent* UGripMotionControllerComponent::FindGripNearController()

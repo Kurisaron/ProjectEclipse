@@ -89,11 +89,11 @@ public:
 	bool TryAttachParentToMotionController(UMotionControllerComponent* NewMotionController);
 
 	UFUNCTION(BlueprintNativeEvent, Category = "Grip Component")
-	void PrimaryUse(bool Pressed, float PressedTime);
-	void PrimaryUse_Implementation(bool Pressed, float PressedTime);
+	void Trigger(bool Pressed, float PressedTime);
+	void Trigger_Implementation(bool Pressed, float PressedTime);
 
 	UFUNCTION(BlueprintNativeEvent, Category = "Grip Component")
-	void SecondaryUse(bool Pressed, float PressedTime);
-	void SecondaryUse_Implementation(bool Pressed, float PressedTime);
+	void Use(bool Pressed, float PressedTime);
+	void Use_Implementation(bool Pressed, float PressedTime);
 
 };

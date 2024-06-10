@@ -239,39 +239,59 @@ protected:
 	// Called via Sprint Input Action to engage/disengage sprinting behaviour
 	void Sprint(const FInputActionValue& Value);
 
-	// Called via Jump Input Action to collect input value
-	void JumpTriggered(const FInputActionValue& Value);
-
 	// Called via Jump Input Action when it has started being pressed
 	virtual void Jump() override;
 
 	// Called via Jump Input Action when it has stopped being pressed
 	virtual void StopJumping() override;
 
+	// Called via Jump Input Action to collect input value
+	void Jump_Value(const FInputActionValue& Value);
+
 	// Called via Dodge Input Action to perform dodging/dashing behaviour
 	void Dodge(const FInputActionValue& Value);
 
 	// Called via Left Grab Input Action when it has started being pressed
-	void LeftGrab();
+	void LeftGrab_Press();
 
 	// Called via Left Grab Input Action when it has stopped being pressed
-	void LeftRelease();
+	void LeftGrab_Release();
 
 	// Called via Left Grab Input Action to collect input value
-	void LeftGrabValue(const FInputActionValue& Value);
+	void LeftGrab_Value(const FInputActionValue& Value);
 
 	// Called via Right Grab Input Action when it has started being pressed
-	void RightGrab();
+	void RightGrab_Press();
 
 	// Called via Right Grab Input Action when it has stopped being pressed
-	void RightRelease();
+	void RightGrab_Release();
 
 	// Called via Right Grab Input Action to collect input value
-	void RightGrabValue(const FInputActionValue& Value);
+	void RightGrab_Value(const FInputActionValue& Value);
 
-	void LeftTrigger(const FInputActionValue& Value);
+	void LeftTrigger_Press();
 
-	void RightTrigger(const FInputActionValue& Value);
+	void LeftTrigger_Release();
+
+	void LeftTrigger_Value(const FInputActionValue& Value);
+
+	void RightTrigger_Press();
+
+	void RightTrigger_Release();
+
+	void RightTrigger_Value(const FInputActionValue& Value);
+
+	void LeftUse_Press();
+
+	void LeftUse_Release();
+
+	void LeftUse_Value(const FInputActionValue& Value);
+
+	void RightUse_Press();
+
+	void RightUse_Release();
+
+	void RightUse_Value(const FInputActionValue& Value);
 
 
 

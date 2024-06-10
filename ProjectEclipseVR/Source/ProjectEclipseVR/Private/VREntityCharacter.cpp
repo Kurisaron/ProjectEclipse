@@ -166,7 +166,7 @@ void AVREntityCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 			if (UInputAction* JumpAction = DefaultPool->GetAction("Jump"))
 			{
 				EnhancedInput->BindAction(JumpAction, ETriggerEvent::Started, this, &AVREntityCharacter::Jump);
-				EnhancedInput->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::JumpTriggered);
+				EnhancedInput->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::Jump_Value);
 				EnhancedInput->BindAction(JumpAction, ETriggerEvent::Completed, this, &AVREntityCharacter::StopJumping);
 			}
 
@@ -179,29 +179,49 @@ void AVREntityCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 			// Bind left grab input
 			if (UInputAction* LeftGrabAction = DefaultPool->GetAction("Left Grab"))
 			{
-				EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Started, this, &AVREntityCharacter::LeftGrab);
-				EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Completed, this, &AVREntityCharacter::LeftRelease);
-				EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftGrabValue);
+				EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Started, this, &AVREntityCharacter::LeftGrab_Press);
+				EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftGrab_Value);
+				EnhancedInput->BindAction(LeftGrabAction, ETriggerEvent::Completed, this, &AVREntityCharacter::LeftGrab_Release);
 			}
 
 			// Bind right grab input
 			if (UInputAction* RightGrabAction = DefaultPool->GetAction("Right Grab"))
 			{
-				EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Started, this, &AVREntityCharacter::RightGrab);
-				EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Completed, this, &AVREntityCharacter::RightRelease);
-				EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightGrabValue);
+				EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Started, this, &AVREntityCharacter::RightGrab_Press);
+				EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightGrab_Value);
+				EnhancedInput->BindAction(RightGrabAction, ETriggerEvent::Completed, this, &AVREntityCharacter::RightGrab_Release);
 			}
 
 			// Bind left trigger input
 			if (UInputAction* LeftTriggerAction = DefaultPool->GetAction("Left Trigger"))
 			{
-				EnhancedInput->BindAction(LeftTriggerAction, ETriggerEvent::Completed, this, &AVREntityCharacter::LeftTrigger);
+				EnhancedInput->BindAction(LeftTriggerAction, ETriggerEvent::Started, this, &AVREntityCharacter::LeftTrigger_Press);
+				EnhancedInput->BindAction(LeftTriggerAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftTrigger_Value);
+				EnhancedInput->BindAction(LeftTriggerAction, ETriggerEvent::Completed, this, &AVREntityCharacter::LeftTrigger_Release);
 			}
 
 			// Bind right trigger input
 			if (UInputAction* RightTriggerAction = DefaultPool->GetAction("Right Trigger"))
 			{
-				EnhancedInput->BindAction(RightTriggerAction, ETriggerEvent::Completed, this, &AVREntityCharacter::RightTrigger);
+				EnhancedInput->BindAction(RightTriggerAction, ETriggerEvent::Started, this, &AVREntityCharacter::RightTrigger_Press);
+				EnhancedInput->BindAction(RightTriggerAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightTrigger_Value);
+				EnhancedInput->BindAction(RightTriggerAction, ETriggerEvent::Completed, this, &AVREntityCharacter::RightTrigger_Release);
+			}
+
+			// Bind left use button
+			if (UInputAction* LeftUseAction = DefaultPool->GetAction("Left Use"))
+			{
+				EnhancedInput->BindAction(LeftUseAction, ETriggerEvent::Started, this, &AVREntityCharacter::LeftUse_Press);
+				EnhancedInput->BindAction(LeftUseAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::LeftUse_Value);
+				EnhancedInput->BindAction(LeftUseAction, ETriggerEvent::Completed, this, &AVREntityCharacter::LeftUse_Release);
+			}
+
+			// Bind right use button
+			if (UInputAction* RightUseAction = DefaultPool->GetAction("Right Use"))
+			{
+				EnhancedInput->BindAction(RightUseAction, ETriggerEvent::Started, this, &AVREntityCharacter::RightUse_Press);
+				EnhancedInput->BindAction(RightUseAction, ETriggerEvent::Triggered, this, &AVREntityCharacter::RightUse_Value);
+				EnhancedInput->BindAction(RightUseAction, ETriggerEvent::Completed, this, &AVREntityCharacter::RightUse_Release);
 			}
 		}
 		else
@@ -304,7 +324,7 @@ void AVREntityCharacter::Sprint(const FInputActionValue& Value)
 	bool Sprinting = Value.Get<bool>();
 }
 
-void AVREntityCharacter::JumpTriggered(const FInputActionValue& Value)
+void AVREntityCharacter::Jump_Value(const FInputActionValue& Value)
 {
 	float JumpScale = Value.Get<float>();
 	float PressedTime(0.0f);
@@ -425,17 +445,17 @@ void AVREntityCharacter::Dodge(const FInputActionValue& Value)
 	}
 }
 
-void AVREntityCharacter::LeftGrab()
+void AVREntityCharacter::LeftGrab_Press()
 {
 	MotionController_LeftGrip->Grab();
 }
 
-void AVREntityCharacter::LeftRelease()
+void AVREntityCharacter::LeftGrab_Release()
 {
 	MotionController_LeftGrip->Release();
 }
 
-void AVREntityCharacter::LeftGrabValue(const FInputActionValue& Value)
+void AVREntityCharacter::LeftGrab_Value(const FInputActionValue& Value)
 {
 	// Input value is a float
 	float GripValue = Value.Get<float>();
@@ -444,17 +464,17 @@ void AVREntityCharacter::LeftGrabValue(const FInputActionValue& Value)
 	MotionController_LeftGrip->SetGripPressure(GripValue);
 }
 
-void AVREntityCharacter::RightGrab()
+void AVREntityCharacter::RightGrab_Press()
 {
 	MotionController_RightGrip->Grab();
 }
 
-void AVREntityCharacter::RightRelease()
+void AVREntityCharacter::RightGrab_Release()
 {
 	MotionController_RightGrip->Release();
 }
 
-void AVREntityCharacter::RightGrabValue(const FInputActionValue& Value)
+void AVREntityCharacter::RightGrab_Value(const FInputActionValue& Value)
 {
 	// Input value is a float
 	float GripValue = Value.Get<float>();
@@ -462,15 +482,133 @@ void AVREntityCharacter::RightGrabValue(const FInputActionValue& Value)
 	MotionController_RightGrip->SetGripPressure(GripValue);
 }
 
-void AVREntityCharacter::LeftTrigger(const FInputActionValue& Value)
+void AVREntityCharacter::LeftTrigger_Press()
 {
-	
+	if (UInputActionPool* DefaultPool = GetDefaultPool())
+	{
+		if (UInputAction* LeftTriggerAction = DefaultPool->GetAction(TEXT("Left Trigger")))
+		{
+			if (InputCounters.StartCounter(LeftTriggerAction))
+			{
+				// All prerequisites met
+				// Perform behaviour for when the left trigger is starting to be pressed
+
+				// Perform logic on Grip Motion Controller's held grip if there is one
+				if (UGripComponent* HeldGrip = MotionController_LeftGrip->GetHeldGrip())
+				{
+					HeldGrip->Trigger(true, 0.0f);
+				}
+			}
+		}
+	}
 }
 
-void AVREntityCharacter::RightTrigger(const FInputActionValue& Value)
+void AVREntityCharacter::LeftTrigger_Release()
+{
+	if (UInputActionPool* DefaultPool = GetDefaultPool())
+	{
+		if (UInputAction* LeftTriggerAction = DefaultPool->GetAction(TEXT("Left Trigger")))
+		{
+			float PressedTime;
+			if (InputCounters.StopCounter(LeftTriggerAction, PressedTime))
+			{
+				// All prerequisites met
+				// Perform behaviour for when the left trigger is being released
+
+				// Perform logic on Grip Motion Controller's held grip if there is one
+				if (UGripComponent* HeldGrip = MotionController_LeftGrip->GetHeldGrip())
+				{
+					HeldGrip->Trigger(false, PressedTime);
+				}
+			}
+		}
+	}
+}
+
+void AVREntityCharacter::LeftTrigger_Value(const FInputActionValue& Value)
+{
+	float TriggerValue = Value.Get<float>();
+}
+
+void AVREntityCharacter::RightTrigger_Press()
+{
+	if (UInputActionPool* DefaultPool = GetDefaultPool())
+	{
+		if (UInputAction* RightTriggerAction = DefaultPool->GetAction(TEXT("Right Trigger")))
+		{
+			if (InputCounters.StartCounter(RightTriggerAction))
+			{
+				// All prerequisites met
+				// Perform behaviour for when the right trigger is starting to be pressed
+
+				// Perform logic on Grip Motion Controller's held grip if there is one
+				if (UGripComponent* HeldGrip = MotionController_RightGrip->GetHeldGrip())
+				{
+					HeldGrip->Trigger(true, 0.0f);
+				}
+			}
+		}
+	}
+}
+
+void AVREntityCharacter::RightTrigger_Release()
+{
+	if (UInputActionPool* DefaultPool = GetDefaultPool())
+	{
+		if (UInputAction* RightTriggerAction = DefaultPool->GetAction(TEXT("Right Trigger")))
+		{
+			float PressedTime;
+			if (InputCounters.StopCounter(RightTriggerAction, PressedTime))
+			{
+				// All prerequisites met
+				// Perform behaviour for when the left trigger is being released
+
+				// Perform logic on Grip Motion Controller's held grip if there is one
+				if (UGripComponent* HeldGrip = MotionController_RightGrip->GetHeldGrip())
+				{
+					HeldGrip->Trigger(false, PressedTime);
+				}
+			}
+		}
+	}
+}
+
+void AVREntityCharacter::RightTrigger_Value(const FInputActionValue& Value)
+{
+	float TriggerValue = Value.Get<float>();
+}
+
+void AVREntityCharacter::LeftUse_Press()
 {
 
 }
+
+void AVREntityCharacter::LeftUse_Release()
+{
+
+}
+
+void AVREntityCharacter::LeftUse_Value(const FInputActionValue& Value)
+{
+	float UseValue = Value.Get<float>();
+}
+
+void AVREntityCharacter::RightUse_Press()
+{
+
+}
+
+void AVREntityCharacter::RightUse_Release()
+{
+
+}
+
+void AVREntityCharacter::RightUse_Value(const FInputActionValue& Value)
+{
+	float UseValue = Value.Get<float>();
+}
+
+
 
 void AVREntityCharacter::LeftPoint(const FInputActionValue& Value)
 {
