@@ -109,7 +109,9 @@
             "d:\\github\\projecteclipse\\projecteclipsevr\\source\\projecteclipsevr\\public\\gripcomponent.h",
             "d:\\epiclibrary\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\haptics\\hapticfeedbackeffect_base.h",
             "d:\\epiclibrary\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\hapticfeedbackeffect_base.generated.h",
-            "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipsevr\\uht\\gripcomponent.generated.h"
+            "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipsevr\\uht\\gripcomponent.generated.h",
+            "d:\\github\\projecteclipse\\projecteclipsevr\\source\\projecteclipsevr\\public\\entitycharactermeshcomponent.h",
+            "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipsevr\\uht\\entitycharactermeshcomponent.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

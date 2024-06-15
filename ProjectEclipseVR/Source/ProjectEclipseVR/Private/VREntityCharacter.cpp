@@ -4,6 +4,7 @@
 #include "VREntityCharacter.h"
 #include "VRRootComponent.h"
 #include "GripComponent.h"
+#include "EntityCharacterMeshComponent.h"
 
 AVREntityCharacter::AVREntityCharacter(const FObjectInitializer& ObjectInitializer) : AEntityCharacter(ObjectInitializer.SetDefaultSubobjectClass<UVRMovementComponent>(ACharacter::CharacterMovementComponentName).SetDefaultSubobjectClass<UVRRootComponent>(ACharacter::CapsuleComponentName))
 {
@@ -44,6 +45,12 @@ AVREntityCharacter::AVREntityCharacter(const FObjectInitializer& ObjectInitializ
 
 	// Setup roomscale movement
 	VRRootComp->SetupRoomscale(VROrigin, Camera);
+
+	// Setup/modify values for character mesh
+	if (UEntityCharacterMeshComponent* ECharacterMesh = GetEntityCharacterMesh())
+	{
+		ECharacterMesh->CanRagdoll(false);
+	}
 
 	// Create the motion controllers
 	FName SourceName = TEXT("Head");
@@ -496,7 +503,7 @@ void AVREntityCharacter::LeftTrigger_Press()
 				// Perform logic on Grip Motion Controller's held grip if there is one
 				if (UGripComponent* HeldGrip = MotionController_LeftGrip->GetHeldGrip())
 				{
-					HeldGrip->Trigger(true, 0.0f);
+					HeldGrip->Fire(true, 0.0f);
 				}
 			}
 		}
@@ -518,7 +525,7 @@ void AVREntityCharacter::LeftTrigger_Release()
 				// Perform logic on Grip Motion Controller's held grip if there is one
 				if (UGripComponent* HeldGrip = MotionController_LeftGrip->GetHeldGrip())
 				{
-					HeldGrip->Trigger(false, PressedTime);
+					HeldGrip->Fire(false, PressedTime);
 				}
 			}
 		}
@@ -544,7 +551,7 @@ void AVREntityCharacter::RightTrigger_Press()
 				// Perform logic on Grip Motion Controller's held grip if there is one
 				if (UGripComponent* HeldGrip = MotionController_RightGrip->GetHeldGrip())
 				{
-					HeldGrip->Trigger(true, 0.0f);
+					HeldGrip->Fire(true, 0.0f);
 				}
 			}
 		}
@@ -566,7 +573,7 @@ void AVREntityCharacter::RightTrigger_Release()
 				// Perform logic on Grip Motion Controller's held grip if there is one
 				if (UGripComponent* HeldGrip = MotionController_RightGrip->GetHeldGrip())
 				{
-					HeldGrip->Trigger(false, PressedTime);
+					HeldGrip->Fire(false, PressedTime);
 				}
 			}
 		}
@@ -580,12 +587,45 @@ void AVREntityCharacter::RightTrigger_Value(const FInputActionValue& Value)
 
 void AVREntityCharacter::LeftUse_Press()
 {
+	if (UInputActionPool* DefaultPool = GetDefaultPool())
+	{
+		if (UInputAction* LeftUseAction = DefaultPool->GetAction(TEXT("Left Use")))
+		{
+			if (InputCounters.StartCounter(LeftUseAction))
+			{
+				// All prerequisites met
+				// Perform behaviour for when the left use is starting to be pressed
 
+				// Perform logic on Grip Motion Controller's held grip if there is one
+				if (UGripComponent* HeldGrip = MotionController_LeftGrip->GetHeldGrip())
+				{
+					HeldGrip->Use(true, 0.0f);
+				}
+			}
+		}
+	}
 }
 
 void AVREntityCharacter::LeftUse_Release()
 {
+	if (UInputActionPool* DefaultPool = GetDefaultPool())
+	{
+		if (UInputAction* LeftUseAction = DefaultPool->GetAction(TEXT("Left Use")))
+		{
+			float PressedTime;
+			if (InputCounters.StopCounter(LeftUseAction, PressedTime))
+			{
+				// All prerequisites met
+				// Perform behaviour for when the left use is being released
 
+				// Perform logic on Grip Motion Controller's held grip if there is one
+				if (UGripComponent* HeldGrip = MotionController_LeftGrip->GetHeldGrip())
+				{
+					HeldGrip->Use(false, PressedTime);
+				}
+			}
+		}
+	}
 }
 
 void AVREntityCharacter::LeftUse_Value(const FInputActionValue& Value)
@@ -595,12 +635,45 @@ void AVREntityCharacter::LeftUse_Value(const FInputActionValue& Value)
 
 void AVREntityCharacter::RightUse_Press()
 {
+	if (UInputActionPool* DefaultPool = GetDefaultPool())
+	{
+		if (UInputAction* RightUseAction = DefaultPool->GetAction(TEXT("Right Use")))
+		{
+			if (InputCounters.StartCounter(RightUseAction))
+			{
+				// All prerequisites met
+				// Perform behaviour for when the right use is starting to be pressed
 
+				// Perform logic on Grip Motion Controller's held grip if there is one
+				if (UGripComponent* HeldGrip = MotionController_RightGrip->GetHeldGrip())
+				{
+					HeldGrip->Use(true, 0.0f);
+				}
+			}
+		}
+	}
 }
 
 void AVREntityCharacter::RightUse_Release()
 {
+	if (UInputActionPool* DefaultPool = GetDefaultPool())
+	{
+		if (UInputAction* RightUseAction = DefaultPool->GetAction(TEXT("Right Use")))
+		{
+			float PressedTime;
+			if (InputCounters.StopCounter(RightUseAction, PressedTime))
+			{
+				// All prerequisites met
+				// Perform behaviour for when the left use is being released
 
+				// Perform logic on Grip Motion Controller's held grip if there is one
+				if (UGripComponent* HeldGrip = MotionController_RightGrip->GetHeldGrip())
+				{
+					HeldGrip->Use(false, PressedTime);
+				}
+			}
+		}
+	}
 }
 
 void AVREntityCharacter::RightUse_Value(const FInputActionValue& Value)

@@ -8,9 +8,15 @@
 #include "Haptics/HapticFeedbackEffect_Base.h"
 #include "GripComponent.generated.h"
 
+class UGripMotionControllerComponent;
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGripGrabEvent);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGripReleaseEvent);
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FGripFireEvent, bool, Pressed, float, PressedTime);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FGripUseEvent, bool, Pressed, float, PressedTime);
+
+/*
 UENUM(BlueprintType)
 enum class EGripType : uint8
 {
@@ -19,7 +25,30 @@ enum class EGripType : uint8
 	GTE_Snap	UMETA(DisplayName = "Snap"),
 	GTE_Custom	UMETA(DisplayName = "Custom"),
 };
+*/
 
+USTRUCT(BlueprintType)
+struct FGripType
+{
+	GENERATED_BODY()
+
+	// True = grip can be held in hand
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	bool bCanGrab = true;
+
+	// True = hand will snap to the grip (or its axis)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true", EditCondition = "bCanGrab"))
+	bool bSnapHandToGrip = false;
+
+	// Length of the axis for the grip. Any values greater than zero allows for sliding and two-handed holding
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true", EditCondition = "bCanGrab && bSnapHandToGrip"))
+	float AxisLength = 0.0f;
+
+	// True = grip can be moved with telekinesis
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	bool bCanTK = true;
+
+};
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class PROJECTECLIPSEVR_API UGripComponent : public USceneComponent
@@ -42,7 +71,7 @@ class PROJECTECLIPSEVR_API UGripComponent : public USceneComponent
 	bool bSimulateOnDrop;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	EGripType GripType;
+	FGripType GripType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UHapticFeedbackEffect_Base* OnGrabHapticEffect;
@@ -51,7 +80,12 @@ class PROJECTECLIPSEVR_API UGripComponent : public USceneComponent
 	FGripGrabEvent OnGrabbed;
 	UPROPERTY(BlueprintCallable, BlueprintAssignable, Category = "Events")
 	FGripReleaseEvent OnDropped;
-	
+
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, Category = "Events")
+	FGripFireEvent OnFired;
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, Category = "Events")
+	FGripUseEvent OnUsed;
+
 
 public:	
 	// Sets default values for this component's properties
@@ -65,11 +99,9 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UFUNCTION(BlueprintCallable)
-	bool TryGrab(UMotionControllerComponent* NewMotionController);
+	bool TryGrab(UGripMotionControllerComponent* NewController);
 
-	UFUNCTION(BlueprintCallable)
-	bool TryRelease();
+	bool TryRelease(UGripMotionControllerComponent* OldController);
 
 private:
 
@@ -86,14 +118,10 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Grip Component")
 	EControllerHand GetHeldByHand();
 
-	bool TryAttachParentToMotionController(UMotionControllerComponent* NewMotionController);
+	bool TryAttachHandToGrip(UGripMotionControllerComponent* NewMotionController);
 
-	UFUNCTION(BlueprintNativeEvent, Category = "Grip Component")
-	void Trigger(bool Pressed, float PressedTime);
-	void Trigger_Implementation(bool Pressed, float PressedTime);
+	void Fire(bool Pressed, float PressedTime);
 
-	UFUNCTION(BlueprintNativeEvent, Category = "Grip Component")
 	void Use(bool Pressed, float PressedTime);
-	void Use_Implementation(bool Pressed, float PressedTime);
 
 };

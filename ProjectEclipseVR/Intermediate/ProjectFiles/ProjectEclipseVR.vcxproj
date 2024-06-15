@@ -269,6 +269,9 @@
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\EntityCharacter.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\EntityCharacterMeshComponent.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\EntityComponent.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -307,6 +310,7 @@
     </ClCompile>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\EntityAttribute.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\EntityCharacter.h"/>
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\EntityCharacterMeshComponent.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\EntityComponent.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\EntityPawn.h"/>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\Equipment.h"/>

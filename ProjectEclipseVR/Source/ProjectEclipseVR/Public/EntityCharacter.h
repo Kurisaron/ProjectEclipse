@@ -7,6 +7,8 @@
 #include "EntityComponent.h"
 #include "EntityCharacter.generated.h"
 
+class UEntityCharacterMeshComponent;
+
 UCLASS(ClassGroup = (Custom), Blueprintable, BlueprintType)
 class PROJECTECLIPSEVR_API AEntityCharacter : public ACharacter
 {
@@ -33,4 +35,6 @@ public:
 	// Called to access the entity component on the character
 	UFUNCTION(BlueprintPure, Category = "Entity")
 	virtual UEntityComponent* GetEntity();
+
+	UEntityCharacterMeshComponent* GetEntityCharacterMesh();
 };

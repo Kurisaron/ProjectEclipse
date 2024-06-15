@@ -17,7 +17,9 @@
             "d:\\epiclibrary\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\character.generated.h",
             "d:\\github\\projecteclipse\\projecteclipsevr\\source\\projecteclipsevr\\public\\entitycomponent.h",
             "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipsevr\\uht\\entitycomponent.generated.h",
-            "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipsevr\\uht\\entitycharacter.generated.h"
+            "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipsevr\\uht\\entitycharacter.generated.h",
+            "d:\\github\\projecteclipse\\projecteclipsevr\\source\\projecteclipsevr\\public\\entitycharactermeshcomponent.h",
+            "d:\\github\\projecteclipse\\projecteclipsevr\\intermediate\\build\\win64\\unrealeditor\\inc\\projecteclipsevr\\uht\\entitycharactermeshcomponent.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

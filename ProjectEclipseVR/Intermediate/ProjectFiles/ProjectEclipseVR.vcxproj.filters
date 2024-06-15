@@ -54,6 +54,9 @@
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\EntityCharacter.cpp">
       <Filter>Source\ProjectEclipseVR\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\EntityCharacterMeshComponent.cpp">
+      <Filter>Source\ProjectEclipseVR\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ProjectEclipseVR\Private\EntityComponent.cpp">
       <Filter>Source\ProjectEclipseVR\Private</Filter>
     </ClCompile>
@@ -97,6 +100,9 @@
       <Filter>Source\ProjectEclipseVR\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\EntityCharacter.h">
+      <Filter>Source\ProjectEclipseVR\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\EntityCharacterMeshComponent.h">
       <Filter>Source\ProjectEclipseVR\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ProjectEclipseVR\Public\EntityComponent.h">

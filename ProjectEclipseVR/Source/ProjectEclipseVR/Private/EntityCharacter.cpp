@@ -2,15 +2,17 @@
 
 
 #include "EntityCharacter.h"
+#include "EntityCharacterMeshComponent.h"
 
 // Sets default values
-AEntityCharacter::AEntityCharacter(const FObjectInitializer& ObjectInitializer) : ACharacter(ObjectInitializer)
+AEntityCharacter::AEntityCharacter(const FObjectInitializer& ObjectInitializer) : ACharacter(ObjectInitializer.SetDefaultSubobjectClass<UEntityCharacterMeshComponent>(ACharacter::MeshComponentName))
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 
 	EntityComponent = CreateDefaultSubobject<UEntityComponent>(TEXT("Entity Comp"));
+	
 }
 
 // Called when the game starts or when spawned
@@ -36,3 +38,8 @@ void AEntityCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 
 UEntityComponent* AEntityCharacter::GetEntity() { return EntityComponent; }
+
+UEntityCharacterMeshComponent* AEntityCharacter::GetEntityCharacterMesh()
+{
+	return Cast<UEntityCharacterMeshComponent>(GetMesh());
+}

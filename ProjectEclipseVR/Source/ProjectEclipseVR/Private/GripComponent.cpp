@@ -41,8 +41,10 @@ void UGripComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	// ...
 }
 
+/* Old TryGrab
 bool UGripComponent::TryGrab(UMotionControllerComponent* NewMotionController)
 {
+	
 	switch (GripType)
 	{
 		case EGripType::GTE_None:
@@ -76,6 +78,7 @@ bool UGripComponent::TryGrab(UMotionControllerComponent* NewMotionController)
 		default:
 			break;
 	}
+	
 
 	if (!bIsHeld)
 		return false;
@@ -91,9 +94,12 @@ bool UGripComponent::TryGrab(UMotionControllerComponent* NewMotionController)
 
 	return bIsHeld;
 }
+*/
 
+/* Old TryRelease
 bool UGripComponent::TryRelease()
 {
+	
 	switch (GripType)
 	{
 		case EGripType::GTE_None:
@@ -110,6 +116,7 @@ bool UGripComponent::TryRelease()
 		default:
 			break;
 	}
+	
 
 	if (bIsHeld)
 		return false;
@@ -117,6 +124,22 @@ bool UGripComponent::TryRelease()
 	// Call On Dropped delegate
 	OnDropped.Broadcast();
 
+	return true;
+}
+*/
+
+bool UGripComponent::TryGrab(UGripMotionControllerComponent* NewController)
+{
+	if (!GripType.bCanGrab)
+		return false;
+
+	SetPrimitiveCompPhysics(false);
+
+	return true;
+}
+
+bool UGripComponent::TryRelease(UGripMotionControllerComponent* OldController)
+{
 	return true;
 }
 
@@ -164,6 +187,7 @@ EControllerHand UGripComponent::GetHeldByHand()
 	return Hand == TEXT("LeftGrip") ? EControllerHand::Left : EControllerHand::Right;
 }
 
+/*
 bool UGripComponent::TryAttachParentToMotionController(UMotionControllerComponent* NewMotionController)
 {
 	USceneComponent* Parent = GetAttachParent();
@@ -177,13 +201,16 @@ bool UGripComponent::TryAttachParentToMotionController(UMotionControllerComponen
 	}
 	return Success;
 }
+*/
 
-void UGripComponent::Trigger_Implementation(bool Pressed, float PressedTime)
+void UGripComponent::Fire(bool Pressed, float PressedTime)
 {
-
+	if (OnFired.IsBound())
+		OnFired.Broadcast(Pressed, PressedTime);
 }
 
-void UGripComponent::Use_Implementation(bool Pressed, float PressedTime)
+void UGripComponent::Use(bool Pressed, float PressedTime)
 {
-
+	if (OnUsed.IsBound())
+		OnUsed.Broadcast(Pressed, PressedTime);
 }
