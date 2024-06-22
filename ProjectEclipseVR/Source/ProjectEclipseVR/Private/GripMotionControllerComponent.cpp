@@ -20,19 +20,42 @@ void UGripMotionControllerComponent::InitializeComponent()
 void UGripMotionControllerComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	UpdateGrabTarget();
 }
 
 void UGripMotionControllerComponent::Grab()
 {
-	
+	UGripComponent* Target = GrabbingStatus.GrabTarget;
+	if (Target != nullptr && Target->TryGrab(this))
+	{
+		GrabbingStatus.bHeld = true;
+	}
 }
 
 void UGripMotionControllerComponent::Release()
 {
-	
+	UGripComponent* Target = GrabbingStatus.GrabTarget;
+	if (Target != nullptr && Target->TryRelease(this))
+	{
+		GrabbingStatus.bHeld = false;
+	}
 }
 
-UGripComponent* UGripMotionControllerComponent::FindGripNearController()
+void UGripMotionControllerComponent::UpdateGrabTarget()
+{
+	// Do not perform update if holding the grab target
+	if (GrabbingStatus.GrabTarget != nullptr && GrabbingStatus.bHeld)
+		return;
+
+	// If the Grab Target/Held Grip is null, set the held status to false if it is not already
+	if (GrabbingStatus.bHeld && GrabbingStatus.GrabTarget == nullptr)
+		GrabbingStatus.bHeld = false;
+
+	GrabbingStatus.GrabTarget = FindGripNearController();
+}
+
+UGripComponent* UGripMotionControllerComponent::FindGripNearController(bool MustBeGrabbable)
 {
 	FVector ControllerGripPosition = GetComponentLocation();
 
@@ -45,7 +68,7 @@ UGripComponent* UGripMotionControllerComponent::FindGripNearController()
 	UGripComponent* ClosestGrip = nullptr;
 	float ClosestDistance = 9999999.0f;
 
-	bool hit = UKismetSystemLibrary::SphereTraceSingleForObjects(World, ControllerGripPosition, ControllerGripPosition, GrabRadius, ObjectTypes, false, TArray<AActor*, FDefaultAllocator>(), EDrawDebugTrace::None, HitResult, true, FColor::Cyan, FColor::Green, 1.0f);
+	bool hit = UKismetSystemLibrary::SphereTraceSingleForObjects(World, ControllerGripPosition, ControllerGripPosition, 10.0f, ObjectTypes, false, TArray<AActor*, FDefaultAllocator>(), EDrawDebugTrace::None, HitResult, true, FColor::Cyan, FColor::Green, 1.0f);
 	if (hit)
 	{
 		AActor* HitActor = HitResult.GetActor();
@@ -56,6 +79,9 @@ UGripComponent* UGripMotionControllerComponent::FindGripNearController()
 		{
 			for (auto Element : Grips)
 			{
+				if (MustBeGrabbable && !Element->CanGrab(this))
+					continue;
+				
 				FVector ItemGripPosition = Element->GetComponentLocation();
 				FVector PositionDifference = ItemGripPosition - ControllerGripPosition;
 				float DifferenceLengthSquared = PositionDifference.SquaredLength();
@@ -71,19 +97,20 @@ UGripComponent* UGripMotionControllerComponent::FindGripNearController()
 	return ClosestGrip;
 }
 
-bool UGripMotionControllerComponent::IsHoldingGrip() { return HeldGrip != nullptr; }
+bool UGripMotionControllerComponent::IsHoldingGrip()
+{ 
+	return GrabbingStatus.GrabTarget != nullptr && GrabbingStatus.bHeld;
+}
 
-UGripComponent* UGripMotionControllerComponent::GetHeldGrip() { return HeldGrip; }
+UGripComponent* UGripMotionControllerComponent::GetHeldGrip()
+{
+	return GrabbingStatus.bHeld ? GrabbingStatus.GrabTarget : nullptr;
+}
 
 void UGripMotionControllerComponent::SetGripPressure(float Value)
 {
 	GripPressure = Value;
 
-	// Perform operations on the held grip if there is one
-	if (HeldGrip != nullptr)
-	{
-		
-	}
 }
 
 void UGripMotionControllerComponent::SetConstrainedHand(UStaticMeshComponent* NewHand)

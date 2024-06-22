@@ -36,6 +36,9 @@ struct FGripType
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	bool bCanGrab = true;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true", EditCondition = "bCanGrab"))
+	float GrabRadius = 6.0f;
+
 	// True = hand will snap to the grip (or its axis)
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true", EditCondition = "bCanGrab"))
 	bool bSnapHandToGrip = false;
@@ -103,6 +106,12 @@ public:
 
 	bool TryRelease(UGripMotionControllerComponent* OldController);
 
+	// Only checks if the grip is of the type to be grabbable. Does not consider other things like distance
+	bool CanGrab();
+
+	// Checks if the given controller can grab considering factors like distance
+	bool CanGrab(UGripMotionControllerComponent* Controller);
+
 private:
 
 	void DetachRelease();
@@ -118,7 +127,7 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Grip Component")
 	EControllerHand GetHeldByHand();
 
-	bool TryAttachHandToGrip(UGripMotionControllerComponent* NewMotionController);
+	//bool TryAttachHandToGrip(UGripMotionControllerComponent* NewMotionController);
 
 	void Fire(bool Pressed, float PressedTime);
 

@@ -38,13 +38,13 @@ PROJECTECLIPSEVR_API void FGripUseEvent_DelegateWrapper(const FMulticastScriptDe
 
 template<> PROJECTECLIPSEVR_API UScriptStruct* StaticStruct<struct FGripType>();
 
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_56_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_59_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execGetHeldByHand); \
 	DECLARE_FUNCTION(execSetPrimitiveCompPhysics); \
 	DECLARE_FUNCTION(execSetShouldSimulateOnDrop);
 
 
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_56_INCLASS_NO_PURE_DECLS \
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_59_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUGripComponent(); \
 	friend struct Z_Construct_UClass_UGripComponent_Statics; \
@@ -53,7 +53,7 @@ public: \
 	DECLARE_SERIALIZER(UGripComponent)
 
 
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_56_ENHANCED_CONSTRUCTORS \
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_59_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	UGripComponent(UGripComponent&&); \
@@ -65,13 +65,13 @@ public: \
 	NO_API virtual ~UGripComponent();
 
 
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_53_PROLOG
-#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_56_GENERATED_BODY \
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_56_PROLOG
+#define FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_59_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_56_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_56_INCLASS_NO_PURE_DECLS \
-	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_56_ENHANCED_CONSTRUCTORS \
+	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_59_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_59_INCLASS_NO_PURE_DECLS \
+	FID_Github_ProjectEclipse_ProjectEclipseVR_Source_ProjectEclipseVR_Public_GripComponent_h_59_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

@@ -138,6 +138,18 @@ bool UGripComponent::TryGrab(UGripMotionControllerComponent* NewController)
 	return true;
 }
 
+bool UGripComponent::CanGrab() { return GripType.bCanGrab; }
+
+bool UGripComponent::CanGrab(UGripMotionControllerComponent* Controller)
+{
+	const FVector GripLocation = GetComponentLocation();
+	const FVector ControllerLocation = Controller->GetComponentLocation();
+	const FVector LocationDifference = GripLocation - ControllerLocation;
+	const float DifferenceDistance = LocationDifference.Length();
+
+	return GripType.bCanGrab && GripType.GrabRadius >= DifferenceDistance;
+}
+
 bool UGripComponent::TryRelease(UGripMotionControllerComponent* OldController)
 {
 	return true;
@@ -214,3 +226,4 @@ void UGripComponent::Use(bool Pressed, float PressedTime)
 	if (OnUsed.IsBound())
 		OnUsed.Broadcast(Pressed, PressedTime);
 }
+

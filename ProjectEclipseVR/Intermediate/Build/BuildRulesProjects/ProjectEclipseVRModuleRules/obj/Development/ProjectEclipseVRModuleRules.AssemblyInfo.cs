@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProjectEclipseVRModuleRules")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Development")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+41fdf36d277b31ef7a52e17d270f15425e94fc7f")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProjectEclipseVRModuleRules")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProjectEclipseVRModuleRules")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

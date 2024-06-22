@@ -454,12 +454,12 @@ void AVREntityCharacter::Dodge(const FInputActionValue& Value)
 
 void AVREntityCharacter::LeftGrab_Press()
 {
-	MotionController_LeftGrip->Grab();
+	//MotionController_LeftGrip->Grab();
 }
 
 void AVREntityCharacter::LeftGrab_Release()
 {
-	MotionController_LeftGrip->Release();
+	//MotionController_LeftGrip->Release();
 }
 
 void AVREntityCharacter::LeftGrab_Value(const FInputActionValue& Value)
@@ -473,12 +473,12 @@ void AVREntityCharacter::LeftGrab_Value(const FInputActionValue& Value)
 
 void AVREntityCharacter::RightGrab_Press()
 {
-	MotionController_RightGrip->Grab();
+	//MotionController_RightGrip->Grab();
 }
 
 void AVREntityCharacter::RightGrab_Release()
 {
-	MotionController_RightGrip->Release();
+	//MotionController_RightGrip->Release();
 }
 
 void AVREntityCharacter::RightGrab_Value(const FInputActionValue& Value)

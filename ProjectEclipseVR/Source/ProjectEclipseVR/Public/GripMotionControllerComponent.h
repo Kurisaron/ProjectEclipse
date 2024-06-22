@@ -18,6 +18,17 @@ enum class EHandSide : uint8
 	HSE_Right	UMETA(DisplayName = "Right"),
 };
 
+USTRUCT(BlueprintType)
+struct FGrabStatus
+{
+	GENERATED_BODY()
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UGripComponent* GrabTarget = nullptr;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	bool bHeld = false;
+};
 
 /**
  * 
@@ -28,15 +39,13 @@ class PROJECTECLIPSEVR_API UGripMotionControllerComponent : public UMotionContro
 	GENERATED_BODY()
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Grabbing", meta = (AllowPrivateAccess = "true"))
-	UGripComponent* HeldGrip;
+	FGrabStatus GrabbingStatus;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Grabbing", meta = (AllowPrivateAccess = "true"))
 	float GripPressure = 0.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Grabbing", meta = (AllowPrivateAccess = "true"))
-	float GrabRadius = 6.0f;
-
 	UStaticMeshComponent* ConstrainedHand;
+
 
 public:
 
@@ -52,7 +61,9 @@ public:
 
 protected:
 
-	UGripComponent* FindGripNearController();
+	void UpdateGrabTarget();
+
+	UGripComponent* FindGripNearController(bool MustBeGrabbable = true);
 
 public:
 
